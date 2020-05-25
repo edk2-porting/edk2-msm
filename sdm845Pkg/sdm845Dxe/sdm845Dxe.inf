@@ -1,0 +1,48 @@
+#
+#  Copyright (c) 2018, Linaro Limited. All rights reserved.
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+
+[Defines]
+  INF_VERSION                    = 0x0001001a
+  BASE_NAME                      = sdm845Dxe
+  FILE_GUID                      = 422BB380-0FFB-41EC-B86E-AE70F8A02DA3
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = sdm845EntryPoint
+
+[Sources.common]
+  sdm845Dxe.c
+
+[Packages]
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  CacheMaintenanceLib
+  DxeServicesTableLib
+  IoLib
+  PcdLib
+  TimerLib
+  UefiDriverEntryPoint
+  UefiLib
+
+[Protocols]
+  gEfiDevicePathFromTextProtocolGuid
+  gEfiLoadedImageProtocolGuid
+  gEfiCpuArchProtocolGuid
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+
+[Depex]
+  gEfiCpuArchProtocolGuid
