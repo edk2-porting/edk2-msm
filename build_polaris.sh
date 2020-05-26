@@ -6,7 +6,7 @@ echo Done.
 set -e
 . firstrun_common.sh
 # not actually GCC5; it's GCC7 on Ubuntu 18.04.
-GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -p sdm845Pkg/sdm845Pkg.dsc
+GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -p sdm845Pkg/polaris.dsc
 gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/sdm845PKG_UEFI.fd >uefi_img
 cat ./device_specific/polaris.dtb >>uefi_img
 abootimg --create boot_polaris.img -k uefi_img -r ramdisk -f bootimg.cfg
