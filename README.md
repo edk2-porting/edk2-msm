@@ -5,6 +5,7 @@ Attempt to create a normal EDK2 for Snapdragon 845 platform.
 ## Resources
 
 [Telegram group for edk2-porting](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+
 QQ discussion group for edk2-porting: 697666196
 
 ## Dependencies
