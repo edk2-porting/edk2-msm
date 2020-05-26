@@ -2,6 +2,11 @@
 
 Attempt to create a normal EDK2 for Snapdragon 845 platform.
 
+## Resources
+
+[Telegram group for edk2-porting](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+QQ discussion group for edk2-porting: 697666196
+
 ## Dependencies
 
 Ubuntu 18.04:
@@ -52,7 +57,6 @@ git clone https://github.com/edk2-porting/edk2-sdm845.git
 3.Build eenvironment
 ```
 cd edk2-sdm845
-mkdir workspace
 bash firstrun.sh
 ```
 
@@ -67,10 +71,10 @@ fastboot boot boot_*.img
 
 ## Credits
 
-MemoryMap thanks [Lemon1Ice](https://github.com/Lemon1Ice).
+MemoryMap thanks to [Lemon1Ice](https://github.com/Lemon1Ice).
 
-ACPI etc. tables thanks [5超级菜鸟5](https://github.com/sunshuyu)
+ACPI etc. tables thanks to [5超级菜鸟5](https://github.com/sunshuyu)
 
 SimpleFbDxe screen driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg).
 
-Also thanks [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
+Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
