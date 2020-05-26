@@ -40,34 +40,29 @@ commit:cfdc7f907d545b14302295b819ea078bc36c6a40
 ```
 mkdir workspaceedk2
 cd workspaceedk2
-git clone https://github.com/tianocore/edk2.git --recursive
-git clone https://github.com/tianocore/edk2-platforms.git
-cd edk2
-git checkout 3a3713e62cfad00d78bb938b0d9fb1eedaeff314
-cd ..
-cd edk2-platforms
-git checkout cfdc7f907d545b14302295b819ea078bc36c6a40
+git clone https://github.com/tianocore/edk2.git -o 3a3713e62cfad00d78bb938b0d9fb1eedaeff314 --recursive --depth=1
+git clone https://github.com/tianocore/edk2-platforms.git -o cfdc7f907d545b14302295b819ea078bc36c6a40 --recursive --depth=1
 ```
 
 2.Clone this project
 ```
-git clone https://github.com/NekokeCore/edk2-dipper.git
+git clone https://github.com/edk2-porting/edk2-sdm845.git
 ```
 
 3.Build eenvironment
 ```
-cd edk2-dipper
+cd edk2-sdm845
 mkdir workspace
 bash firstrun.sh
 ```
 
 4.Build this project
 ```
-bash build.sh
+bash build_*.sh
 ```
 5.Debug and use
 ```
-fastboot boot uefi.img
+fastboot boot boot_*.img
 ```
 
 ## Credits
