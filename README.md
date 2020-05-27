@@ -2,6 +2,8 @@
 
 Attempt to create a normal EDK2 for Snapdragon 845 platform.
 
+Pull requests for new devices are welcomed!
+
 ## Resources
 
 [Telegram group for edk2-porting](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
@@ -12,12 +14,12 @@ QQ discussion group for edk2-porting: 697666196
 
 Ubuntu 18.04:
 
-```
+```bash
 sudo apt update
 sudo apt install build-essential uuid-dev iasl git nasm python3-distutils gcc-aarch64-linux-gnu
 ```
 Or
-```
+```bash
 sudo apt update
 sudo apt install build-essential
 sudo apt install uuid-dev
@@ -43,7 +45,7 @@ edk2-platforms:
 commit:cfdc7f907d545b14302295b819ea078bc36c6a40
 ```
 
-```
+```bash
 mkdir workspaceedk2
 cd workspaceedk2
 git clone https://github.com/tianocore/edk2.git -o 3a3713e62cfad00d78bb938b0d9fb1eedaeff314 --recursive --depth=1
@@ -51,22 +53,23 @@ git clone https://github.com/tianocore/edk2-platforms.git -o cfdc7f907d545b14302
 ```
 
 2.Clone this project
-```
+```bash
 git clone https://github.com/edk2-porting/edk2-sdm845.git
 ```
 
 3.Build eenvironment
-```
+```bash
 cd edk2-sdm845
 bash firstrun.sh
 ```
 
 4.Build this project
-```
+```bash
 bash build_*.sh
 ```
 5.Debug and use
-```
+
+```bash
 fastboot boot boot_*.img
 ```
 
