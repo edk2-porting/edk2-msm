@@ -232,6 +232,11 @@
   # sdm845Pkg/AcpiTables/AcpiTables.inf
 
   #
+  # FDT support
+  #
+  EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+
+  #
   # SMBIOS Support
   #
   sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
