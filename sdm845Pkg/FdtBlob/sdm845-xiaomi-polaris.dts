@@ -17,6 +17,9 @@
 / {
 	model = "Xiaomi MIX 2s";
 	compatible = "xiaomi,polaris", "qcom,sdm845";
+	/* required for bootloader to select correct board */
+	qcom,board-id = <0x2a 0x0>;
+	qcom,msm-id = <0x141 0x20001>;
 
 	aliases {
 		serial0 = &uart9;
@@ -28,6 +31,45 @@
 		regulator-name = "vph_pwr";
 		regulator-min-microvolt = <3700000>;
 		regulator-max-microvolt = <3700000>;
+	};
+
+	vbat: vbat-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "VBAT";
+
+		vin-supply = <&vph_pwr>;
+		regulator-min-microvolt = <4200000>;
+		regulator-max-microvolt = <4200000>;
+		regulator-always-on;
+	};
+
+	vbat_som: vbat-som-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "VBAT_SOM";
+
+		vin-supply = <&vph_pwr>;
+		regulator-min-microvolt = <4200000>;
+		regulator-max-microvolt = <4200000>;
+		regulator-always-on;
+	};
+
+	vdc_3v3: vdc-3v3-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "VDC_3V3";
+		vin-supply = <&vph_pwr>;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+	};
+
+	vdc_5v: vdc-5v-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "VDC_5V";
+
+		vin-supply = <&vph_pwr>;
+		regulator-min-microvolt = <500000>;
+		regulator-max-microvolt = <500000>;
+		regulator-always-on;
 	};
 
 	vreg_tp_vddio: tp-vddio-vreg {
@@ -54,7 +96,22 @@
 		vin-supply = <&vph_pwr>;
 	};
 
+
+	gpio_keys {
+		compatible = "gpio-keys";
+		autorepeat;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&vol_up_pin_a>;
+
+		vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_VOLUMEUP>;
+			gpios = <&pm8998_gpio 6 GPIO_ACTIVE_LOW>;
+		};
+	};
 };
+
 
 &apps_rsc {
 	pm8998-rpmh-regulators {
@@ -321,7 +378,7 @@
 };
 
 &apps_smmu {
-	/* Fuck this stupid thing */
+	/* Enable this when upstream smmu driver gets patched */
 	status = "disabled";
 };
 
@@ -331,21 +388,25 @@
 			   <GCC_QSPI_CNOC_PERIPH_AHB_CLK>;
 };
 
+/* NFC */
 // &i2c3 {
 // 	status = "okay";
 // 	clock-frequency = <400000>;
 // };
 
+/* Audio DAC tas2559 */
 // &i2c5 {
 // 	status = "okay";
 // 	clock-frequency = <400000>;
 // };
 
+/* smb1355 and p9220 */
 // &i2c10 {
 // 	status = "okay";
 // 	clock-frequency = <400000>;
 // };
 
+/* touchscreen */
 &i2c14 {
 	status = "okay";
 	clock-frequency = <400000>;
@@ -376,36 +437,23 @@
 	};
 };
 
-&qup_i2c12_default {
-	drive-strength = <2>;
-	bias-disable;
-};
-
-&qup_i2c14_default {
-	drive-strength = <2>;
-	bias-disable;
-};
-
-&qup_uart6_default {
-	pinmux {
-		 pins = "gpio45", "gpio46", "gpio47", "gpio48";
-		 function = "qup6";
-	};
-
-	cts {
-		pins = "gpio45";
-		bias-pull-down;
-	};
-
-	rts-tx {
-		pins = "gpio46", "gpio47";
-		drive-strength = <2>;
-		bias-disable;
-	};
-
-	rx {
-		pins = "gpio48";
+&pm8998_gpio {
+	vol_up_pin_a: vol-up-active {
+		pins = "gpio6";
+		function = "normal";
+		input-enable;
 		bias-pull-up;
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_NO>;
+	};
+};
+
+&pm8998_pon {
+	resin {
+		compatible = "qcom,pm8941-resin";
+		interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
+		debounce = <15625>;
+		bias-pull-up;
+		linux,code = <KEY_VOLUMEDOWN>;
 	};
 };
 
@@ -446,4 +494,40 @@
 	status = "okay";
 	vdda-phy-supply = <&vdda_ufs1_core>;
 	vdda-pll-supply = <&vdda_ufs1_1p2>;
+};
+
+
+/* PINCTRL - additions to nodes defined in sdm845.dtsi */
+
+&qup_i2c12_default {
+	drive-strength = <2>;
+	bias-disable;
+};
+
+&qup_i2c14_default {
+	drive-strength = <2>;
+	bias-disable;
+};
+
+&qup_uart6_default {
+	pinmux {
+		 pins = "gpio45", "gpio46", "gpio47", "gpio48";
+		 function = "qup6";
+	};
+
+	cts {
+		pins = "gpio45";
+		bias-disable;
+	};
+
+	rts-tx {
+		pins = "gpio46", "gpio47";
+		drive-strength = <2>;
+		bias-disable;
+	};
+
+	rx {
+		pins = "gpio48";
+		bias-pull-up;
+	};
 };
