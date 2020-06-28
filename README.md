@@ -2,7 +2,7 @@
 
 Attempt to create a normal EDK2 for Snapdragon 845 platform.
 
-Pull requests for new devices are welcomed!
+Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
 ## Resources
 
@@ -24,19 +24,9 @@ Ubuntu 18.04:
 
 ```bash
 sudo apt update
-sudo apt install build-essential uuid-dev iasl git nasm python3-distutils gcc-aarch64-linux-gnu
+sudo apt install build-essential uuid-dev iasl git nasm python3-distutils gcc-aarch64-linux-gnu abootimg
 ```
-Or
-```bash
-sudo apt update
-sudo apt install build-essential
-sudo apt install uuid-dev
-sudo apt install iasl
-sudo apt install git
-sudo apt install nasm
-sudo apt install python3-distutils
-sudo apt install gcc-aarch64-linux-gnu
-```
+Ubuntu 20.04 is also proved to be fine.
 
 
 ## Building
@@ -54,18 +44,19 @@ commit:cfdc7f907d545b14302295b819ea078bc36c6a40
 ```
 
 ```bash
-mkdir workspaceedk2
-cd workspaceedk2
+mkdir workspace-edk2
+cd workspace-edk2
 git clone https://github.com/tianocore/edk2.git -o 3a3713e62cfad00d78bb938b0d9fb1eedaeff314 --recursive --depth=1
 git clone https://github.com/tianocore/edk2-platforms.git -o cfdc7f907d545b14302295b819ea078bc36c6a40 --recursive --depth=1
 ```
 
 2.Clone this project
+
 ```bash
 git clone https://github.com/edk2-porting/edk2-sdm845.git
 ```
 
-3.Build environment
+3.Initialize environment
 
 ```bash
 cd edk2-sdm845
@@ -84,11 +75,13 @@ fastboot boot boot_*.img
 
 ## Credits
 
+Special thanks to [fxsheep](https://github.com/fxsheep)
+
 MemoryMap thanks to [Lemon1Ice](https://github.com/Lemon1Ice).
 
-ACPI etc. tables thanks to [5超级菜鸟5](https://github.com/sunshuyu)
+ACPI tables thanks to [5超级菜鸟5](https://github.com/sunshuyu) and many other people related.
 
-SimpleFbDxe screen driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg).
+SimpleFbDxe driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg).
 
 Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
 
