@@ -235,11 +235,11 @@
 		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		// };
 
-		// vreg_l12a_1p8: ldo12 {
-		// 	regulator-min-microvolt = <1800000>;
-		// 	regulator-max-microvolt = <1800000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l12a_1p8: ldo12 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		// vreg_l13a_2p95: ldo13 {
 		// 	regulator-min-microvolt = <1800000>;
@@ -312,11 +312,11 @@
 		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		// };
 
-		// vreg_l24a_3p075: ldo24 {
-		// 	regulator-min-microvolt = <3088000>;
-		// 	regulator-max-microvolt = <3088000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l24a_3p075: ldo24 {
+			regulator-min-microvolt = <3088000>;
+			regulator-max-microvolt = <3088000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l25a_3p3: ldo25 {
 			regulator-always-on;
@@ -331,12 +331,6 @@
 			regulator-max-microvolt = <1200000>;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
-
-		// vreg_l28a_3p1: ldo28 {
-		// 	regulator-min-microvolt = <3100000>;
-		// 	regulator-max-microvolt = <3100000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
 
 		vreg_lvs1a_1p8: lvs1 {
 			regulator-min-microvolt = <1800000>;
@@ -389,29 +383,26 @@
 };
 
 /* NFC */
-// &i2c3 {
-// 	status = "okay";
-// 	clock-frequency = <400000>;
-// };
+&i2c3 {
+	status = "okay";
+	clock-frequency = <400000>;
+};
 
 /* Audio DAC tas2559 */
-// &i2c5 {
-// 	status = "okay";
-// 	clock-frequency = <400000>;
-// };
+&i2c5 {
+	status = "okay";
+	clock-frequency = <400000>;
+};
 
 /* smb1355 and p9220 */
-// &i2c10 {
-// 	status = "okay";
-// 	clock-frequency = <400000>;
-// };
+&i2c10 {
+	status = "okay";
+	clock-frequency = <400000>;
+};
 
 /* touchscreen */
 &i2c14 {
 	status = "okay";
-	pinctrl-names = "default", "sleep";
-	pinctrl-0 = <&qupv3_se14_i2c_active>;
-	pinctrl-1 = <&qupv3_se14_i2c_sleep>;
 	clock-frequency = <400000>;
 
 	touchscreen: synaptics-dsi-i2c@20 {
@@ -419,12 +410,12 @@
 		reg = <0x20>;
 		#address-cells = <1>;
 		#size-cells = <0>;
-		interrupts-extended = <&tlmm 125 0x2008>;
-		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend";
+		interrupt-parent = <&tlmm>;
+		interrupts = <0x7d 0x2008>;
+		pinctrl-names = "default";
 		pinctrl-0 = <&ts_active>;
-		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
-		vdd-supply = <&vreg_l14a_1p8>;
-		vio-supply = <&vreg_tp_vddio>;
+		vdd-supply = <&vreg_tp_vddio>;
+		vio-supply = <&vreg_l14a_1p8>;
 		syna,reset-delay-ms = <200>;
 		syna,startup-delay-ms = <200>;
 
@@ -558,33 +549,33 @@
 
 /* Uncomment these when smmu is working */
 
-// &usb_1 {
-// 	status = "okay";
-// };
+&usb_1 {
+	status = "okay";
+};
 
-// &usb_1_dwc3 {
-// 	dr_mode = "peripheral";
-// };
+&usb_1_dwc3 {
+	dr_mode = "peripheral";
+};
 
-// &usb_1_hsphy {
-// 	status = "okay";
+&usb_1_hsphy {
+	status = "okay";
 
-// 	vdd-supply = <&vreg_l1a_0p875>;
-// 	vdda-pll-supply = <&vreg_l12a_1p8>;
-// 	vdda-phy-dpdm-supply = <&vreg_l24a_3p075>;
+	vdd-supply = <&vreg_l1a_0p875>;
+	vdda-pll-supply = <&vreg_l12a_1p8>;
+	vdda-phy-dpdm-supply = <&vreg_l24a_3p075>;
 
-// 	qcom,imp-res-offset-value = <8>;
-// 	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
-// 	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
-// 	qcom,preemphasis-width = <QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT>;
-// };
+	qcom,imp-res-offset-value = <8>;
+	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
+	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
+	qcom,preemphasis-width = <QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT>;
+};
 
-// &usb_1_qmpphy {
-// 	status = "okay";
+&usb_1_qmpphy {
+	status = "okay";
 
-// 	vdda-phy-supply = <&vreg_l26a_1p2>;
-// 	vdda-pll-supply = <&vreg_l1a_0p875>;
-// };
+	vdda-phy-supply = <&vreg_l26a_1p2>;
+	vdda-pll-supply = <&vreg_l1a_0p875>;
+};
 
 
 

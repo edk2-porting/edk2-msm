@@ -4,6 +4,9 @@ Attempt to create a normal EDK2 for Snapdragon 845 platform.
 
 Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
+![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
+![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
+
 ## Resources
 
 [Telegram group for edk2-porting](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
