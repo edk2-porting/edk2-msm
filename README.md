@@ -1,5 +1,7 @@
 # EDK2 UEFI Firmware For Snapdragon 845 (sdm845)
 
+## NOTICE: This repo won't receive updates in the next 12 months because of my studying. Please join the groups below.
+
 Attempt to create a normal EDK2 for Snapdragon 845 platform.
 
 Pull requests for new devices and device tree or ACPI fixes are welcomed!
