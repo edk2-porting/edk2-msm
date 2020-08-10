@@ -14,11 +14,11 @@
 #include "pm8005.dtsi"
 
 / {
-	model = "Xiaomi MIX 2s";
-	compatible = "xiaomi,polaris", "qcom,sdm845";
+	model = "Xiaomi MI 8";
+	compatible = "xiaomi,dipper", "qcom,sdm845";
 	/* required for bootloader to select correct board */
-	qcom,board-id = <0x2a 0x0>;
-	qcom,msm-id = <0x141 0x20001>;
+	qcom,board-id = <0x36 0x0>;
+	qcom,msm-id = <0x141 0x20000>;
 
 	aliases {
 		serial0 = &uart9;
@@ -40,7 +40,7 @@
 			compatible = "simple-framebuffer";
 			reg = <0 0x9D400000 0 0x02400000>;
 			width = <1080>;
-			height = <2160>;
+			height = <2248>;
 			stride = <(1080 * 4)>;
 			format = "a8r8g8b8";
 			status = "okay";
@@ -93,18 +93,8 @@
 		regulator-always-on;
 	};
 
-	// vreg_tp_vddio: tp-vddio-vreg {
-	// 	regulator-always-on;
-	// 	compatible = "regulator-fixed";
-	// 	regulator-name = "vreg_tp_vddio";
-	// 	regulator-boot-on;
-	// 	enable-active-high;
-	// 	gpio = <&tlmm 23 0>;
-	// 	startup-delay-us = <4000>;
-	// };
-
 	/*
-	 * Apparently RPMh does not provide support for PM8150 S4 because it
+	 * Apparently RPMh does not provide support for PM8998 S4 because it
 	 * is always-on; model it as a fixed regulator.
 	 */
 	vreg_s4a_1p8: pm8998-smps4 {
@@ -115,49 +105,6 @@
 		regulator-always-on;
 		regulator-boot-on;
 		vin-supply = <&vph_pwr>;
-	};
-
-	i2c_touch: i2c {
-		compatible = "i2c-gpio";
-		status = "okay";
-
-		sda-gpios = <&tlmm 33 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-		scl-gpios = <&tlmm 34 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-
-		i2c-gpio,delay-us = <5>;	/* 5~=100 kHz */
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&i2c_ts_pins>;
-
-		touchscreen: synaptics-rmi4-i2c@20 {
-			compatible = "syna,rmi4-i2c";
-			reg = <0x20>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-			interrupts-extended = <&tlmm 125 0x2008>; // IRQF_ONESHOT | IRQF_TRIGGER_LOW
-
-			pinctrl-names = "default";
-			pinctrl-0 = <&ts_default_pins &ts_enable_1p8>;
-
-			// vdd-supply = <&vreg_tp_vddio>;
-			vio-supply = <&vreg_l6a_1p8>;
-
-			syna,reset-delay-ms = <200>;
-			syna,startup-delay-ms = <500>;
-
-			rmi4-f01@1 {
-				reg = <0x01>;
-				syna,nosleep-mode = <1>;
-			};
-
-			rmi4_f12: rmi4-f12@12 {
-				reg = <0x12>;
-				syna,sensor-type = <1>;
-				syna,rezero-wait-ms = <200>;
-			};
-		};
 	};
 
 
@@ -174,49 +121,12 @@
 			gpios = <&pm8998_gpio 6 GPIO_ACTIVE_LOW>;
 		};
 	};
-
-	// usb2_vbus_det {
-	// 	usb2_vbus_det_default: usb2_vbus_det_default {
-	// 		pins = "gpio8";
-	// 		function = "normal";
-	// 		input-enable;
-	// 		bias-pull-down;
-	// 		power-source = <1>;	/* VPH input supply */
-	// 	};
-	// };
-
-	// extcon_usb1: extcon-usb-1 {
-	// 	compatible = "linux,extcon-usb-gpio";
-	// 	vbus-gpio = <&pmi8998_gpio 8 GPIO_ACTIVE_HIGH>;
-
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&usb2_vbus_det_default>;
-	// };
-
-	// ext_5v_boost {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&pmi8998_gpio 10 GPIO_ACTIVE_HIGH>;
-	// 	status = "ok";
-	// 	pinctrl-0 = <&usb2_ext_5v_boost>;
-	// 	regulator-name = "ext_5v_boost";
-	// 	pinctrl-names = "default";
-	// 	regulator-always-on;
-	// };
-
-	// vbus_boost {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&pmi8998_gpio 2 GPIO_ACTIVE_HIGH>;
-	// 	status = "ok";
-	// 	pinctrl-0 = <&usb2_vbus_boost>;
-	// 	regulator-name = "vbus_boost";
-	// 	pinctrl-names = "default";
-	// 	regulator-always-on;
-	// };
-
 };
 
+&adsp_pas {
+	status = "okay";
+	firmware-name = "qcom/adsp.mbn";
+};
 
 &apps_rsc {
 	pm8998-rpmh-regulators {
@@ -304,11 +214,11 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		vreg_l6a_1p8: ldo6 {
-			regulator-min-microvolt = <1856000>;
-			regulator-max-microvolt = <1856000>;
-			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		};
+		// vreg_l6a_1p8: ldo6 {
+		// 	regulator-min-microvolt = <1856000>;
+		// 	regulator-max-microvolt = <1856000>;
+		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		// };
 
 		vreg_l7a_1p8: ldo7 {
 			regulator-min-microvolt = <1800000>;
@@ -437,13 +347,6 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		vreg_l28a_3p0: ldo28 {
-			regulator-min-microvolt = <2856000>;
-			regulator-max-microvolt = <3008000>;
-			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-			regulator-always-on;
-		};
-
 		vreg_lvs1a_1p8: lvs1 {
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
@@ -488,6 +391,63 @@
 	status = "okay";
 };
 
+&cdsp_pas {
+	status = "okay";
+	firmware-name = "qcom/cdsp.mbn";
+};
+
+
+
+
+// vreg_l14a_1p8
+
+// &dsi0 {
+// 	status = "okay";
+// 	vdda-supply = <&vreg_l26a_1p2>;
+
+// 	#address-cells = <1>;
+// 	#size-cells = <0>;
+
+// 	display_panel: panel@0 {
+// 		status = "disabled";
+
+// 		port {
+// 			panel_in: endpoint {
+// 				remote-endpoint = <&dsi0_out>;
+// 			};
+// 		};
+// 	};
+// };
+
+// &dsi0_out {
+// 	remote-endpoint = <&panel_in>;
+// 	data-lanes = <0 1 2 3>;
+// };
+
+// &dsi0_phy {
+// 	status = "okay";
+// 	vdds-supply = <&vreg_l1a_0p875>;
+// };
+
+// &display_panel {
+// 	compatible = "visionox,fhd-r66455";
+// 	status = "okay";
+
+// 	#address-cells = <1>;
+// 	#size-cells = <0>;
+// 	reg = <0>;
+
+// 	vddio-supply = <&vreg_l14a_1p8>;
+
+// 	reset-gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
+
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&panel_reset_pins &panel_te_pin>;
+// };
+
+
+
+
 &gcc {
 	protected-clocks = <GCC_QSPI_CORE_CLK>,
 			   <GCC_QSPI_CORE_CLK_SRC>,
@@ -496,22 +456,62 @@
 			   <GCC_LPASS_SWAY_CLK>;
 };
 
+&gpu {
+	/*
+	 * note: the amd,imageon compatible makes it possible
+	 * to use the drm/msm driver without the display node,
+	 * make sure to remove it when display node is added
+	 */
+	compatible = "qcom,adreno-630.2",
+				 "qcom,adreno",
+				 "amd,imageon";
+	zap-shader {
+		memory-region = <&gpu_mem>;
+		firmware-name = "qcom/a630_zap.mbn";
+	};
+};
+
+&ipa {
+	status = "okay";
+	modem-init;
+	memory-region = <&ipa_fw_mem>;
+};
+
 /* NFC */
 &i2c3 {
 	status = "okay";
 	clock-frequency = <400000>;
 };
 
-/* Audio Amplifier tas2559 */
+/* Audio Amplifier tas2557 */
 &i2c5 {
 	status = "okay";
 	clock-frequency = <400000>;
 };
 
-/* smb1355 and p9220 */
+/* smb1355 and lm3644 LED */
 &i2c10 {
 	status = "okay";
 	clock-frequency = <400000>;
+};
+
+/* fts touchscreen */
+&i2c14 {
+	status = "okay";
+	clock-frequency = <400000>;
+};
+
+// &mdss {
+// 	status = "okay";
+// };
+
+// &mdss_mdp {
+// 	status = "okay";
+// };
+
+&mss_pil {
+	status = "okay";
+	firmware-name = "qcom/mba.mbn", "qcom/modem.mbn";
 };
 
 &pm8998_gpio {
@@ -545,42 +545,30 @@
 &tlmm {
 	gpio-reserved-ranges = <0 4>, <81 4>;
 
-	i2c_ts_pins: i2c-touch-default {
+	panel_reset_pins: panel-reset {
 		mux {
-			pins = "gpio33", "gpio34";
+			pins = "gpio6", "gpio52";
 			function = "gpio";
 		};
 
 		config {
-			pins = "gpio33", "gpio34";
+			pins = "gpio6", "gpio52";
+			drive-strength = <8>;
+			bias-disable = <0>;
+		};
+	};
+
+	panel_te_pin: panel-te {
+		mux {
+			pins = "gpio10";
+			function = "mdp_vsync";
+		};
+
+		config {
+			pins = "gpio10";
 			drive-strength = <2>;
 			bias-disable;
-		};
-	};
-
-	ts_default_pins: ts-int {
-		mux {
-			pins = "gpio99", "gpio125";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio99", "gpio125";
-			drive-strength = <16>;
-			bias-pull-up;
-		};
-	};
-
-	ts_enable_1p8: ts-1p8 {
-		mux {
-			pins = "gpio23";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio23";
-			drive-strength = <16>;
-			bias-pull-up;
+			input-enable;
 		};
 	};
 };
@@ -610,7 +598,6 @@
 
 	/* fastest mode for USB 2 */
 	maximum-speed = "high-speed";
-	// extcon = <&extcon_usb1>;
 
 	/* Remove USB3 phy */
 	phys = <&usb_1_hsphy>;
@@ -771,7 +758,6 @@
 			pmsg-size = <0x200000>;
 			ecc-size = <0x0>;
 		};
-
 
 	};
 };
