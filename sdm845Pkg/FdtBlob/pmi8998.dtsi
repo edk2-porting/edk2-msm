@@ -1,0 +1,117 @@
+// SPDX-License-Identifier: GPL-2.0
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/spmi/spmi.h>
+
+&spmi_bus {
+	pmi8998_lsid0: pmic@2 {
+		compatible = "qcom,pmi8998", "qcom,spmi-pmic";
+		reg = <0x2 SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		pmi8998_gpio: gpios@c000 {
+			compatible = "qcom,pmi8998-gpio", "qcom,spmi-gpio";
+			reg = <0xc000>;
+			gpio-controller;
+			gpio-ranges = <&pmi8998_gpio 0 0 14>;
+			#gpio-cells = <2>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
+			interrupts = <0x2 0xc0 0 IRQ_TYPE_NONE>,
+				<0x2 0xc1 0 IRQ_TYPE_NONE>,
+				<0x2 0xc2 0 IRQ_TYPE_NONE>,
+				<0x2 0xc4 0 IRQ_TYPE_NONE>,
+				<0x2 0xc5 0 IRQ_TYPE_NONE>,
+				<0x2 0xc7 0 IRQ_TYPE_NONE>,
+				<0x2 0xc8 0 IRQ_TYPE_NONE>,
+				<0x2 0xc9 0 IRQ_TYPE_NONE>,
+				<0x2 0xca 0 IRQ_TYPE_NONE>,
+				<0x2 0xcb 0 IRQ_TYPE_NONE>,
+				<0x2 0xcd 0 IRQ_TYPE_NONE>;
+			interrupt-names = "pmi8998_gpio1", "pmi8998_gpio2",
+					"pmi8998_gpio3", "pmi8998_gpio5",
+					"pmi8998_gpio6", "pmi8998_gpio8",
+					"pmi8998_gpio9", "pmi8998_gpio10",
+					"pmi8998_gpio11", "pmi8998_gpio12",
+					"pmi8998_gpio14";
+			qcom,gpios-disallowed = <4 7 13>;
+
+			// usb2_ext_5v_boost:usb2_ext_5v_boost_default {
+			// 	output-low;
+			// 	pins = "gpio10";
+			// 	function = "normal";
+			// 	power-source = <0x0>;
+			// };
+
+			// usb2_id_det:usb2_id_det_default {
+			// 	pins = "gpio9";
+			// 	function = "normal";
+			// 	power-source = <0x0>;
+			// 	input-enable;
+			// 	bias-pull-up;
+			// };
+
+			// usb2_vbus_det:usb2_vbus_det_default {
+			// 	pins = "gpio8";
+			// 	function = "normal";
+			// 	bias-pull-down;
+			// 	power-source = <0x1>;
+			// 	input-enable;
+			// };
+
+			// usb2_vbus_boost:usb2_vbus_boost_default {
+			// 	output-low;
+			// 	pins = "gpio2";
+			// 	function = "normal";
+			// 	power-source = <0x0>;
+			// };
+		};
+	};
+
+	pmi8998_lsid1: pmic@3 {
+		compatible = "qcom,pmi8998", "qcom,spmi-pmic";
+		reg = <0x3 SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		lpg {
+			compatible = "qcom,pmi8998-lpg";
+
+			status = "disabled";
+		};
+		
+		labibb {
+			compatible = "qcom,pmi8998-lab-ibb";
+
+			ibb: ibb {
+				regulator-always-on;
+				interrupts = <0x3 0xdc 0x2 IRQ_TYPE_EDGE_RISING>;
+			};
+
+			lab: lab {
+				regulator-always-on;
+				interrupts = <0x3 0xde 0x0 IRQ_TYPE_EDGE_RISING>;
+			};
+		};
+
+		pmi8998_wled: qcom,leds@d800 {
+			compatible = "qcom,pmi8998-wled";
+			reg = <0xd800 0xd900>;
+			interrupts = <0x3 0xd8 0x1 IRQ_TYPE_EDGE_RISING>,
+				     <0x3 0xd8 0x2 IRQ_TYPE_EDGE_RISING>;
+			interrupt-names = "ovp-irq", "sc-irq";
+			label = "backlight";
+
+			qcom,switching-freq = <800>;
+			qcom,ovp-millivolt = <29600>;
+			qcom,current-boost-limit = <970>;
+			qcom,current-limit-microamp = <25000>;
+			qcom,num-strings = <4>;
+			qcom,enabled-strings = <0 1 2 3>;
+			qcom,qcom,external-pfet;
+
+			status = "disabled";
+		};
+
+	};
+};
