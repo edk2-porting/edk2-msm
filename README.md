@@ -63,22 +63,18 @@ git clone https://github.com/tianocore/edk2-platforms.git -o cfdc7f907d545b14302
 git clone https://github.com/edk2-porting/edk2-sdm845.git
 ```
 
-3.Initialize environment
-
+3.Build this project
 ```bash
-cd edk2-sdm845
-bash firstrun.sh
+bash build.sh --device DEVICE
 ```
 
-4.Build this project
-```bash
-bash build_*.sh
-```
-5.Debug and use
+4.Debug and use
 
 ```bash
-fastboot boot boot_*.img
+fastboot boot boot_DEVICE.img
 ```
+
+(DEVICE is the codename of your phone.)
 
 ## Credits
 
