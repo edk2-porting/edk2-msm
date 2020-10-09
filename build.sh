@@ -70,5 +70,6 @@ rm -f "boot_${DEVICE}.img" uefi_img
 GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"
 gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img"
 cat "uefi-${DEVICE}.img" "device_specific/${DEVICE}.dtb" >> "uefi-${DEVICE}.img-dtb"
-abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img-dtb" -r ramdisk -f bootimg.cfg
+echo > ramdisk
+abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img-dtb" -r ramdisk
 echo "Build done: boot-${DEVICE}.img"

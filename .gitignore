@@ -4,3 +4,4 @@ uefi-*.img-dtb
 workspace
 *.efi
 *.dll
+ramdisk
