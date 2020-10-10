@@ -32,14 +32,14 @@
   __DATE__"\0"                         /* BiosReleaseDate */
 
 #define TYPE1_STRINGS                                   \
-  "Google\0"                         /* Manufacturer */ \
-  "Pixel 3 XL\0"                     /* Product Name */ \
-  "None\0"                           /* Version */      \
+  "Xiaomi\0"                         /* Manufacturer */ \
+  "Xiaomi MIX 2S\0"                     /* Product Name */ \
+  "Version SHIT\0"                           /* Version */      \
   "                    \0"           /* 20 character buffer */
 
 #define TYPE2_STRINGS                                     \
-  "Google\0"                         /* Manufacturer */   \
-  "Pixel 3 XL\0"                     /* Product Name */   \
+  "Xiaomi\0"                         /* Manufacturer */   \
+  "Xiaomi MIX 2S\0"                     /* Product Name */   \
   "R0\0"                             /* Version */        \
   "Serial Not Set\0"                 /* Serial */         \
   "Base of Chassis\0"                /* board location */ \
@@ -48,7 +48,7 @@
 
 #define TYPE3_STRINGS                                   \
   "ARM LTD\0"                        /* Manufacturer */ \
-  "None\0"                           /* Version */      \
+  "Version SHIT\0"                           /* Version */      \
   "Serial Not Set\0"                 /* Serial  */
 
 #define TYPE4_STRINGS                                               \
