@@ -5,6 +5,7 @@ DEVICES=(
 	enchilada
 	fajita
 	polaris
+	akari
 )
 #####################################
 function _help(){
