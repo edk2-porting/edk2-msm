@@ -1,0 +1,58 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MMCHS
+  FILE_GUID                      = 891F2B63-4ED3-4305-A660-016D02810541
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MMCHSInitialize
+
+
+[Sources.common]
+  MMCHS.c
+  mmc_sdhci.c
+  sdhci.c
+  sdhci_msm.c
+
+#[Packages]
+#  MdePkg/MdePkg.dec
+#  ArmPkg/ArmPkg.dec
+#  EmbeddedPkg/EmbeddedPkg.dec
+#  Lumia950XLPkg/Lumia950XLPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  ArmLib
+  IoLib
+  TimerLib
+  #LcmLib
+  #MallocLib
+  CacheMaintenanceLib
+  #InterruptsLib
+  #QcomPlatformMmcLib
+  #QcomTargetMmcSdhciLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-pointer-to-int-cast
+
+[Protocols]
+  gEfiBlockIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid
+  gEfiEventExitBootServicesGuid
+
+[FeaturePcd]
+  gQcomTokenSpaceGuid.PcdMmcHs200Caps
+
+[Pcd.common]
+  gQcomTokenSpaceGuid.PcdSdccMciHcMode
+  gQcomTokenSpaceGuid.PcdSdccHcPwrctlStatusReg
+  gQcomTokenSpaceGuid.PcdSdccHcPwrctlMaskReg
+  gQcomTokenSpaceGuid.PcdSdccHcPwrctlClearReg
+  gQcomTokenSpaceGuid.PcdSdccHcPwrctlCtlReg
+  gQcomTokenSpaceGuid.PcdMmcSdhciDdrCfgVal
+
+[Depex]
+  TRUE
