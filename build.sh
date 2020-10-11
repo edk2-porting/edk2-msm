@@ -70,7 +70,7 @@ rm -f "boot_${DEVICE}.img" uefi_img
 # not actually GCC5, it's GCC7 on Ubuntu 18.04.
 GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"
 gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img"
-cat "uefi-${DEVICE}.img" "device_specific/${DEVICE}.dtb" >> "uefi-${DEVICE}.img-dtb"
+cat "uefi-${DEVICE}.img" "device_specific/${DEVICE}.dtb" > "uefi-${DEVICE}.img-dtb"
 echo > ramdisk
 abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img-dtb" -r ramdisk
 echo "Build done: boot-${DEVICE}.img"
