@@ -13,7 +13,7 @@ Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
 [Discord group for general discussion](https://discord.gg/XXBWfag)
 
-QQ discussion group for edk2-porting: 697666196
+@Sophon on Coolapk for QQ group.
 
 ## Dependencies
 
