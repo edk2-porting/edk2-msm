@@ -6,6 +6,7 @@ DEVICES=(
 	fajita
 	polaris
 	akari
+    beryllium
 )
 #####################################
 function _help(){
@@ -22,7 +23,7 @@ function _help(){
 }
 cd "$(dirname "$0")"
 if ! [ -f sdm845Pkg/sdm845Pkg.dsc ]
-then	echo "cannot found sdm845Pkg/sdm845Pkg.dsc" >&2
+then	echo "cannot find sdm845Pkg/sdm845Pkg.dsc" >&2
 	exit 1
 fi
 typeset -l DEVICE
