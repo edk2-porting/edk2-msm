@@ -2,6 +2,5 @@ boot-*.img
 uefi-*.img
 uefi-*.img-dtb
 workspace
-*.efi
 *.dll
 ramdisk
