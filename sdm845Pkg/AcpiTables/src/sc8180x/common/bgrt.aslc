@@ -1,0 +1,49 @@
+/** @file
+  BGRT Table
+
+  This file contains BGRT Table Definition.  
+  
+  Copyright (c) 2011, 2013 - Mmoclauq Technologies Inc. All rights reserved.
+
+**/ 
+
+#include "Platform.h"
+#include "Acpi.h"
+
+/* IMAGE ADDRESS - UINT64, according to uefiplatWP.cfg */
+#define BGRT_IMAGE_ADDRESS   0
+
+/* IMAGE OFFSET X - UINT32 */
+/* Sample logo is 176x182, centering (38.2% from the top) the image into 720x1280, same for CDP/MTP/QRD */
+#define BGRT_IMAGE_OFFSET_X  0x00000110      /* (720*0.5 - 176*0.5) = 272 = 0x110 */
+
+/* IMAGE OFFSET Y - UINT32 */
+#define BGRT_IMAGE_OFFSET_Y  0x0000018E      /* (1280*0.382 - 182*0.5) = 398 = 0x18E */
+
+#pragma pack(1)
+
+/* ACPI 5.0 BGRT Table */
+BGRT_TABLE BGRT = 
+{
+    /* ACPI BGRT Header */
+    {
+      ACPI_BGRT_SIGNATURE,                                   //Signature
+      sizeof (BGRT_TABLE),                                   //Length
+      ACPI_BGRT_REVISION,                                    //Revision
+      0,                                                     //Checksum
+      ACPI_OEM_ID,                                           //OEMID
+      ACPI_OEM_TABLE_ID,                                     //OEMTableID
+      ACPI_OEM_REVISION,                                     //OEMRevision
+      ACPI_CREATOR_ID,                                       //CreatorID
+      ACPI_CREATOR_REVISION                                  //CreatorRevision
+    },
+    0x0001,                                                  //Version 
+    BGRT_IMAGE_INVALID,                                      //Validity of Image, bit 0 = 0 (Invalid image WP Default)
+    BGRT_BITMAP_IMAGE,                                       //Image Type is Bit-Map i.e 0x00
+    BGRT_IMAGE_ADDRESS,
+    BGRT_IMAGE_OFFSET_X,
+    BGRT_IMAGE_OFFSET_Y
+};
+#pragma pack()
+
+
