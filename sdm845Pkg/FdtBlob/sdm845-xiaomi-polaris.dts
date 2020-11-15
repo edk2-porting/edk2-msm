@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * Copyright (c) 2020, Sophon Wu <strongtz@yeah.net>
+ * Copyright (c) 2020, Xilin Wu <strongtz@yeah.net>
  */
 
 /dts-v1/;
@@ -8,7 +8,10 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
 #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+#include <dt-bindings/input/linux-event-codes.h>
 #include "sdm845.dtsi"
+
+// Needed for some GPIO (like the volume buttons)
 #include "pm8998.dtsi"
 #include "pmi8998.dtsi"
 #include "pm8005.dtsi"
@@ -53,55 +56,19 @@
 		regulator-min-microvolt = <3700000>;
 		regulator-max-microvolt = <3700000>;
 	};
+	
 
-	vbat: vbat-regulator {
+	vreg_tp_vddio: tp-vddio-vreg {
 		compatible = "regulator-fixed";
-		regulator-name = "VBAT";
-
-		vin-supply = <&vph_pwr>;
-		regulator-min-microvolt = <4200000>;
-		regulator-max-microvolt = <4200000>;
-		regulator-always-on;
+		regulator-name = "vreg_tp_vddio";
+		
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		
+		gpio = <&tlmm 23 0>;
+		regulator-boot-on;
+		enable-active-high;
 	};
-
-	vbat_som: vbat-som-regulator {
-		compatible = "regulator-fixed";
-		regulator-name = "VBAT_SOM";
-
-		vin-supply = <&vph_pwr>;
-		regulator-min-microvolt = <4200000>;
-		regulator-max-microvolt = <4200000>;
-		regulator-always-on;
-	};
-
-	vdc_3v3: vdc-3v3-regulator {
-		compatible = "regulator-fixed";
-		regulator-name = "VDC_3V3";
-		vin-supply = <&vph_pwr>;
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-always-on;
-	};
-
-	vdc_5v: vdc-5v-regulator {
-		compatible = "regulator-fixed";
-		regulator-name = "VDC_5V";
-
-		vin-supply = <&vph_pwr>;
-		regulator-min-microvolt = <500000>;
-		regulator-max-microvolt = <500000>;
-		regulator-always-on;
-	};
-
-	// vreg_tp_vddio: tp-vddio-vreg {
-	// 	regulator-always-on;
-	// 	compatible = "regulator-fixed";
-	// 	regulator-name = "vreg_tp_vddio";
-	// 	regulator-boot-on;
-	// 	enable-active-high;
-	// 	gpio = <&tlmm 23 0>;
-	// 	startup-delay-us = <4000>;
-	// };
 
 	/*
 	 * Apparently RPMh does not provide support for PM8150 S4 because it
@@ -117,50 +84,6 @@
 		vin-supply = <&vph_pwr>;
 	};
 
-	i2c_touch: i2c {
-		compatible = "i2c-gpio";
-		status = "okay";
-
-		sda-gpios = <&tlmm 33 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-		scl-gpios = <&tlmm 34 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-
-		i2c-gpio,delay-us = <5>;	/* 5~=100 kHz */
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&i2c_ts_pins>;
-
-		touchscreen: synaptics-rmi4-i2c@20 {
-			compatible = "syna,rmi4-i2c";
-			reg = <0x20>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-			interrupts-extended = <&tlmm 125 0x2008>; // IRQF_ONESHOT | IRQF_TRIGGER_LOW
-
-			pinctrl-names = "default";
-			pinctrl-0 = <&ts_default_pins &ts_enable_1p8>;
-
-			// vdd-supply = <&vreg_tp_vddio>;
-			vio-supply = <&vreg_l6a_1p8>;
-
-			syna,reset-delay-ms = <200>;
-			syna,startup-delay-ms = <500>;
-
-			rmi4-f01@1 {
-				reg = <0x01>;
-				syna,nosleep-mode = <1>;
-			};
-
-			rmi4_f12: rmi4-f12@12 {
-				reg = <0x12>;
-				syna,sensor-type = <1>;
-				syna,rezero-wait-ms = <200>;
-			};
-		};
-	};
-
-
 	gpio_keys {
 		compatible = "gpio-keys";
 		autorepeat;
@@ -174,46 +97,6 @@
 			gpios = <&pm8998_gpio 6 GPIO_ACTIVE_LOW>;
 		};
 	};
-
-	// usb2_vbus_det {
-	// 	usb2_vbus_det_default: usb2_vbus_det_default {
-	// 		pins = "gpio8";
-	// 		function = "normal";
-	// 		input-enable;
-	// 		bias-pull-down;
-	// 		power-source = <1>;	/* VPH input supply */
-	// 	};
-	// };
-
-	// extcon_usb1: extcon-usb-1 {
-	// 	compatible = "linux,extcon-usb-gpio";
-	// 	vbus-gpio = <&pmi8998_gpio 8 GPIO_ACTIVE_HIGH>;
-
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&usb2_vbus_det_default>;
-	// };
-
-	// ext_5v_boost {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&pmi8998_gpio 10 GPIO_ACTIVE_HIGH>;
-	// 	status = "ok";
-	// 	pinctrl-0 = <&usb2_ext_5v_boost>;
-	// 	regulator-name = "ext_5v_boost";
-	// 	pinctrl-names = "default";
-	// 	regulator-always-on;
-	// };
-
-	// vbus_boost {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&pmi8998_gpio 2 GPIO_ACTIVE_HIGH>;
-	// 	status = "ok";
-	// 	pinctrl-0 = <&usb2_vbus_boost>;
-	// 	regulator-name = "vbus_boost";
-	// 	pinctrl-names = "default";
-	// 	regulator-always-on;
-	// };
 
 };
 
@@ -251,7 +134,6 @@
 		vin-lvs-1-2-supply = <&vreg_s4a_1p8>;
 
 		vreg_s2a_1p1: smps2 {
-			regulator-always-on;
 			regulator-min-microvolt = <1100000>;
 			regulator-max-microvolt = <1100000>;
 		};
@@ -267,13 +149,11 @@
 		// };
 
 		vreg_s5a_2p04: smps5 {
-			regulator-always-on;
 			regulator-min-microvolt = <1904000>;
 			regulator-max-microvolt = <2040000>;
 		};
 
 		vreg_s7a_1p025: smps7 {
-			regulator-always-on;
 			regulator-min-microvolt = <900000>;
 			regulator-max-microvolt = <1028000>;
 		};
@@ -285,18 +165,18 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l2a_0p875: ldo2 {
-		// 	regulator-min-microvolt = <1200000>;
-		// 	regulator-max-microvolt = <1200000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// 	regulator-always-on;
-		// };
+		vreg_l2a_1p2: ldo2 {
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+		};
 
-		// vreg_l3a_0p875: ldo3 {
-		// 	regulator-min-microvolt = <1000000>;
-		// 	regulator-max-microvolt = <1000000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l3a_1p0: ldo3 {
+			regulator-min-microvolt = <1000000>;
+			regulator-max-microvolt = <1000000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l5a_0p8: ldo5 {
 			regulator-min-microvolt = <800000>;
@@ -316,29 +196,29 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l8a_1p2: ldo8 {
-		// 	regulator-min-microvolt = <1200000>;
-		// 	regulator-max-microvolt = <1248000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l8a_1p2: ldo8 {
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1248000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l9a_2p95: ldo9 {
-		// 	regulator-min-microvolt = <1704000>;
-		// 	regulator-max-microvolt = <2928000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l9a_1p8: ldo9 {
+			regulator-min-microvolt = <1704000>;
+			regulator-max-microvolt = <2928000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l10a_2p95: ldo10 {
-		// 	regulator-min-microvolt = <1704000>;
-		// 	regulator-max-microvolt = <2928000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l10a_2p95: ldo10 {
+			regulator-min-microvolt = <1704000>;
+			regulator-max-microvolt = <2928000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l11a_1p05: ldo11 {
-		// 	regulator-min-microvolt = <1000000>;
-		// 	regulator-max-microvolt = <1048000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l11a_1p05: ldo11 {
+			regulator-min-microvolt = <1000000>;
+			regulator-max-microvolt = <1048000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l12a_1p8: ldo12 {
 			regulator-min-microvolt = <1800000>;
@@ -346,11 +226,11 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l13a_2p95: ldo13 {
-		// 	regulator-min-microvolt = <1800000>;
-		// 	regulator-max-microvolt = <2960000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l13a_2p95: ldo13 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <2960000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 
 		// dsi and touchscreen maybe
@@ -358,21 +238,20 @@
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1880000>;
 			regulator-always-on;
-			regulator-boot-on;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l15a_1p8: ldo15 {
-		// 	regulator-min-microvolt = <1800000>;
-		// 	regulator-max-microvolt = <1800000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l15a_1p8: ldo15 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l16a_2p7: ldo16 {
-		// 	regulator-min-microvolt = <2704000>;
-		// 	regulator-max-microvolt = <2704000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l16a_2p7: ldo16 {
+			regulator-min-microvolt = <2704000>;
+			regulator-max-microvolt = <2704000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l17a_1p3: ldo17 {
 			regulator-always-on;
@@ -381,17 +260,17 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l18a_2p9: ldo18 {
-		// 	regulator-min-microvolt = <2704000>;
-		// 	regulator-max-microvolt = <2960000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l18a_2p9: ldo18 {
+			regulator-min-microvolt = <2704000>;
+			regulator-max-microvolt = <2960000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l19a_3p1: ldo19 {
-		// 	regulator-min-microvolt = <2856000>;
-		// 	regulator-max-microvolt = <3104000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l19a_3p1: ldo19 {
+			regulator-min-microvolt = <2856000>;
+			regulator-max-microvolt = <3104000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l20a_2p95: ldo20 {
 			regulator-min-microvolt = <2704000>;
@@ -399,23 +278,23 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 
-		// vreg_l21a_2p95: ldo21 {
-		// 	regulator-min-microvolt = <2704000>;
-		// 	regulator-max-microvolt = <2960000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l21a_2p95: ldo21 {
+			regulator-min-microvolt = <2704000>;
+			regulator-max-microvolt = <2960000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l22a_3p3: ldo22 {
-		// 	regulator-min-microvolt = <2864000>;
-		// 	regulator-max-microvolt = <3312000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l22a_3p3: ldo22 {
+			regulator-min-microvolt = <2864000>;
+			regulator-max-microvolt = <3312000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
-		// vreg_l23a_3p3: ldo23 {
-		// 	regulator-min-microvolt = <3000000>;
-		// 	regulator-max-microvolt = <3312000>;
-		// 	regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-		// };
+		vreg_l23a_3p3: ldo23 {
+			regulator-min-microvolt = <3000000>;
+			regulator-max-microvolt = <3312000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
 
 		vreg_l24a_3p075: ldo24 {
 			regulator-min-microvolt = <3088000>;
@@ -441,19 +320,16 @@
 			regulator-min-microvolt = <2856000>;
 			regulator-max-microvolt = <3008000>;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-			regulator-always-on;
 		};
 
 		vreg_lvs1a_1p8: lvs1 {
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
-			regulator-always-on;
 		};
 
 		vreg_lvs2a_1p8: lvs2 {
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
-			regulator-always-on;
 		};
 	};
 
@@ -474,6 +350,11 @@
 	pm8005-rpmh-regulators {
 		compatible = "qcom,pm8005-rpmh-regulators";
 		qcom,pmic-id = "c";
+		
+		vdd-s1-supply = <&vph_pwr>;
+		vdd-s2-supply = <&vph_pwr>;
+		vdd-s3-supply = <&vph_pwr>;
+		vdd-s4-supply = <&vph_pwr>;
 
 		vreg_smp3c_0p6: smps3 {
 			regulator-always-on;
@@ -514,6 +395,55 @@
 	clock-frequency = <400000>;
 };
 
+/* touchscreen */
+&i2c14 {
+	status = "okay";
+
+	touchscreen: synaptics-dsi-i2c@20 {
+		compatible = "syna,rmi4-i2c";
+		reg = <0x20>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		interrupts-extended = <&tlmm 125 IRQ_TYPE_EDGE_FALLING>;
+		
+		pinctrl-names = "default";
+		pinctrl-0 = <&ts_default_pins>;
+		
+		vdd-supply = <&vreg_l28a_3p0>;
+		vio-supply = <&vreg_tp_vddio>;
+		
+		syna,reset-delay-ms = <200>;
+		syna,startup-delay-ms = <200>;
+
+		rmi4-f01@1 {
+			reg = <0x1>;
+			syna,nosleep-mode = <0x1>;
+		};
+
+		rmi4-f12@12 {
+			reg = <0x12>;
+			syna,sensor-type = <1>;
+			syna,clip-x-low = <0>;
+			syna,clip-x-high = <1080>;
+			syna,clip-y-low = <0>;
+			syna,clip-y-high = <2160>;
+			syna,rezero-wait-ms = <200>;
+		};
+	};
+};
+
+&qup_i2c14_default {
+	mux {
+		pins = "gpio33", "gpio34";
+		function = "qup14";
+	};
+	config {
+		pins = "gpio33", "gpio34";
+		drive-strength = <2>;
+		bias-disable;
+	};
+};
+
 &pm8998_gpio {
 	vol_up_pin_a: vol-up-active {
 		pins = "gpio6";
@@ -545,19 +475,6 @@
 &tlmm {
 	gpio-reserved-ranges = <0 4>, <81 4>;
 
-	i2c_ts_pins: i2c-touch-default {
-		mux {
-			pins = "gpio33", "gpio34";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio33", "gpio34";
-			drive-strength = <2>;
-			bias-disable;
-		};
-	};
-
 	ts_default_pins: ts-int {
 		mux {
 			pins = "gpio99", "gpio125";
@@ -570,19 +487,7 @@
 			bias-pull-up;
 		};
 	};
-
-	ts_enable_1p8: ts-1p8 {
-		mux {
-			pins = "gpio23";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio23";
-			drive-strength = <16>;
-			bias-pull-up;
-		};
-	};
+	
 };
 
 &uart6 {
