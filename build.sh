@@ -6,7 +6,7 @@ DEVICES=(
 	fajita
 	polaris
 	akari
-    beryllium
+	beryllium
 )
 #####################################
 function _help(){
