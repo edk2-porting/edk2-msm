@@ -9,11 +9,11 @@ Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
 ## Resources
 
-[Telegram group for edk2-porting](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+[Telegram group (recommended)](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
-[Discord group for general discussion](https://discord.gg/XXBWfag)
+[Discord group](https://discord.gg/XXBWfag)
 
-@Sophon on Coolapk for QQ group.
+QQ group: 697666196
 
 ## Dependencies
 
@@ -54,11 +54,12 @@ git clone https://github.com/edk2-porting/edk2-sdm845.git
 ```
 
 3.Build this project
+
 ```bash
 bash build.sh --device DEVICE
 ```
 
-4.Debug and use
+4.Boot the image
 
 ```bash
 fastboot boot boot_DEVICE.img
@@ -78,5 +79,5 @@ SimpleFbDxe driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Pro
 
 Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
 
-## Simple Porting Guide (Chinese)
- http://sophonwu.com/blog/?p=85
+## Simple Porting Guide
+ WIP
