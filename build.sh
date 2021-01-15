@@ -17,62 +17,88 @@ function _help(){
 	echo
 	echo "Options: "
 	echo "	--device DEV, -d DEV: build for DEV. (${DEVICES[*]})"
+	echo "	--all, -a:            build all devices."
 	echo "	--help, -h:           show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
 	exit "${1}"
 }
-cd "$(dirname "$0")"
-if ! [ -f sdm845Pkg/sdm845Pkg.dsc ]
-then	echo "cannot find sdm845Pkg/sdm845Pkg.dsc" >&2
-	exit 1
-fi
+function _error(){ echo "${@}" >&2;exit 1; }
+function _build(){
+	local DEVICE="${1}"
+	shift
+	source "${_EDK2}/edksetup.sh"
+	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
+	set -x
+	make -C "${_EDK2}/BaseTools" -j "$(nproc)"||exit "$?"
+	# based on the instructions from edk2-platform
+	rm -f "boot_${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
+	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"||return "$?"
+	gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img.gz"||return "$?"
+	cat "uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "uefi-${DEVICE}.img.gz-dtb"||return "$?"
+	abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
+	echo "Build done: boot-${DEVICE}.img"
+	set +x
+}
+cd "$(dirname "$0")"||exit 1
+[ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
 DEVICE=""
-OPTS="$(getopt -o d:h -l device:,help -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o d:ha -l device:,help,all -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
 		-d|--device)DEVICE="${2}";shift 2;;
+		-a|--all)DEVICE="all";shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
 	esac
 done
-[ -z "${DEVICE}" ]&&_help 1
-HAS=false
-for i in "${DEVICES[@]}"
-do	[ "${i}" == "${DEVICE}" ]||continue
-	HAS=true
-	break
+if ! [ -d ../edk2 ]
+then	echo "Updating submodules"
+	git submodule init&&git submodule update
+	pushd edk2&&git submodule init&&git submodule update&&popd
+	pushd edk2-platforms&&git submodule init&&git submodule update&&popd
+fi
+for i in "${EDK2}" ./edk2 ../edk2
+do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
+	then	_EDK2="$(realpath "${i}")"
+		break
+	fi
 done
-if [ "${HAS}" != "true" ]
-then	echo "build.sh: unknown build target device ${DEVICE}." >&2
-	exit 1
-fi
-_EDK2="$(realpath "$PWD/../edk2")"
-_EDK2_PLATFORMS="$(realpath "$PWD/../edk2-platforms")"
-if ! [ -d "${_EDK2}" ]
-then	echo "${_EDK2} not found, please see README.md" >&2
-	exit 1
-fi
-if ! [ -d "${_EDK2_PLATFORMS}" ]
-then	echo "${_EDK2_PLATFORMS} not found, please see README.md" >&2
-	exit 1
-fi
-set -e
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
-export WORKSPACE="$PWD/workspace"
-source ../edk2/edksetup.sh
-[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
-set -x
-make -C ../edk2/BaseTools -j "$(nproc)"
-# based on the instructions from edk2-platform
-rm -f "boot_${DEVICE}.img" uefi_img
+for i in "${EDK2_PLATFORMS}" ./edk2-platforms ../edk2-platforms
+do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
+	then	_EDK2_PLATFORMS="$(realpath "${i}")"
+		break
+	fi
+done
+[ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
+[ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
+echo "EDK2 Path: ${_EDK2}"
+echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 # not actually GCC5, it's GCC7 on Ubuntu 18.04.
-GCC5_AARCH64_PREFIX=aarch64-linux-gnu- build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"
-gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img"
-cat "uefi-${DEVICE}.img" "device_specific/${DEVICE}.dtb" > "uefi-${DEVICE}.img-dtb"
+export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
+export WORKSPACE="${PWD}/workspace"
 echo > ramdisk
-abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img-dtb" -r ramdisk
-echo "Build done: boot-${DEVICE}.img"
+set -e
+if [ -z "${DEVICE}" ]
+then _help 1
+elif [ "${DEVICE}" == "all" ]
+then	E=0
+	for i in "${DEVICES[@]}"
+	do	echo "Building ${i}"
+		rm --recursive --force --one-file-system ./workspace||true
+		_build "${i}"||E="$?"
+	done
+	exit "${E}"
+else	HAS=false
+	for i in "${DEVICES[@]}"
+	do	[ "${i}" == "${DEVICE}" ]||continue
+		HAS=true
+		break
+	done
+	[ "${HAS}" == "true" ]||_error "build.sh: unknown build target device ${DEVICE}."
+	_build "${DEVICE}"
+fi
