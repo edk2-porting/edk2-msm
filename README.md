@@ -28,38 +28,19 @@ Ubuntu 20.04 is also proved to be fine.
 
 ## Building
 
-1.Clone edk2 and edk2-platforms (Place three directories side by side.)
-
-edk2:
-```
-commit:3a3713e62cfad00d78bb938b0d9fb1eedaeff314
-```
-
-edk2-platforms:
-```
-commit:cfdc7f907d545b14302295b819ea078bc36c6a40
-```
+1.Clone this project
 
 ```bash
-mkdir workspace-edk2
-cd workspace-edk2
-git clone https://github.com/tianocore/edk2.git -o 3a3713e62cfad00d78bb938b0d9fb1eedaeff314 --recursive --depth=1
-git clone https://github.com/tianocore/edk2-platforms.git -o cfdc7f907d545b14302295b819ea078bc36c6a40 --recursive --depth=1
+git clone https://github.com/edk2-porting/edk2-sdm845.git --recursive
 ```
 
-2.Clone this project
-
-```bash
-git clone https://github.com/edk2-porting/edk2-sdm845.git
-```
-
-3.Build this project
+2.Build this project
 
 ```bash
 bash build.sh --device DEVICE
 ```
 
-4.Boot the image
+3.Boot the image
 
 ```bash
 fastboot boot boot_DEVICE.img
