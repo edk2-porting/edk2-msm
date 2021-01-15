@@ -7,6 +7,7 @@ DEVICES=(
 	polaris
 	akari
 	beryllium
+	perseus
 )
 #####################################
 function _help(){
