@@ -221,12 +221,6 @@ READ_LOCK_STATUS   = TRUE
     SECTION UI = "ChipInfo"
   }
 
-  #FILE DRIVER = 7a32bd23-f735-4f57-aa1a-447d2fe3be0d {
-  #  SECTION DXE_DEPEX = sdm845Pkg/Binary/beryllium/SPI/SPI.depex
-  #  SECTION PE32 = sdm845Pkg/Binary/beryllium/SPI/SPI.efi
-  #  SECTION UI = "SPI"
-  #}
-
 
   #
   # USB Host Support

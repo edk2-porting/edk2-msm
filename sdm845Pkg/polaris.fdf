@@ -122,30 +122,6 @@ READ_LOCK_STATUS   = TRUE
   INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
   INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
 
-  # FILE DRIVER = af9763a2-033b-4109-8e17-56a98d380c92 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/HWIODxeDriver/HWIODxeDriver.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/HWIODxeDriver/HWIODxeDriver.efi
-  #   SECTION UI = "HWIODxeDriver"
-  # }
-
-  # FILE DRIVER = 4db5dea6-5302-4d1a-8a82-677a683b0d29 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/ClockDxe/ClockDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/ClockDxe/ClockDxe.efi
-  #   SECTION UI = "ClockDxe"
-  # }
-
-  # FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/PmicDxe/PmicDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/PmicDxe/PmicDxe.efi
-  #   SECTION UI = "PmicDxe"
-  # }
-
-  # FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/ButtonsDxe/ButtonsDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/ButtonsDxe/ButtonsDxe.efi
-  #   SECTION UI = "ButtonsDxe"
-  # }
-
   #
   # Multiple Console IO support
   #
@@ -162,39 +138,6 @@ READ_LOCK_STATUS   = TRUE
 
   INF MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
 
-  # FILE DRIVER = 3299a266-15f0-4346-8318-716336736d3e {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/UsbDeviceDxe/UsbDeviceDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/UsbDeviceDxe/UsbDeviceDxe.efi
-  #   SECTION UI = "UsbDeviceDxe"
-  # }
-
-  # FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
-  #   SECTION UI = "UsbPwrCtrlDxe"
-  # }
-
-  # FILE DRIVER = 5af77f10-90df-4e7e-8325-a17ec09d5443 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/UsbMsdDxe/UsbMsdDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/UsbMsdDxe/UsbMsdDxe.efi
-  #   SECTION UI = "UsbMsdDxe"
-  # }
-
-  # FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-  #   SECTION UI = "UsbfnDwc3Dxe"
-  # }
-
-  # FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/UsbConfigDxe/UsbConfigDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/UsbConfigDxe/UsbConfigDxe.efi
-  #   SECTION UI = "UsbConfigDxe"
-  # }
-
-  #
-  # GPIO
-  #
 
   #
   # Virtual Keyboard
@@ -210,30 +153,11 @@ READ_LOCK_STATUS   = TRUE
     SECTION UI = "UFSDxe"
   }
 
-  # FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/SPMI/SPMI.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/SPMI/SPMI.efi
-  #   SECTION UI = "SPMI"
-  # }
-
   FILE DRIVER = f541d663-4a48-40aa-aabf-ff158ccae34c {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/SmemDxe/SmemDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/polaris/SmemDxe/SmemDxe.efi
     SECTION UI = "SmemDxe"
   }
-    
-  # FILE DRIVER = 10e193df-9966-44e7-b17c-59dd831e20fc {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/ChipInfo/ChipInfo.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/ChipInfo/ChipInfo.efi
-  #   SECTION UI = "ChipInfo"
-  # }
-
-  # FILE DRIVER = 7a32bd23-f735-4f57-aa1a-447d2fe3be0d {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/polaris/SPI/SPI.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/polaris/SPI/SPI.efi
-  #   SECTION UI = "SPI"
-  # }
-
 
   #
   # USB Host Support
