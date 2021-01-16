@@ -15,6 +15,17 @@ Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
 QQ group: 697666196
 
+## WARNING
+
+**DO NOT EVER TRY TO PORT IT TO *SONY* DEVICES**
+
+**YOUR UFS WILL BE WIPED CLEAN!!!**
+
+
+**This repo only supports Snapdragon 845 (sdm845) and does not support others such as Snapdragon 855 (sm8150)**
+
+**Do not try to run on other non sdm845 devices such as MIX3 5G**
+
 ## Dependencies
 
 Ubuntu 18.04:
@@ -31,7 +42,7 @@ Ubuntu 20.04 is also proved to be fine.
 1.Clone this project
 
 ```bash
-git clone https://github.com/edk2-porting/edk2-sdm845.git --recursive
+git clone https://github.com/edk2-porting/edk2-sdm845.git --recursive --depth=1
 ```
 
 2.Build this project
