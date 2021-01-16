@@ -5,7 +5,6 @@ DEVICES=(
 	enchilada
 	fajita
 	polaris
-	akari
 	beryllium
 	perseus
 )
