@@ -32,7 +32,7 @@ Ubuntu 18.04:
 
 ```bash
 sudo apt update
-sudo apt install build-essential uuid-dev iasl git nasm python3-distutils gcc-aarch64-linux-gnu abootimg
+sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 ```
 Ubuntu 20.04 is also proved to be fine.
 
