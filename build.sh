@@ -17,6 +17,7 @@ function _help(){
 	echo "Options: "
 	echo "	--device DEV, -d DEV: build for DEV. (${DEVICES[*]})"
 	echo "	--all, -a:            build all devices."
+	echo "	--chinese, -c:        optimization for Chinese users."
 	echo "	--help, -h:           show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
@@ -43,12 +44,14 @@ cd "$(dirname "$0")"||exit 1
 [ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
 DEVICE=""
-OPTS="$(getopt -o d:ha -l device:,help,all -n 'build.sh' -- "$@")"||exit 1
+CHINESE=false
+OPTS="$(getopt -o d:hac -l device:,help,all,chinese -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
 		-d|--device)DEVICE="${2}";shift 2;;
-		-a|--all)DEVICE="all";shift;;
+		-a|--all)DEVICE=all;shift;;
+		-c|--chinese)CHINESE=true;shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
@@ -57,9 +60,26 @@ done
 if ! [ -f edk2/edksetup.sh ] || ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
-	git submodule init&&git submodule update
-	pushd edk2&&git submodule init&&git submodule update&&popd
-	pushd edk2-platforms&&git submodule init&&git submodule update&&popd
+	if "${CHINESE}"
+	then	git submodule set-url edk2 https://gitee.com/mirrors/edk2.git
+		git submodule set-url edk2-platforms https://gitee.com/mirrors/edk2-platforms.git
+		git submodule init;git submodule update --depth 1
+		pushd edk2
+		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://gitee.com/mirrors/openssl.git
+		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://gitee.com/mirrors/brotli.git
+		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://gitee.com/strongtz/cmocka.git
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://gitee.com/strongtz/berkeley-softfloat-3
+		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://gitee.com/mirrors/brotli.git
+		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://gitee.com/mirrors/oniguruma.git
+		git submodule init;git submodule update
+		git checkout .gitmodules
+		popd
+		git checkout .gitmodules
+	else	git submodule init;git submodule update --depth 1
+		pushd edk2
+		git submodule init;git submodule update
+		popd
+	fi
 	set +e
 fi
 for i in "${EDK2}" ./edk2 ../edk2
