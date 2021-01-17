@@ -32,6 +32,7 @@ function _build(){
 	make -C "${_EDK2}/BaseTools" -j "$(nproc)"||exit "$?"
 	# based on the instructions from edk2-platform
 	rm -f "boot_${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
+	python3 assets/generate-logo.py
 	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"||return "$?"
 	gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img.gz"||return "$?"
 	cat "uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "uefi-${DEVICE}.img.gz-dtb"||return "$?"
