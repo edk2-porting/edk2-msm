@@ -202,28 +202,28 @@ READ_LOCK_STATUS   = TRUE
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
     SECTION RAW = sdm845Pkg/AcpiTables/testing/CSRT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-	  SECTION RAW = sdm845Pkg/AcpiTables/testing/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/DSDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FACS.aml
-	  SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
-  	SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
     
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/CSRT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/DBG2.aml
-	  # SECTION RAW = sdm845Pkg/AcpiTables/test2/DSDT.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/test2/DSDT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/FACS.aml
-	  # SECTION RAW = sdm845Pkg/AcpiTables/test2/FADT.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/test2/FADT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/GTDT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/IORT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/MADT.aml
-  	# SECTION RAW = sdm845Pkg/AcpiTables/test2/MCFG.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/test2/MCFG.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/PPTT.aml
 
-	  SECTION UI = "AcpiTables"
+    SECTION UI = "AcpiTables"
   }
 
   #
@@ -288,5 +288,3 @@ READ_LOCK_STATUS   = TRUE
   }
 
 !include sdm845Pkg/CommonFdf.fdf.inc
-
-
