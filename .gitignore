@@ -6,3 +6,4 @@ uefi-*.img.gz-dtb
 workspace
 *.dll
 ramdisk
+sdm845Pkg/Drivers/LogoDxe/Logo.bmp
