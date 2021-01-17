@@ -24,7 +24,7 @@ QQ group: 697666196
 
 **This repo only supports Snapdragon 845 (sdm845) and does not support others such as Snapdragon 855 (sm8150)**
 
-**Do not try to run on other non sdm845 devices such as MIX3 5G**
+**Do not try to run on other non sdm845 devices such as Xiaomi MIX3 5G**
 
 ## Dependencies
 
@@ -36,6 +36,15 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 ```
 Ubuntu 20.04 is also proved to be fine.
 
+## Supported devices
+
+1. Xiaomi MIX 2S       (polaris)
+2. Xiaomi MIX 3        (perseus)
+3. Xiaomi MI 8         (dipper)
+4. Xiaomi PocoPhone F1 (beryllium)
+5. OnePlus 6           (enchilada)
+6. OnePlus 6T          (fajita)
+7. Sony Xperia XZ2     (akari)     (Removed)
 
 ## Building
 
@@ -65,7 +74,7 @@ Special thanks to [fxsheep](https://github.com/fxsheep)
 
 MemoryMap thanks to [Lemon1Ice](https://github.com/Lemon1Ice).
 
-ACPI tables thanks to [5超级菜鸟5](https://github.com/sunshuyu) and many other people related.
+ACPI tables thanks to [sunshuyu](https://github.com/sunshuyu) and many other people related.
 
 SimpleFbDxe driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg).
 
