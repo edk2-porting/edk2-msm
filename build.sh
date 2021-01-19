@@ -57,6 +57,7 @@ do	case "${1}" in
 		*)_help 1;;
 	esac
 done
+[ -z "${DEVICE}" ]&&_help 1
 if ! [ -f edk2/edksetup.sh ] || ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
@@ -105,9 +106,7 @@ export WORKSPACE="${PWD}/workspace"
 echo > ramdisk
 set -e
 python3 assets/generate-logo.py
-if [ -z "${DEVICE}" ]
-then _help 1
-elif [ "${DEVICE}" == "all" ]
+if [ "${DEVICE}" == "all" ]
 then	E=0
 	for i in "${DEVICES[@]}"
 	do	echo "Building ${i}"
