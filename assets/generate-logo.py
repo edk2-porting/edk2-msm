@@ -21,13 +21,14 @@ print(ohmydate)
 repoPath = pwd + "/.."
 repo = Repo(repoPath)
 gitHead = str(repo.head.commit)
+gitHead = gitHead[0:7]
 print(gitHead)
-strs = "head:" + gitHead + "\n Build:" + ohmydate
+strs = " commit: " + gitHead + "\n Build: " + ohmydate
 
 
-x = 1
-y = 1
-word_size = 11
+x = 410
+y = 250
+word_size = 40
 word_css  = pwd + "/NotoSerif-Italic.ttf"
 
 #Set font
