@@ -84,7 +84,7 @@ Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/w
 
 ## Porting Guide
  
- 1. Install Python protobuf by executing `pip install --upgrade google-api-python-client` in terminal
+ 1. Install Python protobuf and uefi_firmware-parser by executing `pip install --upgrade google-api-python-client uefi_firmware` in terminal
  2. Download [extract_android_ota_payload](https://github.com/cyxx/extract_android_ota_payload/archive/master.zip) and extract the folder inside the archive anywhere
  3. Download any OTA update for your phone
  4. Extract payload.bin to `extract_android_ota_payload-master` folder
