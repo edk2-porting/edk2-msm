@@ -82,7 +82,7 @@ SimpleFbDxe driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Pro
 
 Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
 
-## Simple Porting Guide
+## Porting Guide
  
  1. Install Python protobuf by executing `pip install --upgrade google-api-python-client` in terminal
  2. Download [extract_android_ota_payload](https://github.com/cyxx/extract_android_ota_payload/archive/master.zip) and extract the folder inside the archive anywhere
