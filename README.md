@@ -16,7 +16,8 @@ Pull requests for new devices and device tree or ACPI fixes are welcomed!
 QQ group: 697666196
 
 ## License
-This project is released under the [WTFPL LICENSE](http://www.wtfpl.net/ "WTFPL LICENSE").
+
+This project is released under the [WTFPL LICENSE](http://www.wtfpl.net/).
 
 ## WARNING
 
