@@ -1,8 +1,8 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
-尝试为骁龙845平台移植EDK2。
+该项目旨在尝试为骁龙845平台移植EDK2。
 
-欢迎PR新设备和设备树或ACPI的修复！
+欢迎PR新设备的支持，以及设备树或ACPI的修复！
 
 ![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
 ![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
@@ -21,14 +21,14 @@ QQ交流群: 697666196
 
 ## 警告
 
-**请勿尝试移植到任何的*索尼*设备**
+**请勿尝试移植到任何索尼设备上**
 
 **你的UFS会被清空!!!**
 
 
-**仅支持骁龙845(sdm845)平台,不支持其它任何平台如骁龙855 (sm8150)**
+**该项目仅支持骁龙845(sdm845)平台,不支持其它任何平台如骁龙855 (sm8150)**
 
-**请不要在非骁龙845(sdm845)平台设备如小米MIX3 5G**
+**请不要在非骁龙845设备上编译运行，如小米MIX3 5G**
 
 ## 依赖
 
@@ -51,13 +51,13 @@ Ubuntu 20.04同上。
 
 ## 构建
 
-1.克隆此项目
+1.克隆此项目（默认使用国内fastgit镜像加速）
 
 ```bash
-git clone https://gitee.com/strongtz/edk2-sdm845.git --depth=1
+git clone https://hub.fastgit.org/edk2-porting/edk2-sdm845.git --depth=1
 ```
 
-2.编译此项目
+2.编译此项目（默认使用fastgit加速submodule克隆）
 
 ```bash
 bash build.sh --chinese --device DEVICE
@@ -77,11 +77,11 @@ fastboot boot boot_DEVICE.img
 
 感谢[Lemon1Ice](https://github.com/Lemon1Ice)提供MemoryMap
 
-感谢[5超级菜鸟5](https://github.com/sunshuyu)以及其他人提供的ACPI表
+感谢[5超级菜鸟5](https://github.com/sunshuyu)以及其他人提供的ACPI
 
 SimpleFbDxe驱动来自imbushuo的[Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg)
 
-同样感谢[edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt)
+同样感谢[tianocore wiki](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt)
 
 ## 简单的移植教程
 
@@ -113,4 +113,4 @@ SimpleFbDxe驱动来自imbushuo的[Lumia950XLPkg](https://github.com/WOA-Project
 
  然后现在可以编译并测试使用.
 
- 如果您在某个地方遇到问题,你可以在Discord或Telegram组发送消息询问,如果移植成功,请发送`edk2-sdm845/sdm845Pkg/Binary/设备代号`文件夹以及.dsc和.fdf文件.
+ 如果您在某个地方遇到问题,你可以在Discord、Telegram和QQ群中发送消息询问,并发送`edk2-sdm845/sdm845Pkg/Binary/设备代号`文件夹以及.dsc和.fdf文件。若移植成功，亦可发送消息告知。
