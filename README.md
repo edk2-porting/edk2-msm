@@ -1,11 +1,6 @@
 # EDK2 UEFI Firmware For Snapdragon 845 (sdm845)
 
-Attempt to create a normal EDK2 for Snapdragon 845 platform.
-
-Pull requests for new devices and device tree or ACPI fixes are welcomed!
-
-![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
-![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
+A broken but working EDK2 implementation for Snapdragon 845 platform.
 
 ## Resources
 
@@ -13,32 +8,13 @@ Pull requests for new devices and device tree or ACPI fixes are welcomed!
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ group: 697666196
-
-## License
-
-This project is released under the [WTFPL LICENSE](http://www.wtfpl.net/).
+QQ group: 697666196 (Never On-Topic)
 
 ## WARNING
 
 **DO NOT EVER TRY TO PORT IT TO *SONY* DEVICES**
 
 **YOUR UFS WILL BE WIPED CLEAN!!!**
-
-
-**This repo only supports Snapdragon 845 (sdm845) and does not support others such as Snapdragon 855 (sm8150)**
-
-**Do not try to run on other non sdm845 devices such as Xiaomi MIX3 5G**
-
-## Dependencies
-
-Ubuntu 18.04:
-
-```bash
-sudo apt update
-sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
-```
-Ubuntu 20.04 is also proved to be fine.
 
 ## Supported devices
 
@@ -49,12 +25,21 @@ Ubuntu 20.04 is also proved to be fine.
 5. OnePlus 6           (enchilada)
 6. OnePlus 6T          (fajita)
 
+## Dependencies
+
+For Ubuntu 20.04:
+
+```bash
+sudo apt update
+sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
+```
+
 ## Building
 
 1.Clone this project
 
 ```bash
-git clone https://github.com/edk2-porting/edk2-sdm845.git --recursive --depth=1
+git clone https://github.com/edk2-porting/edk2-sdm845.git --depth=1
 ```
 
 2.Build this project
@@ -73,15 +58,7 @@ fastboot boot boot_DEVICE.img
 
 ## Credits
 
-Special thanks to [fxsheep](https://github.com/fxsheep)
-
-MemoryMap thanks to [Lemon1Ice](https://github.com/Lemon1Ice).
-
-ACPI tables thanks to [sunshuyu](https://github.com/sunshuyu) and many other people related.
-
-SimpleFbDxe driver is from imbushuo's [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg).
-
-Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/wiki/Using-EDK-II-with-Native-GCC#Install_required_software_from_apt).
+To be filled soon
 
 ## Porting Guide
  
@@ -114,3 +91,7 @@ Also thanks to [edk2 website](https://github.com/tianocore/tianocore.github.io/w
  You can now build as usual.
  
  Make sure to message the Discord or Telegram group in case you are stuck somewhere and if your port is successful, send `edk2-sdm845/sdm845Pkg/Binary/devicename` folder and `.dsc` and `.fdf` files.
+
+## License
+
+This project is released under the [WTFPL LICENSE](http://www.wtfpl.net/).
