@@ -1,8 +1,6 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
-该项目旨在尝试为骁龙845平台移植EDK2。
-
-欢迎PR新设备的支持，以及设备树或ACPI的修复！
+一个针对骁龙845平台的勉强能用的EDK2 UEFI
 
 ## 资源
 
@@ -11,6 +9,8 @@
 [Discord交流群](https://discord.gg/XXBWfag)
 
 QQ交流群: 697666196
+
+[没什么用的文档](https://renegade-doc.readthedocs.io/zh_CN/latest/index.html)
 
 ## 警告
 
