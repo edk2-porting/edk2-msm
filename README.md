@@ -2,6 +2,8 @@
 
 A broken but working EDK2 implementation for Snapdragon 845 platform.
 
+[Chinese version (中文版)](https://github.com/edk2-porting/edk2-sdm845/blob/master/README.zh.md)
+
 ## Resources
 
 [Telegram group (recommended)](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
@@ -9,6 +11,8 @@ A broken but working EDK2 implementation for Snapdragon 845 platform.
 [Discord group](https://discord.gg/XXBWfag)
 
 QQ group: 697666196 (Never On-Topic)
+
+[Useless documents](https://renegade-doc.readthedocs.io/en/latest/index.html)
 
 ## WARNING
 
