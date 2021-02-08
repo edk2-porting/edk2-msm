@@ -200,17 +200,17 @@ READ_LOCK_STATUS   = TRUE
   # INF RuleOverride = ACPITABLE sdm845Pkg/AcpiTables/AcpiTables.inf
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/CSRT.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/testing/CSRT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/credits/DSDTTouch.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/FACS.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/polaris/DSDT.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/testing/FACS.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
     
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/CSRT.aml
     # SECTION RAW = sdm845Pkg/AcpiTables/test2/DBG2.aml
