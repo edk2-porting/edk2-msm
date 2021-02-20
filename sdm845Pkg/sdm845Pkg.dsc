@@ -182,6 +182,10 @@
     <LibraryClasses>
 	  RealTimeClockLib|sdm845Pkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
   }
+
+  MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
+  MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
+
   #
   # GPIO
   #
@@ -191,8 +195,8 @@
   #
   EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
 
-  sdm845Pkg/sdm845Dxe/sdm845Dxe.inf
-  sdm845Pkg/SimpleFbDxe/SimpleFbDxe.inf
+  sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
+  sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
   #
   # USB Host Support
