@@ -33,10 +33,12 @@ function _build(){
 	make -C "${_EDK2}/BaseTools" -j "$(nproc)"||exit "$?"
 	# based on the instructions from edk2-platform
 	rm -f "boot_${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/${DEVICE}.dsc"||return "$?"
+	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc"||return "$?"
 	gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "uefi-${DEVICE}.img.gz"||return "$?"
 	cat "uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "uefi-${DEVICE}.img.gz-dtb"||return "$?"
 	abootimg --create "boot-${DEVICE}.img" -k "uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
+    mv "uefi-${DEVICE}.img.gz" "workspace/"
+    mv "uefi-${DEVICE}.img.gz-dtb" "workspace/"
 	echo "Build done: boot-${DEVICE}.img"
 	set +x
 }
