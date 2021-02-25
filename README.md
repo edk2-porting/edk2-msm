@@ -40,7 +40,7 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 
 ## Building
 
-1.Clone this project
+1.Clone this project (no need for recursive)
 
 ```bash
 git clone https://github.com/edk2-porting/edk2-sdm845.git --depth=1
@@ -62,7 +62,17 @@ fastboot boot boot_DEVICE.img
 
 ## Credits
 
-To be filled soon
+@fxsheep for his original `edk2-sagit`
+
+@strongtz for the creating and maintaining the whole Renegade Project
+
+@BigFootACA for build script
+
+@lemon1ice and NTAuthority for guidance and some blobs
+
+@wetdreams and TAOCroatia for working hard on testing and debugging
+
+@NekokeCore for fixing MemoryMap
 
 ## Porting Guide
 
