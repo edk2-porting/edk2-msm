@@ -18,6 +18,7 @@ function _help(){
 	echo "	--device DEV, -d DEV: build for DEV. (${DEVICES[*]})"
 	echo "	--all, -a:            build all devices."
 	echo "	--chinese, -c:        optimization for Chinese users."
+	echo "	--acpi, -A:           compile acpi."
 	echo "	--help, -h:           show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
@@ -31,6 +32,9 @@ function _build(){
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
 	make -C "${_EDK2}/BaseTools" -j "$(nproc)"||exit "$?"
+	if "${GEN_ACPI}" && ! iasl -ve "sdm845Pkg/AcpiTables/${DEVICE}/Dsdt.asl"
+	then echo "iasl failed with ${?}" >&2;return 1
+	fi
 	# based on the instructions from edk2-platform
 	rm -f "boot_${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc"||return "$?"
@@ -47,13 +51,15 @@ cd "$(dirname "$0")"||exit 1
 typeset -l DEVICE
 DEVICE=""
 CHINESE=false
-OPTS="$(getopt -o d:hac -l device:,help,all,chinese -n 'build.sh' -- "$@")"||exit 1
+export GEN_ACPI=false
+OPTS="$(getopt -o d:hacA -l device:,help,all,chinese,acpi -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
 		-d|--device)DEVICE="${2}";shift 2;;
 		-a|--all)DEVICE=all;shift;;
 		-c|--chinese)CHINESE=true;shift;;
+		-A|--acpi)GEN_ACPI=true;shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
