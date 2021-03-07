@@ -19,6 +19,8 @@ function _help(){
 	echo "	--all, -a:            build all devices."
 	echo "	--chinese, -c:        optimization for Chinese users."
 	echo "	--acpi, -A:           compile acpi."
+	echo "	--clean, -C:          clean workspace and output."
+	echo "	--distclean, -D:      clean up all files that are not in repo."
 	echo "	--help, -h:           show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
@@ -44,13 +46,17 @@ function _build(){
 	echo "Build done: boot-${DEVICE}.img"
 	set +x
 }
+function _clean(){ rm --one-file-system --recursive --force ./workspace boot-*.img uefi-*.img*; }
+function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 cd "$(dirname "$0")"||exit 1
 [ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
 DEVICE=""
 CHINESE=false
+CLEAN=false
+DISTCLEAN=false
 export GEN_ACPI=false
-OPTS="$(getopt -o d:hacA -l device:,help,all,chinese,acpi -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o d:hacACD -l device:,help,all,chinese,acpi,clean,distclean -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -58,11 +64,15 @@ do	case "${1}" in
 		-a|--all)DEVICE=all;shift;;
 		-c|--chinese)CHINESE=true;shift;;
 		-A|--acpi)GEN_ACPI=true;shift;;
+		-C|--clean)CLEAN=true;shift;;
+		-D|--distclean)DISTCLEAN=true;shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
 	esac
 done
+if "${DISTCLEAN}";then _distclean;exit "$?";fi
+if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
 if ! [ -f edk2/edksetup.sh ] || ! [ -f ../edk2/edksetup.sh ]
 then	set -e
