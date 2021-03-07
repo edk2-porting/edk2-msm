@@ -28,6 +28,7 @@ QQ group: 697666196 (Never On-Topic)
 4. Xiaomi PocoPhone F1 (beryllium)
 5. OnePlus 6           (enchilada)
 6. OnePlus 6T          (fajita)
+7. Nubia X             (nx616j)
 
 ## Dependencies
 
