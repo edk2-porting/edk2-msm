@@ -1,37 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@mhtygt211227 
-edk2-porting
-/
-edk2-sdm845
-8
-48
-6
-Code
-Issues
-1
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-edk2-sdm845/sdm845Pkg/Devices/845.fdf
-@TAOcroatia
-TAOcroatia Add USB support for some devices, reform folder structure and make al…
-…
-Latest commit 1051d5a 15 days ago
- History
- 1 contributor
-612 lines (505 sloc)  21.4 KB
-  
 #
 #  Copyright (c) 2018, Linaro Limited. All rights reserved.
 #
