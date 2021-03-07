@@ -26,6 +26,7 @@ QQ交流群: 697666196
 4. 小米PocoPhone F1 (beryllium)
 5. 一加6            (enchilada)
 6. 一加6T           (fajita)
+7. 努比亚X          (nx616j)
 
 ## 依赖
 

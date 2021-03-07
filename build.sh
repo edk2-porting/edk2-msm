@@ -7,6 +7,7 @@ DEVICES=(
 	polaris
 	beryllium
 	perseus
+	nx616j
 )
 #####################################
 function _help(){
