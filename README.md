@@ -29,6 +29,7 @@ QQ group: 697666196 (Never On-Topic)
 5. OnePlus 6           (enchilada)
 6. OnePlus 6T          (fajita)
 7. Nubia X             (nx616j)
+8. Meizu 16th          (m1882)
 
 ## Dependencies
 
