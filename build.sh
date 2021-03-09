@@ -8,6 +8,7 @@ DEVICES=(
 	beryllium
 	perseus
 	nx616j
+	m1882
 )
 #####################################
 function _help(){
