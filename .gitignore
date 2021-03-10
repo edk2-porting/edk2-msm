@@ -8,3 +8,7 @@ workspace
 ramdisk
 sdm845Pkg/Drivers/LogoDxe/Logo.bmp
 .vscode
+device_specific/*.dts
+*.swp
+*.rej
+*.orig
