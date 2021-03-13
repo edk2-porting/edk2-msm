@@ -3,6 +3,7 @@
 // DESCRIPTION
 //   This file contans the REMOTE ETM details needed by qdss driver.
 //
+//
 //===========================================================================
 
 Scope(\_SB.QDSS)

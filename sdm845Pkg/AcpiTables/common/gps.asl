@@ -1,6 +1,4 @@
 //
-// This file contains the GPS ACPI device definitions.
-//
     
     //
     // Qualcomm GPS driver
@@ -12,9 +10,8 @@
 	\_SB_.GLNK
 	})
     
-        Name (_HID, "HID_GPS")
+        Name (_HID, "QCOM02B6")
 		Alias(\_SB.PSUB, _SUB)
 	Name (_CID, "ACPI\QCOM24B4")
 	Name (_UID, 0)
     }
-	

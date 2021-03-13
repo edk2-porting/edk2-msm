@@ -36,4 +36,3 @@ Method (BLCP, 1, NotSerialized) {
    // Return the packet data
    Return(RBUF)
 }
-

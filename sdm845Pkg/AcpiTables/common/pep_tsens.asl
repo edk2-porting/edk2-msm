@@ -1,5 +1,3 @@
-
-
 Scope(\_SB.PEP0)
 {
 	Method(CTSN)
@@ -11,7 +9,7 @@ Scope(\_SB.PEP0)
     {
        Return(Package()
        {           
-          "HID_PEP0",          
+          "ACPI\\VEN_QCOM&DEV_0237",          
        })
     }
 	
@@ -19,7 +17,7 @@ Scope(\_SB.PEP0)
     {
        Return(Package()
        {           
-          "HID_TZ_BCL",          
+          "ACPI\\VEN_QCOM&DEV_0294",          
        })
     }
     
@@ -35,27 +33,27 @@ Scope(\_SB.PEP0)
 				21, //Total number of thermal physical sensors
 				
 			    //        sensor HID,                 sensor number associated to HID 
-				Package() {"HID_TSENS0", 0},
-				Package() {"HID_TSENS1", 1},
-				Package() {"HID_TSENS2", 2},
-				Package() {"HID_TSENS3", 3},				
-				Package() {"HID_TSENS4", 4},
-				Package() {"HID_TSENS5", 5},
-				Package() {"HID_TSENS6", 6},
-				Package() {"HID_TSENS7", 7},
-				Package() {"HID_TSENS8", 8},
-				Package() {"HID_TSENS9", 9},
-				Package() {"HID_TSENS10", 10},
-				Package() {"HID_TSENS11", 11},
-				Package() {"HID_TSENS12", 12},
-				Package() {"HID_TSENS13", 13},
-				package() {"HID_TSENS14", 14},
-				Package() {"HID_TSENS15", 15},
-				Package() {"HID_TSENS16", 16},
-				Package() {"HID_TSENS17", 17},
-				Package() {"HID_TSENS18", 18},
-				Package() {"HID_TSENS19", 19},
-				Package() {"HID_TSENS20", 20},				
+				Package() {"ACPI\\VEN_QCOM&DEV_027F", 0},
+				Package() {"ACPI\\VEN_QCOM&DEV_0280", 1},
+				Package() {"ACPI\\VEN_QCOM&DEV_0281", 2},
+				Package() {"ACPI\\VEN_QCOM&DEV_0282", 3},				
+				Package() {"ACPI\\VEN_QCOM&DEV_0283", 4},
+				Package() {"ACPI\\VEN_QCOM&DEV_0284", 5},
+				Package() {"ACPI\\VEN_QCOM&DEV_0285", 6},
+				Package() {"ACPI\\VEN_QCOM&DEV_0286", 7},
+				Package() {"ACPI\\VEN_QCOM&DEV_0287", 8},
+				Package() {"ACPI\\VEN_QCOM&DEV_0288", 9},
+				Package() {"ACPI\\VEN_QCOM&DEV_0289", 10},
+				Package() {"ACPI\\VEN_QCOM&DEV_02AB", 11},
+				Package() {"ACPI\\VEN_QCOM&DEV_02AC", 12},
+				Package() {"ACPI\\VEN_QCOM&DEV_02AD", 13},
+				package() {"ACPI\\VEN_QCOM&DEV_02AE", 14},
+				Package() {"ACPI\\VEN_QCOM&DEV_02AF", 15},
+				Package() {"ACPI\\VEN_QCOM&DEV_02C8", 16},
+				Package() {"ACPI\\VEN_QCOM&DEV_02C9", 17},
+				Package() {"ACPI\\VEN_QCOM&DEV_02CA", 18},
+				Package() {"ACPI\\VEN_QCOM&DEV_02CB", 19},
+				Package() {"ACPI\\VEN_QCOM&DEV_02CC", 20},				
 			},
 			
 			// TSENSLIST Package
@@ -70,7 +68,7 @@ Scope(\_SB.PEP0)
 				
 				Package() // sensors associated with Little CPU
 				{
-					"HID_TZ_LITTLE_CPU_VIRT", 
+					"ACPI\\VEN_QCOM&DEV_02B0", 
 					21, // virtual sensor ID
 					5,	//Little cpu sensors
 					Package () {1, 2, 3, 4, 5},
@@ -78,7 +76,7 @@ Scope(\_SB.PEP0)
 				
 				Package() // sensors associated with Big CPU
 				{
-					"HID_TZ_BIG_CPU_VIRT",
+					"ACPI\\VEN_QCOM&DEV_02B1",
 					22, // virtual sensor ID
 					5,	//Big cpu sensors			
 					Package () {6, 7, 8, 9, 10}, // as per thermal floor plan
@@ -86,7 +84,7 @@ Scope(\_SB.PEP0)
 				
 				Package() // All MSM sensors
 				{
-					"HID_TZ_CRT_TEMP_VIRT", 
+					"ACPI\\VEN_QCOM&DEV_02B2", 
 					23, // virtual sensor ID
 					21, //It should be total number of sensors.
 					Package () {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20},
@@ -101,16 +99,16 @@ Scope(\_SB.PEP0)
 				10,  //Number of VADC channels
 				
 				//         channels name   sensor HID,      Sensor number   ADC type
-				Package() {"SYS_THERM1",  "HID_VADC_SENS0", 0,                 0}, //vadc = 0, rradc = 1
-				Package() {"SYS_THERM2",  "HID_VADC_SENS1", 1,                 0 },	
-				Package() {"PA_THERM",    "HID_VADC_SENS2", 2,                 0 },
-				Package() {"PA_THERM1",   "HID_VADC_SENS3", 3,                 0 },
-				Package() {"SYS_THERM3",  "HID_VADC_SENS4", 4,                 0 },
-				Package() {"PMIC_THERM",  "HID_VADC_SENS5", 5,                 0 },
-				Package() {"SKIN_THERM",  "HID_VADC_SENS6", 6,                 1 },
-				Package() {"PMIC_TEMP2",  "HID_VADC_SENS7", 7,                 1 },
-				Package() {"CHG_TEMP",    "HID_VADC_SENS8", 8,                 1 },
-				Package() {"BATT_THERM",  "HID_VADC_SENS9", 9,                 1 },
+				Package() {"SYS_THERM1",  "ACPI\\VEN_QCOM&DEV_0299", 0,                 0}, //vadc = 0, rradc = 1
+				Package() {"SYS_THERM2",  "ACPI\\VEN_QCOM&DEV_029A", 1,                 0 },	
+				Package() {"PA_THERM",    "ACPI\\VEN_QCOM&DEV_029B", 2,                 0 },
+				Package() {"PA_THERM1",   "ACPI\\VEN_QCOM&DEV_029C", 3,                 0 },
+				Package() {"SYS_THERM3",  "ACPI\\VEN_QCOM&DEV_029D", 4,                 0 },
+				Package() {"PMIC_THERM",  "ACPI\\VEN_QCOM&DEV_029E", 5,                 0 },
+				Package() {"SKIN_THERM",  "ACPI\\VEN_QCOM&DEV_029F", 6,                 1 },
+				Package() {"PMIC_TEMP2",  "ACPI\\VEN_QCOM&DEV_02A0", 7,                 1 },
+				Package() {"CHG_TEMP",    "ACPI\\VEN_QCOM&DEV_02EE", 8,                 1 },
+				Package() {"BATT_THERM",  "ACPI\\VEN_QCOM&DEV_02EF", 9,                 1 },
 			},
 
 			//  Thermal Restriction data package
@@ -227,7 +225,4 @@ Scope(\_SB.PEP0)
 			}
 		}
 	)
-}   
-	
-    
-    
+}

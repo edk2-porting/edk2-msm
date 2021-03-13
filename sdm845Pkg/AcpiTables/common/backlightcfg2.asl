@@ -1,5 +1,4 @@
 //
-//
 // BLCP Method - Secondary display backlight control packet method, returns a 
 //               command buffer for a specific backlight level
 //
@@ -15,4 +14,3 @@ Method (BLC2, 1, NotSerialized) {
    // Return the packet data
    Return(RBUF)
 }
-

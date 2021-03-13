@@ -12,7 +12,7 @@
 //        \_SB_.PEP0,
 //        \_SB_.I2C7
 //    })
-//    Name (_HID, "HID_FMSL")
+//    Name (_HID, "QCOM02B4")
 
 //    Method (_CRS, 0x0, NotSerialized)
 //    {

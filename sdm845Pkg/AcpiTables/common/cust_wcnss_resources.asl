@@ -1,5 +1,4 @@
-
-//customizable resource for wlan/bt/fm
+// customizable resource for wlan/bt/fm
 // PEP resources for iHelium
 // END iHelium
 

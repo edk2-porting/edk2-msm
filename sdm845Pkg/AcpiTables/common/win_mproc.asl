@@ -8,7 +8,7 @@
 //
 Device (RPEN)
 {
-    Name (_HID, "HID_RPEN")
+    Name (_HID, "QCOM026D")
 	Alias(\_SB.PSUB, _SUB)
 } 
 
@@ -17,7 +17,7 @@ Device (RPEN)
 //
 Device (PILC)
 {
-    Name (_HID, "HID_PILC")
+    Name (_HID, "QCOM023B")
 
     Method(PILX)
     {
@@ -67,7 +67,7 @@ Device (CDI)
         \_SB_.PILC,
         \_SB_.RPEN
     })
-    Name (_HID, "HID_CDI")
+    Name (_HID, "QCOM026C")
 	Alias(\_SB.PSUB, _SUB)
     
     Method(_STA, 0)
@@ -92,7 +92,7 @@ Device (SCSS)
           \_SB_.SSDD,
     })
 
-    Name (_HID, "HID_SCSS")
+    Name (_HID, "QCOM02BE")
 	Alias(\_SB.PSUB, _SUB)
 
     Method (_CRS, 0x0, NotSerialized) 
@@ -125,7 +125,7 @@ Device (ADSP)
           \_SB_.SSDD,
           \_SB_.PDSR,
     })
-    Name (_HID, "HID_ADSP")
+    Name (_HID, "QCOM023D")
     Alias(\_SB.PSUB, _SUB)
     //
     // WDIR - Watch Dog Interrupt Registers
@@ -179,7 +179,7 @@ Device (AMSS)
         \_SB_.SSDD,
         \_SB_.PDSR,
     })
-    Name (_HID, "HID_AMSS")
+    Name (_HID, "QCOM023E")
     
     Name (WLEN, 0x1)				// Holds the enable/disable flag for WLAN
 	
@@ -224,7 +224,7 @@ Device (AMSS)
 //
 Device (QSM)
 {
-    Name (_HID, "HID_QSM")
+    Name (_HID, "QCOM02B9")
 	
 	Alias(\_SB.PSUB, _SUB)
 
@@ -262,7 +262,7 @@ Device (QSM)
 //
 Device (SSDD)
 {
-    Name (_HID, "HID_SSDD")
+    Name (_HID, "QCOM02D1")
 	
 	Alias(\_SB.PSUB, _SUB)
 
@@ -279,7 +279,7 @@ Device (SSDD)
 //
 Device (PDSR)
 {
-     Name (_HID, "HID_PDSR")
+     Name (_HID, "QCOM02CE")
 	 
 	 Alias(\_SB.PSUB, _SUB)
 
@@ -307,7 +307,7 @@ Device (CDSP)
           \_SB_.SSDD,
           \_SB_.PDSR,
     })
-    Name (_HID, "HID_CDSP")
+    Name (_HID, "QCOM02F7")
     Alias(\_SB.PSUB, _SUB)
 
     Method (_CRS, 0x0, NotSerialized) 
@@ -329,7 +329,7 @@ Device (CDSP)
 //
 Device (TFTP)
 {
-     Name (_HID, "HID_TFTP")
+     Name (_HID, "QCOM02F6")
 	 
 	 Alias(\_SB.PSUB, _SUB)
 
@@ -347,13 +347,12 @@ Device (SSVC)
         \_SB_.IPC0, // IPC Router used by QMI, in turn depends on GLINK
         \_SB_.QDIG  // Qualcomm DIAG service        
     })
-    Name (_HID, "HID_SSVC")
+    Name (_HID, "QCOM0302")
     Alias(\_SB.PSUB, _SUB)
-    Name (_CID, "ACPI\HID_SSVC")
+    Name (_CID, "ACPI\QCOM0302")
     Name (_UID, 0)
 }
 
 // Warning:  Include these files after device scopes have been defined
 //Include("cust_win_mproc.asl")   // Customer specific data
 Include("plat_win_mproc.asl")   // Platform specific data
-

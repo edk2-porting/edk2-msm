@@ -9,7 +9,7 @@ Device (LLC)
     {
         \_SB_.PEP0
     })
-    Name (_HID, "HID_QLLC")
+    Name (_HID, "QCOM02F8")
 	Alias(\_SB.PSUB, _SUB)
     
     Method (_CRS, 0x0, NotSerialized)
@@ -21,4 +21,3 @@ Device (LLC)
     }
 
 }
-

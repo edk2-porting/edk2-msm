@@ -1,4 +1,3 @@
-
 Device (SYSM) { 
         Name (_HID, "ACPI0010")
         Name (_UID, 0x100000)

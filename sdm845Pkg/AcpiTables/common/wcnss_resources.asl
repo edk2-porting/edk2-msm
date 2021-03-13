@@ -1,3 +1,4 @@
+
 // PEP resources for WCNSS
 Scope(\_SB_.PEP0)
 {
@@ -382,4 +383,3 @@ Scope(\_SB_.PEP0)
 
     }) // END WBRC
 }
-

@@ -1,4 +1,3 @@
-//
 // This file contains the Generic Software Interface(GSI)
 // ACPI device definitions.
 // GSI is the interface used by IPA driver to talk to IPA HW and is intended
@@ -17,7 +16,7 @@ Device (GSI)
    // Indicates dependency on PEP
    Name (_DEP, Package () { \_SB_.PEP0 })
 
-   Name(_HID, "HID_GSI")
+   Name(_HID, "QCOM02E7")
    Alias(\_SB.PSUB, _SUB)
    Name (_UID, 0)
    

@@ -3,6 +3,7 @@
 // DESCRIPTION
 //   This file contans the QPMDA details needed by qdss driver.
 //
+//
 //===========================================================================
 
 Scope(\_SB.QDSS)

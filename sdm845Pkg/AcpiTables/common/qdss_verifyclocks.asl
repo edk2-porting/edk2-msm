@@ -4,7 +4,6 @@
 //   This file contains the clock registers needed by qdss driver.
 //
 //
-//
 //===========================================================================
 
 Scope(\_SB.QDSS)

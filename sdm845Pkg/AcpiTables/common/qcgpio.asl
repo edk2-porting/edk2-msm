@@ -3,7 +3,7 @@
 //
 Device (GIO0)
 {
-	Name (_HID, "HID_GIO0")
+	Name (_HID, "QCOM0217")
 	Alias(\_SB.PSUB, _SUB)
 	Name (_UID, 0)
 

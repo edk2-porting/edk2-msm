@@ -4,7 +4,6 @@
 //   This file contans the resources needed by SMMU test driver.
 //
 //
-//
 //===========================================================================
 
 Scope(\_SB_.PEP0){

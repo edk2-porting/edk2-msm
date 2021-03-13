@@ -1,4 +1,3 @@
-
 //
 // SSM Driver
 //
@@ -9,6 +8,6 @@ Device (SSM)
         \_SB_.GLNK,
         \_SB_.TREE
     })
-   Name (_HID, "HID_SSM")
+   Name (_HID, "QCOM0226")
    Alias(\_SB.PSUB, _SUB)
 }

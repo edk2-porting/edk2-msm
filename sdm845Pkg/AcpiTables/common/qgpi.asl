@@ -13,7 +13,7 @@ Device (QGP0)
   // Indicates dependency on PEP
   //Name (_DEP, Package () { \_SB_.PEP0 })
 
-  Name (_HID, "HID_QGPI")
+  Name (_HID, "QCOM02F4")
   Alias(\_SB.PSUB, _SUB)
   Name (_UID, 0)
   Name (_CCA, 0)
@@ -133,7 +133,7 @@ Device (QGP1)
   // Indicates dependency on PEP
   //Name (_DEP, Package () { \_SB_.PEP0 })
 
-  Name (_HID, "HID_QGPI")
+  Name (_HID, "QCOM02F4")
   Alias(\_SB.PSUB, _SUB)
   Name (_UID, 1)
   Name (_CCA, 0)

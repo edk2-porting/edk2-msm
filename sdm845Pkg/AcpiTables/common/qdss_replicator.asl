@@ -4,7 +4,6 @@
 //   This file contans the REPLICATOR details needed by qdss driver.
 //
 //
-//
 //===========================================================================
 
 Scope(\_SB.QDSS)

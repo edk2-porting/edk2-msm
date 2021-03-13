@@ -7,6 +7,6 @@ Device (QCSP)
       {
          \_SB_.GLNK
       })
-      Name (_HID, "HID_QCSP")
+      Name (_HID, "QCOM0307")
 	  Alias(\_SB.PSUB, _SUB)
 }

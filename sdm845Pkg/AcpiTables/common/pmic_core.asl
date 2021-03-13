@@ -11,7 +11,7 @@ Device (PMIC)
     {
         \_SB_.SPMI
     })
-    Name (_HID, "HID_PMIC")
+    Name (_HID, "QCOM0266")
     Name (_CID, "PNP0CA3")
 
         Method (PMCF) {
@@ -45,7 +45,7 @@ Device (PMIC)
 //
 Device (PM01)
 {
-    Name (_HID, "HID_PM01")
+    Name (_HID, "QCOM0269")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 1)
     Name (_DEP,
@@ -114,7 +114,7 @@ Device (PM01)
 //
 Device (PMAP) 
 {
-	Name (_HID, "HID_PMAP")
+	Name (_HID, "QCOM0268")
 	Alias(\_SB.PSUB, _SUB)
 	Name(_DEP, Package(0x3) {
 			\_SB_.PMIC,

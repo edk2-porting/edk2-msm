@@ -11,7 +11,7 @@ Device (IPC0)
 	{
 		\_SB_.GLNK
 	})
-	Name (_HID, "HID_IPC0")
+	Name (_HID, "QCOM021C")
 	Alias(\_SB.PSUB, _SUB)
 }
 
@@ -25,7 +25,7 @@ Device (GLNK)
 	{
 		\_SB_.RPEN
 	})
-  Name (_HID, "HID_GLNK")
+  Name (_HID, "QCOM02F9")
   Alias(\_SB.PSUB, _SUB)
 	Name (_UID, 0)
 

@@ -1,3 +1,4 @@
+
 // UFS Controller
 Device (UFS0)
 {
@@ -6,9 +7,9 @@ Device (UFS0)
      \_SB.PEP0,
  })
 
-   Name (_HID, "HID_UFS0")
+   Name (_HID, "QCOM24A5")
    Alias(\_SB.PSUB, _SUB)
-   Name (_CID, "ACPI\HID_UFS0")
+   Name (_CID, "ACPI\QCOM24A5")
    Name (_UID, 0)
    Name (_CCA, 0)
 
@@ -38,7 +39,3 @@ Device (UFS0)
       }       
    }  
  }
-
-     
- 
-

@@ -1,4 +1,3 @@
-
 // 
 // iHelium WLAN
 //
@@ -76,7 +75,7 @@ Scope(\_SB)
 {
     Device (COEX)
     {
-        Name (_HID, "HID_LTE_COEX_Manager_Driver")
+        Name (_HID, "QCOM0295")
         Alias(\_SB.PSUB, _SUB)
     }
 }

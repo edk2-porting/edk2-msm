@@ -7,7 +7,7 @@
 //
 Device(BTH0)
 {
-    Name(_HID, "HID_BTUR")
+    Name(_HID, "QCOM02B5")
         Alias(\_SB.PSUB, _SUB)
     Name(_DEP, Package(0x3)
     {

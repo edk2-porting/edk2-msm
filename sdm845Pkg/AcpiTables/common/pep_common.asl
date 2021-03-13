@@ -4,7 +4,7 @@
 
 Device (PEP0)
 {
-    Name (_HID, "HID_PEP0")
+    Name (_HID, "QCOM0237")
     Name (_CID, "PNP0D80")
 
 	Include("thz.asl")
@@ -472,7 +472,7 @@ Device (PEP0)
 
 //Device (PRXY)  // PEP proxy
 //{
-//    Name (_HID, "HID_PRXY")
+//    Name (_HID, "QCOM0239")
 //    Name(_DEP, Package(0x2) {
 //         \_SB_.ABD,
 //         \_SB_.PEP0

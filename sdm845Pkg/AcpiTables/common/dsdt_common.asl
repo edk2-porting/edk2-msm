@@ -1,4 +1,3 @@
-
 // To enable SOC revision based run time differentiation, uncomment following line
 // and uncomment SSID method in ABD device. The original string is artificailly set as 
 // 16 characters, so there is enough room to hold SOC revision string. 
@@ -105,7 +104,7 @@ Include("adsprpc.asl")
 //        {
 //            // Indicates dependency on PEP
 //           Name (_DEP, Package () { \_SB_.PEP0 })
-//           Name(_HID, "HID_IPA")
+//           Name(_HID, "QCOM02B3")
 //           Name (_UID, 0)
 //        }
 		
@@ -118,7 +117,7 @@ Include("adsprpc.asl")
             {
                 \_SB_.GLNK
             })
-           Name (_HID, "HID_QDIG")
+           Name (_HID, "QCOM0225")
 		   Alias(\_SB.PSUB, _SUB)
         }
         Include("qcdb.asl")       
@@ -133,7 +132,7 @@ Include("adsprpc.asl")
 		Name (_DEP, Package(0x1) {
 			   \_SB_.PEP0,
 		})
-		Name (_HID, "HID_QRNG")
+		Name (_HID, "QCOM02FE")
 		Name (_UID, 0)
 		Method (_CRS, 0x0, NotSerialized)
 		{
@@ -162,8 +161,8 @@ Include("adsprpc.asl")
 	//	\_SB_.GLNK
 	//	})
 	//	
-	//	Name (_HID, "HID_GPS")
-	//	Name (_CID, "ACPI\HID_GPS")
+	//	Name (_HID, "QCOM02B6")
+	//	Name (_CID, "ACPI\QCOM02B6")
 	//	Name (_UID, 0)
 	//}
 		

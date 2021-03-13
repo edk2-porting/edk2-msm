@@ -1,6 +1,4 @@
 //
-
-//
 // NFC entry.
 //
 Device(NFCD)

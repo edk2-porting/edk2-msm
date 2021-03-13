@@ -35,7 +35,7 @@ Scope(\_SB.PEP0)
                 1, // source - PM_GPIO_SOURCE_1 (drive logic HIGH)
                 0, // out_buffer_config - PM_GPIO_OUT_BUFFER_CONFIG_CMOS 
                 1, // out_buffer_strength - PM_GPIO_OUT_BUFFER_LOW
-                0, // inversion ?no invert
+                0, // inversion � no invert
                 1, // External pin enable - PM_GPIO_PERPH_EN_ENABLE
                 5, // PM_GPIO_I_SOURCE_PULL_NO_PULL, ignored for Output mode.
              },
@@ -52,7 +52,7 @@ Scope(\_SB.PEP0)
                 0, // source - PM_GPIO_SOURCE_0 (drive logic LOW)
                 0, // out_buffer_config - PM_GPIO_OUT_BUFFER_CONFIG_CMOS 
                 1, // out_buffer_strength - PM_GPIO_OUT_BUFFER_LOW
-                0, // inversion ?no invert
+                0, // inversion � no invert
                 1, // External pin enable - PM_GPIO_PERPH_EN_ENABLE
                 5, // PM_GPIO_I_SOURCE_PULL_NO_PULL, ignored for Output mode.
              },
@@ -98,4 +98,3 @@ Scope(\_SB.PEP0)
         Return(DVMP)
     }
 }
-

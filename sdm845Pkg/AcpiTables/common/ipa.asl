@@ -1,4 +1,3 @@
-//
 // This file contains the Bus Access Modules (BAM)
 // ACPI device definitions and pipe configurations
 //
@@ -23,7 +22,7 @@ Device (IPA)
         \_SB_.GLNK,     
    })
 
-   Name(_HID, "HID_IPA")
+   Name(_HID, "QCOM02B3")
    Alias(\_SB.PSUB, _SUB)
    Name (_UID, 0)
    

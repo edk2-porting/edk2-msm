@@ -4,7 +4,6 @@
 //   This file contans the resources needed by core BSP drivers.
 //
 //
-//
 //===========================================================================
 
 

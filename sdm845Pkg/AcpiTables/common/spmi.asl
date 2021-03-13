@@ -1,9 +1,10 @@
+
 //
 //SPMI driver.
 //
 Device(SPMI)
 {
-   Name(_HID, "HID_SPMI")
+   Name(_HID, "QCOM0216")
    Alias(\_SB.PSUB, _SUB)
    Name (_CID, "PNP0CA2")
    Name(_UID, One)

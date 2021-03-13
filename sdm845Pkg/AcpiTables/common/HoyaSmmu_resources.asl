@@ -4,7 +4,6 @@
 //   This file contans the resources needed by SMMU driver.
 //
 //
-//
 //===========================================================================
 Scope(\_SB.PEP0){
     // SMMU
@@ -118,4 +117,3 @@ Scope(\_SB.PEP0){
         },
     })
 }
-

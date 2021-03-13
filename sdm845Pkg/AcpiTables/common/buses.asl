@@ -1,5 +1,4 @@
 //
-//
 //  Please note that not all the SE engine instances (I2C/SPI/UART) from below asl file can be used directly by icluding in the client ACPI, 
 //  The corresponding Access Control needs to be enabled from TZ side to get the SE/usecase working End 2 End.
 //
@@ -10,7 +9,7 @@
 //
 Device (UAR7)
 {
-    Name (_HID, "HID_UART")
+    Name (_HID, "QCOM0236")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 7)
     Name (_DEP, Package() { \_SB_.PEP0 })
@@ -38,7 +37,7 @@ Device (UAR7)
 //
  Device (UARD)
  {
-     Name (_HID, "HID_UART")
+     Name (_HID, "QCOM0236")
      Alias(\_SB.PSUB, _SUB)
      Name (_UID, 10)
      Name (_DEP, Package() { \_SB_.PEP0 })
@@ -61,7 +60,7 @@ Device (UAR7)
 //
 Device (I2C4)
 {
-    Name (_HID, "HID_I2C")
+    Name (_HID, "QCOM0220")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 4)
     Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP0})
@@ -83,7 +82,7 @@ Device (I2C4)
 //
 Device (I2C6)
 {
-    Name (_HID, "HID_I2C")
+    Name (_HID, "QCOM0220")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 6)
     Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP0})
@@ -105,7 +104,7 @@ Device (I2C6)
 //
 Device (IC11)
 {
-    Name (_HID, "HID_I2C")
+    Name (_HID, "QCOM0220")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 11)
     Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP0})
@@ -128,7 +127,7 @@ Device (IC11)
 //
 //Device (IC15)
 //{
-//    Name (_HID, "HID_I2C")
+//    Name (_HID, "QCOM0220")
 //    Name (_UID, 15)
 //    Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP0})
 //    Name (_CCA, 0)
@@ -149,7 +148,7 @@ Device (IC11)
 
 Device (SPI9)
 {
-    Name (_HID, "HID_SPI")
+    Name (_HID, "QCOM021E")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 9)
     Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP1})
@@ -677,4 +676,3 @@ Scope(\_SB_.PEP0)
         },
     })
 }
-

@@ -23,7 +23,7 @@ Device (SLM1)
    {
       Return (Package()
       {           
-         "SLM1\\HID_ACD",
+         "SLM1\\QCOM023F",
       })
    }
 
@@ -48,5 +48,3 @@ Device (SLM2)
       Return (RBUF)
    }
 }
-
-

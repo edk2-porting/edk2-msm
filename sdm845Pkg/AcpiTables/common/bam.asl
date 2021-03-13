@@ -16,7 +16,7 @@
 //    BAMF  - USB3.0 primary
 Device (BAM1)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 1)
     Name (_CCA, 0)
@@ -34,7 +34,7 @@ Device (BAM1)
 
 Device (BAM5)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 5)
     Name (_CCA, 0)
@@ -53,7 +53,7 @@ Device (BAM5)
 
 Device (BAM6)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 6)
     Name (_CCA, 0)
@@ -71,7 +71,7 @@ Device (BAM6)
 
 Device (BAM7)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 7)
     Name (_CCA, 0)
@@ -89,7 +89,7 @@ Device (BAM7)
 
 Device (BAMD)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 13)
     Name (_CCA, 0)
@@ -107,7 +107,7 @@ Device (BAMD)
 
 Device (BAME)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 14)
     Name (_CCA, 0)
@@ -125,7 +125,7 @@ Device (BAME)
 
 Device (BAMF)
 {
-    Name (_HID, "HID_BAM0")
+    Name (_HID, "QCOM0213")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 15)
     Name (_CCA, 0)
@@ -140,4 +140,3 @@ Device (BAMF)
         Return (RBUF)
     }
 }
-

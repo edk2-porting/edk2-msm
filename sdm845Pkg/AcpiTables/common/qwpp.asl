@@ -2,7 +2,7 @@ Device (QWPP)
 {
     Name (_DEP, Package () { \_SB_.PEP0 })
 
-    Name (_HID, "HID_QWPP")
+    Name (_HID, "QCOM02E4")
 	Alias(\_SB.PSUB, _SUB)
     Name (_UID, 0)
 

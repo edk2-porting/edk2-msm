@@ -1,3 +1,4 @@
+
 Name(QUFN, 0x0 )      //enable flag for QcUsbFN driver stack
 
 //Holds the DPDM Polarity
@@ -20,10 +21,10 @@ Device(URS0)
     //select HID based on flag for QcUsbFN driver stack
     Method (URSI) {
     If(Lequal(\_SB.QUFN, 0x0)) {
-        return("HID_URS0")
+        return("QCOM0304")
       }
     Else{
-        return ("HID_URS1")
+        return ("QCOM0305")
       }
     }
 
@@ -92,7 +93,7 @@ Device(URS0)
 
         //Method to set DPDM Polarity for Pep Driver
         Method(DPM0, 0x1, NotSerialized) {
-            // ARG 0 ?DPDM polarity
+            // ARG 0 � DPDM polarity
             Store(Arg0, \_SB.DPP0)        //DPDM Polarity
             Notify(\_SB.PEP0, 0xA0)
         }
@@ -156,10 +157,10 @@ Device(URS0)
                         }
 
                         // Function 2: Port type identification
-                        // 0x00 ?Regular USB
-                        // 0x01 ?HSIC
-                        // 0x02 ?SSIC
-                        // 0x03 ?0xff reserved
+                        // 0x00 � Regular USB
+                        // 0x01 � HSIC
+                        // 0x02 � SSIC
+                        // 0x03 � 0xff reserved
                         case(2) { Return(0x0); Break; }
 
                         // Function 3: Query Controller Capabilities
@@ -435,7 +436,7 @@ Name(USBC, Buffer(){0x0B})
 //
 Device(UCP0)
 {
-    Name(_HID, "HID_USBC") // QCOM24D3
+    Name(_HID, "QCOM02D0") // QCOM24D3
     Name(_DEP, Package(0x3)
     {
         \_SB_.PEP0,
@@ -626,7 +627,7 @@ Device (USB1)
     {
         \_SB_.PEP0
     })
-    Name (_HID, "HID_USBD")  // QCOM02BA
+    Name (_HID, "QCOM02BA")  // QCOM02BA
     Name (_UID, 1)
 
     //set device status as not present, disabled, not shown in UI, not functioning properly
@@ -647,7 +648,7 @@ Device (USBA)
     {
         \_SB_.IMM0
     })
-    Name (_HID, "HID_USBA")
+    Name (_HID, "QCOM0300")
     Alias(\_SB.PSUB, _SUB)
 }
 
@@ -670,7 +671,7 @@ Name(DPP1, Buffer(){0x0})
 //USB Role Switch For Secondary Port
 Device(URS1)
 {
-    Name(_HID, "HID_URS0")
+    Name(_HID, "QCOM0304")
     Name(_CID, "PNP0CA1")
     Alias(\_SB.PSUB, _SUB)
     Name (_UID, 1)
@@ -747,7 +748,7 @@ Device(URS1)
 
         //Method to set DPDM Polarity for Pep Driver
         Method(DPM1, 0x1, NotSerialized) {
-            // ARG 0 ?DPDM polarity
+            // ARG 0 � DPDM polarity
             Store(Arg0, \_SB.DPP1)        //DPDM Polarity
             Notify(\_SB.PEP0, 0xA1)
         }
@@ -779,10 +780,10 @@ Device(URS1)
                         }
 
                         // Function 2: Port type identification
-                        // 0x00 ?Regular USB
-                        // 0x01 ?HSIC
-                        // 0x02 ?SSIC
-                        // 0x03 ?0xff reserved
+                        // 0x00 � Regular USB
+                        // 0x01 � HSIC
+                        // 0x02 � SSIC
+                        // 0x03 � 0xff reserved
                         case(2) { Return(0x0); Break; }
 
                         // Function 3: Query Controller Capabilities

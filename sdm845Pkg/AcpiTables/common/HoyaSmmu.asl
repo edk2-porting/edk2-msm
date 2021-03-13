@@ -1,6 +1,4 @@
-
-
-        //
+//
         // SMMU Driver
         //
         // SMT vector diagram: \\brewmp4\public\Istari\
@@ -13,7 +11,7 @@
         {
             // ATCU 
 
-            Name (_HID, "HID_MMU0")
+            Name (_HID, "QCOM0212")
             Alias(\_SB.PSUB, _SUB)
             Name (_UID, 0)
             Name (_DEP, Package ()
@@ -109,7 +107,7 @@
         {
             // This is the SMMU for Oxili/GFX
 
-            Name (_HID, "HID_MMU0")
+            Name (_HID, "QCOM0212")
             Alias(\_SB.PSUB, _SUB)
             Name (_UID, 1)
             Name (_DEP, Package()
@@ -143,7 +141,7 @@
         {
             // ATCU 
 
-            Name (_HID, "HID_IMMU")
+            Name (_HID, "QCOM030B")
             Alias(\_SB.PSUB, _SUB)
             Name (_UID, 0)
         }
@@ -152,7 +150,7 @@
         {
             // This is the SMMU for Oxili/GFX
 
-            Name (_HID, "HID_IMMU")
+            Name (_HID, "QCOM030B")
             Alias(\_SB.PSUB, _SUB)
             Name (_UID, 1)
         }

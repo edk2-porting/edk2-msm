@@ -9,7 +9,7 @@ Device (RFS0)
 	  \_SB_.UFS0
     })
 
-    Name (_HID, "HID_RFS0")
+    Name (_HID, "QCOM0235")
 	Alias(\_SB.PSUB, _SUB)
 
     Method (_CRS, 0x0, NotSerialized) {
