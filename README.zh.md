@@ -1,12 +1,12 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
-*在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请离开*
+**在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请离开**
 
 一个针对骁龙845平台的勉强能用的EDK2 UEFI
 
 ## 资源
 
-*群里问智障问题会被踢*
+**群里问智障问题会被踢**
 
 [Telegram交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
@@ -45,7 +45,7 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 
 ## 构建
 
-*不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04或以上版本*
+**不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04或以上版本**
 
 1.克隆此项目（默认使用国内fastgit镜像加速）
 
