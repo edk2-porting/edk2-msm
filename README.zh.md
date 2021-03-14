@@ -1,8 +1,12 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
+*在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请离开*
+
 一个针对骁龙845平台的勉强能用的EDK2 UEFI
 
 ## 资源
+
+*群里问智障问题会被踢*
 
 [Telegram交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
@@ -35,15 +39,19 @@ Ubuntu 20.04:
 
 ```bash
 sudo apt update
+sudo apt upgrade
 sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 ```
 
 ## 构建
 
+*不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04或以上版本*
+
 1.克隆此项目（默认使用国内fastgit镜像加速）
 
 ```bash
 git clone https://hub.fastgit.org/edk2-porting/edk2-sdm845.git --depth=1
+cd edk2-sdm845
 ```
 
 2.编译此项目（默认使用fastgit加速submodule克隆）

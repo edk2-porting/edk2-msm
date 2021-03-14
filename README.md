@@ -2,6 +2,7 @@
 
 A broken but working EDK2 implementation for Snapdragon 845 platform.
 
+中国人请看中文版
 [Chinese version (中文版)](https://github.com/edk2-porting/edk2-sdm845/blob/master/README.zh.md)
 
 ## Resources
@@ -37,6 +38,7 @@ For Ubuntu 20.04:
 
 ```bash
 sudo apt update
+sudo apt upgrade
 sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 ```
 
@@ -46,6 +48,7 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 
 ```bash
 git clone https://github.com/edk2-porting/edk2-sdm845.git --depth=1
+cd edk2-sdm845
 ```
 
 2.Build this project
@@ -68,7 +71,7 @@ fastboot boot boot_DEVICE.img
 
 @strongtz for the creating and maintaining the whole Renegade Project
 
-@BigFootACA for build script
+@BigfootACA for build script
 
 @lemon1ice and NTAuthority for guidance and some blobs
 
