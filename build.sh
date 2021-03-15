@@ -10,6 +10,7 @@ DEVICES=(
 	nx616j
 	m1882
 	skr-a0
+	judyln
 )
 #####################################
 function _help(){
