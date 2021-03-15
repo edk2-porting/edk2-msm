@@ -45,6 +45,10 @@ sudo apt upgrade
 sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 ```
 
+## 视频教程
+
+[【UEFI】edk2-sdm845项目编译教程 - 5超级菜鸟5](https://www.bilibili.com/video/BV1ab4y197e7)
+
 ## 构建
 
 **不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04或以上版本**
