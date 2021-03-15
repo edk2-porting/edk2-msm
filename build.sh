@@ -9,6 +9,7 @@ DEVICES=(
 	perseus
 	nx616j
 	m1882
+	skr-a0
 )
 #####################################
 function _help(){

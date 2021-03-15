@@ -31,6 +31,7 @@ QQ group: 697666196 (Never On-Topic)
 6. OnePlus 6T          (fajita)
 7. Nubia X             (nx616j)
 8. Meizu 16th          (m1882)
+9. BlackShark One      (skr-a0)
 
 ## Dependencies
 
