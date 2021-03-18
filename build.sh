@@ -11,6 +11,7 @@ DEVICES=(
 	m1882
 	skr-a0
 	judyln
+	star2qltechn
 )
 #####################################
 function _help(){
