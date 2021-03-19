@@ -630,9 +630,9 @@ STATIC CONST ARM_TYPE17 mArmDefaultType17 = {
     0,      //not part of a set
     1,      //right side of board
     2,      //bank 0
-    MemoryTypeDdr3,                  //LP DDR3
+    MemoryTypeLpddr4,                  //LP DDR4
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, //unbuffered
-    1600,                            //1600Mhz DDR
+    1866,                            //1866Mhz DDR
     0, //varies between diffrent production runs
     0, //serial
     0, //asset tag
