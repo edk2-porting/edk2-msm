@@ -22,7 +22,7 @@ function _help(){
 	echo "Options: "
 	echo "	--device DEV, -d DEV: build for DEV. (${DEVICES[*]})"
 	echo "	--all, -a:            build all devices."
-	echo "	--chinese, -c:        optimization for Chinese users."
+	echo "	--chinese, -c:        use fastgit for submodule cloning."
 	echo "	--acpi, -A:           compile acpi."
 	echo "	--clean, -C:          clean workspace and output."
 	echo "	--distclean, -D:      clean up all files that are not in repo."
