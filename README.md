@@ -68,6 +68,12 @@ fastboot boot boot_DEVICE.img
 
 (DEVICE is the codename of your phone.)
 
+Additionally, you can flash the image to recovery to achieve dual-boot.
+
+```bash
+fastboot flash recovery boot_DEVICE.img
+```
+
 ## Credits
 
 @fxsheep for his original `edk2-sagit`

@@ -75,6 +75,12 @@ fastboot boot boot_DEVICE.img
 
 (请将DEVICE替换成你的设备代号.)
 
+另外，你可以将UEFI刷写至recovery分区以实现双重启动。
+
+```bash
+fastboot flash recovery boot_DEVICE.img
+```
+
 ## 贡献
 
 待填充
