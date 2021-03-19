@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ##### Change this to add device #####
 DEVICES=(
 	dipper
@@ -14,6 +15,7 @@ DEVICES=(
 	star2qltechn
 )
 #####################################
+
 function _help(){
 	echo "Usage: build.sh --device DEV"
 	echo
@@ -31,7 +33,9 @@ function _help(){
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
 	exit "${1}"
 }
+
 function _error(){ echo "${@}" >&2;exit 1; }
+
 function _build(){
 	local DEVICE="${1}"
 	shift
@@ -51,8 +55,11 @@ function _build(){
 	echo "Build done: boot-${DEVICE}.img"
 	set +x
 }
+
 function _clean(){ rm --one-file-system --recursive --force ./workspace boot-*.img uefi-*.img*; }
+
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
+
 cd "$(dirname "$0")"||exit 1
 [ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
@@ -122,7 +129,6 @@ done
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
-# not actually GCC5, it's GCC7 on Ubuntu 18.04.
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
 export WORKSPACE="${PWD}/workspace"
