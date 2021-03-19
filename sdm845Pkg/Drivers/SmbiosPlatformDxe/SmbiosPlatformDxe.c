@@ -32,14 +32,14 @@
   __DATE__"\0"                         /* BiosReleaseDate */
 
 #define TYPE1_STRINGS                                   \
-  "Xiaomi\0"                         /* Manufacturer */ \
-  "Xiaomi MIX 2S\0"                     /* Product Name */ \
-  "Version SHIT\0"                           /* Version */      \
+  "Unknown Manufacturer\0"           /* Manufacturer */ \
+  "Unknown Device\0"                  /* Product Name */ \
+  "Version Unknown\0"                   /* Version */      \
   "                    \0"           /* 20 character buffer */
 
 #define TYPE2_STRINGS                                     \
-  "Xiaomi\0"                         /* Manufacturer */   \
-  "Xiaomi MIX 2S\0"                     /* Product Name */   \
+  "Unknown Manufacturer\0"           /* Manufacturer */   \
+  "Unknown Device\0"                  /* Product Name */   \
   "R0\0"                             /* Version */        \
   "Serial Not Set\0"                 /* Serial */         \
   "Base of Chassis\0"                /* board location */ \
@@ -54,9 +54,9 @@
 #define TYPE4_STRINGS                                               \
   "BGA-1156\0"                       /* socket type */              \
   "ARM LTD\0"                        /* manufactuer */              \
-  "Cortex-A57\0"                     /* processor 1 description */  \
+  "Snapdragon 845 Extreme Edition\0"  /* processor 1 description */  \
   "Snapdragon 845 Extreme Edition\0"  /* processor 2 description */  \
-  "Cortex-A72\0"                     /* processor 2 description */  \
+  "Snapdragon 845 Extreme Edition\0"  /* processor 2 description */  \
   "0xd03\0"                          /* A53 part number */          \
   "0xd07\0"                          /* A57 part number */          \
   "0xd08\0"                          /* A72 part number */
@@ -630,7 +630,6 @@ STATIC CONST ARM_TYPE17 mArmDefaultType17 = {
     0,      //not part of a set
     1,      //right side of board
     2,      //bank 0
-//  MemoryTypeLpddr3, //LP DDR3, isn't defined yet
     MemoryTypeDdr3,                  //LP DDR3
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, //unbuffered
     1600,                            //1600Mhz DDR
