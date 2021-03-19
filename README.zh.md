@@ -61,7 +61,7 @@ git clone https://hub.fastgit.org/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.编译此项目（默认使用fastgit加速submodule克隆）
+2.编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
 
 ```bash
 bash build.sh --chinese --device DEVICE
