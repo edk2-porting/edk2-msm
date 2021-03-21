@@ -132,9 +132,10 @@ echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
 export WORKSPACE="${PWD}/workspace"
+export GITCOMMIT=`git describe --tags`
 echo > ramdisk
 set -e
-python3 assets/generate-logo.py
+python3 assets/generate-logo.py ${GITCOMMIT}
 if [ "${DEVICE}" == "all" ]
 then	E=0
 	for i in "${DEVICES[@]}"
