@@ -34,7 +34,7 @@ QQ group: 697666196 (Never On-Topic)
 7. Nubia X             (nx616j)
 8. Meizu 16th          (m1882)
 9. BlackShark One      (skr-a0)
-10. LG G7              (judyln)
+10. LG G7              (judyln)         (Will automatically restart)
 11. Samsung Galaxy S9+ (star2qltechn)
 12. Xiaomi MI 7        (dipper-old)
 
