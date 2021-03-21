@@ -35,7 +35,7 @@ QQ交流群: 697666196
 7. 努比亚X          (nx616j)
 8. 魅族16th         (m1882)
 9. 黑鲨手机一代     (skr-a0)
-10. LG G7           (judyln)
+10. LG G7           (judyln)            (会自动重启)
 11. 三星S9+         (star2qltechn)
 12. 小米7           (dipper-old)
 
