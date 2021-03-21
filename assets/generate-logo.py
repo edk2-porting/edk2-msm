@@ -23,7 +23,7 @@ repo = Repo(repoPath)
 gitHead = str(repo.head.commit)
 gitHead = gitHead[0:7]
 print(gitHead)
-strs = " commit: " + gitHead + "\n Build: " + ohmydate
+strs = " version: " + str(sys.argv[1]) + "\n Build: " + ohmydate
 
 
 x = 410
