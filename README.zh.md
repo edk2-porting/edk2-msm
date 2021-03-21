@@ -37,6 +37,7 @@ QQ交流群: 697666196
 9. 黑鲨手机一代     (skr-a0)
 10. LG G7           (judyln)
 11. 三星S9+         (star2qltechn)
+12. 小米7           (dipper-old)
 
 ## 依赖
 

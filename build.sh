@@ -13,6 +13,7 @@ DEVICES=(
 	skr-a0
 	judyln
 	star2qltechn
+	dipper-old
 )
 #####################################
 
