@@ -37,6 +37,7 @@ QQ group: 697666196 (Never On-Topic)
 10. LG G7              (judyln)         (Will automatically restart)
 11. Samsung Galaxy S9+ (star2qltechn)
 12. Xiaomi MI 7        (dipper-old)
+13. OPPO Find X        (pafm00)
 
 ## Dependencies
 
