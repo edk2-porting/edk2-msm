@@ -14,6 +14,7 @@ DEVICES=(
 	judyln
 	star2qltechn
 	dipper-old
+	pafm00
 )
 #####################################
 
