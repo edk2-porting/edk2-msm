@@ -137,7 +137,8 @@ echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
 export WORKSPACE="${PWD}/workspace"
-export GITCOMMIT="$(git describe --tags --always)"
+GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
+export GITCOMMIT
 echo > ramdisk
 set -e
 python3 assets/generate-logo.py "${GITCOMMIT}"
