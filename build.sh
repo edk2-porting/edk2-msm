@@ -30,6 +30,7 @@ function _help(){
 	echo "	--acpi, -A:           compile acpi."
 	echo "	--clean, -C:          clean workspace and output."
 	echo "	--distclean, -D:      clean up all files that are not in repo."
+	echo "	--outputdir, -O:      output folder."
 	echo "	--help, -h:           show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
@@ -49,12 +50,12 @@ function _build(){
 	then echo "iasl failed with ${?}" >&2;return 1
 	fi
 	# based on the instructions from edk2-platform
-	rm -f "boot_${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
+	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc"||return "$?"
 	gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
 	cat "workspace/uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "workspace/uefi-${DEVICE}.img.gz-dtb"||return "$?"
-	abootimg --create "boot-${DEVICE}.img" -k "workspace/uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
-	echo "Build done: boot-${DEVICE}.img"
+	abootimg --create "${OUTDIR}/boot-${DEVICE}.img" -k "workspace/uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
+	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
 	set +x
 }
 
@@ -69,8 +70,9 @@ DEVICE=""
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
+export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o d:hacACD -l device:,help,all,chinese,acpi,clean,distclean -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o d:hacACDO: -l device:,help,all,chinese,acpi,clean,distclean,outputdir: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -80,6 +82,7 @@ do	case "${1}" in
 		-A|--acpi)GEN_ACPI=true;shift;;
 		-C|--clean)CLEAN=true;shift;;
 		-D|--distclean)DISTCLEAN=true;shift;;
+		-O|--outputdir)OUTDIR="${2}";shift 2;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
