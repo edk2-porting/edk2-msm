@@ -26,6 +26,8 @@ QQ交流群: 697666196
 
 ## 已支持的设备
 
+此列表为能够启动进入UEFI Shell的设备
+
 1. 小米MIX2S        (polaris)
 2. 小米MIX3         (perseus)
 3. 小米8            (dipper)
