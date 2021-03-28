@@ -1,5 +1,8 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
+![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
+![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
+
 **在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请离开**
 
 一个针对骁龙845平台的勉强能用的EDK2 UEFI
