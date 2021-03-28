@@ -15,6 +15,7 @@ DEVICES=(
 	star2qltechn
 	dipper-old
 	pafm00
+	trident
 )
 #####################################
 
