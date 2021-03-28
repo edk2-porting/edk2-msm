@@ -41,6 +41,7 @@ QQ group: 697666196 (Never On-Topic)
 11. Samsung Galaxy S9+ (star2qltechn)
 12. Xiaomi MI 7        (dipper-old)
 13. OPPO Find X        (pafm00)
+14. Smartisan R1       (trident)
 
 ## Dependencies
 
