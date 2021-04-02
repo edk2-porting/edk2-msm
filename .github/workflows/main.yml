@@ -6,24 +6,54 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    name: Image Build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        device:
+          - dipper
+          - enchilada
+          - fajita
+          - polaris
+          - beryllium
+          - perseus
+          - nx616j
+          - m1882
+          - skr-a0
+          - judyln
+          - star2qltechn
+          - dipper-old
+          - pafm00
+          - trident
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Install requires packages
-        run: sudo apt update&&sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install build-essential uuid-dev iasl nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 
-      - name: Build all devices
-        run: ./build.sh -a
+      - name: Build device ${{ matrix.device }}
+        run: |
+          ./build.sh --device ${{ matrix.device }}
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with: # Artifact name
+          name: ${{ matrix.device }}
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./*.img
