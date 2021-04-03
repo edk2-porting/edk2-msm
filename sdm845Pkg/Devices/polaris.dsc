@@ -7,7 +7,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/845.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/polaris.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
 

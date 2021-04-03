@@ -33,6 +33,8 @@
 		#size-cells = <2>;
 		ranges;
 
+		bootargs = "efi=novamap pd_ignore_unused video=efifb:off clk_ignore_unused acpi=off";
+
 		// For simplefb hack
 		stdout-path = "display0";
 
@@ -66,6 +68,7 @@
 		regulator-max-microvolt = <1800000>;
 		
 		gpio = <&tlmm 23 0>;
+		regulator-always-on;
 		regulator-boot-on;
 		enable-active-high;
 	};
@@ -320,6 +323,7 @@
 			regulator-min-microvolt = <2856000>;
 			regulator-max-microvolt = <3008000>;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
 		};
 
 		vreg_lvs1a_1p8: lvs1 {
@@ -364,8 +368,11 @@
 	};
 };
 
-&apps_smmu {
-	/* Enable this when upstream smmu driver gets patched */
+&gpi_dma0 {
+	status = "okay";
+};
+
+&gpi_dma1 {
 	status = "okay";
 };
 
@@ -375,6 +382,15 @@
 			   <GCC_QSPI_CNOC_PERIPH_AHB_CLK>,
 			   <GCC_LPASS_Q6_AXI_CLK>,
 			   <GCC_LPASS_SWAY_CLK>;
+};
+
+// Keep these always on until we get panel driver working 
+&ibb {
+	regulator-always-on;
+};
+
+&lab {
+	regulator-always-on;
 };
 
 /* NFC */
@@ -397,17 +413,24 @@
 
 /* touchscreen */
 &i2c14 {
+	#dma-cells = <3>;
 	status = "okay";
+	clock-frequency = <400000>;
+
+	dmas =  <&gpi_dma1 0 6 QCOM_GPI_I2C>,
+		    <&gpi_dma1 1 6 QCOM_GPI_I2C>;
+	dma-names = "tx", "rx";
 
 	touchscreen: synaptics-dsi-i2c@20 {
 		compatible = "syna,rmi4-i2c";
 		reg = <0x20>;
 		#address-cells = <1>;
 		#size-cells = <0>;
-		interrupts-extended = <&tlmm 125 IRQ_TYPE_EDGE_FALLING>;
+		interrupts-extended = <&tlmm 125 0x2008>;
 		
-		pinctrl-names = "default";
+		pinctrl-names = "default", "sleep";
 		pinctrl-0 = <&ts_default_pins>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
 		
 		vdd-supply = <&vreg_l28a_3p0>;
 		vio-supply = <&vreg_tp_vddio>;
@@ -485,13 +508,39 @@
 			pins = "gpio99", "gpio125";
 			drive-strength = <16>;
 			bias-pull-up;
+			input-enable;
 		};
 	};
-	
+
+	ts_reset_suspend: ts_reset_suspend {
+		mux {
+			pins = "gpio99";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio99";
+			bias-disable;
+			drive-strength = <0x2>;
+		};
+	};
+
+	ts_int_suspend: ts_int_suspend {
+		mux {
+			pins = "gpio125";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio125";
+			bias-disable;
+			drive-strength = <0x2>;
+		};
+	};
 };
 
 &uart6 {
-	status = "okay";
+	status = "disabled";
 
 	bluetooth {
 		compatible = "qcom,wcn3990-bt";
@@ -556,8 +605,12 @@
 	vdda-pll-supply = <&vdda_ufs1_1p2>;
 };
 
+&venus {
+	status = "disabled";
+};
+
 &wifi {
-	status = "okay";
+	status = "disabled";
 
 	vdd-0.8-cx-mx-supply = <&vreg_l5a_0p8>;
 	vdd-1.8-xo-supply = <&vreg_l7a_1p8>;
@@ -676,7 +729,5 @@
 			pmsg-size = <0x200000>;
 			ecc-size = <0x0>;
 		};
-
-
 	};
 };
