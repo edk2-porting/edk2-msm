@@ -41,7 +41,7 @@ QQ交流群: 697666196
 8. 魅族16th         (m1882)
 9. 黑鲨手机一代     (skr-a0)
 10. LG G7           (judyln)            (会自动重启)
-11. 三星S9+         (star2qltechn)
+11. 三星S9+         (star2qltechn)      (有可能会清空UFS)
 12. 小米7           (dipper-old)
 13. OPPO Find X     (pafm00)
 14. 锤子坚果R1      (trident)
