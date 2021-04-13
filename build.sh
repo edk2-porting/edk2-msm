@@ -16,6 +16,7 @@ DEVICES=(
 	dipper-old
 	pafm00
 	trident
+	olympic
 )
 #####################################
 
