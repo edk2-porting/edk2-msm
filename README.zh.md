@@ -45,6 +45,7 @@ QQ交流群: 697666196
 12. 小米7           (dipper-old)
 13. OPPO Find X     (pafm00)
 14. 锤子坚果R1      (trident)
+15. 诺基亚9 PureView(olympic)
 
 ## 依赖
 
