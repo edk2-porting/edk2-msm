@@ -1,6 +1,6 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
-# 项目停更，准备高考
+# 2021高考加油！
 
 ![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
 ![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
