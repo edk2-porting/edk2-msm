@@ -574,6 +574,11 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
+  
+  #
+  # OnePlus 6T A/B Slot Support
+  #
+  INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
