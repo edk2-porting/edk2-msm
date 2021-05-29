@@ -16,4 +16,4 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x140000000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
