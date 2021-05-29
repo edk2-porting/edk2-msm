@@ -45,7 +45,7 @@ EFI_STATUS EFIAPI SlotMain(IN EFI_HANDLE ImageHandle,
                     &numHandles,
                     &controllerHandles);
     if (EFI_ERROR(status)) {
-        WaitAnyKey(SystemTable);
+        //WaitAnyKey(SystemTable);
         return status;
     }
         // ergodic the handles
