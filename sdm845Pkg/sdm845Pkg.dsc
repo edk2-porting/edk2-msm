@@ -245,7 +245,12 @@
   #
   sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-
+  
+  #
+  # OnePlus 6T A/B Slot Support
+  #
+  sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+  
   #
   # Bds
   #
