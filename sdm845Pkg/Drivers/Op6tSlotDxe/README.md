@@ -1,4 +1,4 @@
-# Op6TSlot
+# [Op6TSlot](https://github.com/longjunyu2/Op6TSlot)
 Add A/B slot support for OnePlus 6T EFI-EDK2 firmware.
 
 ## Introduction
