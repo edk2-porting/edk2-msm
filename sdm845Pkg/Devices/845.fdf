@@ -243,6 +243,16 @@ APRIORI DXE {
     SECTION UI = "SPMI"
   }
 
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+
   FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.efi
@@ -255,10 +265,15 @@ APRIORI DXE {
     SECTION UI = "UsbPwrCtrlDxe"
   }
 
-  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-    SECTION UI = "UsbfnDwc3Dxe"
+  #FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+  #  SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+  #  SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+  #  SECTION UI = "UsbfnDwc3Dxe"
+  #}
+  
+  FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
+    SECTION UI = "UsbKbDxe"
   }
 
   FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
@@ -419,6 +434,16 @@ APRIORI DXE {
     SECTION UI = "SPMI"
   }
 
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+
   FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.efi
@@ -431,10 +456,15 @@ APRIORI DXE {
     SECTION UI = "UsbPwrCtrlDxe"
   }
 
-  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-    SECTION UI = "UsbfnDwc3Dxe"
+  #FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+  #  SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+  #  SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+  #  SECTION UI = "UsbfnDwc3Dxe"
+  #}
+  
+  FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
+    SECTION UI = "UsbKbDxe"
   }
 
   FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
@@ -461,11 +491,11 @@ APRIORI DXE {
     SECTION UI = "ButtonsDxe"
   }
 
-  FILE DRIVER = 5af77f10-90df-4e7e-8325-a17ec09d5443 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
-    SECTION UI = "UsbMsdDxe"
-  }
+  #FILE DRIVER = 5af77f10-90df-4e7e-8325-a17ec09d5443 {
+  #  SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
+  #  SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
+  #  SECTION UI = "UsbMsdDxe"
+  #}
 
   FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.depex
