@@ -5,7 +5,6 @@
 
 A broken but working EDK2 implementation for Snapdragon 845 platform.
 
-中国人请看中文版
 [Chinese version (中文版)](https://github.com/edk2-porting/edk2-sdm845/blob/master/README.zh.md)
 
 ## Resources
@@ -14,7 +13,9 @@ A broken but working EDK2 implementation for Snapdragon 845 platform.
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ group: 697666196 (Never On-Topic)
+QQ group: 697666196 (Main group)
+
+QQ group: 737223105 (Linux/edk2)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 
