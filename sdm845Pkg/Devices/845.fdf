@@ -562,7 +562,7 @@ APRIORI DXE {
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
+    # SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
     SECTION UI = "AcpiTables"
   }
 
