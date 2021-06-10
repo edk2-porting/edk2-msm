@@ -33,7 +33,12 @@
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
   BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
 
+!if $(TARGET) != RELEASE
   SerialPortLib|sdm845Pkg/Library/InMemorySerialPortLib/InMemorySerialPortLib.inf
+!else
+  SerialPortLib|MdePkg/Library/BaseSerialPortLibNull/BaseSerialPortLibNull.inf
+!endif
+
   RealTimeClockLib|EmbeddedPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
   TimeBaseLib|EmbeddedPkg/Library/TimeBaseLib/TimeBaseLib.inf
 
@@ -56,7 +61,10 @@
   # SimpleFbDxe
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
 
+!if $(TARGET) != RELEASE
   SerialPortLib|sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+!endif
+
   PlatformBootManagerLib|sdm845Pkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
   MemoryInitPeiLib|sdm845Pkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|sdm845Pkg/Library/PlatformPeiLib/PlatformPeiLib.inf
@@ -167,7 +175,10 @@
   MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
   MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
+  
+!if $(TARGET) != RELEASE  
   MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
+!endif
 
   MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
   
