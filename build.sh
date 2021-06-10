@@ -53,8 +53,8 @@ function _build(){
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc"||return "$?"
-	gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
+	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b RELEASE||return "$?"
+	gzip -c < workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
 	cat "workspace/uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "workspace/uefi-${DEVICE}.img.gz-dtb"||return "$?"
 	abootimg --create "${OUTDIR}/boot-${DEVICE}.img" -k "workspace/uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
 	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
