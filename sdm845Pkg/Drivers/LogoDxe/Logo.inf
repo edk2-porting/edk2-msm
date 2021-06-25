@@ -17,9 +17,9 @@
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = Logo
   MODULE_UNI_FILE                = Logo.uni
-  FILE_GUID                      = 7BB28B99-61BB-11D5-9A5D-0090273FC14D
+  FILE_GUID                      = 395CD006-FE97-785E-6DEE-4569C3B4411B
   MODULE_TYPE                    = USER_DEFINED
-  VERSION_STRING                 = 1.0
+  VERSION_STRING                 = 1.1
 
 #
 # The following information is for reference only and not required by the build tools.

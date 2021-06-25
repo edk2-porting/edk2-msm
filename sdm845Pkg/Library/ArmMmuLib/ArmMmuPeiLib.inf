@@ -10,9 +10,9 @@
 [Defines]
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = ArmMmuPeiLib
-  FILE_GUID                      = b50d8d53-1ad1-44ea-9e69-8c89d4a6d08b
+  FILE_GUID                      = 2FD24913-D00D-6E81-35DE-0EFA5A0AE893
   MODULE_TYPE                    = PEIM
-  VERSION_STRING                 = 1.0
+  VERSION_STRING                 = 1.1
   LIBRARY_CLASS                  = ArmMmuLib|PEIM
   CONSTRUCTOR                    = ArmMmuPeiLibConstructor
 
