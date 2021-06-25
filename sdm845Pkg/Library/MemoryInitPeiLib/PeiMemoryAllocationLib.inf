@@ -29,6 +29,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   DebugLib

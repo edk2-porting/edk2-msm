@@ -37,6 +37,7 @@
   ArmPlatformPkg/ArmPlatformPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   ArmLib

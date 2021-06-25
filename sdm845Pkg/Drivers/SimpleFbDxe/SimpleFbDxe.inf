@@ -16,6 +16,7 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   BaseLib
