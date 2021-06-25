@@ -11,6 +11,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   ArmLib
