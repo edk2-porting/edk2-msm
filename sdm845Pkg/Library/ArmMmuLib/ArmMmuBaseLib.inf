@@ -10,9 +10,9 @@
 [Defines]
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = ArmMmuBaseLib
-  FILE_GUID                      = da8f0232-fb14-42f0-922c-63104d2c70bd
+  FILE_GUID                      = 459A0113-F77B-4270-7C40-ED473B985ED5
   MODULE_TYPE                    = BASE
-  VERSION_STRING                 = 1.0
+  VERSION_STRING                 = 1.1
   LIBRARY_CLASS                  = ArmMmuLib
   CONSTRUCTOR                    = ArmMmuBaseLibConstructor
 

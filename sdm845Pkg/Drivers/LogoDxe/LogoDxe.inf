@@ -17,9 +17,9 @@
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = LogoDxe
   MODULE_UNI_FILE                = LogoDxe.uni
-  FILE_GUID                      = F74D20EE-37E7-48FC-97F7-9B1047749C69
+  FILE_GUID                      = 53B2C4DB-E840-D17C-76FF-5E49F92383BD
   MODULE_TYPE                    = DXE_DRIVER
-  VERSION_STRING                 = 1.0
+  VERSION_STRING                 = 1.1
 
   ENTRY_POINT                    = InitializeLogo
 #
