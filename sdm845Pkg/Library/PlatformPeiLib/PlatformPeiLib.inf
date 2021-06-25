@@ -26,10 +26,10 @@
 
 [Packages]
   ArmPkg/ArmPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   DebugLib
