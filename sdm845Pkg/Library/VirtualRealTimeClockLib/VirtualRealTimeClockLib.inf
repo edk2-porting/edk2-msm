@@ -30,7 +30,6 @@
   ArmPkg/ArmPkg.dec
   MdePkg/MdePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   IoLib
