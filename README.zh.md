@@ -1,7 +1,5 @@
 # 骁龙845(sdm845)的EDK2 UEFI固件
 
-# 2021高考加油！
-
 ![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
 ![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
 
@@ -27,7 +25,7 @@ QQ交流群: 737223105 (Linux/edk2)
 
 ## 警告
 
-**请勿尝试移植到任何索尼设备上**
+**请勿尝试移植到任何索尼和谷歌设备上**
 
 **你的UFS会被清空!!!**
 
