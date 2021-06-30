@@ -3,7 +3,7 @@
 ![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
 ![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
 
-A broken but working EDK2 implementation for Snapdragon 845 platform.
+EDK2 implementation for Snapdragon 845 platform.
 
 [Chinese version (中文版)](https://github.com/edk2-porting/edk2-sdm845/blob/master/README.zh.md)
 
@@ -13,36 +13,34 @@ A broken but working EDK2 implementation for Snapdragon 845 platform.
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ group: 697666196 (Main group)
-
-QQ group: 737223105 (Linux/edk2)
+QQ group: 697666196 (Main group)    737223105 (Linux/edk2)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 
-[Useless documents](https://renegade-doc.readthedocs.io/en/latest/index.html)
+[Project website](https://renegade-project.org/))
 
 ## WARNING
 
-**DO NOT EVER TRY TO PORT IT TO *SONY* DEVICES**
+**DO NOT EVER TRY TO PORT IT TO *SONY* and *GOOGLE* DEVICES**
 
 **YOUR UFS WILL BE WIPED CLEAN!!!**
 
 ## Supported devices
 
-1. Xiaomi MIX 2S       (polaris)
-2. Xiaomi MIX 3        (perseus)
-3. Xiaomi MI 8         (dipper)
+1. OnePlus 6           (enchilada)
+2. OnePlus 6T          (fajita)
+3. Xiaomi MIX 3        (perseus)
 4. Xiaomi PocoPhone F1 (beryllium)
-5. OnePlus 6           (enchilada)
-6. OnePlus 6T          (fajita)
-7. Nubia X             (nx616j)
-8. Meizu 16th          (m1882)
-9. BlackShark One      (skr-a0)
-10. LG G7              (judyln)         (Will automatically restart)
-11. Samsung Galaxy S9+ (star2qltechn)   (May wipe your UFS)
+5. Meizu 16th          (m1882)
+6. Smartisan R1       (trident)
+7. BlackShark One      (skr-a0)
+8. OPPO Find X        (pafm00)
+9. Xiaomi MIX 2S       (polaris)
+10. LG G7              (judyln)
+11. Samsung Galaxy S9+ (star2qltechn)
 12. Xiaomi MI 7        (dipper-old)
-13. OPPO Find X        (pafm00)
-14. Smartisan R1       (trident)
+13. Xiaomi MI 8         (dipper)
+14. Nubia X             (nx616j)
 15. Nokia9 PureView    (olympic)
 
 ## Dependencies
@@ -57,7 +55,7 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 
 ## Building
 
-1.Clone this project (no need for recursive)
+1.Clone this project
 
 ```bash
 git clone https://github.com/edk2-porting/edk2-sdm845.git --depth=1
@@ -86,21 +84,17 @@ fastboot flash recovery boot_DEVICE.img
 
 ## Credits
 
-@fxsheep for his original `edk2-sagit`
+`fxsheep` for his original `edk2-sagit`
 
-@strongtz for the creating and maintaining the whole Renegade Project
+`strongtz` for maintaining Renegade Project
 
-@BigfootACA for build script
+`BigfootACA` for build script
 
-@lemon1ice and NTAuthority for guidance and some blobs
+`Lemon_Ice` and `NTAuthority` for guidance and some blobs
 
-@wetdreams and TAOCroatia for working hard on testing and debugging
+`@Freak2112`, `TAO_Croatia` and `废物` for working hard on testing and debugging
 
-@NekokeCore for fixing MemoryMap
-
-## Porting Guide
-
-[edk2-sdm845 Porting Guide](https://renegade-doc.readthedocs.io/en/latest/edk2/port.html).
+`NekokeCore` for fixing MemoryMap
 
 ## License
 
