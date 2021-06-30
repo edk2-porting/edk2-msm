@@ -40,6 +40,7 @@ QQ交流群: 697666196 (主群)      737223105 (Linux/edk2)
 13. 小米8           (dipper)
 14. 努比亚X         (nx616j)
 15. 诺基亚9 PureView(olympic)
+16. 华硕 ZenFone 5Z  (draco)
 
 ## 依赖
 

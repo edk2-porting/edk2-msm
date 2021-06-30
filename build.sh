@@ -17,6 +17,7 @@ DEVICES=(
 	pafm00
 	trident
 	olympic
+	draco
 )
 #####################################
 
