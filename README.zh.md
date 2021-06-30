@@ -9,8 +9,6 @@
 
 ## 资源
 
-**群里问智障问题会被踢**
-
 [Telegram交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
 [Discord交流群](https://discord.gg/XXBWfag)
