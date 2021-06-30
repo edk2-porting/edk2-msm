@@ -42,6 +42,7 @@ QQ group: 697666196 (Main group)    737223105 (Linux/edk2)
 13. Xiaomi MI 8         (dipper)
 14. Nubia X             (nx616j)
 15. Nokia9 PureView    (olympic)
+16. ASUS ZenFone 5Z    (draco)
 
 ## Dependencies
 
