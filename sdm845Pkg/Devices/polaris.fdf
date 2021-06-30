@@ -265,11 +265,11 @@ APRIORI DXE {
     SECTION UI = "UsbPwrCtrlDxe"
   }
 
-  #FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-    #SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-    #SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-    #SECTION UI = "UsbfnDwc3Dxe"
-  #}
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
 
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
@@ -456,11 +456,11 @@ APRIORI DXE {
     SECTION UI = "UsbPwrCtrlDxe"
   }
 
- # FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-   # SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-   # SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-   # SECTION UI = "UsbfnDwc3Dxe"
-  #}
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
 
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
@@ -490,12 +490,6 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
   }
-
-#  FILE DRIVER = 5af77f10-90df-4e7e-8325-a17ec09d5443 {
-#    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
-#    SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
-#    SECTION UI = "UsbMsdDxe"
-#  }
 
   FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.depex
@@ -554,15 +548,11 @@ APRIORI DXE {
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
     SECTION RAW = sdm845Pkg/AcpiTables/845/DSDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/CSRT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/FACS.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MCFG.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
-   # SECTION RAW = sdm845Pkg/AcpiTables/testing/TPM2.aml
     SECTION UI = "AcpiTables"
   }
 
