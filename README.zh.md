@@ -3,9 +3,7 @@
 ![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
 ![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
 
-**在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请离开**
-
-一个针对骁龙845平台的勉强能用的EDK2 UEFI
+**在编译该项目前，请确定你有一定的Linux常识，以下步骤已经是最简单的方法，如果你看不懂，那么请使用Releases中的编译成品**
 
 ## 资源
 
@@ -13,13 +11,11 @@
 
 [Discord交流群](https://discord.gg/XXBWfag)
 
-QQ交流群: 697666196 (主群)
-
-QQ交流群: 737223105 (Linux/edk2)
+QQ交流群: 697666196 (主群)      737223105 (Linux/edk2)
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
 
-[没什么用的文档](https://renegade-doc.readthedocs.io/zh_CN/latest/index.html)
+[项目官网](https://renegade-project.org/)
 
 ## 警告
 
@@ -29,22 +25,20 @@ QQ交流群: 737223105 (Linux/edk2)
 
 ## 已支持的设备
 
-此列表为能够启动进入UEFI Shell的设备
-
-1. 小米MIX2S        (polaris)
-2. 小米MIX3         (perseus)
-3. 小米8            (dipper)
+1. 一加6            (enchilada)
+2. 一加6T           (fajita)
+3. 小米MIX3         (perseus)
 4. 小米PocoPhone F1 (beryllium)
-5. 一加6            (enchilada)
-6. 一加6T           (fajita)
-7. 努比亚X          (nx616j)
-8. 魅族16th         (m1882)
-9. 黑鲨手机一代     (skr-a0)
-10. LG G7           (judyln)            (会自动重启)
-11. 三星S9+         (star2qltechn)      (有可能会清空UFS)
-12. 小米7           (dipper-old)
-13. OPPO Find X     (pafm00)
-14. 锤子坚果R1      (trident)
+5. 魅族16th         (m1882)
+6. 锤子坚果R1       (trident)
+7. 黑鲨手机一代      (skr-a0)
+8. OPPO Find X      (pafm00)
+9. 小米MIX2S        (polaris)
+10. LG G7           (judyln)
+11. 三星S9+         (star2qltechn)
+12. 小米7（工程机）  (dipper-old)
+13. 小米8           (dipper)
+14. 努比亚X         (nx616j)
 15. 诺基亚9 PureView(olympic)
 
 ## 依赖
@@ -56,10 +50,6 @@ sudo apt update
 sudo apt upgrade
 sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git
 ```
-
-## 视频教程
-
-[【UEFI】edk2-sdm845项目编译教程 - 5超级菜鸟5](https://www.bilibili.com/video/BV1ab4y197e7)
 
 ## 构建
 
@@ -94,11 +84,17 @@ fastboot flash recovery boot_DEVICE.img
 
 ## 贡献
 
-待填充
+感谢`fxsheep`的`edk2-sagit`
 
-## 简单的适配指南
+感谢`strongtz`维护Renegade Project
 
-[edk2-sdm845适配指南](https://renegade-doc.readthedocs.io/zh_CN/latest/edk2/port.html).
+感谢`BigfootACA`的编译脚本
+
+感谢`Lemon_Ice`和`NTAuthority`提供指导以及一些有用的blob
+
+感谢`@Freak2112`, `TAO_Croatia`和`废物`的实机调试
+
+感谢`NekokeCore`参与了MemoryMap的修复
 
 ## 开源许可证
 
