@@ -10,6 +10,7 @@ DEVICES=(
 	perseus
 	nx616j
 	m1882
+	m1892
 	skr-a0
 	judyln
 	star2qltechn
