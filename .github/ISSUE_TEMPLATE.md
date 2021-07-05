@@ -1,7 +1,7 @@
 ### Prerequisites
 
 * [ ] Have you read the readme?
-* [ ] Do you want to have your device in the supported list?
+* [ ] Do you (want to) have your device in the supported list?
 * [ ] Does the device have a Snapdragon 845 SOC?
 
 ### Description
