@@ -17,7 +17,7 @@ QQ group: 697666196 (Main group)    737223105 (Linux/edk2)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 
-[Project website](https://renegade-project.org/))
+[Project website](https://renegade-project.org/)
 
 ## WARNING
 
