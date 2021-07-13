@@ -7,15 +7,17 @@
 
 ## 资源
 
-[Telegram交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+[Telegram英语交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
-[Discord交流群](https://discord.gg/XXBWfag)
+[Discord英语交流群](https://discord.gg/XXBWfag)
 
-QQ交流群: 697666196 (主群)      737223105 (Linux/edk2)
+QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
 
 [项目官网](https://renegade-project.org/)
+
+[项目论坛](https://forum.renegade-project.org/)
 
 ## 警告
 
