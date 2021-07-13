@@ -46,6 +46,7 @@ QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 15. Nubia X                   (nx616j)
 16. Nokia9 PureView           (olympic)
 17. ASUS ZenFone 5Z           (draco)
+18. Vivo NEX Dual Display     (pd1821)
 
 ## Dependencies
 

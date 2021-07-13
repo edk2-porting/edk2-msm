@@ -19,6 +19,7 @@ DEVICES=(
 	trident
 	olympic
 	draco
+	pd1821
 )
 #####################################
 

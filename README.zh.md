@@ -44,6 +44,7 @@ QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
 15. 努比亚X                (nx616j)
 16. 诺基亚9 PureView       (olympic)
 17. 华硕 ZenFone 5Z        (draco)
+18. Vivo NEX 双屏版        (pd1821)
 
 ## 依赖
 
