@@ -9,7 +9,7 @@ EDK2 implementation for Snapdragon 845 platform.
 
 ## Resources
 
-[Telegram group (recommended)](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+[Telegram group](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
 [Discord group](https://discord.gg/XXBWfag)
 
