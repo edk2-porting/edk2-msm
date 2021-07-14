@@ -76,7 +76,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
 
     Scope (\_SB)
     {
-        Name (PSUB, "C153144D")
+        Name (PSUB, "RENEGA0E")
         Name (SOID, 0x0000015C)
         Name (SIDS, "SDM850")
         Name (SIDV, 0x00020001)
@@ -48618,7 +48618,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
             {
                 Name (_ADR, Zero)  // _ADR: Address
                 Name (_CCA, Zero)  // _CCA: Cache Coherency Attribute
-				Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+				Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
@@ -48645,7 +48645,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
 
                 Device (ADCM)
                 {
-					Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+					Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                     Name (_ADR, Zero)  // _ADR: Address
                     Name (_DEP, Package (0x02)  // _DEP: Dependencies
                     {
@@ -48663,7 +48663,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
                     Device (AUDD)
                     {
                         Name (_ADR, Zero)  // _ADR: Address
-						Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+						Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                         Name (_DEP, Package (One)  // _DEP: Dependencies
                         {
                             \_SB.SPI9
@@ -48709,13 +48709,13 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
                         Device (MBHC)
                         {
                             Name (_ADR, Zero)  // _ADR: Address
-                            Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+                            Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                         }
 
                         Device (QCRT)
                         {
                             Name (_ADR, One)  // _ADR: Address
-                            Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+                            Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                         }
                     }
                 }
@@ -48924,7 +48924,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
                 {
                     Name (_HID, "SAM0609")  // _HID: Hardware ID
                     Name (_UID, Zero)  // _UID: Unique ID
-                    Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+                    Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                     Name (_DEP, Package (One)  // _DEP: Dependencies
                     {
                         \_SB.AMSS.QWLN
@@ -61139,7 +61139,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
             {
                 Name (_HID, "SAM0909")  // _HID: Hardware ID
                 Name (_UID, Zero)  // _UID: Unique ID
-                Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+                Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                 Name (_DEP, Package (0x02)  // _DEP: Dependencies
                 {
                     \_SB.GIO0, 
@@ -61178,27 +61178,24 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
         Scope (\_SB)
         {
             Name (GRST, Zero)
         }
 
 
-
-
-
-
+        Device (SEN2)
+        {
+            Name (_DEP, Package (0x03)  // _DEP: Dependencies
+            {
+                \_SB.IPC0, 
+                \_SB.SCSS, 
+                \_SB.ARPC
+            })
+            Name (_HID, "QCOM0308")  // _HID: Hardware ID
+            Alias (\_SB.PSUB, _SUB)
+            Name (_CID, "QCOM02A2")  // _CID: Compatible ID
+        }
 
         Device (LID0)
         {
@@ -61261,7 +61258,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
                 Name (_ADR, Zero)  // _ADR: Address
                 Name (_HID, "SAM0603")  // _HID: Hardware ID
                 Name (_CID, "SAM0603")  // _CID: Compatible ID
-                Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+                Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
                 Name (_UID, One)  // _UID: Unique ID
                 Name (_STA, 0x0F)  // _STA: Status
             }
@@ -63182,7 +63179,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
         Device (SVBI)
         {
             Name (_HID, "SAMM0901")  // _HID: Hardware ID
-            Name (_SUB, "C153144D")  // _SUB: Subsystem ID
+            Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
         }
 
         Device (TSC1)
