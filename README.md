@@ -9,15 +9,17 @@ EDK2 implementation for Snapdragon 845 platform.
 
 ## Resources
 
-[Telegram group (recommended)](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+[Telegram group](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ group: 697666196 (Main group)    737223105 (Linux/edk2)
+QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 
-[Project website](https://renegade-project.org/))
+[Project website](https://renegade-project.org/)
+
+[Project forum](https://forum.renegade-project.org/)
 
 ## WARNING
 
@@ -27,23 +29,24 @@ QQ group: 697666196 (Main group)    737223105 (Linux/edk2)
 
 ## Supported devices
 
-1. OnePlus 6           (enchilada)
-2. OnePlus 6T          (fajita)
-3. Xiaomi MIX 3        (perseus)
-4. Xiaomi PocoPhone F1 (beryllium)
-5. Meizu 16th          (m1882)
-6. Meizu 16th Plus     (m1892)
-7. Smartisan R1       (trident)
-8. BlackShark One      (skr-a0)
-9. OPPO Find X        (pafm00)
-10. Xiaomi MIX 2S       (polaris)
-11. LG G7              (judyln)
-12. Samsung Galaxy S9+ (star2qltechn)
-13. Xiaomi MI 7        (dipper-old)
-14. Xiaomi MI 8         (dipper)
-15. Nubia X             (nx616j)
-16. Nokia9 PureView    (olympic)
-17. ASUS ZenFone 5Z    (draco)
+1.  OnePlus 6                 (enchilada)
+2.  OnePlus 6T                (fajita)
+3.  Xiaomi MIX 3              (perseus)
+4.  Xiaomi PocoPhone F1       (beryllium)
+5.  Meizu 16th                (m1882)
+6.  Meizu 16th Plus           (m1892)
+7.  Smartisan R1              (trident)
+8.  BlackShark One            (skr-a0)
+9.  OPPO Find X               (pafm00)
+10. Xiaomi MIX 2S             (polaris)
+11. LG G7                     (judyln)
+12. Samsung Galaxy S9+        (star2qltechn)
+13. Xiaomi MI 7               (dipper-old)
+14. Xiaomi MI 8               (dipper)
+15. Nubia X                   (nx616j)
+16. Nokia9 PureView           (olympic)
+17. ASUS ZenFone 5Z           (draco)
+18. Vivo NEX Dual Display     (pd1821)
 
 ## Dependencies
 

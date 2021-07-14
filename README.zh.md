@@ -7,15 +7,17 @@
 
 ## 资源
 
-[Telegram交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
+[Telegram英语交流群](https://t.me/joinchat/MNjTmBqHIokjweeN0SpoyA)
 
-[Discord交流群](https://discord.gg/XXBWfag)
+[Discord英语交流群](https://discord.gg/XXBWfag)
 
-QQ交流群: 697666196 (主群)      737223105 (Linux/edk2)
+QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
 
 [项目官网](https://renegade-project.org/)
+
+[项目论坛](https://forum.renegade-project.org/)
 
 ## 警告
 
@@ -25,23 +27,24 @@ QQ交流群: 697666196 (主群)      737223105 (Linux/edk2)
 
 ## 已支持的设备
 
-1. 一加6            (enchilada)
-2. 一加6T           (fajita)
-3. 小米MIX3         (perseus)
-4. 小米PocoPhone F1 (beryllium)
-5. 魅族16th         (m1882)
-6. 魅族16th Plus     (m1892)
-7. 锤子坚果R1       (trident)
-8. 黑鲨手机一代      (skr-a0)
-9. OPPO Find X      (pafm00)
-10. 小米MIX2S        (polaris)
-11. LG G7           (judyln)
-12. 三星S9+         (star2qltechn)
-13. 小米7（工程机）  (dipper-old)
-14. 小米8           (dipper)
-15. 努比亚X         (nx616j)
-16. 诺基亚9 PureView(olympic)
-17. 华硕 ZenFone 5Z  (draco)
+1.  一加6                  (enchilada)
+2.  一加6T                 (fajita)
+3.  小米MIX3               (perseus)
+4.  小米PocoPhone F1       (beryllium)
+5.  魅族16th               (m1882)
+6.  魅族16th Plus          (m1892)
+7.  锤子坚果R1             (trident)
+8.  黑鲨手机一代           (skr-a0)
+9.  OPPO Find X            (pafm00)
+10. 小米MIX2S              (polaris)
+11. LG G7                  (judyln)
+12. 三星S9+                (star2qltechn)
+13. 小米7（工程机）        (dipper-old)
+14. 小米8                  (dipper)
+15. 努比亚X                (nx616j)
+16. 诺基亚9 PureView       (olympic)
+17. 华硕 ZenFone 5Z        (draco)
+18. Vivo NEX 双屏版        (pd1821)
 
 ## 依赖
 
