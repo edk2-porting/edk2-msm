@@ -1,0 +1,614 @@
+#
+#  Copyright (c) 2018, Linaro Limited. All rights reserved.
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+
+################################################################################
+#
+# FD Section
+# The [FD] Section is made up of the definition statements and a
+# description of what goes into  the Flash Device Image.  Each FD section
+# defines one flash "device" image.  A flash device image may be one of
+# the following: Removable media bootable image (like a boot floppy
+# image,) an Option ROM image (that would be "flashed" into an add-in
+# card,) a System "Flash"  image (that would be burned into a system's
+# flash) or an Update ("Capsule") image that will be used to update and
+# existing system flash.
+#
+################################################################################
+
+[FD.sdm845Pkg_UEFI]
+BaseAddress   = 0xd0000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in NOR Flash.
+Size          = 0x00200000|gArmTokenSpaceGuid.PcdFdSize         # The size in bytes of the FLASH Device
+ErasePolarity = 1
+
+# This one is tricky, it must be: BlockSize * NumBlocks = Size
+BlockSize     = 0x00001000
+NumBlocks     = 0x200
+
+################################################################################
+#
+# Following are lists of FD Region layout which correspond to the locations of different
+# images within the flash device.
+#
+# Regions must be defined in ascending order and may not overlap.
+#
+# A Layout Region start with a eight digit hex offset (leading "0x" required) followed by
+# the pipe "|" character, followed by the size of the region, also in hex with the leading
+# "0x" characters. Like:
+# Offset|Size
+# PcdOffsetCName|PcdSizeCName
+# RegionType <FV, DATA, or FILE>
+#
+################################################################################
+
+# from ArmVirtPkg/ArmVirtQemuKernel.fdf
+#
+# Implement the Linux kernel header layout so that the loader will identify
+# it as something bootable, and execute it with a FDT pointer in x0 or r2.
+#
+0x00000000|0x00008000
+DATA = {
+  0x01, 0x00, 0x00, 0x10,                         # code0: adr x1, .
+  0xff, 0x1f, 0x00, 0x14,                         # code1: b 0x8000
+  0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, # text_offset: 512 KB
+  0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, # image_size: 2 MB
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # flags
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res2
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res3
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, # res4
+  0x41, 0x52, 0x4d, 0x64,                         # magic: "ARM\x64"
+  0x00, 0x00, 0x00, 0x00                          # res5
+}
+
+0x00008000|0x001f8000
+gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
+FV = FVMAIN_COMPACT
+
+
+################################################################################
+#
+# FV Section
+#
+# [FV] section is used to define what components or modules are placed within a flash
+# device file.  This section also defines order the components and modules are positioned
+# within the image.  The [FV] section consists of define statements, set statements and
+# module statements.
+#
+################################################################################
+
+[FV.FvMain]
+BlockSize          = 0x40
+NumBlocks          = 0         # This FV gets compressed so make it just big enough
+FvAlignment        = 8         # FV alignment and FV attributes setting.
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+APRIORI DXE {
+
+  #
+  # PI DXE Drivers producing Architectural Protocols (EFI Services)
+  #
+  INF MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
+  INF MdeModulePkg/Core/Dxe/DxeMain.inf
+  INF MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
+  INF MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
+  INF MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
+  INF ArmPkg/Drivers/CpuDxe/CpuDxe.inf
+  INF ArmPkg/Drivers/ArmGic/ArmGicDxe.inf
+  INF ArmPkg/Drivers/TimerDxe/TimerDxe.inf
+  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
+  INF MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
+  INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
+
+  #
+  # FAT filesystem + GPT/MBR partitioning
+  #
+  INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
+  INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
+  INF FatPkg/EnhancedFatDxe/Fat.inf
+  INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
+  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+
+  INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
+  INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+  INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
+  INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
+  INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
+  INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
+
+  INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
+  INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
+  INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+
+  FILE DRIVER = 9A5163E7-5C29-453F-825C-837A46A81E15 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SerialDxe/SerialDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SerialDxe/SerialDxe.efi
+    SECTION UI = "SerialDxe"
+  } 
+
+  FILE DRIVER = f541d663-4a48-40aa-aabf-ff158ccae34c {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SmemDxe/SmemDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SmemDxe/SmemDxe.efi
+    SECTION UI = "SmemDxe"
+  }  
+
+  FILE DRIVER = 8E9BD160-B184-11DF-94E2-0800200C9A66 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALSys/DALSys.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/DALSys/DALSys.efi
+    SECTION UI = "DALSys"
+  }
+
+  FILE DRIVER = 8681CC5A-0DF6-441E-B4B8-E915C538F067 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/HWIODxeDriver/HWIODxeDriver.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/HWIODxeDriver/HWIODxeDriver.efi
+    SECTION UI = "HWIODxeDriver"
+  }
+
+  FILE DRIVER = 10e193df-9966-44e7-b17c-59dd831e20fc {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ChipInfo/ChipInfo.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ChipInfo/ChipInfo.efi
+    SECTION UI = "ChipInfo"
+  }
+
+  FILE DRIVER = B105211B-BBBD-4ADD-A3B0-D1CF4A52154C {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PlatformInfoDxeDriver/PlatformInfoDxeDriver.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PlatformInfoDxeDriver/PlatformInfoDxeDriver.efi
+    SECTION UI = "PlatformInfoDxeDriver"
+  }
+
+  FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.efi
+    SECTION UI = "HALIOMMU"
+  }
+
+  FILE DRIVER = E43128A8-8692-42B6-8AFA-676158578D18 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.efi
+    SECTION UI = "ULogDxe"
+  }
+
+  FILE DRIVER = ABA01FF8-2CCB-4E12-8B2E-CD3F4A742993 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CmdDbDxe/CmdDbDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/CmdDbDxe/CmdDbDxe.efi
+    SECTION UI = "CmdDbDxe"
+  }
+
+  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219711 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/NpaDxe/NpaDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/NpaDxe/NpaDxe.efi
+    SECTION UI = "NpaDxe"
+  }
+
+  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219766 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/RpmhDxe/RpmhDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/RpmhDxe/RpmhDxe.efi
+    SECTION UI = "RpmhDxe"
+  }
+
+  FILE DRIVER = B43C22DB-6333-490C-872D-0A73439059FD {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PdcDxe/PdcDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PdcDxe/PdcDxe.efi
+    SECTION UI = "PdcDxe"
+  }
+
+  FILE DRIVER = 4DB5DEA6-5302-4D1A-8A82-677A683B0D29 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ClockDxe/ClockDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ClockDxe/ClockDxe.efi
+    SECTION UI = "ClockDxe"
+  }
+
+  FILE DRIVER = 1B52138D-3FA3-4E50-B958-20887353F809 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.efi
+    SECTION UI = "CPRDxe"
+  }
+
+  FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.efi
+    SECTION UI = "DALTLMM"
+  }
+
+  FILE DRIVER = 04DE8591-D2B3-4077-BBBE-B12070094EB6 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/I2C/I2C.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/I2C/I2C.efi
+    SECTION UI = "I2C"
+  }
+
+  FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SPMI/SPMI.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SPMI/SPMI.efi
+    SECTION UI = "SPMI"
+  }
+
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+
+  FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.efi
+    SECTION UI = "PmicDxe"
+  }
+
+  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
+  }
+
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
+  
+  FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
+    SECTION UI = "UsbKbDxe"
+  }
+
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbConfigDxe/UsbConfigDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbConfigDxe/UsbConfigDxe.efi
+    SECTION UI = "UsbConfigDxe"
+  }
+
+  FILE DRIVER = 0A134F0E-075E-40B3-9C63-3B3906804663 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbInitDxe/UsbInitDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbInitDxe/UsbInitDxe.efi
+    SECTION UI = "UsbInitDxe"
+  }
+
+  FILE DRIVER = 3299a266-15f0-4346-8318-716336736d3e {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbDeviceDxe/UsbDeviceDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbDeviceDxe/UsbDeviceDxe.efi
+    SECTION UI = "UsbDeviceDxe"
+  }
+
+  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.efi
+    SECTION UI = "ButtonsDxe"
+  }
+
+  INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf  
+
+}
+
+  INF MdeModulePkg/Core/Dxe/DxeMain.inf
+
+  #
+  # PI DXE Drivers producing Architectural Protocols (EFI Services)
+  #
+  INF MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
+  INF ArmPkg/Drivers/CpuDxe/CpuDxe.inf
+  INF MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
+  INF MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
+  INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
+  INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
+  INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+  INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
+  INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
+
+  #
+  # Multiple Console IO support
+  #
+  INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
+  INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
+  INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+  INF MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
+
+  INF ArmPkg/Drivers/ArmGic/ArmGicDxe.inf
+  INF ArmPkg/Drivers/TimerDxe/TimerDxe.inf
+
+  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
+
+  FILE DRIVER = 9A5163E7-5C29-453F-825C-837A46A81E15 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SerialDxe/SerialDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SerialDxe/SerialDxe.efi
+    SECTION UI = "SerialDxe"
+  } 
+
+  FILE DRIVER = f541d663-4a48-40aa-aabf-ff158ccae34c {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SmemDxe/SmemDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SmemDxe/SmemDxe.efi
+    SECTION UI = "SmemDxe"
+  }  
+
+  FILE DRIVER = 8E9BD160-B184-11DF-94E2-0800200C9A66 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALSys/DALSys.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/DALSys/DALSys.efi
+    SECTION UI = "DALSys"
+  }
+
+  FILE DRIVER = 8681CC5A-0DF6-441E-B4B8-E915C538F067 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/HWIODxeDriver/HWIODxeDriver.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/HWIODxeDriver/HWIODxeDriver.efi
+    SECTION UI = "HWIODxeDriver"
+  }
+
+  FILE DRIVER = 10e193df-9966-44e7-b17c-59dd831e20fc {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ChipInfo/ChipInfo.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ChipInfo/ChipInfo.efi
+    SECTION UI = "ChipInfo"
+  }
+
+  FILE DRIVER = B105211B-BBBD-4ADD-A3B0-D1CF4A52154C {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PlatformInfoDxeDriver/PlatformInfoDxeDriver.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PlatformInfoDxeDriver/PlatformInfoDxeDriver.efi
+    SECTION UI = "PlatformInfoDxeDriver"
+  }
+
+  FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.efi
+    SECTION UI = "HALIOMMU"
+  }
+
+  FILE DRIVER = E43128A8-8692-42B6-8AFA-676158578D18 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.efi
+    SECTION UI = "ULogDxe"
+  }
+
+  FILE DRIVER = ABA01FF8-2CCB-4E12-8B2E-CD3F4A742993 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CmdDbDxe/CmdDbDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/CmdDbDxe/CmdDbDxe.efi
+    SECTION UI = "CmdDbDxe"
+  }
+
+  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219711 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/NpaDxe/NpaDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/NpaDxe/NpaDxe.efi
+    SECTION UI = "NpaDxe"
+  }
+
+  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219766 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/RpmhDxe/RpmhDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/RpmhDxe/RpmhDxe.efi
+    SECTION UI = "RpmhDxe"
+  }
+
+  FILE DRIVER = B43C22DB-6333-490C-872D-0A73439059FD {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PdcDxe/PdcDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PdcDxe/PdcDxe.efi
+    SECTION UI = "PdcDxe"
+  }
+
+  FILE DRIVER = 4DB5DEA6-5302-4D1A-8A82-677A683B0D29 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ClockDxe/ClockDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ClockDxe/ClockDxe.efi
+    SECTION UI = "ClockDxe"
+  }
+
+  FILE DRIVER = 1B52138D-3FA3-4E50-B958-20887353F809 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.efi
+    SECTION UI = "CPRDxe"
+  }
+
+  FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.efi
+    SECTION UI = "DALTLMM"
+  }
+
+  FILE DRIVER = 04DE8591-D2B3-4077-BBBE-B12070094EB6 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/I2C/I2C.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/I2C/I2C.efi
+    SECTION UI = "I2C"
+  }
+
+  FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SPMI/SPMI.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SPMI/SPMI.efi
+    SECTION UI = "SPMI"
+  }
+
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+
+  FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.efi
+    SECTION UI = "PmicDxe"
+  }
+
+  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
+  }
+
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
+  
+  FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
+    SECTION UI = "UsbKbDxe"
+  }
+
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbConfigDxe/UsbConfigDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbConfigDxe/UsbConfigDxe.efi
+    SECTION UI = "UsbConfigDxe"
+  }
+
+  FILE DRIVER = 0A134F0E-075E-40B3-9C63-3B3906804663 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbInitDxe/UsbInitDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbInitDxe/UsbInitDxe.efi
+    SECTION UI = "UsbInitDxe"
+  }
+
+  FILE DRIVER = 3299a266-15f0-4346-8318-716336736d3e {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbDeviceDxe/UsbDeviceDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbDeviceDxe/UsbDeviceDxe.efi
+    SECTION UI = "UsbDeviceDxe"
+  }
+
+  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.efi
+    SECTION UI = "ButtonsDxe"
+  }
+
+  FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
+    SECTION UI = "UFSDxe"
+  }
+
+  #
+  # Virtual Keyboard
+  #
+  INF EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
+
+  INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
+  INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
+
+  #
+  # USB Host Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+
+  #
+  # USB Mass Storage Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
+  #
+  # USB Peripheral Support
+  #
+  INF EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
+
+  #
+  # Fastboot
+  #
+  INF EmbeddedPkg/Application/AndroidFastboot/AndroidFastbootApp.inf
+
+  #
+  # FAT filesystem + GPT/MBR partitioning
+  #
+  INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
+  INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
+  INF FatPkg/EnhancedFatDxe/Fat.inf
+  INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
+
+  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+
+  INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
+
+  #
+  # ACPI Support
+  #
+  INF MdeModulePkg/Universal/Acpi/AcpiTableDxe/AcpiTableDxe.inf
+  INF MdeModulePkg/Universal/Acpi/AcpiPlatformDxe/AcpiPlatformDxe.inf
+  INF MdeModulePkg/Universal/Acpi/BootGraphicsResourceTableDxe/BootGraphicsResourceTableDxe.inf
+  # INF RuleOverride = ACPITABLE sdm845Pkg/AcpiTables/AcpiTables.inf
+
+  FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/perseus/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
+    SECTION UI = "AcpiTables"
+  }
+
+  #
+  # SMBIOS Support
+  #
+  INF sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
+
+  #
+  # UEFI applications
+  #
+  INF ShellPkg/Application/Shell/Shell.inf
+!ifdef $(INCLUDE_TFTP_COMMAND)
+  INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
+!endif #$(INCLUDE_TFTP_COMMAND)
+
+  #
+  # Bds
+  #
+  INF MdeModulePkg/Universal/PrintDxe/PrintDxe.inf
+  INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
+  INF MdeModulePkg/Universal/DisplayEngineDxe/DisplayEngineDxe.inf
+  INF MdeModulePkg/Universal/SetupBrowserDxe/SetupBrowserDxe.inf
+  INF MdeModulePkg/Universal/DriverHealthManagerDxe/DriverHealthManagerDxe.inf
+  INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+  INF MdeModulePkg/Application/UiApp/UiApp.inf
+  INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
+
+
+[FV.FVMAIN_COMPACT]
+FvAlignment        = 8
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+  INF ArmPlatformPkg/PrePi/PeiUniCore.inf
+
+  FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+    SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
+      SECTION FV_IMAGE = FVMAIN
+    }
+  }
+
+!include sdm845Pkg/CommonFdf.fdf.inc
+
+

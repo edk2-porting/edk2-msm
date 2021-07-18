@@ -7,9 +7,12 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/845.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/perseus.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
+
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1
 
 [PcdsFixedAtBuild.common]
   # System Memory (5GB)
