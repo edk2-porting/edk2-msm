@@ -50,7 +50,7 @@ function _build(){
 	source "${_EDK2}/edksetup.sh"
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
-	make -C "${_EDK2}/BaseTools" -j "$(nproc)"||exit "$?"
+	make -C "${_EDK2}/BaseTools"||exit "$?"
 	if "${GEN_ACPI}" && ! iasl -ve "sdm845Pkg/AcpiTables/${DEVICE}/Dsdt.asl"
 	then echo "iasl failed with ${?}" >&2;return 1
 	fi
