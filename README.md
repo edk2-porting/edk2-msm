@@ -47,7 +47,7 @@ QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 16. Nokia9 PureView           (olympic)
 17. ASUS ZenFone 5Z           (draco)
 18. Vivo NEX Dual Display     (pd1821)
-19. Unknown device fckmtp     (fckmtp)
+19. Mysterious device prototype (fckmtp-proto)
 
 ## Dependencies
 
