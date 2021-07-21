@@ -38,7 +38,6 @@ jobs:
           - trident
           - draco
           - pd1821
-	  - fckmtp-proto
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

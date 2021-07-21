@@ -20,7 +20,7 @@ DEVICES=(
 	olympic
 	draco
 	pd1821
-	fckmtp-proto
+	fckmtp
 )
 #####################################
 
