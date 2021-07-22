@@ -7,3 +7,6 @@
 [submodule "edk2-platforms"]
 	path = edk2-platforms
 	url = https://github.com/tianocore/edk2-platforms.git
+[submodule "sdm845Pkg/AcpiTables"]
+	path = sdm845Pkg/AcpiTables
+	url = https://git.renegade-project.org/edk2-sdm845-acpi.git
