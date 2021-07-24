@@ -67,11 +67,15 @@ git clone https://github.com/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.Build this project
+2.1 Build this project (only on linux)
 
 ```bash
 bash build.sh --device DEVICE
 ```
+2.2 For Macos/Windows (you can use docker)
+````bash
+docker-compose run edk2 ./build.sh -d your device
+````
 
 3.Boot the image
 
