@@ -547,7 +547,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/xiaomi/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/dipper/DSDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
