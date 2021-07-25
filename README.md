@@ -50,6 +50,10 @@ QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 
 ## Dependencies
 
+For Windows/MacOS/Other Linux distributions:
+
+Install Docker manually or use an Ubuntu virtual machine
+
 For Ubuntu 20.04:
 
 ```bash

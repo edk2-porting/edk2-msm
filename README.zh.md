@@ -48,6 +48,10 @@ QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
 
 ## 依赖
 
+Windows/MacOS/其它Linux发行版:
+
+手动安装Docker或者使用Ubuntu虚拟机
+
 Ubuntu 20.04:
 
 ```bash
