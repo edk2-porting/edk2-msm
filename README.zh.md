@@ -67,11 +67,17 @@ git clone https://hub.fastgit.org/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
+2.1 编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
 
 ```bash
 bash build.sh --chinese --device DEVICE
 ```
+
+2.2 如果你使用MacOS/Windows，则可以借助Docker编译
+
+````bash
+docker-compose run edk2 ./build.sh -d DEVICE
+````
 
 3.启动镜像
 
