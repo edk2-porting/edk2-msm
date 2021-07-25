@@ -72,9 +72,11 @@ cd edk2-sdm845
 ```bash
 bash build.sh --device DEVICE
 ```
+
 2.2 For Macos/Windows (you can use docker)
+
 ````bash
-docker-compose run edk2 ./build.sh -d your device
+docker-compose run edk2 ./build.sh -d DEVICE
 ````
 
 3.Boot the image
