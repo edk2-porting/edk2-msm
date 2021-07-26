@@ -11,6 +11,9 @@
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1
+
 [PcdsFixedAtBuild.common]
   # System Memory (5GB)
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x140000000
