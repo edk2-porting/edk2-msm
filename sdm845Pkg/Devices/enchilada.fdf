@@ -270,7 +270,7 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
     SECTION UI = "UsbfnDwc3Dxe"
   }
-
+  
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
     SECTION UI = "UsbKbDxe"
@@ -461,7 +461,7 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
     SECTION UI = "UsbfnDwc3Dxe"
   }
-
+  
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
     SECTION UI = "UsbKbDxe"
@@ -496,19 +496,6 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
-  
-      FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
-    SECTION UI = "SynapticsTouchDxe"
-  }
-
-    FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
-    SECTION UI = "SynapticsTouchDeviceDxe"
-  }
-
 
   #
   # Virtual Keyboard
@@ -560,7 +547,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/enchilada_fajita/DSDT_fajita.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/enchilada_fajita/DSDT_enchilada.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
@@ -594,12 +581,7 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
-  
-  #
-  # OnePlus 6T A/B Slot Support
-  #
-  # Disabled due to unknown bug
-  # INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
