@@ -43,15 +43,10 @@ InitPeripherals (
   IN VOID
   )
 {
-  //This mainly works.
-  EFI_STATUS            Status;
+  //Feed the QcomWdogTimer
+  MmioWrite32(0x17980008,0x000000);
+  DEBUG ((EFI_D_WARN, "\n \v The Dog is feeded :)\v"));
 
-  Status = gCpu->SetMemoryAttributes (gCpu, 0xa1a10000, 0x200000,
-                  EFI_MEMORY_UC | EFI_MEMORY_XP);
-  ASSERT_EFI_ERROR (Status);
-  Status = gCpu->SetMemoryAttributes (gCpu, 0x9d400000, 0x2400000,
-                  EFI_MEMORY_WC | EFI_MEMORY_XP);
-  ASSERT_EFI_ERROR (Status);
 }
 
 /**
