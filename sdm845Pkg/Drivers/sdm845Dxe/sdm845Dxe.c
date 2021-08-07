@@ -43,9 +43,9 @@ InitPeripherals (
   IN VOID
   )
 {
-  //Feed the QcomWdogTimer
+  //Kill the QcomWdogTimer on certain devices
   MmioWrite32(0x17980008,0x000000);
-  DEBUG ((EFI_D_WARN, "\n \v The Dog is feeded :)\v"));
+  DEBUG ((EFI_D_WARN, "\n \v The Dog is killed :)\v"));
 
 }
 
