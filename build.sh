@@ -112,6 +112,7 @@ then	set -e
 		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
 		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.fastgit.org/google/brotli.git
 		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.fastgit.org/kkos/oniguruma.git
+		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://hub.fastgit.org/akheron/jansson.git
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
