@@ -496,7 +496,18 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
+      FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
+    SECTION UI = "SynapticsTouchDxe"
+  }
 
+    FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
+    SECTION UI = "SynapticsTouchDeviceDxe"
+  }
+  
   #
   # Virtual Keyboard
   #
