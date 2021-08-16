@@ -1,6 +1,6 @@
 [submodule "sdm845Pkg/Binary"]
 	path = sdm845Pkg/Binary
-	url = https://git.renegade-project.org/edk2-sdm845-binary.git
+	url = https://github.com/edk2-porting/edk2-sdm845-binary.git
 [submodule "edk2"]
 	path = edk2
 	url = https://github.com/tianocore/edk2.git
