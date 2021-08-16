@@ -43,9 +43,9 @@ InitPeripherals (
   IN VOID
   )
 {
-  //Kill the QcomWdogTimer on certain devices
+  //Lock the QcomWdogTimer in a cage on certain devices
   MmioWrite32(0x17980008,0x000000);
-  DEBUG ((EFI_D_WARN, "\n \v The Dog is killed :)\v"));
+  DEBUG ((EFI_D_WARN, "\n \v The Dog has been locked in a cage :)\v"));
 
 }
 
