@@ -605,10 +605,9 @@ APRIORI DXE {
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
   
   #
-  # OnePlus 6T A/B Slot Support
+  # OnePlus 6(T) A/B Slot Support
   #
-  # Disabled due to unknown bug
-  # INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+  INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
