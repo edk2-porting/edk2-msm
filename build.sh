@@ -105,6 +105,7 @@ then	set -e
 		git submodule init;git submodule update --depth 1
 		pushd edk2
 
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
 		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.fastgit.org/openssl/openssl.git
 		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://hub.fastgit.org/google/brotli.git
 		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://git.cryptomilk.org/projects/cmocka.git
