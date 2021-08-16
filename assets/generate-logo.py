@@ -37,7 +37,7 @@ font = ImageFont.truetype(word_css,word_size)
 im1=Image.open(imageFile)
 draw = ImageDraw.Draw(im1)
 print(font.getsize(strs))
-draw.text((x, y),strs,(255,255,0),font=font)
+# draw.text((x, y),strs,(255,255,0),font=font)
 
 new_filename = file_save_dir  +outputName.replace(",","-").replace("\n","-")+".bmp"
 im1.save(new_filename)
