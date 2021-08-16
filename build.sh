@@ -29,14 +29,15 @@ function _help(){
 	echo "Build edk2 for Qualcomm SDM845 platform."
 	echo
 	echo "Options: "
-	echo "	--device DEV, -d DEV: build for DEV. (${DEVICES[*]})"
-	echo "	--all, -a:            build all devices."
-	echo "	--chinese, -c:        use fastgit for submodule cloning."
-	echo "	--acpi, -A:           compile acpi."
-	echo "	--clean, -C:          clean workspace and output."
-	echo "	--distclean, -D:      clean up all files that are not in repo."
-	echo "	--outputdir, -O:      output folder."
-	echo "	--help, -h:           show this help."
+	echo "	--device DEV, -d DEV:    build for DEV. (${DEVICES[*]})"
+	echo "	--all, -a:               build all devices."
+	echo "	--chinese, -c:           use Fastgit for submodule cloning."
+	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
+	echo "	--acpi, -A:              compile acpi. (not implemented yet)"
+	echo "	--clean, -C:             clean workspace and output."
+	echo "	--distclean, -D:         clean up all files that are not in repo."
+	echo "	--outputdir, -O:         output folder."
+	echo "	--help, -h:              show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
 	exit "${1}"
@@ -56,8 +57,14 @@ function _build(){
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b RELEASE||return "$?"
-	gzip -c < workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
+	if [ "$MODE" != "RELEASE" ]
+	then
+		build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b DEBUG||return "$?"
+		gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
+	else
+		build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b RELEASE||return "$?"
+		gzip -c < workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
+	fi
 	cat "workspace/uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "workspace/uefi-${DEVICE}.img.gz-dtb"||return "$?"
 	abootimg --create "${OUTDIR}/boot-${DEVICE}.img" -k "workspace/uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
 	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
@@ -71,13 +78,15 @@ function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 cd "$(dirname "$0")"||exit 1
 [ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
+typeset -u MODE
 DEVICE=""
+MODE=RELEASE
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
 export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o d:hacACDO: -l device:,help,all,chinese,acpi,clean,distclean,outputdir: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o d:hacACDO:r: -l device:,help,all,chinese,acpi,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -88,6 +97,7 @@ do	case "${1}" in
 		-C|--clean)CLEAN=true;shift;;
 		-D|--distclean)DISTCLEAN=true;shift;;
 		-O|--outputdir)OUTDIR="${2}";shift 2;;
+		-r|--release)MODE="${2}";shift 2;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
