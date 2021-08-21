@@ -219,12 +219,6 @@ APRIORI DXE {
     SECTION UI = "ClockDxe"
   }
 
-  FILE DRIVER = 1B52138D-3FA3-4E50-B958-20887353F809 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.efi
-    SECTION UI = "CPRDxe"
-  }
-
   FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.depex
     SECTION PE32 = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.efi
@@ -410,12 +404,6 @@ APRIORI DXE {
     SECTION UI = "ClockDxe"
   }
 
-  FILE DRIVER = 1B52138D-3FA3-4E50-B958-20887353F809 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/CPRDxe/CPRDxe.efi
-    SECTION UI = "CPRDxe"
-  }
-
   FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.depex
     SECTION PE32 = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.efi
@@ -547,7 +535,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/enchilada_fajita/DSDT_enchilada.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/beryllium/DSDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
@@ -590,7 +578,6 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
-
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
