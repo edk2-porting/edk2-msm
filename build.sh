@@ -5,8 +5,7 @@ DEVICES=(
 	dipper
 	enchilada
 	fajita
-	polaris-usb
-	polaris-gpu
+	polaris
 	beryllium
 	perseus
 	nx616j
