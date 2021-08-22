@@ -8,7 +8,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/fajita.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/enchilada.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
@@ -20,4 +20,4 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x1E0000000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
