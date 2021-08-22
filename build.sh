@@ -5,7 +5,9 @@ DEVICES=(
 	dipper
 	enchilada
 	fajita
+	fajita-8g
 	polaris
+	polaris-8g
 	beryllium
 	perseus
 	nx616j
