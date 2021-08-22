@@ -4,6 +4,7 @@
 DEVICES=(
 	dipper
 	enchilada
+	enchilada-8g
 	fajita
 	fajita-8g
 	polaris
