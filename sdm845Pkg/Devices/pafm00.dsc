@@ -11,9 +11,12 @@
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DMEMORY_8G=1
+
 [PcdsFixedAtBuild.common]
-  # System Memory (5GB)
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x140000000
+  # System Memory (7GB)
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x1E0000000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340

@@ -13,7 +13,7 @@
 
 [PcdsFixedAtBuild.common]
   # System Memory (5GB)
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x140000000
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000
 
   #gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9D469780
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
