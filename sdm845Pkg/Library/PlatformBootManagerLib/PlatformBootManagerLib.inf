@@ -33,6 +33,7 @@
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   ShellPkg/ShellPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   BaseLib
@@ -76,6 +77,7 @@
   gEfiEndOfDxeEventGroupGuid
   gEfiTtyTermGuid
   gUefiShellFileGuid
+  gUsbfnMsdAppFileGuid
 
 [Protocols]
   gEdkiiNonDiscoverableDeviceProtocolGuid

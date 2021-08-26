@@ -497,34 +497,17 @@ APRIORI DXE {
     SECTION UI = "SynapticsTouchDeviceDxe"
   }
 
+    FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
+    SECTION UI = "UsbMsdDxe"
+  }
 
-  #
-  # Virtual Keyboard
-  #
-  INF EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
 
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
-  #
-  # USB Host Support
-  #
-  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 
-  #
-  # USB Mass Storage Support
-  #
-  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-
-  #
-  # USB Peripheral Support
-  #
-  INF EmbeddedPkg/Drivers/AndroidFastbootTransportUsbDxe/FastbootTransportUsbDxe.inf
-
-  #
-  # Fastboot
-  #
-  INF EmbeddedPkg/Application/AndroidFastboot/AndroidFastbootApp.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
@@ -579,6 +562,8 @@ APRIORI DXE {
 !ifdef $(INCLUDE_TFTP_COMMAND)
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
+
+  INF  sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
 
   #
   # Bds

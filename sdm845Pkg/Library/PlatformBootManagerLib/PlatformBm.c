@@ -32,6 +32,8 @@
 
 #include "PlatformBm.h"
 
+
+
 #define DP_NODE_LEN(Type) { (UINT8)sizeof (Type), (UINT8)(sizeof (Type) >> 8) }
 
 #pragma pack (1)
@@ -705,7 +707,7 @@ PlatformBootManagerAfterConsole (
       Print (VERSION_STRING_PREFIX L"%s\n",
         PcdGetPtr (PcdFirmwareVersionString));
     }
-    Print (L"Press ESCAPE for boot options ");
+    Print (L"Press a any side button for for boot options");
   } else if (FirmwareVerLength > 0) {
     Status = gBS->HandleProtocol (gST->ConsoleOutHandle,
                     &gEfiGraphicsOutputProtocolGuid, (VOID **)&GraphicsOutput);
@@ -742,15 +744,16 @@ PlatformBootManagerAfterConsole (
   //
   // Register UEFI Shell
   //
+  PlatformRegisterFvBootOption (
+  &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE
+  );
    
-	
-   /*PlatformRegisterFvBootOption (
-	&gEfiAblFvNameGuid, L"Android Fastboot App", LOAD_OPTION_ACTIVE
-	);*/
-    PlatformRegisterFvBootOption (
-    &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE
-    );
-
+  //
+  // Register Mass Storage App
+  //
+  PlatformRegisterFvBootOption (
+  &gUsbfnMsdAppFileGuid, L"Mass Storage", LOAD_OPTION_ACTIVE
+  );
 }
 
 /**
@@ -778,7 +781,7 @@ PlatformBootManagerWaitCallback (
   Status = BootLogoUpdateProgress (
              White.Pixel,
              Black.Pixel,
-             L"Press ESCAPE for boot options",
+             L"Press a any side button for for boot options",
              White.Pixel,
              (Timeout - TimeoutRemain) * 100 / Timeout,
              0
