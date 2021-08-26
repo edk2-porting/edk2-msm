@@ -495,7 +495,11 @@ APRIORI DXE {
 
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
-
+  
+  #
+  # USB Host Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
