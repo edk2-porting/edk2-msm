@@ -41,6 +41,7 @@ jobs:
           - trident
           - draco
           - pd1821
+          - ayn-odin
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
