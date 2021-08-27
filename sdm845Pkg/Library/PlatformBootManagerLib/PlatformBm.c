@@ -742,6 +742,13 @@ PlatformBootManagerAfterConsole (
   EfiBootManagerRefreshAllBootOption ();
 
   //
+  // Register Simple Init GUI APP
+  //
+  PlatformRegisterFvBootOption (
+  &gSimpleInitFileGuid, L"Simple Init", LOAD_OPTION_ACTIVE
+  );
+
+  //
   // Register UEFI Shell
   //
   PlatformRegisterFvBootOption (
