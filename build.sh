@@ -134,9 +134,18 @@ then	set -e
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
+		pushd sdm845Pkg/Library/SimpleInit
+		git submodule set-url libs/lvgl     https://hub.fastgit.org/lvgl/lvgl.git
+		git submodule set-url libs/lodepng  https://hub.fastgit.org/lvandeve/lodepng.git
+		git submodule set-url libs/freetype https://hub.fastgit.org/freetype/freetype.git
+		git submodule init;git submodule update
+		popd
 		git checkout .gitmodules
 	else	git submodule init;git submodule update --depth 1
 		pushd edk2
+		git submodule init;git submodule update
+		popd
+		pushd sdm845Pkg/Library/SimpleInit
 		git submodule init;git submodule update
 		popd
 	fi
@@ -160,19 +169,30 @@ do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 		break
 	fi
 done
+for i in "${SIMPLE_INIT}" sdm845Pkg/Library/SimpleInit ./simple-init ../simple-init
+do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
+	then	_SIMPLE_INIT="$(realpath "${i}")"
+		break
+	fi
+done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
 [ -n "${_EDK2_LIBC}" ]||_error "EDK2-LibC not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
+[ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$PWD"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$_SIMPLE_INIT:$PWD"
 export WORKSPACE="${PWD}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT
 echo > ramdisk
 set -e
 python3 assets/generate-logo.py "${GITCOMMIT}"
+mkdir -p "${_SIMPLE_INIT}/build"
+bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
+	"${_SIMPLE_INIT}" \
+	"${_SIMPLE_INIT}/build"
 if [ "${DEVICE}" == "all" ]
 then	E=0
 	for i in "${DEVICES[@]}"

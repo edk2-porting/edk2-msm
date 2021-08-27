@@ -13,3 +13,6 @@
 [submodule "sdm845Pkg/Library/StdLib"]
 	path = sdm845Pkg/Library/StdLib
 	url = https://github.com/tianocore/edk2-libc.git
+[submodule "sdm845Pkg/Library/SimpleInit"]
+	path = sdm845Pkg/Library/SimpleInit
+	url = https://github.com/BigfootACA/simple-init.git
