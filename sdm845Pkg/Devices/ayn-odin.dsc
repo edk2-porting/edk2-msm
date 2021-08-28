@@ -7,7 +7,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/m1892.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/845.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
@@ -16,4 +16,4 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920

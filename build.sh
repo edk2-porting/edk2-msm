@@ -23,6 +23,7 @@ DEVICES=(
 	olympic
 	draco
 	pd1821
+	ayn-odin
 )
 #####################################
 
