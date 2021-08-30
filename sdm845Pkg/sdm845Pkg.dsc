@@ -69,6 +69,10 @@
   MemoryInitPeiLib|sdm845Pkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|sdm845Pkg/Library/PlatformPeiLib/PlatformPeiLib.inf
 
+!ifdef $(AB_SLOTS_SUPPORT)
+  BootSlotLib|sdm845Pkg/Library/BootSlotLib/BootSlotLib.inf
+!endif #$(AB_SLOTS_SUPPORT)
+
 [LibraryClasses.common.SEC]
   PrePiLib|EmbeddedPkg/Library/PrePiLib/PrePiLib.inf
   ExtractGuidedSectionLib|EmbeddedPkg/Library/PrePiExtractGuidedSectionLib/PrePiExtractGuidedSectionLib.inf
@@ -256,12 +260,17 @@
   #
   sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-  
+
   #
   # OnePlus 6T A/B Slot Support
+  # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
   #
   sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
-  
+!ifdef $(AB_SLOTS_SUPPORT)
+  sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
+  sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+!endif #$(AB_SLOTS_SUPPORT)
+
   #
   # Bds
   #

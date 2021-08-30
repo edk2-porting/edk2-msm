@@ -754,6 +754,15 @@ PlatformBootManagerAfterConsole (
   PlatformRegisterFvBootOption (
   &gUsbfnMsdAppFileGuid, L"Mass Storage", LOAD_OPTION_ACTIVE
   );
+   
+#ifdef AB_SLOTS_SUPPORT
+  //
+  // Register Switch Slots App
+  //
+  PlatformRegisterFvBootOption (
+  &gSwitchSlotsAppFileGuid, L"Reboot to other slot", LOAD_OPTION_ACTIVE
+  );
+#endif
 }
 
 /**

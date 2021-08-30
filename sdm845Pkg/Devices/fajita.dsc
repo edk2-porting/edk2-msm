@@ -9,7 +9,13 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = sdm845Pkg/Devices/fajita.fdf
 
+  # Enable A/B Slot Environment
+  DEFINE AB_SLOTS_SUPPORT        = TRUE
+
 !include sdm845Pkg/sdm845Pkg.dsc
+
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1
 
 [PcdsFixedAtBuild.common]
   # System Memory (5GB)
