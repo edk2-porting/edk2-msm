@@ -588,7 +588,7 @@ APRIORI DXE {
   INF sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
   INF sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
 !else
-  # Old unstable solution
+  # Old unstable solution, remove once BootSlotDxe fully tested
   INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
