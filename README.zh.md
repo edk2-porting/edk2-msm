@@ -111,7 +111,3 @@ fastboot flash recovery boot_DEVICE.img
 感谢`@Freak2112`, `TAO_Croatia`和`废物`的实机调试
 
 感谢`NekokeCore`参与了MemoryMap的修复
-
-## 开源许可证
-
-该项目在[WTFPL LICENSE](http://www.wtfpl.net/)下发布.

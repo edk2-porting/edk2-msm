@@ -111,7 +111,3 @@ fastboot flash recovery boot_DEVICE.img
 `@Freak2112`, `TAO_Croatia` and `废物` for working hard on testing and debugging
 
 `NekokeCore` for fixing MemoryMap
-
-## License
-
-This project is released under the [WTFPL LICENSE](http://www.wtfpl.net/).
