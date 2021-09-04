@@ -25,6 +25,7 @@ DEVICES=(
 	pd1821
 	ayn-odin
 	akershus
+	equuleus
 )
 #####################################
 

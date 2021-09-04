@@ -49,6 +49,7 @@ QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 18. Vivo NEX Dual Display     (pd1821)
 19. ayn odin handheld         (ayn-odin)
 20. ZTE Axon 9 Pro            (akershus)
+21. Xiaomi MI 8 UD            (equuleus)
 
 ## Dependencies
 
