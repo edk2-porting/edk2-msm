@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      max-parallel: 8
       matrix:
         device:
           - dipper
