@@ -46,6 +46,7 @@ QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
 17. 华硕 ZenFone 5Z        (draco)
 18. Vivo NEX 双屏版        (pd1821)
 19. ayn odin handheld      (ayn-odin)
+20. 中兴天机Axon 9 Pro     (akershus)
 
 ## 依赖
 

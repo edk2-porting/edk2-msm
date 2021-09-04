@@ -42,6 +42,7 @@ jobs:
           - draco
           - pd1821
           - ayn-odin
+          - akershus
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

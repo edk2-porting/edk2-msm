@@ -48,6 +48,7 @@ QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
 17. ASUS ZenFone 5Z           (draco)
 18. Vivo NEX Dual Display     (pd1821)
 19. ayn odin handheld         (ayn-odin)
+20. ZTE Axon 9 Pro            (akershus)
 
 ## Dependencies
 

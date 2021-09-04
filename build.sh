@@ -24,6 +24,7 @@ DEVICES=(
 	draco
 	pd1821
 	ayn-odin
+	akershus
 )
 #####################################
 
