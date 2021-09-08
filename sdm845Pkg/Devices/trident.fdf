@@ -485,17 +485,17 @@ APRIORI DXE {
     SECTION UI = "UFSDxe"
   }
   
-      FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
-    SECTION UI = "SynapticsTouchDxe"
-  }
+#       FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
+#     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
+#     SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
+#     SECTION UI = "SynapticsTouchDxe"
+#   }
 
-    FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
-    SECTION UI = "SynapticsTouchDeviceDxe"
-  }
+#     FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
+#     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
+#     SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
+#     SECTION UI = "SynapticsTouchDeviceDxe"
+#   }
 
     FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
@@ -535,7 +535,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/enchilada_fajita/DSDT_fajita.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/smartisan/DSDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
@@ -547,11 +547,11 @@ APRIORI DXE {
   #
   # FDT support
   #
-  INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+#   INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
 
-  FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
-    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-oneplus-fajita.dtb
-  }
+#   FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+#     SECTION RAW = sdm845Pkg/FdtBlob/sdm845-oneplus-fajita.dtb
+#   }
 
   #
   # SMBIOS Support
@@ -584,13 +584,13 @@ APRIORI DXE {
   #
   # OnePlus 6(T) A/B Slot Support
   #
-!ifdef $(AB_SLOTS_SUPPORT)
-  INF sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
-  INF sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-!else
-  # Old unstable solution, remove once BootSlotDxe fully tested
-  INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
-!endif #$(AB_SLOTS_SUPPORT)
+# !ifdef $(AB_SLOTS_SUPPORT)
+#   INF sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+#   INF sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
+# !else
+#   # Old unstable solution, remove once BootSlotDxe fully tested
+#   INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+# !endif #$(AB_SLOTS_SUPPORT)
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

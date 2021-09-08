@@ -24,6 +24,8 @@ DEVICES=(
 	draco
 	pd1821
 	ayn-odin
+	akershus
+	equuleus
 )
 #####################################
 
@@ -113,6 +115,7 @@ if "${CLEAN}";then _clean;exit "$?";fi
 if ! [ -f edk2/edksetup.sh ] || ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
+	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
 	if "${CHINESE}"
 	then	git submodule set-url edk2 https://hub.fastgit.org/tianocore/edk2.git
 		git submodule set-url edk2-platforms https://hub.fastgit.org/tianocore/edk2-platforms.git
