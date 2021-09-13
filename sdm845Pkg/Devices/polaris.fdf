@@ -67,7 +67,7 @@ DATA = {
   0x00, 0x00, 0x00, 0x00                          # res5
 }
 
-0x00008000|0x001f8000
+0x00008000|0x004f8000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
@@ -569,6 +569,11 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
+
+  #
+  # Simple Init GUI
+  #
+  INF src/main/SimpleInitMain.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
