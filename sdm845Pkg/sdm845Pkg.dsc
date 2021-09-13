@@ -217,6 +217,7 @@
   # USB Host Support
   #
   MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
 
   #
   # USB Mass Storage Support
