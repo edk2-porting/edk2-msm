@@ -559,6 +559,10 @@ APRIORI DXE {
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
 
+  #
+  # Simple Init GUI
+  #
+  INF src/main/SimpleInitMain.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8
