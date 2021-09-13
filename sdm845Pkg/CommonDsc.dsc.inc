@@ -14,6 +14,7 @@
 #
 
 !include MdePkg/MdeLibs.dsc.inc
+!include sdm845Pkg/Library/SimpleInit/SimpleInit.inc
 
 [LibraryClasses.common]
 !if $(TARGET) == RELEASE

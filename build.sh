@@ -117,8 +117,11 @@ then	set -e
 	echo "Updating submodules"
 	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
 	if "${CHINESE}"
-	then	git submodule set-url edk2 https://hub.fastgit.org/tianocore/edk2.git
-		git submodule set-url edk2-platforms https://hub.fastgit.org/tianocore/edk2-platforms.git
+	then	git submodule set-url edk2                         https://hub.fastgit.org/tianocore/edk2.git
+		git submodule set-url edk2-platforms               https://hub.fastgit.org/tianocore/edk2-platforms.git
+		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.org/edk2-porting/edk2-sdm845-binary.git
+		git submodule set-url sdm845Pkg/Library/StdLib     https://hub.fastgit.org/tianocore/edk2-libc.git
+		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.org/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd edk2
 
@@ -133,9 +136,18 @@ then	set -e
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
+		pushd sdm845Pkg/Library/SimpleInit
+		git submodule set-url libs/lvgl     https://hub.fastgit.org/lvgl/lvgl.git
+		git submodule set-url libs/lodepng  https://hub.fastgit.org/lvandeve/lodepng.git
+		git submodule set-url libs/freetype https://hub.fastgit.org/freetype/freetype.git
+		git submodule init;git submodule update
+		popd
 		git checkout .gitmodules
 	else	git submodule init;git submodule update --depth 1
 		pushd edk2
+		git submodule init;git submodule update
+		popd
+		pushd sdm845Pkg/Library/SimpleInit
 		git submodule init;git submodule update
 		popd
 	fi
@@ -147,24 +159,42 @@ do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
 		break
 	fi
 done
+for i in "${EDK2_LIBC}" sdm845Pkg/Library/StdLib ./edk2-libc ../edk2-libc
+do	if [ -n "${i}" ]&&[ -d "${i}/StdLib" ]
+	then	_EDK2_LIBC="$(realpath "${i}")"
+		break
+	fi
+done
 for i in "${EDK2_PLATFORMS}" ./edk2-platforms ../edk2-platforms
 do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 	then	_EDK2_PLATFORMS="$(realpath "${i}")"
 		break
 	fi
 done
+for i in "${SIMPLE_INIT}" sdm845Pkg/Library/SimpleInit ./simple-init ../simple-init
+do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
+	then	_SIMPLE_INIT="$(realpath "${i}")"
+		break
+	fi
+done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
+[ -n "${_EDK2_LIBC}" ]||_error "EDK2-LibC not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
+[ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE:-aarch64-linux-gnu-}"
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$PWD"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$_SIMPLE_INIT:$PWD"
 export WORKSPACE="${PWD}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT
 echo > ramdisk
 set -e
 python3 assets/generate-logo.py "${GITCOMMIT}"
+mkdir -p "${_SIMPLE_INIT}/build"
+bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
+	"${_SIMPLE_INIT}" \
+	"${_SIMPLE_INIT}/build"
 if [ "${DEVICE}" == "all" ]
 then	E=0
 	for i in "${DEVICES[@]}"

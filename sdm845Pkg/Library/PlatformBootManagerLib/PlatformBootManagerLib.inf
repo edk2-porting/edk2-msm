@@ -79,6 +79,7 @@
   gUefiShellFileGuid
   gUsbfnMsdAppFileGuid
   gSwitchSlotsAppFileGuid
+  gSimpleInitFileGuid
 
 [Protocols]
   gEdkiiNonDiscoverableDeviceProtocolGuid
