@@ -15,7 +15,7 @@
 !include sdm845Pkg/sdm845Pkg.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DMEMORY_8G=1 -DAB_SLOTS_SUPPORT=1
+  GCC:*_*_AARCH64_CC_FLAGS = -DMEMORY_8G=1 -DAB_SLOTS_SUPPORT=1 -DDISPLAY_DPI=440 -DENABLE_SIMPLE_INIT
 
 [PcdsFixedAtBuild.common]
   # System Memory (7GB)
