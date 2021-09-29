@@ -23,7 +23,7 @@ DEVICES=(
 	olympic
 	draco
 	pd1821
-	ayn-odin
+	odin-base
 	akershus
 	equuleus
 )
