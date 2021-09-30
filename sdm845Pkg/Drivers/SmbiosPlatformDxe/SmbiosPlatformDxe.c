@@ -31,11 +31,21 @@
   "EDK II\0"                           /* BiosVersion */ \
   __DATE__"\0"                         /* BiosReleaseDate */
 
+ #ifdef fajita8g
+  #define TYPE1_STRINGS                                   \
+  "OnePlus\0"           /* Manufacturer */ \
+  "6T\0"                  /* Product Name */ \
+  "128-8\0"                   /* Version */      \
+  "                    \0"           /* 20 character buffer */
+  #else
+  
+
 #define TYPE1_STRINGS                                   \
   "Unknown Manufacturer\0"           /* Manufacturer */ \
   "Unknown Device\0"                  /* Product Name */ \
   "Version Unknown\0"                   /* Version */      \
   "                    \0"           /* 20 character buffer */
+#endif
 
 #define TYPE2_STRINGS                                     \
   "Unknown Manufacturer\0"           /* Manufacturer */   \
