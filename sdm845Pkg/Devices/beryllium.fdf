@@ -496,6 +496,11 @@ APRIORI DXE {
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
   #
+  # USB Mass Storage Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+  
+  #
   # USB Host Support
   #
   INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
