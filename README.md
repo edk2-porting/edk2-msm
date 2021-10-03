@@ -13,7 +13,7 @@ EDK2 implementation for Snapdragon 845 platform.
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ chinese group: 697666196 (Main group)    737223105 (Linux/edk2)
+QQ chinese group: 697666196 (Main group, full)  996450026 (Second group)  737223105 (Linux/edk2)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 

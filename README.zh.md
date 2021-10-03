@@ -11,7 +11,7 @@
 
 [Discord英语交流群](https://discord.gg/XXBWfag)
 
-QQ中文交流群: 697666196 (主群)      737223105 (Linux/edk2)
+QQ中文交流群: 697666196 (主群，已满)  996450026 (二群)  737223105 (Linux/edk2)
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
 
