@@ -191,7 +191,13 @@ export GITCOMMIT
 echo > ramdisk
 set -e
 python3 assets/generate-logo.py "${GITCOMMIT}"
-mkdir -p "${_SIMPLE_INIT}/build"
+mkdir -p "${_SIMPLE_INIT}/build" "${_SIMPLE_INIT}/usr/share/locale"
+for i in "${_SIMPLE_INIT}/po/"*.po
+do	[ -f "${i}" ]||continue
+	_name="$(basename "$i" .po)"
+	_path="${_SIMPLE_INIT}/root/usr/share/locale/${_name}/LC_MESSAGES"
+	msgfmt -o "${_path}/simple-init.mo" "${i}"
+done
 bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
 	"${_SIMPLE_INIT}" \
 	"${_SIMPLE_INIT}/build"
