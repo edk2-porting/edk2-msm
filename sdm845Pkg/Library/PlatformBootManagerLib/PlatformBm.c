@@ -523,6 +523,11 @@ PlatformRegisterOptionsAndKeys (
   ASSERT_EFI_ERROR (Status);
   #ifdef ENABLE_SIMPLE_INIT
   //
+  // Search all boot options
+  //
+  EfiBootManagerRefreshAllBootOption ();
+
+  //
   // Register Simple Init GUI APP
   //
   UINT16 OptionSimpleInit = PlatformRegisterFvBootOption (
