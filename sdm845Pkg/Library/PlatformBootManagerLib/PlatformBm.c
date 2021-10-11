@@ -723,9 +723,9 @@ PlatformBootManagerAfterConsole (
         PcdGetPtr (PcdFirmwareVersionString));
     }
     #ifdef ENABLE_SIMPLE_INIT
-    Print (L"Press a any side button for SimpleInitGUI");
+    Print (L"Press any side button for SimpleInitGUI");
     #else
-    Print (L"Press a any side button for Boot Options");
+    Print (L"Press any side button for Boot Options");
     #endif
   } else if (FirmwareVerLength > 0) {
     Status = gBS->HandleProtocol (gST->ConsoleOutHandle,
@@ -810,9 +810,9 @@ PlatformBootManagerWaitCallback (
              White.Pixel,
              Black.Pixel,
   #ifdef ENABLE_SIMPLE_INIT
-             L"Press a any side button for SimpleInitGUI",
+             L"Press any side button for SimpleInitGUI",
   #else
-             L"Press a any side button for Boot Options",
+             L"Press any side button for Boot Options",
   #endif
              White.Pixel,
              (Timeout - TimeoutRemain) * 100 / Timeout,
