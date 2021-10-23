@@ -74,6 +74,7 @@ function _build(){
 		-t GCC5 \
 		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
 		-b "${_MODE}" \
+		-D FIRMWARE_VER="${GITCOMMIT}" \
 		||return "$?"
 	gzip -c \
 		< "workspace/Build/sdm845Pkg/${_MODE}_GCC5/FV/SDM845PKG_UEFI.fd" \
