@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Generic Snapdragon 845 Device"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"sdm845-generic"

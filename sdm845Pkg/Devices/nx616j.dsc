@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Nubia"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"X"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"nx616j"

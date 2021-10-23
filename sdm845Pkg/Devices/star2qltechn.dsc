@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2960
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Samsung"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Galaxy S9+"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"star2qltechn"

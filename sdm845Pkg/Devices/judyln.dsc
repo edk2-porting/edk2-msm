@@ -20,3 +20,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|3120
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"LG"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"G7"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"judyln"

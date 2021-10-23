@@ -24,3 +24,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Oneplus"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"6"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"enchilada"

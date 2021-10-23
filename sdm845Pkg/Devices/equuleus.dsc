@@ -20,3 +20,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MI 8 UD"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"equuleus"

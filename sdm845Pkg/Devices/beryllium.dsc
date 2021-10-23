@@ -19,6 +19,10 @@
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2246
 
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Poco F1"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"beryllium"
+
   #uncomment section underneath and comment out the above section to use full display, including the notch
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404

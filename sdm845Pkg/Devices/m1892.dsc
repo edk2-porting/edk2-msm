@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Meizu"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"16th Plus"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"m1892"

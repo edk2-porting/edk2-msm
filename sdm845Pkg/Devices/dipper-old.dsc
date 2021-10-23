@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MI 7"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"dipper-old"

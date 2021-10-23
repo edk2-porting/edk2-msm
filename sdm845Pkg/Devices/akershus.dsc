@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"ZTE"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Axon 9 Pro"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"akershus"

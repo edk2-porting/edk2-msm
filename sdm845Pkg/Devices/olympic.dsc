@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2880
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Nokia"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"9 PureView"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"olympic"

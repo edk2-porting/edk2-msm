@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"VIVO"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"NEX Dual Display"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"pd1821"

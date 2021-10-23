@@ -20,3 +20,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MIX3"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"perseus"

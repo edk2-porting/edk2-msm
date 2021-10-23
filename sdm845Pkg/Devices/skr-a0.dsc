@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"BlackShark"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"One"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"skr-a0"

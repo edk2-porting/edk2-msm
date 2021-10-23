@@ -20,3 +20,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"AYN"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Odin"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"ayn-odin"

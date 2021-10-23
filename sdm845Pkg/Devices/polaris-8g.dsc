@@ -20,3 +20,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MIX2S"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"polaris"

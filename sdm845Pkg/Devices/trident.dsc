@@ -17,3 +17,7 @@
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2242
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Smartisan"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"R1"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"trident"
