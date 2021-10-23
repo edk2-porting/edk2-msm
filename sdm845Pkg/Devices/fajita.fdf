@@ -562,7 +562,7 @@ APRIORI DXE {
   #
   # SMBIOS Support
   #
-  INF sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  INF sdm845Pkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
   INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #

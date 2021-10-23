@@ -259,7 +259,7 @@
   #
   # SMBIOS Support
   #
-  sdm845Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  sdm845Pkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #
