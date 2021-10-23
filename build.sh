@@ -63,16 +63,32 @@ function _build(){
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	if [ "$MODE" != "RELEASE" ]
-	then
-		build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b DEBUG||return "$?"
-		gzip -c < workspace/Build/sdm845Pkg/DEBUG_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
-	else
-		build -s -n 0 -a AARCH64 -t GCC5 -p "sdm845Pkg/Devices/${DEVICE}.dsc" -b RELEASE||return "$?"
-		gzip -c < workspace/Build/sdm845Pkg/RELEASE_GCC5/FV/SDM845PKG_UEFI.fd > "workspace/uefi-${DEVICE}.img.gz"||return "$?"
-	fi
-	cat "workspace/uefi-${DEVICE}.img.gz" "device_specific/${DEVICE}.dtb" > "workspace/uefi-${DEVICE}.img.gz-dtb"||return "$?"
-	abootimg --create "${OUTDIR}/boot-${DEVICE}.img" -k "workspace/uefi-${DEVICE}.img.gz-dtb" -r ramdisk||return "$?"
+	case "${MODE}" in
+		RELEASE)_MODE=RELEASE;;
+		*)_MODE=DEBUG;;
+	esac
+	build \
+		-s \
+		-n 0 \
+		-a AARCH64 \
+		-t GCC5 \
+		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
+		-b "${_MODE}" \
+		||return "$?"
+	gzip -c \
+		< "workspace/Build/sdm845Pkg/${_MODE}_GCC5/FV/SDM845PKG_UEFI.fd" \
+		> "workspace/uefi-${DEVICE}.img.gz" \
+		||return "$?"
+	cat \
+		"workspace/uefi-${DEVICE}.img.gz" \
+		"device_specific/${DEVICE}.dtb" \
+		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
+		||return "$?"
+	abootimg \
+		--create "${OUTDIR}/boot-${DEVICE}.img" \
+		-k "workspace/uefi-${DEVICE}.img.gz-dtb" \
+		-r ramdisk \
+		||return "$?"
 	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
 	set +x
 }
