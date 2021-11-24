@@ -13,7 +13,12 @@ EDK2 implementation for Snapdragon 845 platform.
 
 [Discord group](https://discord.gg/XXBWfag)
 
-QQ chinese group: 697666196 (Main group, full)  996450026 (Second group)  737223105 (Linux/edk2)
+QQ chinese group:
+[697666196 (Renegade-Project OffTopic 1)](https://jq.qq.com/?_wv=1027&k=JbOy29zv)
+[996450026 (Renegade-Project OffTopic 2)](https://jq.qq.com/?_wv=1027&k=16xaDJnU)
+[996450026 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
+[996450026 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
+[737223105 (Renegade-Project Linux/edk2)](https://jq.qq.com/?_wv=1027&k=KsQdNXl6)
 
 [Windows Drivers](https://github.com/edk2-porting/WOA-Drivers)
 
