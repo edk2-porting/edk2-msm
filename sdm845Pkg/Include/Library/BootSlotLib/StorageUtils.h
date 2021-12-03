@@ -1,4 +1,5 @@
-/* Copyright (c) 2015-2018, 2020-2021, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2015-2018, 2020-2021, The Linux Foundation. All rights
+ * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -24,32 +25,30 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef __BSL_BOARD_H__
 #define __BSL_BOARD_H__
 
-#include <Uefi.h>
-#include <Library/PrintLib.h>
+#include <Library/BootSlotLib/EFICardInfo.h>
 #include <Library/DebugLib.h>
 #include <Library/MemoryAllocationLib.h>
+#include <Library/PrintLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
-#include <Library/BootSlotLib/EFICardInfo.h>
+#include <Uefi.h>
 
 #define HANDLE_MAX_INFO_LIST 128
 
 typedef enum {
   EMMC = 0,
-  UFS = 1,
+  UFS  = 1,
   UNKNOWN,
 } MemCardType;
 
-VOID
-GetRootDeviceType (CHAR8 *StrDeviceType, UINT32 Len);
-MemCardType
-CheckRootDeviceType (VOID);
+VOID        GetRootDeviceType(CHAR8 *StrDeviceType, UINT32 Len);
+MemCardType CheckRootDeviceType(VOID);
 EFI_STATUS
-UfsGetSetBootLun (UINT32 *UfsBootlun, BOOLEAN IsGet);
+UfsGetSetBootLun(UINT32 *UfsBootlun, BOOLEAN IsGet);
 
 #endif

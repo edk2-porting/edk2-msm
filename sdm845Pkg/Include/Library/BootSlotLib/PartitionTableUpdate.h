@@ -144,7 +144,7 @@ table in the respective position mentioned below.
    ((UINT32) * (x + 3) << 24))
 
 #define PUT_LONG(x, y)                                                         \
-  *(x) = y & 0xff;                                                             \
+  *(x)     = y & 0xff;                                                         \
   *(x + 1) = (y >> 8) & 0xff;                                                  \
   *(x + 2) = (y >> 16) & 0xff;                                                 \
   *(x + 3) = (y >> 24) & 0xff;
@@ -163,15 +163,16 @@ table in the respective position mentioned below.
   do {                                                                         \
     Status = (code);                                                           \
     if (Status != EFI_SUCCESS) {                                               \
-      DEBUG ((EFI_D_ERROR, "Err: line:%d %a() status: %r\n", __LINE__,         \
-              __FUNCTION__, Status));                                          \
+      DEBUG(                                                                   \
+          (EFI_D_ERROR, "Err: line:%d %a() status: %r\n", __LINE__,            \
+           __FUNCTION__, Status));                                             \
       return Status;                                                           \
     }                                                                          \
   } while (0)
 
 struct StoragePartInfo {
   HandleInfo HandleInfoList[MAX_NUM_PARTITIONS];
-  UINT32 MaxHandles;
+  UINT32     MaxHandles;
 };
 extern struct StoragePartInfo Ptable[MAX_LUNS];
 
@@ -179,31 +180,32 @@ typedef struct {
   CHAR16 Suffix[MAX_SLOT_SUFFIX_SZ];
 } Slot;
 
-Slot GetCurrentSlotSuffix ();
-UINT32 GetMaxLuns ();
-VOID GetPartitionCount (UINT32 *Val);
-VOID SetMultiSlotBootVal (BOOLEAN Val);
+Slot   GetCurrentSlotSuffix();
+UINT32 GetMaxLuns();
+VOID   GetPartitionCount(UINT32 *Val);
+VOID   SetMultiSlotBootVal(BOOLEAN Val);
 
 struct PartitionEntry {
   EFI_PARTITION_ENTRY PartEntry;
-  UINT32 lun;
+  UINT32              lun;
 };
 extern struct PartitionEntry PtnEntries[MAX_NUM_PARTITIONS];
 
 struct BootPartsLinkedList {
-  CHAR16 PartName[BOOT_PART_SIZE];
+  CHAR16                      PartName[BOOT_PART_SIZE];
   struct BootPartsLinkedList *Next;
 };
 
-INT32 GetPartitionIndex (CHAR16 *PartitionName);
-BOOLEAN PartitionHasMultiSlot (CONST CHAR16 *Pname);
-EFI_STATUS EnumeratePartitions (VOID);
-VOID UpdatePartitionEntries (VOID);
-VOID UpdatePartitionAttributes (UINT32 UpdateType);
-BOOLEAN IsSuffixEmpty (Slot *CheckSlot);
-EFI_STATUS SetActiveSlot (Slot *NewSlot, BOOLEAN ResetSuccessBit, BOOLEAN SetSuccessBit);
-BOOLEAN IsSlotBootable (Slot *CheckSlot);
-EFI_STATUS ClearUnbootable (Slot *CheckSlot);
-UINT64 GetPartitionSize (EFI_BLOCK_IO_PROTOCOL *BlockIo);
+INT32      GetPartitionIndex(CHAR16 *PartitionName);
+BOOLEAN    PartitionHasMultiSlot(CONST CHAR16 *Pname);
+EFI_STATUS EnumeratePartitions(VOID);
+VOID       UpdatePartitionEntries(VOID);
+VOID       UpdatePartitionAttributes(UINT32 UpdateType);
+BOOLEAN    IsSuffixEmpty(Slot *CheckSlot);
+EFI_STATUS
+SetActiveSlot(Slot *NewSlot, BOOLEAN ResetSuccessBit, BOOLEAN SetSuccessBit);
+BOOLEAN    IsSlotBootable(Slot *CheckSlot);
+EFI_STATUS ClearUnbootable(Slot *CheckSlot);
+UINT64     GetPartitionSize(EFI_BLOCK_IO_PROTOCOL *BlockIo);
 
 #endif

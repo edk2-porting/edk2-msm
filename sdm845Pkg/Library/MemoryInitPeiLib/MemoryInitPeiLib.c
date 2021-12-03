@@ -82,7 +82,7 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
   PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
       gDeviceMemoryDescriptorEx;
   ARM_MEMORY_REGION_DESCRIPTOR
-        MemoryDescriptor[MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT];
+  MemoryDescriptor[MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT];
   UINTN Index = 0;
 
   // Ensure PcdSystemMemorySize has been set

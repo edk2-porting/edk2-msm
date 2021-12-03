@@ -10,6 +10,9 @@
 
 **/
 
+#include <Guid/EventGroup.h>
+#include <Guid/SerialPortLibVendor.h>
+#include <Guid/TtyTerm.h>
 #include <IndustryStandard/Pci22.h>
 #include <Library/BootLogoLib.h>
 #include <Library/CapsuleLib.h>
@@ -26,101 +29,85 @@
 #include <Protocol/PciIo.h>
 #include <Protocol/PciRootBridgeIo.h>
 #include <Protocol/PlatformBootManager.h>
-#include <Guid/EventGroup.h>
-#include <Guid/TtyTerm.h>
-#include <Guid/SerialPortLibVendor.h>
 
 #include "PlatformBm.h"
 
+#define DP_NODE_LEN(Type)                                                      \
+  {                                                                            \
+    (UINT8)sizeof(Type), (UINT8)(sizeof(Type) >> 8)                            \
+  }
 
-
-#define DP_NODE_LEN(Type) { (UINT8)sizeof (Type), (UINT8)(sizeof (Type) >> 8) }
-
-#pragma pack (1)
+#pragma pack(1)
 typedef struct {
   VENDOR_DEVICE_PATH         SerialDxe;
   UART_DEVICE_PATH           Uart;
   VENDOR_DEFINED_DEVICE_PATH TermType;
   EFI_DEVICE_PATH_PROTOCOL   End;
 } PLATFORM_SERIAL_CONSOLE;
-#pragma pack ()
+#pragma pack()
 
 STATIC PLATFORM_SERIAL_CONSOLE mSerialConsole = {
-  //
-  // VENDOR_DEVICE_PATH SerialDxe
-  //
-  {
-    { HARDWARE_DEVICE_PATH, HW_VENDOR_DP, DP_NODE_LEN (VENDOR_DEVICE_PATH) },
-    EDKII_SERIAL_PORT_LIB_VENDOR_GUID
-  },
+    //
+    // VENDOR_DEVICE_PATH SerialDxe
+    //
+    {{HARDWARE_DEVICE_PATH, HW_VENDOR_DP, DP_NODE_LEN(VENDOR_DEVICE_PATH)},
+     EDKII_SERIAL_PORT_LIB_VENDOR_GUID},
 
-  //
-  // UART_DEVICE_PATH Uart
-  //
-  {
-    { MESSAGING_DEVICE_PATH, MSG_UART_DP, DP_NODE_LEN (UART_DEVICE_PATH) },
-    0,                                      // Reserved
-    FixedPcdGet64 (PcdUartDefaultBaudRate), // BaudRate
-    FixedPcdGet8 (PcdUartDefaultDataBits),  // DataBits
-    FixedPcdGet8 (PcdUartDefaultParity),    // Parity
-    FixedPcdGet8 (PcdUartDefaultStopBits)   // StopBits
-  },
-
-  //
-  // VENDOR_DEFINED_DEVICE_PATH TermType
-  //
-  {
+    //
+    // UART_DEVICE_PATH Uart
+    //
     {
-      MESSAGING_DEVICE_PATH, MSG_VENDOR_DP,
-      DP_NODE_LEN (VENDOR_DEFINED_DEVICE_PATH)
-    }
+        {MESSAGING_DEVICE_PATH, MSG_UART_DP, DP_NODE_LEN(UART_DEVICE_PATH)},
+        0,                                     // Reserved
+        FixedPcdGet64(PcdUartDefaultBaudRate), // BaudRate
+        FixedPcdGet8(PcdUartDefaultDataBits),  // DataBits
+        FixedPcdGet8(PcdUartDefaultParity),    // Parity
+        FixedPcdGet8(PcdUartDefaultStopBits)   // StopBits
+    },
+
     //
-    // Guid to be filled in dynamically
+    // VENDOR_DEFINED_DEVICE_PATH TermType
     //
-  },
+    {
+        {MESSAGING_DEVICE_PATH, MSG_VENDOR_DP,
+         DP_NODE_LEN(VENDOR_DEFINED_DEVICE_PATH)}
+        //
+        // Guid to be filled in dynamically
+        //
+    },
 
-  //
-  // EFI_DEVICE_PATH_PROTOCOL End
-  //
-  {
-    END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE,
-    DP_NODE_LEN (EFI_DEVICE_PATH_PROTOCOL)
-  }
-};
+    //
+    // EFI_DEVICE_PATH_PROTOCOL End
+    //
+    {END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE,
+     DP_NODE_LEN(EFI_DEVICE_PATH_PROTOCOL)}};
 
-
-#pragma pack (1)
+#pragma pack(1)
 typedef struct {
   USB_CLASS_DEVICE_PATH    Keyboard;
   EFI_DEVICE_PATH_PROTOCOL End;
 } PLATFORM_USB_KEYBOARD;
-#pragma pack ()
+#pragma pack()
 
 STATIC PLATFORM_USB_KEYBOARD mUsbKeyboard = {
-  //
-  // USB_CLASS_DEVICE_PATH Keyboard
-  //
-  {
+    //
+    // USB_CLASS_DEVICE_PATH Keyboard
+    //
     {
-      MESSAGING_DEVICE_PATH, MSG_USB_CLASS_DP,
-      DP_NODE_LEN (USB_CLASS_DEVICE_PATH)
+        {MESSAGING_DEVICE_PATH, MSG_USB_CLASS_DP,
+         DP_NODE_LEN(USB_CLASS_DEVICE_PATH)},
+        0xFFFF, // VendorId: any
+        0xFFFF, // ProductId: any
+        3,      // DeviceClass: HID
+        1,      // DeviceSubClass: boot
+        1       // DeviceProtocol: keyboard
     },
-    0xFFFF, // VendorId: any
-    0xFFFF, // ProductId: any
-    3,      // DeviceClass: HID
-    1,      // DeviceSubClass: boot
-    1       // DeviceProtocol: keyboard
-  },
 
-  //
-  // EFI_DEVICE_PATH_PROTOCOL End
-  //
-  {
-    END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE,
-    DP_NODE_LEN (EFI_DEVICE_PATH_PROTOCOL)
-  }
-};
-
+    //
+    // EFI_DEVICE_PATH_PROTOCOL End
+    //
+    {END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE,
+     DP_NODE_LEN(EFI_DEVICE_PATH_PROTOCOL)}};
 
 /**
   Check if the handle satisfies a particular condition.
@@ -133,13 +120,8 @@ STATIC PLATFORM_USB_KEYBOARD mUsbKeyboard = {
   @retval FALSE  Otherwise. This includes the case when the condition could not
                  be fully evaluated due to an error.
 **/
-typedef
-BOOLEAN
-(EFIAPI *FILTER_FUNCTION) (
-  IN EFI_HANDLE   Handle,
-  IN CONST CHAR16 *ReportText
-  );
-
+typedef BOOLEAN(EFIAPI *FILTER_FUNCTION)(
+    IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText);
 
 /**
   Process a handle.
@@ -148,12 +130,8 @@ BOOLEAN
   @param[in] ReportText  A caller-allocated string passed in for reporting
                          purposes. It must never be NULL.
 **/
-typedef
-VOID
-(EFIAPI *CALLBACK_FUNCTION)  (
-  IN EFI_HANDLE   Handle,
-  IN CONST CHAR16 *ReportText
-  );
+typedef VOID(EFIAPI *CALLBACK_FUNCTION)(
+    IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText);
 
 /**
   Locate all handles that carry the specified protocol, filter them with a
@@ -169,57 +147,52 @@ VOID
                            clears the filter.
 **/
 STATIC
-VOID
-FilterAndProcess (
-  IN EFI_GUID          *ProtocolGuid,
-  IN FILTER_FUNCTION   Filter         OPTIONAL,
-  IN CALLBACK_FUNCTION Process
-  )
+VOID FilterAndProcess(
+    IN EFI_GUID *ProtocolGuid, IN FILTER_FUNCTION Filter OPTIONAL,
+    IN CALLBACK_FUNCTION Process)
 {
-  EFI_STATUS Status;
+  EFI_STATUS  Status;
   EFI_HANDLE *Handles;
-  UINTN      NoHandles;
-  UINTN      Idx;
+  UINTN       NoHandles;
+  UINTN       Idx;
 
-  Status = gBS->LocateHandleBuffer (ByProtocol, ProtocolGuid,
-                  NULL /* SearchKey */, &NoHandles, &Handles);
-  if (EFI_ERROR (Status)) {
+  Status = gBS->LocateHandleBuffer(
+      ByProtocol, ProtocolGuid, NULL /* SearchKey */, &NoHandles, &Handles);
+  if (EFI_ERROR(Status)) {
     //
     // This is not an error, just an informative condition.
     //
-    DEBUG ((EFI_D_VERBOSE, "%a: %g: %r\n", __FUNCTION__, ProtocolGuid,
-      Status));
+    DEBUG((EFI_D_VERBOSE, "%a: %g: %r\n", __FUNCTION__, ProtocolGuid, Status));
     return;
   }
 
-  ASSERT (NoHandles > 0);
+  ASSERT(NoHandles > 0);
   for (Idx = 0; Idx < NoHandles; ++Idx) {
-    CHAR16        *DevicePathText;
+    CHAR16 *      DevicePathText;
     STATIC CHAR16 Fallback[] = L"<device path unavailable>";
 
     //
     // The ConvertDevicePathToText() function handles NULL input transparently.
     //
-    DevicePathText = ConvertDevicePathToText (
-                       DevicePathFromHandle (Handles[Idx]),
-                       FALSE, // DisplayOnly
-                       FALSE  // AllowShortcuts
-                       );
+    DevicePathText = ConvertDevicePathToText(
+        DevicePathFromHandle(Handles[Idx]),
+        FALSE, // DisplayOnly
+        FALSE  // AllowShortcuts
+    );
     if (DevicePathText == NULL) {
       DevicePathText = Fallback;
     }
 
-    if (Filter == NULL || Filter (Handles[Idx], DevicePathText)) {
-      Process (Handles[Idx], DevicePathText);
+    if (Filter == NULL || Filter(Handles[Idx], DevicePathText)) {
+      Process(Handles[Idx], DevicePathText);
     }
 
     if (DevicePathText != Fallback) {
-      FreePool (DevicePathText);
+      FreePool(DevicePathText);
     }
   }
-  gBS->FreePool (Handles);
+  gBS->FreePool(Handles);
 }
-
 
 /**
   This FILTER_FUNCTION checks if a handle corresponds to a PCI display device.
@@ -227,208 +200,172 @@ FilterAndProcess (
 STATIC
 BOOLEAN
 EFIAPI
-IsPciDisplay (
-  IN EFI_HANDLE   Handle,
-  IN CONST CHAR16 *ReportText
-  )
+IsPciDisplay(IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText)
 {
-  EFI_STATUS          Status;
+  EFI_STATUS           Status;
   EFI_PCI_IO_PROTOCOL *PciIo;
-  PCI_TYPE00          Pci;
+  PCI_TYPE00           Pci;
 
-  Status = gBS->HandleProtocol (Handle, &gEfiPciIoProtocolGuid,
-                  (VOID**)&PciIo);
-  if (EFI_ERROR (Status)) {
+  Status = gBS->HandleProtocol(Handle, &gEfiPciIoProtocolGuid, (VOID **)&PciIo);
+  if (EFI_ERROR(Status)) {
     //
     // This is not an error worth reporting.
     //
     return FALSE;
   }
 
-  Status = PciIo->Pci.Read (PciIo, EfiPciIoWidthUint32, 0 /* Offset */,
-                        sizeof Pci / sizeof (UINT32), &Pci);
-  if (EFI_ERROR (Status)) {
-    DEBUG ((EFI_D_ERROR, "%a: %s: %r\n", __FUNCTION__, ReportText, Status));
+  Status = PciIo->Pci.Read(
+      PciIo, EfiPciIoWidthUint32, 0 /* Offset */, sizeof Pci / sizeof(UINT32),
+      &Pci);
+  if (EFI_ERROR(Status)) {
+    DEBUG((EFI_D_ERROR, "%a: %s: %r\n", __FUNCTION__, ReportText, Status));
     return FALSE;
   }
 
-  return IS_PCI_DISPLAY (&Pci);
+  return IS_PCI_DISPLAY(&Pci);
 }
-
 
 /**
   This CALLBACK_FUNCTION attempts to connect a handle non-recursively, asking
   the matching driver to produce all first-level child handles.
 **/
 STATIC
-VOID
-EFIAPI
-Connect (
-  IN EFI_HANDLE   Handle,
-  IN CONST CHAR16 *ReportText
-  )
+VOID EFIAPI Connect(IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText)
 {
   EFI_STATUS Status;
 
-  Status = gBS->ConnectController (
-                  Handle, // ControllerHandle
-                  NULL,   // DriverImageHandle
-                  NULL,   // RemainingDevicePath -- produce all children
-                  FALSE   // Recursive
-                  );
-  DEBUG ((EFI_ERROR (Status) ? EFI_D_ERROR : EFI_D_VERBOSE, "%a: %s: %r\n",
-    __FUNCTION__, ReportText, Status));
+  Status = gBS->ConnectController(
+      Handle, // ControllerHandle
+      NULL,   // DriverImageHandle
+      NULL,   // RemainingDevicePath -- produce all children
+      FALSE   // Recursive
+  );
+  DEBUG(
+      (EFI_ERROR(Status) ? EFI_D_ERROR : EFI_D_VERBOSE, "%a: %s: %r\n",
+       __FUNCTION__, ReportText, Status));
 }
-
 
 /**
   This CALLBACK_FUNCTION retrieves the EFI_DEVICE_PATH_PROTOCOL from the
   handle, and adds it to ConOut and ErrOut.
 **/
 STATIC
-VOID
-EFIAPI
-AddOutput (
-  IN EFI_HANDLE   Handle,
-  IN CONST CHAR16 *ReportText
-  )
+VOID EFIAPI AddOutput(IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText)
 {
-  EFI_STATUS               Status;
+  EFI_STATUS                Status;
   EFI_DEVICE_PATH_PROTOCOL *DevicePath;
 
-  DevicePath = DevicePathFromHandle (Handle);
+  DevicePath = DevicePathFromHandle(Handle);
   if (DevicePath == NULL) {
-    DEBUG ((EFI_D_ERROR, "%a: %s: handle %p: device path not found\n",
-      __FUNCTION__, ReportText, Handle));
+    DEBUG(
+        (EFI_D_ERROR, "%a: %s: handle %p: device path not found\n",
+         __FUNCTION__, ReportText, Handle));
     return;
   }
 
-  Status = EfiBootManagerUpdateConsoleVariable (ConOut, DevicePath, NULL);
-  if (EFI_ERROR (Status)) {
-    DEBUG ((EFI_D_ERROR, "%a: %s: adding to ConOut: %r\n", __FUNCTION__,
-      ReportText, Status));
+  Status = EfiBootManagerUpdateConsoleVariable(ConOut, DevicePath, NULL);
+  if (EFI_ERROR(Status)) {
+    DEBUG(
+        (EFI_D_ERROR, "%a: %s: adding to ConOut: %r\n", __FUNCTION__,
+         ReportText, Status));
     return;
   }
 
-  Status = EfiBootManagerUpdateConsoleVariable (ErrOut, DevicePath, NULL);
-  if (EFI_ERROR (Status)) {
-    DEBUG ((EFI_D_ERROR, "%a: %s: adding to ErrOut: %r\n", __FUNCTION__,
-      ReportText, Status));
+  Status = EfiBootManagerUpdateConsoleVariable(ErrOut, DevicePath, NULL);
+  if (EFI_ERROR(Status)) {
+    DEBUG(
+        (EFI_D_ERROR, "%a: %s: adding to ErrOut: %r\n", __FUNCTION__,
+         ReportText, Status));
     return;
   }
 
-  DEBUG ((EFI_D_VERBOSE, "%a: %s: added to ConOut and ErrOut\n", __FUNCTION__,
-    ReportText));
+  DEBUG(
+      (EFI_D_VERBOSE, "%a: %s: added to ConOut and ErrOut\n", __FUNCTION__,
+       ReportText));
 }
 
 STATIC
 UINT16
-PlatformRegisterFvBootOption (
-  CONST EFI_GUID                   *FileGuid,
-  CHAR16                           *Description,
-  UINT32                           Attributes
-  )
+PlatformRegisterFvBootOption(
+    CONST EFI_GUID *FileGuid, CHAR16 *Description, UINT32 Attributes)
 {
   EFI_STATUS                        Status;
   INTN                              OptionIndex;
   EFI_BOOT_MANAGER_LOAD_OPTION      NewOption;
-  EFI_BOOT_MANAGER_LOAD_OPTION      *BootOptions;
+  EFI_BOOT_MANAGER_LOAD_OPTION *    BootOptions;
   UINTN                             BootOptionCount;
   MEDIA_FW_VOL_FILEPATH_DEVICE_PATH FileNode;
-  EFI_LOADED_IMAGE_PROTOCOL         *LoadedImage;
-  EFI_DEVICE_PATH_PROTOCOL          *DevicePath;
+  EFI_LOADED_IMAGE_PROTOCOL *       LoadedImage;
+  EFI_DEVICE_PATH_PROTOCOL *        DevicePath;
   UINT16                            OptionNumber;
 
-  Status = gBS->HandleProtocol (
-                  gImageHandle,
-                  &gEfiLoadedImageProtocolGuid,
-                  (VOID **) &LoadedImage
-                  );
-  ASSERT_EFI_ERROR (Status);
+  Status = gBS->HandleProtocol(
+      gImageHandle, &gEfiLoadedImageProtocolGuid, (VOID **)&LoadedImage);
+  ASSERT_EFI_ERROR(Status);
 
-  EfiInitializeFwVolDevicepathNode (&FileNode, FileGuid);
-  DevicePath = DevicePathFromHandle (LoadedImage->DeviceHandle);
-  ASSERT (DevicePath != NULL);
-  DevicePath = AppendDevicePathNode (
-                 DevicePath,
-                 (EFI_DEVICE_PATH_PROTOCOL *) &FileNode
-                 );
-  ASSERT (DevicePath != NULL);
+  EfiInitializeFwVolDevicepathNode(&FileNode, FileGuid);
+  DevicePath = DevicePathFromHandle(LoadedImage->DeviceHandle);
+  ASSERT(DevicePath != NULL);
+  DevicePath =
+      AppendDevicePathNode(DevicePath, (EFI_DEVICE_PATH_PROTOCOL *)&FileNode);
+  ASSERT(DevicePath != NULL);
 
-  Status = EfiBootManagerInitializeLoadOption (
-             &NewOption,
-             LoadOptionNumberUnassigned,
-             LoadOptionTypeBoot,
-             Attributes,
-             Description,
-             DevicePath,
-             NULL,
-             0
-             );
-  ASSERT_EFI_ERROR (Status);
-  FreePool (DevicePath);
+  Status = EfiBootManagerInitializeLoadOption(
+      &NewOption, LoadOptionNumberUnassigned, LoadOptionTypeBoot, Attributes,
+      Description, DevicePath, NULL, 0);
+  ASSERT_EFI_ERROR(Status);
+  FreePool(DevicePath);
 
-  BootOptions = EfiBootManagerGetLoadOptions (
-                  &BootOptionCount, LoadOptionTypeBoot
-                  );
+  BootOptions =
+      EfiBootManagerGetLoadOptions(&BootOptionCount, LoadOptionTypeBoot);
 
-  OptionIndex = EfiBootManagerFindLoadOption (
-                  &NewOption, BootOptions, BootOptionCount
-                  );
+  OptionIndex =
+      EfiBootManagerFindLoadOption(&NewOption, BootOptions, BootOptionCount);
 
   if (OptionIndex == -1) {
-    Status = EfiBootManagerAddLoadOptionVariable (&NewOption, MAX_UINTN);
-    ASSERT_EFI_ERROR (Status);
+    Status = EfiBootManagerAddLoadOptionVariable(&NewOption, MAX_UINTN);
+    ASSERT_EFI_ERROR(Status);
   }
   OptionNumber = NewOption.OptionNumber;
-  EfiBootManagerFreeLoadOption (&NewOption);
-  EfiBootManagerFreeLoadOptions (BootOptions, BootOptionCount);
+  EfiBootManagerFreeLoadOption(&NewOption);
+  EfiBootManagerFreeLoadOptions(BootOptions, BootOptionCount);
   return OptionNumber;
 }
 
-
 STATIC
-VOID
-GetPlatformOptions (
-  VOID
-  )
+VOID GetPlatformOptions(VOID)
 {
   EFI_STATUS                      Status;
-  EFI_BOOT_MANAGER_LOAD_OPTION    *CurrentBootOptions;
-  EFI_BOOT_MANAGER_LOAD_OPTION    *BootOptions;
-  EFI_INPUT_KEY                   *BootKeys;
-  PLATFORM_BOOT_MANAGER_PROTOCOL  *PlatformBootManager;
+  EFI_BOOT_MANAGER_LOAD_OPTION *  CurrentBootOptions;
+  EFI_BOOT_MANAGER_LOAD_OPTION *  BootOptions;
+  EFI_INPUT_KEY *                 BootKeys;
+  PLATFORM_BOOT_MANAGER_PROTOCOL *PlatformBootManager;
   UINTN                           CurrentBootOptionCount;
   UINTN                           Index;
   UINTN                           BootCount;
 
-  Status = gBS->LocateProtocol (&gPlatformBootManagerProtocolGuid, NULL,
-                  (VOID **)&PlatformBootManager);
-  if (EFI_ERROR (Status)) {
+  Status = gBS->LocateProtocol(
+      &gPlatformBootManagerProtocolGuid, NULL, (VOID **)&PlatformBootManager);
+  if (EFI_ERROR(Status)) {
     return;
   }
-  Status = PlatformBootManager->GetPlatformBootOptionsAndKeys (
-                                  &BootCount,
-                                  &BootOptions,
-                                  &BootKeys
-                                  );
-  if (EFI_ERROR (Status)) {
+  Status = PlatformBootManager->GetPlatformBootOptionsAndKeys(
+      &BootCount, &BootOptions, &BootKeys);
+  if (EFI_ERROR(Status)) {
     return;
   }
   //
   // Fetch the existent boot options. If there are none, CurrentBootCount
   // will be zeroed.
   //
-  CurrentBootOptions = EfiBootManagerGetLoadOptions (
-                         &CurrentBootOptionCount,
-                         LoadOptionTypeBoot
-                         );
+  CurrentBootOptions =
+      EfiBootManagerGetLoadOptions(&CurrentBootOptionCount, LoadOptionTypeBoot);
   //
   // Process the platform boot options.
   //
   for (Index = 0; Index < BootCount; Index++) {
-    INTN    Match;
-    UINTN   BootOptionNumber;
+    INTN  Match;
+    UINTN BootOptionNumber;
 
     //
     // If there are any preexistent boot options, and the subject platform boot
@@ -437,27 +374,24 @@ GetPlatformOptions (
     // that EfiBootManagerFindLoadOption() deals fine with (CurrentBootOptions
     // == NULL) if (CurrentBootCount == 0).
     //
-    Match = EfiBootManagerFindLoadOption (
-              &BootOptions[Index],
-              CurrentBootOptions,
-              CurrentBootOptionCount
-              );
+    Match = EfiBootManagerFindLoadOption(
+        &BootOptions[Index], CurrentBootOptions, CurrentBootOptionCount);
     if (Match >= 0) {
       BootOptionNumber = CurrentBootOptions[Match].OptionNumber;
-    } else {
+    }
+    else {
       //
       // Add the platform boot options as a new one, at the end of the boot
       // order. Note that if the platform provided this boot option with an
       // unassigned option number, then the below function call will assign a
       // number.
       //
-      Status = EfiBootManagerAddLoadOptionVariable (
-                 &BootOptions[Index],
-                 MAX_UINTN
-                 );
-      if (EFI_ERROR (Status)) {
-        DEBUG ((DEBUG_ERROR, "%a: failed to register \"%s\": %r\n",
-          __FUNCTION__, BootOptions[Index].Description, Status));
+      Status =
+          EfiBootManagerAddLoadOptionVariable(&BootOptions[Index], MAX_UINTN);
+      if (EFI_ERROR(Status)) {
+        DEBUG(
+            (DEBUG_ERROR, "%a: failed to register \"%s\": %r\n", __FUNCTION__,
+             BootOptions[Index].Description, Status));
         continue;
       }
       BootOptionNumber = BootOptions[Index].OptionNumber;
@@ -470,31 +404,21 @@ GetPlatformOptions (
       continue;
     }
 
-    Status = EfiBootManagerAddKeyOptionVariable (
-               NULL,
-               BootOptionNumber,
-               0,
-               &BootKeys[Index],
-               NULL
-               );
-    if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_ERROR, "%a: failed to register hotkey for \"%s\": %r\n",
-        __FUNCTION__, BootOptions[Index].Description, Status));
+    Status = EfiBootManagerAddKeyOptionVariable(
+        NULL, BootOptionNumber, 0, &BootKeys[Index], NULL);
+    if (EFI_ERROR(Status)) {
+      DEBUG(
+          (DEBUG_ERROR, "%a: failed to register hotkey for \"%s\": %r\n",
+           __FUNCTION__, BootOptions[Index].Description, Status));
     }
   }
-  EfiBootManagerFreeLoadOptions (CurrentBootOptions, CurrentBootOptionCount);
-  EfiBootManagerFreeLoadOptions (BootOptions, BootCount);
-  FreePool (BootKeys);
+  EfiBootManagerFreeLoadOptions(CurrentBootOptions, CurrentBootOptionCount);
+  EfiBootManagerFreeLoadOptions(BootOptions, BootCount);
+  FreePool(BootKeys);
 }
 
-
-
-
 STATIC
-VOID
-PlatformRegisterOptionsAndKeys (
-  VOID
-  )
+VOID PlatformRegisterOptionsAndKeys(VOID)
 {
   EFI_STATUS                   Status;
   EFI_INPUT_KEY                Enter;
@@ -502,15 +426,15 @@ PlatformRegisterOptionsAndKeys (
   EFI_INPUT_KEY                Esc;
   EFI_BOOT_MANAGER_LOAD_OPTION BootOption;
 
-  GetPlatformOptions ();
+  GetPlatformOptions();
 
   //
   // Register ENTER as CONTINUE key
   //
   Enter.ScanCode    = SCAN_NULL;
   Enter.UnicodeChar = CHAR_CARRIAGE_RETURN;
-  Status = EfiBootManagerRegisterContinueKeyOption (0, &Enter, NULL);
-  ASSERT_EFI_ERROR (Status);
+  Status            = EfiBootManagerRegisterContinueKeyOption(0, &Enter, NULL);
+  ASSERT_EFI_ERROR(Status);
 
   //
   // Map UP and ESC to Boot Manager Menu or SimpleInitGUI
@@ -519,35 +443,30 @@ PlatformRegisterOptionsAndKeys (
   UP.UnicodeChar  = CHAR_NULL;
   Esc.ScanCode    = SCAN_ESC;
   Esc.UnicodeChar = CHAR_NULL;
-  Status = EfiBootManagerGetBootManagerMenu (&BootOption);
-  ASSERT_EFI_ERROR (Status);
-  #ifdef ENABLE_SIMPLE_INIT
+  Status          = EfiBootManagerGetBootManagerMenu(&BootOption);
+  ASSERT_EFI_ERROR(Status);
+#ifdef ENABLE_SIMPLE_INIT
   //
   // Search all boot options
   //
-  EfiBootManagerRefreshAllBootOption ();
+  EfiBootManagerRefreshAllBootOption();
 
   //
   // Register Simple Init GUI APP
   //
-  UINT16 OptionSimpleInit = PlatformRegisterFvBootOption (
-    &gSimpleInitFileGuid, L"Simple Init", LOAD_OPTION_ACTIVE
-  );
-  Status = EfiBootManagerAddKeyOptionVariable (
-             NULL, (UINT16) OptionSimpleInit, 0, &UP, NULL
-             );
-  #else
-  Status = EfiBootManagerAddKeyOptionVariable (
-             NULL, (UINT16) BootOption.OptionNumber, 0, &UP, NULL
-             );
-  #endif
-  ASSERT (Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
-  Status = EfiBootManagerAddKeyOptionVariable (
-             NULL, (UINT16) BootOption.OptionNumber, 0, &Esc, NULL
-             );
-  ASSERT (Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
+  UINT16 OptionSimpleInit = PlatformRegisterFvBootOption(
+      &gSimpleInitFileGuid, L"Simple Init", LOAD_OPTION_ACTIVE);
+  Status = EfiBootManagerAddKeyOptionVariable(
+      NULL, (UINT16)OptionSimpleInit, 0, &UP, NULL);
+#else
+  Status = EfiBootManagerAddKeyOptionVariable(
+      NULL, (UINT16)BootOption.OptionNumber, 0, &UP, NULL);
+#endif
+  ASSERT(Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
+  Status = EfiBootManagerAddKeyOptionVariable(
+      NULL, (UINT16)BootOption.OptionNumber, 0, &Esc, NULL);
+  ASSERT(Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
 }
-
 
 //
 // BDS Platform Functions
@@ -563,135 +482,128 @@ PlatformRegisterOptionsAndKeys (
   > Authentication action: 1. connect Auth devices;
   >                        2. Identify auto logon user.
 **/
-VOID
-EFIAPI
-PlatformBootManagerBeforeConsole (
-  VOID
-  )
+VOID EFIAPI PlatformBootManagerBeforeConsole(VOID)
 {
   //
   // Signal EndOfDxe PI Event
   //
-  EfiEventGroupSignal (&gEfiEndOfDxeEventGroupGuid);
+  EfiEventGroupSignal(&gEfiEndOfDxeEventGroupGuid);
 
   //
   // Dispatch deferred images after EndOfDxe event.
   //
-  EfiBootManagerDispatchDeferredImages ();
+  EfiBootManagerDispatchDeferredImages();
 
   //
   // Locate the PCI root bridges and make the PCI bus driver connect each,
   // non-recursively. This will produce a number of child handles with PciIo on
   // them.
   //
-  FilterAndProcess (&gEfiPciRootBridgeIoProtocolGuid, NULL, Connect);
+  FilterAndProcess(&gEfiPciRootBridgeIoProtocolGuid, NULL, Connect);
 
   //
   // Find all display class PCI devices (using the handles from the previous
   // step), and connect them non-recursively. This should produce a number of
   // child handles with GOPs on them.
   //
-  FilterAndProcess (&gEfiPciIoProtocolGuid, IsPciDisplay, Connect);
+  FilterAndProcess(&gEfiPciIoProtocolGuid, IsPciDisplay, Connect);
 
   //
   // Now add the device path of all handles with GOP on them to ConOut and
   // ErrOut.
   //
-  FilterAndProcess (&gEfiGraphicsOutputProtocolGuid, NULL, AddOutput);
+  FilterAndProcess(&gEfiGraphicsOutputProtocolGuid, NULL, AddOutput);
 
   //
   // Add the hardcoded short-form USB keyboard device path to ConIn.
   //
-  EfiBootManagerUpdateConsoleVariable (ConIn,
-    (EFI_DEVICE_PATH_PROTOCOL *)&mUsbKeyboard, NULL);
-    
-  EFI_HANDLE *handles;
-  UINTN NoHandles;
+  EfiBootManagerUpdateConsoleVariable(
+      ConIn, (EFI_DEVICE_PATH_PROTOCOL *)&mUsbKeyboard, NULL);
+
+  EFI_HANDLE *              handles;
+  UINTN                     NoHandles;
   EFI_DEVICE_PATH_PROTOCOL *devicehandle;
   /*CHAR16 *devicepathtxt;*/
-  //EfiBootManagerUpdateConsoleVariable(ConIn,
-    //  (EFI_DEVICE_PATH_PROTOCOL*)&gQcomKeypadDeviceGuid, NULL);
-  gBS->LocateHandleBuffer(ByProtocol,&gEfiSimpleTextInputExProtocolGuid,NULL, &NoHandles,&handles);
+  // EfiBootManagerUpdateConsoleVariable(ConIn,
+  //  (EFI_DEVICE_PATH_PROTOCOL*)&gQcomKeypadDeviceGuid, NULL);
+  gBS->LocateHandleBuffer(
+      ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &NoHandles,
+      &handles);
   devicehandle = DevicePathFromHandle(handles[1]);
-  EfiBootManagerUpdateConsoleVariable (ConIn,
-    devicehandle, NULL);/*
-  devicepathtxt = ConvertDevicePathToText(devicehandle,TRUE,TRUE);
-  DEBUG((DEBUG_ERROR,"There are %s handles\n",devicepathtxt));
-  ASSERT(0);*/
-
-  
-	
+  EfiBootManagerUpdateConsoleVariable(
+      ConIn, devicehandle, NULL); /*
+            devicepathtxt = ConvertDevicePathToText(devicehandle,TRUE,TRUE);
+            DEBUG((DEBUG_ERROR,"There are %s handles\n",devicepathtxt));
+            ASSERT(0);*/
 
   //
   // Add the hardcoded serial console device path to ConIn, ConOut, ErrOut.
   //
-  ASSERT (FixedPcdGet8 (PcdDefaultTerminalType) == 4);
-  CopyGuid (&mSerialConsole.TermType.Guid, &gEfiTtyTermGuid);
+  ASSERT(FixedPcdGet8(PcdDefaultTerminalType) == 4);
+  CopyGuid(&mSerialConsole.TermType.Guid, &gEfiTtyTermGuid);
 
-  EfiBootManagerUpdateConsoleVariable (ConIn,
-    (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
-  EfiBootManagerUpdateConsoleVariable (ConOut,
-    (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
-  EfiBootManagerUpdateConsoleVariable (ErrOut,
-    (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
+  EfiBootManagerUpdateConsoleVariable(
+      ConIn, (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
+  EfiBootManagerUpdateConsoleVariable(
+      ConOut, (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
+  EfiBootManagerUpdateConsoleVariable(
+      ErrOut, (EFI_DEVICE_PATH_PROTOCOL *)&mSerialConsole, NULL);
 
   //
   // Register platform-specific boot options and keyboard shortcuts.
   //
-  PlatformRegisterOptionsAndKeys ();
+  PlatformRegisterOptionsAndKeys();
 }
 
 STATIC
-VOID
-HandleCapsules (
-  VOID
-  )
+VOID HandleCapsules(VOID)
 {
-  ESRT_MANAGEMENT_PROTOCOL    *EsrtManagement;
-  EFI_PEI_HOB_POINTERS        HobPointer;
-  EFI_CAPSULE_HEADER          *CapsuleHeader;
-  BOOLEAN                     NeedReset;
-  EFI_STATUS                  Status;
+  ESRT_MANAGEMENT_PROTOCOL *EsrtManagement;
+  EFI_PEI_HOB_POINTERS      HobPointer;
+  EFI_CAPSULE_HEADER *      CapsuleHeader;
+  BOOLEAN                   NeedReset;
+  EFI_STATUS                Status;
 
-  DEBUG ((DEBUG_INFO, "%a: processing capsules ...\n", __FUNCTION__));
+  DEBUG((DEBUG_INFO, "%a: processing capsules ...\n", __FUNCTION__));
 
-  Status = gBS->LocateProtocol (&gEsrtManagementProtocolGuid, NULL,
-                  (VOID **)&EsrtManagement);
-  if (!EFI_ERROR (Status)) {
-    EsrtManagement->SyncEsrtFmp ();
+  Status = gBS->LocateProtocol(
+      &gEsrtManagementProtocolGuid, NULL, (VOID **)&EsrtManagement);
+  if (!EFI_ERROR(Status)) {
+    EsrtManagement->SyncEsrtFmp();
   }
 
   //
   // Find all capsule images from hob
   //
-  HobPointer.Raw = GetHobList ();
-  NeedReset = FALSE;
-  while ((HobPointer.Raw = GetNextHob (EFI_HOB_TYPE_UEFI_CAPSULE,
-                             HobPointer.Raw)) != NULL) {
+  HobPointer.Raw = GetHobList();
+  NeedReset      = FALSE;
+  while ((HobPointer.Raw =
+              GetNextHob(EFI_HOB_TYPE_UEFI_CAPSULE, HobPointer.Raw)) != NULL) {
     CapsuleHeader = (VOID *)(UINTN)HobPointer.Capsule->BaseAddress;
 
-    Status = ProcessCapsuleImage (CapsuleHeader);
-    if (EFI_ERROR (Status)) {
-      DEBUG ((DEBUG_ERROR, "%a: failed to process capsule %p - %r\n",
-        __FUNCTION__, CapsuleHeader, Status));
+    Status = ProcessCapsuleImage(CapsuleHeader);
+    if (EFI_ERROR(Status)) {
+      DEBUG(
+          (DEBUG_ERROR, "%a: failed to process capsule %p - %r\n", __FUNCTION__,
+           CapsuleHeader, Status));
       return;
     }
 
-    NeedReset = TRUE;
-    HobPointer.Raw = GET_NEXT_HOB (HobPointer);
+    NeedReset      = TRUE;
+    HobPointer.Raw = GET_NEXT_HOB(HobPointer);
   }
 
   if (NeedReset) {
-      DEBUG ((DEBUG_WARN, "%a: capsule update successful, resetting ...\n",
-        __FUNCTION__));
+    DEBUG(
+        (DEBUG_WARN, "%a: capsule update successful, resetting ...\n",
+         __FUNCTION__));
 
-      gRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
-      CpuDeadLoop();
+    gRT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+    CpuDeadLoop();
   }
 }
 
-
-#define VERSION_STRING_PREFIX    L"Tianocore/EDK2 firmware version "
+#define VERSION_STRING_PREFIX L"Tianocore/EDK2 firmware version "
 
 /**
   Do the platform specific action after the console is ready
@@ -704,52 +616,51 @@ HandleCapsules (
   > Dispatch additional option roms
   > Special boot: e.g.: USB boot, enter UI
 **/
-VOID
-EFIAPI
-PlatformBootManagerAfterConsole (
-  VOID
-  )
+VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
 {
   EFI_STATUS                    Status;
-  EFI_GRAPHICS_OUTPUT_PROTOCOL  *GraphicsOutput;
+  EFI_GRAPHICS_OUTPUT_PROTOCOL *GraphicsOutput;
   UINTN                         FirmwareVerLength;
   UINTN                         PosX;
   UINTN                         PosY;
 
-  FirmwareVerLength = StrLen (PcdGetPtr (PcdFirmwareVersionString));
+  FirmwareVerLength = StrLen(PcdGetPtr(PcdFirmwareVersionString));
 
   //
   // Show the splash screen.
   //
-  Status = BootLogoEnableLogo ();
-  if (EFI_ERROR (Status)) {
+  Status = BootLogoEnableLogo();
+  if (EFI_ERROR(Status)) {
     if (FirmwareVerLength > 0) {
-      Print (VERSION_STRING_PREFIX L"%s\n",
-        PcdGetPtr (PcdFirmwareVersionString));
+      Print(VERSION_STRING_PREFIX L"%s\n", PcdGetPtr(PcdFirmwareVersionString));
     }
-    #ifdef ENABLE_SIMPLE_INIT
-    Print (L"Press any side button for SimpleInitGUI");
-    #else
-    Print (L"Press any side button for Boot Options");
-    #endif
-  } else if (FirmwareVerLength > 0) {
-    Status = gBS->HandleProtocol (gST->ConsoleOutHandle,
-                    &gEfiGraphicsOutputProtocolGuid, (VOID **)&GraphicsOutput);
-    if (!EFI_ERROR (Status)) {
+#ifdef ENABLE_SIMPLE_INIT
+    Print(L"Press any side button for SimpleInitGUI");
+#else
+    Print(L"Press any side button for Boot Options");
+#endif
+  }
+  else if (FirmwareVerLength > 0) {
+    Status = gBS->HandleProtocol(
+        gST->ConsoleOutHandle, &gEfiGraphicsOutputProtocolGuid,
+        (VOID **)&GraphicsOutput);
+    if (!EFI_ERROR(Status)) {
       PosX = (GraphicsOutput->Mode->Info->HorizontalResolution -
-              (StrLen (VERSION_STRING_PREFIX) + FirmwareVerLength) *
-              EFI_GLYPH_WIDTH) / 2;
+              (StrLen(VERSION_STRING_PREFIX) + FirmwareVerLength) *
+                  EFI_GLYPH_WIDTH) /
+             2;
       PosY = 0;
 
-      PrintXY (PosX, PosY, NULL, NULL, VERSION_STRING_PREFIX L"%s",
-        PcdGetPtr (PcdFirmwareVersionString));
+      PrintXY(
+          PosX, PosY, NULL, NULL, VERSION_STRING_PREFIX L"%s",
+          PcdGetPtr(PcdFirmwareVersionString));
     }
   }
 
   //
   // Connect the rest of the devices.
   //
-  EfiBootManagerConnectAll ();
+  EfiBootManagerConnectAll();
 
   //
   // On ARM, there is currently no reason to use the phased capsule
@@ -758,34 +669,31 @@ PlatformBootManagerAfterConsole (
   // when the console is up and we can actually give the user some
   // feedback about what is going on.
   //
-  HandleCapsules ();
+  HandleCapsules();
 
   //
   // Enumerate all possible boot options.
   //
-  EfiBootManagerRefreshAllBootOption ();
+  EfiBootManagerRefreshAllBootOption();
 
   //
   // Register UEFI Shell
   //
-  PlatformRegisterFvBootOption (
-  &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE
-  );
-   
+  PlatformRegisterFvBootOption(
+      &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
+
   //
   // Register Mass Storage App
   //
-  PlatformRegisterFvBootOption (
-  &gUsbfnMsdAppFileGuid, L"Mass Storage", LOAD_OPTION_ACTIVE
-  );
-   
+  PlatformRegisterFvBootOption(
+      &gUsbfnMsdAppFileGuid, L"Mass Storage", LOAD_OPTION_ACTIVE);
+
 #ifdef AB_SLOTS_SUPPORT
   //
   // Register Switch Slots App
   //
-  PlatformRegisterFvBootOption (
-  &gSwitchSlotsAppFileGuid, L"Reboot to other slot", LOAD_OPTION_ACTIVE
-  );
+  PlatformRegisterFvBootOption(
+      &gSwitchSlotsAppFileGuid, L"Reboot to other slot", LOAD_OPTION_ACTIVE);
 #endif
 }
 
@@ -795,36 +703,28 @@ PlatformBootManagerAfterConsole (
 
   @param TimeoutRemain  The remaining timeout.
 **/
-VOID
-EFIAPI
-PlatformBootManagerWaitCallback (
-  UINT16          TimeoutRemain
-  )
+VOID EFIAPI PlatformBootManagerWaitCallback(UINT16 TimeoutRemain)
 {
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL_UNION Black;
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL_UNION White;
   UINT16                              Timeout;
   EFI_STATUS                          Status;
 
-  Timeout = PcdGet16 (PcdPlatformBootTimeOut);
+  Timeout = PcdGet16(PcdPlatformBootTimeOut);
 
   Black.Raw = 0x00000000;
   White.Raw = 0x00FFFFFF;
 
-  Status = BootLogoUpdateProgress (
-             White.Pixel,
-             Black.Pixel,
-  #ifdef ENABLE_SIMPLE_INIT
-             L"Press any side button for SimpleInitGUI",
-  #else
-             L"Press any side button for Boot Options",
-  #endif
-             White.Pixel,
-             (Timeout - TimeoutRemain) * 100 / Timeout,
-             0
-             );
-  if (EFI_ERROR (Status)) {
-    Print (L".");
+  Status = BootLogoUpdateProgress(
+      White.Pixel, Black.Pixel,
+#ifdef ENABLE_SIMPLE_INIT
+      L"Press any side button for SimpleInitGUI",
+#else
+      L"Press any side button for Boot Options",
+#endif
+      White.Pixel, (Timeout - TimeoutRemain) * 100 / Timeout, 0);
+  if (EFI_ERROR(Status)) {
+    Print(L".");
   }
 }
 
@@ -835,11 +735,4 @@ PlatformBootManagerWaitCallback (
 
   If this function returns, BDS attempts to enter an infinite loop.
 **/
-VOID
-EFIAPI
-PlatformBootManagerUnableToBoot (
-  VOID
-  )
-{
-  return;
-}
+VOID EFIAPI PlatformBootManagerUnableToBoot(VOID) { return; }

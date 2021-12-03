@@ -1,0 +1,17 @@
+Language: Cpp
+BreakBeforeBraces: Stroustrup
+PointerAlignment: Right
+IndentWidth: 2
+AccessModifierOffset: 0
+ColumnLimit: 80
+NamespaceIndentation: All
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AlwaysBreakTemplateDeclarations: true
+AlignAfterOpenBracket: AlwaysBreak
+UseTab: Never
+IncludeBlocks: Preserve
+AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: true
+SpacesInParentheses: false
+SpaceBeforeParens: ControlStatements

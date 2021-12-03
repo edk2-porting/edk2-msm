@@ -16,27 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/
  */
 
-#include <Library/UefiApplicationEntryPoint.h>
 #include <Library/BootSlotLib.h>
+#include <Library/UefiApplicationEntryPoint.h>
 
 EFI_STATUS
 EFIAPI
-SwitchSlotsAppEntryPoint (
-  IN EFI_HANDLE                            ImageHandle,
-  IN EFI_SYSTEM_TABLE                      *SystemTable
-  )
+SwitchSlotsAppEntryPoint(
+    IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 {
 
   MemCardType Type = CheckRootDeviceType();
   if (Type == UNKNOWN) {
-    PrintAndWaitAnyKey(SystemTable, L"Unknown device storage. Press any key to exit.\n");
+    PrintAndWaitAnyKey(
+        SystemTable, L"Unknown device storage. Press any key to exit.\n");
     return EFI_UNSUPPORTED;
   }
 
   EFI_STATUS Status = EnumeratePartitions();
 
-  if (EFI_ERROR (Status)) {
-    Print (L"Could not enumerate partitions. Code %d\n", Status);
+  if (EFI_ERROR(Status)) {
+    Print(L"Could not enumerate partitions. Code %d\n", Status);
     WaitAnyKey(SystemTable);
     return Status;
   }
@@ -44,39 +43,46 @@ SwitchSlotsAppEntryPoint (
   UpdatePartitionEntries();
 
   /*Check for multislot boot support*/
-  BOOLEAN MultiSlotSupported = PartitionHasMultiSlot ((CONST CHAR16 *)L"boot");
+  BOOLEAN MultiSlotSupported = PartitionHasMultiSlot((CONST CHAR16 *)L"boot");
   if (!MultiSlotSupported) {
-    PrintAndWaitAnyKey(SystemTable, L"A/B slots aren't supported on this device. Press any key to exit.\n");
+    PrintAndWaitAnyKey(
+        SystemTable,
+        L"A/B slots aren't supported on this device. Press any key to exit.\n");
     return EFI_UNSUPPORTED;
   }
 
   Slot CurrentSlot = GetCurrentSlotSuffix();
   if (IsSuffixEmpty(&CurrentSlot)) {
-    PrintAndWaitAnyKey(SystemTable, L"Current active slot not found, try to boot Android first. Press any key to exit.\n");
+    PrintAndWaitAnyKey(
+        SystemTable, L"Current active slot not found, try to boot Android "
+                     L"first. Press any key to exit.\n");
     return EFI_NOT_READY;
   }
 
   Slot *NewSlot = NULL;
-  Slot Slots[] = {{L"_a"}, {L"_b"}};
-  if (StrnCmp (CurrentSlot.Suffix, Slots[0].Suffix, StrLen (Slots[0].Suffix)) == 0) {
+  Slot  Slots[] = {{L"_a"}, {L"_b"}};
+  if (StrnCmp(CurrentSlot.Suffix, Slots[0].Suffix, StrLen(Slots[0].Suffix)) ==
+      0) {
     NewSlot = &Slots[1];
-  } else {
+  }
+  else {
     NewSlot = &Slots[0];
   }
 
-  //Print (L"Current active slot suffix is: %s, next slot suffix is: %s\n", &CurrentSlot.Suffix, &NewSlot->Suffix);
+  // Print (L"Current active slot suffix is: %s, next slot suffix is: %s\n",
+  // &CurrentSlot.Suffix, &NewSlot->Suffix);
 
   Status = SetActiveSlot(NewSlot, TRUE, FALSE);
 
   if (EFI_ERROR(Status)) {
-    Print (L"Could not update active slot. Code %d\n", Status);
+    Print(L"Could not update active slot. Code %d\n", Status);
     WaitAnyKey(SystemTable);
     return Status;
   }
 
-  //Print (L"Current active slot has been updated successfully! Press any key to reboot.\n");
-  //WaitAnyKey(SystemTable);
-  gRT->ResetSystem (EfiResetWarm, EFI_SUCCESS, 0, NULL);
-  CpuDeadLoop ();
+  // Print (L"Current active slot has been updated successfully! Press any key
+  // to reboot.\n"); WaitAnyKey(SystemTable);
+  gRT->ResetSystem(EfiResetWarm, EFI_SUCCESS, 0, NULL);
+  CpuDeadLoop();
   return EFI_SUCCESS;
 }
