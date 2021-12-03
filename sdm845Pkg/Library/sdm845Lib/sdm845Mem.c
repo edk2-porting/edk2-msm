@@ -14,11 +14,14 @@
  *
  **/
 
-#include <Configuration/DeviceMemoryMap.h>
 #include <Library/ArmPlatformLib.h>
 #include <Library/DebugLib.h>
 #include <Library/HobLib.h>
 #include <Library/MemoryAllocationLib.h>
+
+// Must include last
+#include <Configuration/DeviceMemoryMap.h>
+
 /**
   Return the Virtual Memory Map of your platform
   This Virtual Memory Map is used by MemoryInitPei Module to initialize the MMU
