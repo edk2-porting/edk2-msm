@@ -3,9 +3,9 @@
 
 Copyright (c) 2006 - 2016, Intel Corporation. All rights reserved.<BR>
 This program and the accompanying materials
-are licensed and made available under the terms and conditions of the BSD License
-which accompanies this distribution.  The full text of the license may be found at
-http://opensource.org/licenses/bsd-license.php
+are licensed and made available under the terms and conditions of the BSD
+License which accompanies this distribution.  The full text of the license may
+be found at http://opensource.org/licenses/bsd-license.php
 
 THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
 WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
@@ -21,11 +21,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
   @param ErrMsg    Unicode string of error message
 
 **/
-VOID
-KeypadError (
-  IN KEYPAD_CONSOLE_IN_DEV *ConsoleIn,
-  IN CHAR16                  *ErrMsg
-  )
+VOID KeypadError(IN KEYPAD_CONSOLE_IN_DEV *ConsoleIn, IN CHAR16 *ErrMsg)
 {
   ConsoleIn->KeypadErr = TRUE;
 }
@@ -41,42 +37,39 @@ KeypadError (
   @param Context     A KEYPAD_CONSOLE_IN_DEV pointer
 
 **/
-VOID
-EFIAPI
-KeypadTimerHandler (
-  IN EFI_EVENT    Event,
-  IN VOID         *Context
-  )
+VOID EFIAPI KeypadTimerHandler(IN EFI_EVENT Event, IN VOID *Context)
 
 {
-  EFI_TPL                 OldTpl;
-  KEYPAD_CONSOLE_IN_DEV   *ConsoleIn;
+  EFI_TPL                OldTpl;
+  KEYPAD_CONSOLE_IN_DEV *ConsoleIn;
 
-  ConsoleIn = (KEYPAD_CONSOLE_IN_DEV *) Context;
+  ConsoleIn = (KEYPAD_CONSOLE_IN_DEV *)Context;
 
   //
   // Enter critical section
   //
-  OldTpl = gBS->RaiseTPL (TPL_NOTIFY);
+  OldTpl = gBS->RaiseTPL(TPL_NOTIFY);
 
-  if (((KEYPAD_CONSOLE_IN_DEV *) Context)->KeypadErr) {
+  if (((KEYPAD_CONSOLE_IN_DEV *)Context)->KeypadErr) {
     //
     // Leave critical section and return
     //
-    gBS->RestoreTPL (OldTpl);
-    return ;
+    gBS->RestoreTPL(OldTpl);
+    return;
   }
 
   UINT64 CurrentCounterValue = GetPerformanceCounter();
-  UINT64 DeltaCounter = CurrentCounterValue - ConsoleIn->Last;
-  ConsoleIn->Last = CurrentCounterValue;
+  UINT64 DeltaCounter        = CurrentCounterValue - ConsoleIn->Last;
+  ConsoleIn->Last            = CurrentCounterValue;
 
-  ConsoleIn->KeypadDevice->GetKeys(ConsoleIn->KeypadDevice, &ConsoleIn->KeypadReturnApi, GetTimeInNanoSecond(DeltaCounter));
+  ConsoleIn->KeypadDevice->GetKeys(
+      ConsoleIn->KeypadDevice, &ConsoleIn->KeypadReturnApi,
+      GetTimeInNanoSecond(DeltaCounter));
 
   //
   // Leave critical section and return
   //
-  gBS->RestoreTPL (OldTpl);
+  gBS->RestoreTPL(OldTpl);
 }
 
 /**
@@ -91,22 +84,20 @@ KeypadTimerHandler (
   @retval EFI_SUCCESS      Success to init keypad
 **/
 EFI_STATUS
-InitKeypad (
-  IN OUT KEYPAD_CONSOLE_IN_DEV *ConsoleIn,
-  IN BOOLEAN                     ExtendedVerification
-  )
+InitKeypad(
+    IN OUT KEYPAD_CONSOLE_IN_DEV *ConsoleIn, IN BOOLEAN ExtendedVerification)
 {
-  EFI_STATUS              Status;
+  EFI_STATUS Status;
 
-  Status                 = EFI_SUCCESS;
+  Status = EFI_SUCCESS;
 
   ConsoleIn->KeypadDevice->Reset(ConsoleIn->KeypadDevice);
 
   //
   // Clear Memory Scancode Buffer
   //
-  ConsoleIn->EfiKeyQueue.Head   = 0;
-  ConsoleIn->EfiKeyQueue.Tail   = 0;
+  ConsoleIn->EfiKeyQueue.Head          = 0;
+  ConsoleIn->EfiKeyQueue.Tail          = 0;
   ConsoleIn->EfiKeyQueueForNotify.Head = 0;
   ConsoleIn->EfiKeyQueueForNotify.Tail = 0;
 
@@ -129,10 +120,10 @@ InitKeypad (
 
   ConsoleIn->IsSupportPartialKey = FALSE;
 
-  if (!EFI_ERROR (Status)) {
+  if (!EFI_ERROR(Status)) {
     return EFI_SUCCESS;
-  } else {
+  }
+  else {
     return EFI_DEVICE_ERROR;
   }
-
 }

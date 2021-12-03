@@ -24,7 +24,7 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef __BSL_BLOCK_UTILS_H__
 #define __BSL_BLOCK_UTILS_H__
@@ -97,14 +97,13 @@ typedef struct {
 typedef struct {
   EFI_GUID *RootDeviceType; /* GUID Selecting the root device type */
   EFI_GUID *PartitionType;  /* Partition Type to match */
-  CHAR8 *VolumeName;        /* Mounted filesystem volume name to match */
-  CHAR16 *PartitionLabel;   /* Partition label to match */
+  CHAR8 *   VolumeName;     /* Mounted filesystem volume name to match */
+  CHAR16 *  PartitionLabel; /* Partition label to match */
 } PartiSelectFilter;
 
 EFI_STATUS
 EFIAPI
-GetPartitionEntry (IN EFI_HANDLE Handle, 
-                   OUT EFI_PARTITION_ENTRY **PartEntry);
+GetPartitionEntry(IN EFI_HANDLE Handle, OUT EFI_PARTITION_ENTRY **PartEntry);
 
 /**
   Returns a list of BlkIo handles based on required criteria
@@ -122,9 +121,8 @@ GetPartitionEntry (IN EFI_HANDLE Handle,
  */
 EFI_STATUS
 EFIAPI
-GetBlkIOHandles (IN UINT32 SelectionAttrib,
-                 IN PartiSelectFilter *FilterData,
-                 OUT HandleInfo *HandleInfoPtr,
-                 IN OUT UINT32 *MaxBlkIopCnt);
+GetBlkIOHandles(
+    IN UINT32 SelectionAttrib, IN PartiSelectFilter *FilterData,
+    OUT HandleInfo *HandleInfoPtr, IN OUT UINT32 *MaxBlkIopCnt);
 
 #endif

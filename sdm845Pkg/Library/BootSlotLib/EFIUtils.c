@@ -19,14 +19,17 @@
 #include <Library/BootSlotLib/EFIUtils.h>
 #include <Library/UefiLib.h>
 
-void WaitAnyKey(EFI_SYSTEM_TABLE *mSystemTable) {
-    UINTN index = 0;
-    EFI_INPUT_KEY Key;
-    mSystemTable->BootServices->WaitForEvent(1, &mSystemTable->ConIn->WaitForKey, &index);
-    mSystemTable->ConIn->ReadKeyStroke(mSystemTable->ConIn, &Key);
+void WaitAnyKey(EFI_SYSTEM_TABLE *mSystemTable)
+{
+  UINTN         index = 0;
+  EFI_INPUT_KEY Key;
+  mSystemTable->BootServices->WaitForEvent(
+      1, &mSystemTable->ConIn->WaitForKey, &index);
+  mSystemTable->ConIn->ReadKeyStroke(mSystemTable->ConIn, &Key);
 }
 
-void PrintAndWaitAnyKey(EFI_SYSTEM_TABLE *mSystemTable, CHAR16 *Message) {
-    Print(Message);
-    WaitAnyKey(mSystemTable);
+void PrintAndWaitAnyKey(EFI_SYSTEM_TABLE *mSystemTable, CHAR16 *Message)
+{
+  Print(Message);
+  WaitAnyKey(mSystemTable);
 }
