@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/
  */
 
-/* 
-* Flags of OP6T slots
-*/
+/*
+ * Flags of OP6T slots
+ */
 
 const unsigned char OP6T_SLOT_FLAG_ACTIVE = 0x6F;
 
@@ -36,38 +36,41 @@ const unsigned char OP6T_SLOT_FLAG_BOOTABLE_6 = 0x2F;
 
 const unsigned OP6T_SLOT_FLAG_BOOTABLE_7 = 0x37;
 
-const unsigned OP6T_SLOT_FLAG_BOOTABLE = 0x37; /* defaultly set bootable the same as bootable_7 */
+const unsigned OP6T_SLOT_FLAG_BOOTABLE =
+    0x37; /* defaultly set bootable the same as bootable_7 */
 
 const unsigned OP6T_SLOT_FLAG_UNBOOTABLE = 0xBA;
 
-// const unsigned OP6T_SLOT_FLAG_SUCCESSFUL = 0xFF; /* OP6T_SLOT_FLAG_SUCCESSFUL maybe uncorrect in this file */
+// const unsigned OP6T_SLOT_FLAG_SUCCESSFUL = 0xFF; /* OP6T_SLOT_FLAG_SUCCESSFUL
+// maybe uncorrect in this file */
 
 #define OP6T_SLOT_FLAG_SIZE 1
 
 /*
-* Flag's offset on disk
-* The offset may very from device to device
-* Make sure the offset is correct before using it
-*/
+ * Flag's offset on disk
+ * The offset may very from device to device
+ * Make sure the offset is correct before using it
+ */
 
 #define OP6T_SLOT_A_BOOT_FLAG_LBA2_OFFSET 0x536
 
 #define OP6T_SLOT_B_BOOT_FLAG_LBA3_OFFSET 0x336
 
 /*
-* Boot partitions name and their offsets
-* Find the right device by comparaing the partition name on the offset
-*/
+ * Boot partitions name and their offsets
+ * Find the right device by comparaing the partition name on the offset
+ */
 
-const unsigned char OP6T_SLOT_A_BOOT_BUFFER[] = {0x62, 0x00, 0x6F, 0x00, 0x6F, 
-                                0x00, 0x74, 0x00, 0x5F, 0x00, 0x61}; /* ACSII: b.o.o.t._.a */
+const unsigned char OP6T_SLOT_A_BOOT_BUFFER[] = {
+    0x62, 0x00, 0x6F, 0x00, 0x6F, 0x00,
+    0x74, 0x00, 0x5F, 0x00, 0x61}; /* ACSII: b.o.o.t._.a */
 
-const unsigned char OP6T_SLOT_B_BOOT_BUFFER[] = {0x62, 0x00, 0x6F, 0x00, 0x6F, 
-                                0x00, 0x74, 0x00, 0x5F, 0x00, 0x62}; /* ACSII: b.o.o.t._.b */
+const unsigned char OP6T_SLOT_B_BOOT_BUFFER[] = {
+    0x62, 0x00, 0x6F, 0x00, 0x6F, 0x00,
+    0x74, 0x00, 0x5F, 0x00, 0x62}; /* ACSII: b.o.o.t._.b */
 
 #define OP6T_SLOT_BOOT_BUFFER_LEN 11
 
 #define OP6T_SLOT_A_BOOT_BUFFER_LBA2_OFFSET 0x538
 
 #define OP6T_SLOT_B_BOOT_BUFFER_LBA3_OFFSET 0x338
-

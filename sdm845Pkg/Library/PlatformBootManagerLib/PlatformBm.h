@@ -41,9 +41,7 @@
   @retval EFI_UNSUPPORTED Logo not found
 **/
 EFI_STATUS
-EnableQuietBoot (
-  IN  EFI_GUID  *LogoFile
-  );
+EnableQuietBoot(IN EFI_GUID *LogoFile);
 
 /**
   Use SystemTable Conout to turn on video based Simple Text Out consoles. The
@@ -53,8 +51,6 @@ EnableQuietBoot (
   @retval EFI_SUCCESS     UGA devices are back in text mode and synced up.
 **/
 EFI_STATUS
-DisableQuietBoot (
-  VOID
-  );
+DisableQuietBoot(VOID);
 
 #endif // _PLATFORM_BM_H_
