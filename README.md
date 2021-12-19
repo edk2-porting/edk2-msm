@@ -34,7 +34,7 @@ QQ chinese group:
 
 ## Supported devices
 
-[Windows Status Matrix](https://renegade-project.org/#/zh/windows/state-frame.html)
+[Windows Status Matrix](https://renegade-project.org/#/en/windows/state-frame.html)
 
 ## Dependencies
 
