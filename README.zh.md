@@ -35,27 +35,7 @@ QQ中文交流群:
 
 ## 已支持的设备
 
-1.  一加6                  (enchilada)
-2.  一加6T                 (fajita)
-3.  小米MIX3               (perseus)
-4.  小米PocoPhone F1       (beryllium)
-5.  魅族16th               (m1882)
-6.  魅族16th Plus          (m1892)
-7.  锤子坚果R1             (trident)
-8.  黑鲨手机一代           (skr-a0)
-9.  OPPO Find X            (pafm00)
-10. 小米MIX2S              (polaris)
-11. LG G7                  (judyln)
-12. 三星S9+                (star2qltechn)
-13. 小米7（工程机）        (dipper-old)
-14. 小米8                  (dipper)
-15. 努比亚X                (nx616j)
-16. 诺基亚9 PureView       (olympic)
-17. 华硕 ZenFone 5Z        (draco)
-18. Vivo NEX 双屏版        (pd1821)
-19. AYN Odin Handheld      (odin-base)
-20. 中兴天机Axon 9 Pro     (akershus)
-21. 小米8UD 屏幕指纹版     (equuleus)
+参阅[Windows设备支持状态](https://renegade-project.org/#/zh/windows/state-frame.html)
 
 ## 依赖
 
@@ -73,7 +53,7 @@ sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu ab
 
 ## 构建
 
-**不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04或以上版本**
+**不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04**
 
 1.克隆此项目（默认使用国内fastgit镜像加速）
 
