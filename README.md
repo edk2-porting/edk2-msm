@@ -28,6 +28,10 @@ QQ chinese group:
 
 ## WARNING
 
+**IT IS STRICTLY PROHIBITED TO USE THIS REPOSITORY FOR ANY COMMERCIAL PURPOSES**
+
+**If you want to redistribute, you need to ensure that users can get updates**
+
 **DO NOT EVER TRY TO PORT IT TO *SONY* and *GOOGLE* DEVICES**
 
 **YOUR UFS WILL BE WIPED CLEAN!!!**
