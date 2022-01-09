@@ -490,9 +490,6 @@ APRIORI DXE {
     SECTION UI = "UsbMsdDxe"
   }
 
-
-
-
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
@@ -501,6 +498,7 @@ APRIORI DXE {
   #
   INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
 
   #
