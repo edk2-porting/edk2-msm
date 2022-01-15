@@ -503,7 +503,6 @@ APRIORI DXE {
     SECTION UI = "UsbMsdDxe"
   }
 
-
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
@@ -522,9 +521,7 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
   INF FatPkg/EnhancedFatDxe/Fat.inf
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
-
   INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
-
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 
   #
@@ -536,13 +533,13 @@ APRIORI DXE {
   # INF RuleOverride = ACPITABLE sdm845Pkg/AcpiTables/AcpiTables.inf
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/meizu/DSDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/legacy/meizu/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/IORT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/PPTT.aml
     SECTION UI = "AcpiTables"
   }
 

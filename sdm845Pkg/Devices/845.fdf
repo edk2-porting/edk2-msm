@@ -536,13 +536,13 @@ APRIORI DXE {
   # INF RuleOverride = ACPITABLE sdm845Pkg/AcpiTables/AcpiTables.inf
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/845/DSDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/legacy/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/IORT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/PPTT.aml
     SECTION UI = "AcpiTables"
   }
 
