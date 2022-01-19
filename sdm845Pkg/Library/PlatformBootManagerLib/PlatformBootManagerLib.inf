@@ -78,6 +78,7 @@
   gEfiTtyTermGuid
   gUefiShellFileGuid
   gUsbfnMsdAppFileGuid
+  gBuiltinLinuxKrlFileGuid
   gSwitchSlotsAppFileGuid
   gSimpleInitFileGuid
 

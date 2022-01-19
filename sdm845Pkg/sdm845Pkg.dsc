@@ -344,3 +344,4 @@
 
 
   sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
+  sdm845Pkg/Binary/845/BuiltinLinuxKrl/BuiltinLinuxKrl.inf
