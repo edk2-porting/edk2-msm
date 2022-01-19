@@ -40,7 +40,7 @@ function _help(){
 	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use Fastgit for submodule cloning."
 	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
-	echo "	--acpi, -A:              compile acpi. (not implemented yet)"
+	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
 	echo "	--outputdir, -O:         output folder."
@@ -59,8 +59,8 @@ function _build(){
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
-	if "${GEN_ACPI}" && ! iasl -ve "sdm845Pkg/AcpiTables/${DEVICE}/Dsdt.asl"
-	then echo "iasl failed with ${?}" >&2;return 1
+	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
+	then echo "asl build failed. Have you installed wine?" >&2;return 1
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
