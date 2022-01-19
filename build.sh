@@ -138,7 +138,7 @@ then	set -e
 	then	git submodule set-url edk2                         https://hub.fastgit.org/tianocore/edk2.git
 		git submodule set-url edk2-platforms               https://hub.fastgit.org/tianocore/edk2-platforms.git
 		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.org/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url sdm845Pkg/Library/StdLib     https://hub.fastgit.org/tianocore/edk2-libc.git
+		git submodule set-url sdm845Pkg/Library/StdLib     https://hub.fastgit.org/edk2-porting/edk2-libc.git
 		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.org/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd edk2
