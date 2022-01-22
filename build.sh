@@ -38,7 +38,7 @@ function _help(){
 	echo "Options: "
 	echo "	--device DEV, -d DEV:    build for DEV. (${DEVICES[*]})"
 	echo "	--all, -a:               build all devices."
-	echo "	--chinese, -c:           use Fastgit for submodule cloning."
+	echo "	--chinese, -c:           use github.com.cnpmjs.org for submodule cloning."
 	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
 	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
@@ -135,29 +135,29 @@ then	set -e
 	echo "Updating submodules"
 	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
 	if "${CHINESE}"
-	then	git submodule set-url edk2                         https://hub.fastgit.org/tianocore/edk2.git
-		git submodule set-url edk2-platforms               https://hub.fastgit.org/tianocore/edk2-platforms.git
-		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.org/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url sdm845Pkg/Library/StdLib     https://hub.fastgit.org/edk2-porting/edk2-libc.git
-		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.org/BigfootACA/simple-init.git
+	then	git submodule set-url edk2                         https://github.com.cnpmjs.org/tianocore/edk2.git
+		git submodule set-url edk2-platforms               https://github.com.cnpmjs.org/tianocore/edk2-platforms.git
+		git submodule set-url sdm845Pkg/Binary             https://github.com.cnpmjs.org/edk2-porting/edk2-sdm845-binary.git
+		git submodule set-url sdm845Pkg/Library/StdLib     https://github.com.cnpmjs.org/edk2-porting/edk2-libc.git
+		git submodule set-url sdm845Pkg/Library/SimpleInit https://github.com.cnpmjs.org/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd edk2
 
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.fastgit.org/openssl/openssl.git
-		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://hub.fastgit.org/google/brotli.git
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://github.com.cnpmjs.org/ucb-bar/berkeley-softfloat-3.git
+		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://github.com.cnpmjs.org/openssl/openssl.git
+		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://github.com.cnpmjs.org/google/brotli.git
 		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://git.cryptomilk.org/projects/cmocka.git
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.fastgit.org/google/brotli.git
-		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.fastgit.org/kkos/oniguruma.git
-		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://hub.fastgit.org/akheron/jansson.git
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://github.com.cnpmjs.org/ucb-bar/berkeley-softfloat-3.git
+		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://github.com.cnpmjs.org/google/brotli.git
+		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://github.com.cnpmjs.org/kkos/oniguruma.git
+		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://github.com.cnpmjs.org/akheron/jansson.git
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
 		pushd sdm845Pkg/Library/SimpleInit
-		git submodule set-url libs/lvgl     https://hub.fastgit.org/lvgl/lvgl.git
-		git submodule set-url libs/lodepng  https://hub.fastgit.org/lvandeve/lodepng.git
-		git submodule set-url libs/freetype https://hub.fastgit.org/freetype/freetype.git
+		git submodule set-url libs/lvgl     https://github.com.cnpmjs.org/lvgl/lvgl.git
+		git submodule set-url libs/lodepng  https://github.com.cnpmjs.org/lvandeve/lodepng.git
+		git submodule set-url libs/freetype https://github.com.cnpmjs.org/freetype/freetype.git
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
