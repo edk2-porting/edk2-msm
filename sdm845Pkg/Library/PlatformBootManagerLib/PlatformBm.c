@@ -682,18 +682,12 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
   PlatformRegisterFvBootOption(
       &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
 
-  //
-  // Register Qualcomm Mass Storage App
-  //
-  PlatformRegisterFvBootOption(
-      &gUsbfnMsdAppFileGuid, L"UEFI Mass Storage", LOAD_OPTION_ACTIVE);
-
 #ifdef BUILTIN_LINUX_TEST
   //
   // Register Built-in Linux Kernel
   //
   PlatformRegisterFvBootOption(
-      &gBuiltinLinuxKrlFileGuid, L"Linux Mass Storage", LOAD_OPTION_ACTIVE);
+      &gBuiltinLinuxKrlFileGuid, L"USB Attached SCSI (UAS) Storage", LOAD_OPTION_ACTIVE);
 #endif
 
 #ifdef AB_SLOTS_SUPPORT
