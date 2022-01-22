@@ -11,6 +11,9 @@
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DDISPLAY_DPI=440 -DENABLE_SIMPLE_INIT -DBUILTIN_LINUX_TEST=1
+
 [PcdsFixedAtBuild.common]
   # System Memory (5GB)
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000

@@ -579,7 +579,8 @@ APRIORI DXE {
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  INF  sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
+  INF sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
+  INF sdm845Pkg/Binary/845/BuiltinLinuxKrl/BuiltinLinuxKrl.inf
 
   #
   # Bds
