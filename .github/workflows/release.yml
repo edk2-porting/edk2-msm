@@ -1,0 +1,57 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: build_release
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 8
+      matrix:
+        device:
+          - akershus
+          - beryllium
+          - dipper
+          - draco
+          - enchilada
+          - enchilada-8g
+          - equuleus
+          - fajita
+          - fajita-8g
+          - fajita-10g
+          - judyln
+          - m1882
+          - m1892
+          - nx616j
+          - olympic
+          - pafm00
+          - pd1821
+          - perseus
+          - polaris
+          - polaris-8g
+          - skr-a0
+          - star2qltechn
+          - trident
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install requires packages
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install build-essential uuid-dev iasl nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext
+
+      - name: Build device ${{ matrix.device }}
+        run: |
+          ./build.sh --device ${{ matrix.device }}
+          
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: boot-${{ matrix.device }}.img
