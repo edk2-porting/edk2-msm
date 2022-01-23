@@ -158,6 +158,7 @@ then	set -e
 		git submodule set-url libs/lvgl     https://github.com.cnpmjs.org/lvgl/lvgl.git
 		git submodule set-url libs/lodepng  https://github.com.cnpmjs.org/lvandeve/lodepng.git
 		git submodule set-url libs/freetype https://github.com.cnpmjs.org/freetype/freetype.git
+		git submodule set-url libs/nanosvg  https://github.com.cnpmjs.org/memononen/nanosvg.git
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
