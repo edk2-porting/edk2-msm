@@ -342,4 +342,4 @@
   ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  sdm845Pkg/Binary/845/BuiltinLinuxKrl/BuiltinLinuxKrl.inf
+  sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf

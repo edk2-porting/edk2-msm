@@ -77,7 +77,7 @@
   gEfiEndOfDxeEventGroupGuid
   gEfiTtyTermGuid
   gUefiShellFileGuid
-  gBuiltinLinuxKrlFileGuid
+  gLinuxSimpleMassStorageGuid
   gSwitchSlotsAppFileGuid
   gSimpleInitFileGuid
 

@@ -16,7 +16,7 @@
 !include sdm845Pkg/sdm845Pkg.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DMEMORY_8G=1 -DAB_SLOTS_SUPPORT=1 -DBUILTIN_LINUX_TEST=1
+  GCC:*_*_AARCH64_CC_FLAGS = -DMEMORY_8G=1 -DAB_SLOTS_SUPPORT=1 -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
   # System Memory (7GB)
