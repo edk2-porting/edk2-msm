@@ -540,6 +540,15 @@ APRIORI DXE {
   }
 
   #
+  # FDT support
+  #
+  INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+
+  FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-xiaomi-polaris.dtb
+  }
+
+  #
   # SMBIOS Support
   #
   INF sdm845Pkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
@@ -552,6 +561,8 @@ APRIORI DXE {
 !ifdef $(INCLUDE_TFTP_COMMAND)
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
+
+  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # Bds
