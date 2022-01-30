@@ -714,6 +714,12 @@ VOID EFIAPI PlatformBootManagerWaitCallback(UINT16 TimeoutRemain)
 
   Timeout = PcdGet16(PcdPlatformBootTimeOut);
 
+  if (Timeout != 0 && TimeoutRemain <= 0) {
+    gST->ConOut->ClearScreen(gST->ConOut);
+    BootLogoEnableLogo ();
+    return;
+  }
+
   Black.Raw = 0x00000000;
   White.Raw = 0x00FFFFFF;
 
