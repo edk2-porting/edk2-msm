@@ -54,4 +54,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          body: To be filled. 待填充
           files: boot-${{ matrix.device }}.img
