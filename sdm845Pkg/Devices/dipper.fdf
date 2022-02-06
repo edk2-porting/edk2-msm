@@ -531,7 +531,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/legacy/dipper/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/dipper/DSDT.AML
     SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
