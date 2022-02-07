@@ -40,6 +40,7 @@ function _help(){
 	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use github.com.cnpmjs.org for submodule cloning."
 	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
+	echo "  --toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
 	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
@@ -72,13 +73,13 @@ function _build(){
 		-s \
 		-n 0 \
 		-a AARCH64 \
-		-t GCC5 \
+		-t "${TOOLCHAIN}" \
 		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		||return "$?"
 	gzip -c \
-		< "workspace/Build/sdm845Pkg/${_MODE}_GCC5/FV/SDM845PKG_UEFI.fd" \
+		< "workspace/Build/sdm845Pkg/${_MODE}_${TOOLCHAIN}/FV/SDM845PKG_UEFI.fd" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \
@@ -108,9 +109,10 @@ MODE=RELEASE
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
+TOOLCHAIN=GCC5
 export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o d:hacACDO:r: -l device:,help,all,chinese,acpi,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o t:d:hacACDO:r: -l toolchain:,device:,help,all,chinese,acpi,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -122,6 +124,7 @@ do	case "${1}" in
 		-D|--distclean)DISTCLEAN=true;shift;;
 		-O|--outputdir)OUTDIR="${2}";shift 2;;
 		-r|--release)MODE="${2}";shift 2;;
+		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
@@ -204,6 +207,7 @@ echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE}"
+export CLANG38_AARCH64_PREFIX="${CROSS_COMPILE}"
 export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$_SIMPLE_INIT:$PWD"
 export WORKSPACE="${PWD}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
