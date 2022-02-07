@@ -33,10 +33,10 @@
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
   BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
 
-!if $(TARGET) != RELEASE
+!if $(USE_UART) == 1
   SerialPortLib|sdm845Pkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
 !else
-  SerialPortLib|MdePkg/Library/BaseSerialPortLibNull/BaseSerialPortLibNull.inf
+  SerialPortLib|sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 !endif
 
   RealTimeClockLib|EmbeddedPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
@@ -61,7 +61,7 @@
   #
   # Secure Boot dependencies
   #
-  
+
   # Cryptographic libraries
   RngLib|MdePkg/Library/DxeRngLib/DxeRngLib.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
@@ -151,7 +151,7 @@
   # Make VariableRuntimeDxe work at emulated non-volatile variable mode.
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
-  
+
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
@@ -200,13 +200,13 @@
   MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
   MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
-  
-!if $(TARGET) != RELEASE  
+
+!if $(TARGET) != RELEASE
   MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 !endif
 
   MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
-  
+
   ArmPkg/Drivers/ArmGic/ArmGicDxe.inf
   ArmPkg/Drivers/TimerDxe/TimerDxe.inf
 

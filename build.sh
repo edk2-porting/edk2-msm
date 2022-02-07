@@ -41,6 +41,7 @@ function _help(){
 	echo "	--chinese, -c:           use github.com.cnpmjs.org for submodule cloning."
 	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
 	echo "  --toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
+	echo "  --uart, -u:              compile with UART support, print debug messages to uart debug port."
 	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
@@ -77,6 +78,7 @@ function _build(){
 		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
+		-D USE_UART="${USE_UART}" \
 		||return "$?"
 	gzip -c \
 		< "workspace/Build/sdm845Pkg/${_MODE}_${TOOLCHAIN}/FV/SDM845PKG_UEFI.fd" \
@@ -110,9 +112,10 @@ CHINESE=false
 CLEAN=false
 DISTCLEAN=false
 TOOLCHAIN=GCC5
+USE_UART=0
 export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o t:d:hacACDO:r: -l toolchain:,device:,help,all,chinese,acpi,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -125,6 +128,7 @@ do	case "${1}" in
 		-O|--outputdir)OUTDIR="${2}";shift 2;;
 		-r|--release)MODE="${2}";shift 2;;
 		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
+		-u|--uart)USE_UART=1;shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
