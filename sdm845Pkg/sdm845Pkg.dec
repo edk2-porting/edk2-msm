@@ -63,3 +63,5 @@
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"|VOID*|0x0000a301
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Snapdragon 845 Device"|VOID*|0x0000a302
   gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"sdm845"|VOID*|0x0000a303
+
+  gsdm845PkgTokenSpaceGuid.DeviceTreeStore|0x83300000|UINT64|0x0000a501

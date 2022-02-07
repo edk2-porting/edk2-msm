@@ -26,6 +26,8 @@ startlabel:
   bne	docopy
   ret
 docopy:
+  mov x10, FixedPcdGet64 (DeviceTreeStore)
+  str x0, [x10] // oh my fdt
   // find our start address by getting our expected offset, then subtracting it from our actual address
   ldr	x6, =FixedPcdGet64 (PcdFdBaseAddress)
   sub	x5, x5, x6 // x5 now holds offset of ArmPlatformPeiBootAction from start of FD base
