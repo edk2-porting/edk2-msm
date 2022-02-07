@@ -36,7 +36,6 @@
 [Sources.common]
   sdm845.c
   sdm845Helper.S
-  sdm845Mem.c
 
 [FixedPcd]
   gArmTokenSpaceGuid.PcdArmPrimaryCore
