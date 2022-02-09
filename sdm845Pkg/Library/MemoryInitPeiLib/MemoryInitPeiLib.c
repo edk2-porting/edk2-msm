@@ -21,6 +21,7 @@
 #include <Library/HobLib.h>
 #include <Library/MemoryAllocationLib.h>
 #include <Library/PcdLib.h>
+#include <Library/FdtParserLib.h>
 
 // This varies by device
 #include <Configuration/DeviceMemoryMap.h>
@@ -84,12 +85,19 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
   ARM_MEMORY_REGION_DESCRIPTOR
   MemoryDescriptor[MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT];
   UINTN Index = 0;
+  UINTN Node = 0;
+  UINTN MemoryBase = 0;
+  UINTN MemorySize = 0;
+  UINTN MemoryTotal = 0;
+  fdt *Fdt;
 
-  // Ensure PcdSystemMemorySize has been set
-  ASSERT(PcdGet64(PcdSystemMemorySize) != 0);
+  Fdt = GetFdt();
+  ASSERT(Fdt != NULL);
 
   // Run through each memory descriptor
   while (MemoryDescriptorEx->Length != 0) {
+    if (MemoryDescriptorEx->MemoryType == EfiConventionalMemory)
+      MemoryTotal += MemoryDescriptorEx->Length;
     switch (MemoryDescriptorEx->HobOption) {
     case AddMem:
     case AddDev:
@@ -112,12 +120,41 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
     MemoryDescriptorEx++;
   }
 
+  while (fdt_get_memory(Fdt, (int)Node, (uint64_t*)&MemoryBase, (uint64_t*)&MemorySize)) {
+    MemoryTotal += MemorySize;
+    DEBUG((
+      EFI_D_INFO,
+      "FDT Memory %-2d: 0x%016llx - 0x%016llx (0x%016llx)\n",
+      Node, MemoryBase, (MemoryBase + MemorySize), MemorySize
+    ));
+    ASSERT(Index < MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT);
+    MemoryDescriptor[Index].PhysicalBase = MemoryBase;
+    MemoryDescriptor[Index].VirtualBase  = MemoryBase;
+    MemoryDescriptor[Index].Length       = MemorySize;
+    MemoryDescriptor[Index].Attributes   = ARM_MEMORY_REGION_ATTRIBUTE_WRITE_BACK;
+    BuildResourceDescriptorHob(
+      EFI_RESOURCE_SYSTEM_MEMORY,
+      SYSTEM_MEMORY_RESOURCE_ATTR_CAPABILITIES,
+      MemoryBase,
+      MemorySize
+    );
+    BuildMemoryAllocationHob(
+      MemoryBase,
+      MemorySize,
+      EfiConventionalMemory
+    );
+    Index++;
+    Node++;
+  }
+
   // Last one (terminator)
   ASSERT(Index < MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT);
   MemoryDescriptor[Index].PhysicalBase = 0;
   MemoryDescriptor[Index].VirtualBase  = 0;
   MemoryDescriptor[Index].Length       = 0;
   MemoryDescriptor[Index].Attributes   = 0;
+
+  DEBUG((EFI_D_INFO, "Memory Total: 0x%016lx (%d GiB)\n", MemoryTotal, MemoryTotal / (1024 * 1024 * 1024)));
 
   // Build Memory Allocation Hob
   DEBUG((EFI_D_INFO, "Configure MMU In \n"));
