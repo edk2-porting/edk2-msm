@@ -141,7 +141,6 @@ then	set -e
 	then	git submodule set-url edk2                         https://github.com.cnpmjs.org/tianocore/edk2.git
 		git submodule set-url edk2-platforms               https://github.com.cnpmjs.org/tianocore/edk2-platforms.git
 		git submodule set-url sdm845Pkg/Binary             https://github.com.cnpmjs.org/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url sdm845Pkg/Library/StdLib     https://github.com.cnpmjs.org/edk2-porting/edk2-libc.git
 		git submodule set-url sdm845Pkg/Library/SimpleInit https://github.com.cnpmjs.org/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd edk2
@@ -181,12 +180,6 @@ do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
 		break
 	fi
 done
-for i in "${EDK2_LIBC}" sdm845Pkg/Library/StdLib ./edk2-libc ../edk2-libc
-do	if [ -n "${i}" ]&&[ -d "${i}/StdLib" ]
-	then	_EDK2_LIBC="$(realpath "${i}")"
-		break
-	fi
-done
 for i in "${EDK2_PLATFORMS}" ./edk2-platforms ../edk2-platforms
 do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 	then	_EDK2_PLATFORMS="$(realpath "${i}")"
@@ -200,7 +193,6 @@ do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
 	fi
 done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
-[ -n "${_EDK2_LIBC}" ]||_error "EDK2-LibC not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
 [ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
 echo "EDK2 Path: ${_EDK2}"
@@ -208,7 +200,7 @@ echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE}"
 export CLANG38_AARCH64_PREFIX="${CROSS_COMPILE}"
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$_SIMPLE_INIT:$PWD"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_SIMPLE_INIT:$PWD"
 export WORKSPACE="${PWD}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT

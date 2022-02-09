@@ -12,7 +12,7 @@
 !include sdm845Pkg/sdm845Pkg.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DDISPLAY_DPI=440 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
 
@@ -23,6 +23,9 @@
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Poco F1"
   gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"beryllium"
+
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   #uncomment section underneath and comment out the above section to use full display, including the notch
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
