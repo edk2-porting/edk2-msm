@@ -19,11 +19,8 @@ jobs:
           - dipper
           - draco
           - enchilada
-          - enchilada-8g
           - equuleus
           - fajita
-          - fajita-8g
-          - fajita-10g
           - judyln
           - m1882
           - m1892
@@ -33,7 +30,6 @@ jobs:
           - pd1821
           - perseus
           - polaris
-          - polaris-8g
           - skr-a0
           - star2qltechn
           - trident

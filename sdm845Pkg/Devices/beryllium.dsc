@@ -15,8 +15,6 @@
   GCC:*_*_AARCH64_CC_FLAGS = -DDISPLAY_DPI=440 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
-  # System Memory (5GB)
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000
 
   #gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9D469780
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080

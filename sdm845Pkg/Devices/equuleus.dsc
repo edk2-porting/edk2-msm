@@ -15,8 +15,6 @@
   GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1
 
 [PcdsFixedAtBuild.common]
-  # System Memory (5GB)
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
