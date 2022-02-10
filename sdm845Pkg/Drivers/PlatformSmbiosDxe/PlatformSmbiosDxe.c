@@ -1091,7 +1091,7 @@ PlatformSmbiosDriverEntryPoint(
 
   while (fdt_get_memory(Fdt, (int)Node, (uint64_t*)&MemoryBase, (uint64_t*)&MemorySize)) {
     mMemArrMapInfoType19.StartingAddress = MemoryBase;
-    mMemArrMapInfoType19.EndingAddress = MemorySize;
+    mMemArrMapInfoType19.EndingAddress = MemoryBase + MemorySize;
     LogSmbiosData(
         (EFI_SMBIOS_TABLE_HEADER *)&mMemArrMapInfoType19,
         mMemArrMapInfoType19Strings, NULL);
