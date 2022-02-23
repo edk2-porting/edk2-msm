@@ -180,6 +180,11 @@ APRIORI DXE {
     SECTION UI = "PlatformInfoDxeDriver"
   }
 
+  FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION PE32 = sdm845Pkg/Binary/845/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
+  }
+
   FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.depex
     SECTION PE32 = sdm845Pkg/Binary/845/HALIOMMU/HALIOMMU.efi
@@ -576,6 +581,8 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
+
+  INF src/kernelfdt/KernelFdtDxe.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

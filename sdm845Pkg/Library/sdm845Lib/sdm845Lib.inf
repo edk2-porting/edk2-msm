@@ -25,6 +25,7 @@
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   sdm845Pkg/sdm845Pkg.dec
+  SimpleInit.dec
 
 [LibraryClasses]
   ArmLib
@@ -44,4 +45,4 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize
   gArmTokenSpaceGuid.PcdFdBaseAddress
   gArmTokenSpaceGuid.PcdFdSize
-  gsdm845PkgTokenSpaceGuid.DeviceTreeStore
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore

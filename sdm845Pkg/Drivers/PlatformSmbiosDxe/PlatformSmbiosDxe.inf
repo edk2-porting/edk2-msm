@@ -54,12 +54,14 @@
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct
   gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName
-  gsdm845PkgTokenSpaceGuid.DeviceTreeStore
 
 [Protocols]
   gEfiSmbiosProtocolGuid                      # PROTOCOL ALWAYS_CONSUMED
+  gKernelFdtProtocolGuid
 
 [Guids]
 
 [Depex]
-  gEfiSmbiosProtocolGuid
+  gEfiSmbiosProtocolGuid AND
+  gKernelFdtProtocolGuid
+

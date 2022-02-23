@@ -13,6 +13,7 @@
  *
  **/
 
+#define FDT_DIRECT
 #include <PiPei.h>
 
 #include <Library/ArmMmuLib.h>

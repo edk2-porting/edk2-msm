@@ -48,7 +48,7 @@
 [FixedPcd]
   gArmTokenSpaceGuid.PcdSystemMemoryBase
   gArmTokenSpaceGuid.PcdSystemMemorySize
-  gsdm845PkgTokenSpaceGuid.DeviceTreeStore
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
 
 [Depex]
   TRUE

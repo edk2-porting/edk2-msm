@@ -26,7 +26,7 @@ startlabel:
   bne	docopy
   ret
 docopy:
-  mov x10, FixedPcdGet64 (DeviceTreeStore)
+  mov x10, FixedPcdGet64 (PcdDeviceTreeStore)
   str x0, [x10] // oh my fdt
   // find our start address by getting our expected offset, then subtracting it from our actual address
   ldr	x6, =FixedPcdGet64 (PcdFdBaseAddress)

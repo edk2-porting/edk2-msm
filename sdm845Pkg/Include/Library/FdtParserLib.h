@@ -12,6 +12,7 @@
 #include <Library/DebugLib.h>
 #include <Library/PrintLib.h>
 #include <Library/BaseMemoryLib.h>
+#include <KernelFdt.h>
 #include <fdtparser.h>
 #include <param.h>
 #include <keyval.h>
@@ -22,16 +23,35 @@ fdt*
 EFIAPI
 GetFdt(VOID)
 {
-  EFI_PHYSICAL_ADDRESS FdtStore = (EFI_PHYSICAL_ADDRESS)FixedPcdGet64(DeviceTreeStore);
-  EFI_PHYSICAL_ADDRESS FdtAddress = *(EFI_PHYSICAL_ADDRESS*)FdtStore;
+  EFI_PHYSICAL_ADDRESS FdtAddress;
+  #ifndef FDT_DIRECT
+  EFI_STATUS          Status;
+  KERNEL_FDT_PROTOCOL *Fdt;
 
-  DEBUG((EFI_D_INFO, "Device Tree Address: 0x%016lx\n",FdtAddress));
+  Status = gBS->LocateProtocol (
+    &gKernelFdtProtocolGuid,
+    NULL,
+    (VOID**)&Fdt
+    );
+  if (EFI_ERROR (Status)) {
+    DEBUG((EFI_D_ERROR, "Locate Kernel Fdt Protocol failed: %r\n", Status));
+    return NULL;
+  }
+  if (Fdt == NULL || Fdt->Fdt == NULL) {
+    DEBUG((EFI_D_ERROR, "Invalid Device Tree\n"));
+    return NULL;
+  }
+  FdtAddress = (EFI_PHYSICAL_ADDRESS)Fdt->Fdt;
+  #else
+  FdtAddress = *(EFI_PHYSICAL_ADDRESS*)FixedPcdGet64 (PcdDeviceTreeStore);
 
   if (FdtAddress < PcdGet64(PcdSystemMemoryBase)){
     DEBUG((EFI_D_INFO, "Invalid Device Tree Address\n"));
     return NULL;
   }
+  #endif
 
+  DEBUG((EFI_D_INFO, "Device Tree Address: 0x%016lx\n", FdtAddress));
   return get_fdt_from_pointer ((VOID*)FdtAddress);
 }
 
