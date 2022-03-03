@@ -7,14 +7,18 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/845.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/judyln.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
-
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 [PcdsFixedAtBuild.common]
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|3120
+
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"LG"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"G7"
