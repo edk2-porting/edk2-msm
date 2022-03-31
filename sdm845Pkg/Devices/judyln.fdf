@@ -505,18 +505,6 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
-  
-  FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
-    SECTION UI = "SynapticsTouchDxe"
-  }
-
-  FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
-    SECTION UI = "SynapticsTouchDeviceDxe"
-  }
 
   FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
@@ -561,7 +549,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/legacy/lg/DSDT-lg.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/legacy/judyln/DSDT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
