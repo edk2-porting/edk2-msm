@@ -15,11 +15,9 @@
 !include sdm845Pkg/sdm845Pkg.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1
+  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
-  # System Memory (5GB)                    
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x15AE00000
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
@@ -27,3 +25,6 @@
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Oneplus"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"6"
   gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"enchilada"
+
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440

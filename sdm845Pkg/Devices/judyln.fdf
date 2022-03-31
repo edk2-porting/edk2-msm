@@ -257,8 +257,8 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
   FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/Beryllium/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/Beryllium/ButtonsDxe/ButtonsDxe.efi
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
   }
 
@@ -470,7 +470,7 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
     SECTION UI = "UsbfnDwc3Dxe"
   }
-  
+
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
     SECTION UI = "UsbKbDxe"
@@ -495,8 +495,8 @@ APRIORI DXE {
   }
 
   FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/Beryllium/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/Beryllium/ButtonsDxe/ButtonsDxe.efi
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
   }
 
@@ -505,23 +505,38 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
+  
+  FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A309 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDxe.efi
+    SECTION UI = "SynapticsTouchDxe"
+  }
 
-    FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
+  FILE DRIVER = F0D87C5E-4D5D-4FB5-939F-A6768AE8A310 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/Synaptics/SynapticsTouchDeviceDxe.efi
+    SECTION UI = "SynapticsTouchDeviceDxe"
+  }
+
+  FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
     SECTION UI = "UsbMsdDxe"
   }
 
-
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
+  
+  #
+  # USB Mass Storage Support
+  #
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
   #
   # USB Host Support
   #
   INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
-  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
 
   #
@@ -546,7 +561,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/beryllium/DSDT.AML
+    SECTION RAW = sdm845Pkg/AcpiTables/legacy/lg/DSDT-lg.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
@@ -561,7 +576,7 @@ APRIORI DXE {
   INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
 
   FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
-    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-xiaomi-beryllium.dtb
+    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-lge-judyln.dtb
   }
 
   #
@@ -578,7 +593,6 @@ APRIORI DXE {
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # Bds
@@ -592,7 +606,15 @@ APRIORI DXE {
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
 
+
+  #
+  # Simple Init GUI
+  #
+  INF src/main/SimpleInitMain.inf
+
   INF src/kernelfdt/KernelFdtDxe.inf
+
+  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

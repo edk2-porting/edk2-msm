@@ -7,6 +7,7 @@ workspace
 *.dll
 ramdisk
 sdm845Pkg/Drivers/LogoDxe/Logo.bmp
+.cache
 .vscode
 *.dts
 *.swp

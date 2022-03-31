@@ -14,7 +14,7 @@
 #
 
 !include MdePkg/MdeLibs.dsc.inc
-!include sdm845Pkg/Library/SimpleInit/SimpleInit.inc
+!include SimpleInit.inc
 
 [LibraryClasses.common]
 !if $(TARGET) == RELEASE
@@ -65,8 +65,10 @@
   ArmDisassemblerLib|ArmPkg/Library/ArmDisassemblerLib/ArmDisassemblerLib.inf
   ArmGicLib|ArmPkg/Drivers/ArmGic/ArmGicLib.inf
   ArmGicArchLib|ArmPkg/Library/ArmGicArchLib/ArmGicArchLib.inf
+  DmaLib|EmbeddedPkg/Library/NonCoherentDmaLib/NonCoherentDmaLib.inf
   ArmPlatformStackLib|ArmPlatformPkg/Library/ArmPlatformStackLib/ArmPlatformStackLib.inf
   ArmSmcLib|ArmPkg/Library/ArmSmcLib/ArmSmcLib.inf
+  ArmHvcLib|ArmPkg/Library/ArmHvcLib/ArmHvcLib.inf
   ArmMmuLib|sdm845Pkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
 
   ResetSystemLib|ArmPkg/Library/ArmSmcPsciResetSystemLib/ArmSmcPsciResetSystemLib.inf
@@ -223,6 +225,7 @@
   #
   VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLibRuntimeDxe.inf
   #
+  BaseCryptLib|CryptoPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
 
 [LibraryClasses.AARCH64]
   ArmGenericTimerCounterLib|ArmPkg/Library/ArmGenericTimerPhyCounterLib/ArmGenericTimerPhyCounterLib.inf
@@ -303,7 +306,11 @@
   #  DEBUG_EVENT     0x00080000  // Event messages
   #  DEBUG_ERROR     0x80000000  // Error
 
+!if $(TARGET) != RELEASE
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000040
+!else
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000000
+!endif
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x06
 
   #
@@ -333,6 +340,4 @@
   gEfiMdePkgTokenSpaceGuid.PcdUartDefaultReceiveFifoDepth|32
 
 [PcdsDynamicHii.common.DEFAULT]
-  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|L"Timeout"|gEfiGlobalVariableGuid|0x0|3 # Variable: L"Timeout"
-
-
+  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|L"Timeout"|gEfiGlobalVariableGuid|0x0|0 # Variable: L"Timeout"

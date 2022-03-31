@@ -55,18 +55,36 @@ sudo apt upgrade
 sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext
 ```
 
+如果你的编译器为 GCC 11+, 请手动修改 `edk2/BaseTools/Source/C/Makefiles/header.makefile`
+
+```diff
+diff --git a/BaseTools/Source/C/Makefiles/header.makefile b/BaseTools/Source/C/Makefiles/header.makefile
+index 0df728f..247c917 100644
+--- a/BaseTools/Source/C/Makefiles/header.makefile
++++ b/BaseTools/Source/C/Makefiles/header.makefile
+@@ -92,7 +92,7 @@ BUILD_CFLAGS = -MD -fshort-wchar -fno-strict-aliasing -fwrapv \
+ -Wno-unused-result -nostdlib -g
+ else
+ BUILD_CFLAGS = -MD -fshort-wchar -fno-strict-aliasing -fwrapv \
+--fno-delete-null-pointer-checks -Wall -Werror \
++-fno-delete-null-pointer-checks -Wall \^M
+ -Wno-deprecated-declarations -Wno-stringop-truncation -Wno-restrict \
+ -Wno-unused-result -nostdlib -g
+ endif
+```
+
 ## 构建
 
 **不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04**
 
-1.克隆此项目（默认使用国内fastgit镜像加速）
+1.克隆此项目（默认使用国内cnpmjs.org镜像加速）
 
 ```bash
-git clone https://hub.fastgit.org/edk2-porting/edk2-sdm845.git --depth=1
+git clone https://github.com.cnpmjs.org/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.1 编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
+2.1 编译此项目（默认使用cnpmjs加速submodule克隆，若不需要请删去 `--chinese`）
 
 ```bash
 bash build.sh --chinese --device DEVICE

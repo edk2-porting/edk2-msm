@@ -29,6 +29,7 @@
   ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   sdm845Pkg/sdm845Pkg.dec
+  SimpleInit.dec
 
 [LibraryClasses]
   ArmLib
@@ -41,13 +42,13 @@
   DebugLib
   PrintLib
   TimeBaseLib
+  SimpleInitLib
 
 [Guids]
   gEfiGlobalVariableGuid
 
 [FixedPcd]
   gArmTokenSpaceGuid.PcdSystemMemoryBase
-  gArmTokenSpaceGuid.PcdSystemMemorySize
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor
@@ -56,8 +57,11 @@
 
 [Protocols]
   gEfiSmbiosProtocolGuid                      # PROTOCOL ALWAYS_CONSUMED
+  gKernelFdtProtocolGuid
 
 [Guids]
 
 [Depex]
-  gEfiSmbiosProtocolGuid
+  gEfiSmbiosProtocolGuid AND
+  gKernelFdtProtocolGuid
+

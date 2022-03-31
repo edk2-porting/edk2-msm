@@ -68,7 +68,7 @@ DATA = {
   0x00, 0x00, 0x00, 0x00                          # res5
 }
 
-0x00008000|0x004f8000
+0x00008000|0x005f8000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
@@ -116,30 +116,9 @@ APRIORI DXE {
   INF MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
   INF ArmPkg/Drivers/CpuDxe/CpuDxe.inf
   INF ArmPkg/Drivers/ArmGic/ArmGicDxe.inf
-  INF ArmPkg/Drivers/TimerDxe/TimerDxe.inf
-  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
   INF MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
-  INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
 
-  #
-  # FAT filesystem + GPT/MBR partitioning
-  #
-  INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
-  INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
-  INF FatPkg/EnhancedFatDxe/Fat.inf
-  INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
-  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
-
-  INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
-  INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
-  INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
-  INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
-  INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
-
-  INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
-  INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
-  INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
   FILE DRIVER = 9A5163E7-5C29-453F-825C-837A46A81E15 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SerialDxe/SerialDxe.depex
@@ -183,6 +162,9 @@ APRIORI DXE {
     SECTION UI = "HALIOMMU"
   }
 
+  INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
+  INF ArmPkg/Drivers/TimerDxe/TimerDxe.inf
+
   FILE DRIVER = E43128A8-8692-42B6-8AFA-676158578D18 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/845/ULogDxe/ULogDxe.efi
@@ -219,6 +201,39 @@ APRIORI DXE {
     SECTION UI = "ClockDxe"
   }
 
+  INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
+  INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
+
+  FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/UFSDxe/UFSDxe.efi
+    SECTION UI = "UFSDxe"
+  }
+
+  INF FatPkg/EnhancedFatDxe/Fat.inf
+  INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
+  INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
+
+  FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SPMI/SPMI.depex
+    SECTION PE32 = sdm845Pkg/Binary/845/SPMI/SPMI.efi
+    SECTION UI = "SPMI"
+  }
+
+  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+  INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
+  INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+  INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
+  INF MdeModulePkg/Universal/PrintDxe/PrintDxe.inf
+  INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
+  INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
+  INF SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+  INF SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf
+
+  INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf  
+
+  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
+
   FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.depex
     SECTION PE32 = sdm845Pkg/Binary/845/DALTLMM/DALTLMM.efi
@@ -231,26 +246,20 @@ APRIORI DXE {
     SECTION UI = "I2C"
   }
 
-  FILE DRIVER = 2a7b4bef-80cd-49e1-b473-374ba4d673fc {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/845/SPMI/SPMI.depex
-    SECTION PE32 = sdm845Pkg/Binary/845/SPMI/SPMI.efi
-    SECTION UI = "SPMI"
-  }
-
-  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
-    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
-    SECTION UI = "XhciPciEmulation"
-  }
-
-  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
-    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
-    SECTION UI = "XhciDxe"
-  }
-
   FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
     SECTION DXE_DEPEX = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.depex
     SECTION PE32 = sdm845Pkg/Binary/845/PmicDxe/PmicDxe.efi
     SECTION UI = "PmicDxe"
+  }
+
+  INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
+  INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
+  INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+
+  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.efi
+    SECTION UI = "ButtonsDxe"
   }
 
   FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
@@ -264,7 +273,20 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
     SECTION UI = "UsbfnDwc3Dxe"
   }
-  
+
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = sdm845Pkg/Binary/845/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
     SECTION UI = "UsbKbDxe"
@@ -288,14 +310,10 @@ APRIORI DXE {
     SECTION UI = "UsbDeviceDxe"
   }
 
-  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.efi
-    SECTION UI = "ButtonsDxe"
+  FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION PE32 = sdm845Pkg/Binary/845/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
   }
-
-  INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf  
-
 }
 
   INF MdeModulePkg/Core/Dxe/DxeMain.inf
@@ -307,6 +325,9 @@ APRIORI DXE {
   INF ArmPkg/Drivers/CpuDxe/CpuDxe.inf
   INF MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
   INF MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
+!include ArmPlatformPkg/SecureBootDefaultKeys.fdf.inc
+  INF SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+  INF SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf
   INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
   INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
@@ -500,6 +521,7 @@ APRIORI DXE {
   #
   INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
@@ -508,7 +530,7 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
   INF FatPkg/EnhancedFatDxe/Fat.inf
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
-
+  INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
   INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
 
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
@@ -522,14 +544,23 @@ APRIORI DXE {
   # INF RuleOverride = ACPITABLE sdm845Pkg/AcpiTables/AcpiTables.inf
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/perseus/DSDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/MADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/FADT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/GTDT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/IORT.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/testing/PPTT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/legacy/perseus/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/IORT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/Common/PPTT.aml
     SECTION UI = "AcpiTables"
+  }
+
+  #
+  # FDT support
+  #
+  INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+
+  FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-xiaomi-polaris.dtb
   }
 
   #
@@ -546,7 +577,7 @@ APRIORI DXE {
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  INF  sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
+  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # Bds
@@ -564,6 +595,8 @@ APRIORI DXE {
   # Simple Init GUI
   #
   INF src/main/SimpleInitMain.inf
+
+  INF src/kernelfdt/KernelFdtDxe.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

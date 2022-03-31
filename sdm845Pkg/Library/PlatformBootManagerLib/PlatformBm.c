@@ -446,10 +446,6 @@ VOID PlatformRegisterOptionsAndKeys(VOID)
   Status          = EfiBootManagerGetBootManagerMenu(&BootOption);
   ASSERT_EFI_ERROR(Status);
 #ifdef ENABLE_SIMPLE_INIT
-  //
-  // Search all boot options
-  //
-  EfiBootManagerRefreshAllBootOption();
 
   //
   // Register Simple Init GUI APP
@@ -462,9 +458,6 @@ VOID PlatformRegisterOptionsAndKeys(VOID)
   Status = EfiBootManagerAddKeyOptionVariable(
       NULL, (UINT16)BootOption.OptionNumber, 0, &UP, NULL);
 #endif
-  ASSERT(Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
-  Status = EfiBootManagerAddKeyOptionVariable(
-      NULL, (UINT16)BootOption.OptionNumber, 0, &Esc, NULL);
   ASSERT(Status == EFI_SUCCESS || Status == EFI_ALREADY_STARTED);
 }
 
@@ -682,11 +675,13 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
   PlatformRegisterFvBootOption(
       &gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
 
+#ifdef ENABLE_LINUX_SIMPLE_MASS_STORAGE
   //
-  // Register Mass Storage App
+  // Register Built-in Linux Kernel
   //
   PlatformRegisterFvBootOption(
-      &gUsbfnMsdAppFileGuid, L"Mass Storage", LOAD_OPTION_ACTIVE);
+      &gLinuxSimpleMassStorageGuid, L"USB Attached SCSI (UAS) Storage", LOAD_OPTION_ACTIVE);
+#endif
 
 #ifdef AB_SLOTS_SUPPORT
   //
@@ -711,6 +706,12 @@ VOID EFIAPI PlatformBootManagerWaitCallback(UINT16 TimeoutRemain)
   EFI_STATUS                          Status;
 
   Timeout = PcdGet16(PcdPlatformBootTimeOut);
+
+  if (Timeout != 0 && TimeoutRemain <= 0) {
+    gST->ConOut->ClearScreen(gST->ConOut);
+    BootLogoEnableLogo ();
+    return;
+  }
 
   Black.Raw = 0x00000000;
   White.Raw = 0x00FFFFFF;

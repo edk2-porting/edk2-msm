@@ -33,10 +33,10 @@
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
   BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
 
-!if $(TARGET) != RELEASE
-  SerialPortLib|sdm845Pkg/Library/InMemorySerialPortLib/InMemorySerialPortLib.inf
+!if $(USE_UART) == 1
+  SerialPortLib|sdm845Pkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
 !else
-  SerialPortLib|MdePkg/Library/BaseSerialPortLibNull/BaseSerialPortLibNull.inf
+  SerialPortLib|sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 !endif
 
   RealTimeClockLib|EmbeddedPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
@@ -58,12 +58,25 @@
   TpmMeasurementLib|MdeModulePkg/Library/TpmMeasurementLibNull/TpmMeasurementLibNull.inf
   VarCheckLib|MdeModulePkg/Library/VarCheckLib/VarCheckLib.inf
 
+  #
+  # Secure Boot dependencies
+  #
+
+  # Cryptographic libraries
+  RngLib|MdePkg/Library/DxeRngLib/DxeRngLib.inf
+  IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
+  BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
+  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
+  TlsLib|CryptoPkg/Library/TlsLib/TlsLib.inf
+
+  TpmMeasurementLib|SecurityPkg/Library/DxeTpmMeasurementLib/DxeTpmMeasurementLib.inf
+  AuthVariableLib|SecurityPkg/Library/AuthVariableLib/AuthVariableLib.inf
+  SecureBootVariableLib|SecurityPkg/Library/SecureBootVariableLib/SecureBootVariableLib.inf
+  SecureBootVariableProvisionLib|SecurityPkg/Library/SecureBootVariableProvisionLib/SecureBootVariableProvisionLib.inf
+  PlatformSecureLib|OvmfPkg/Library/PlatformSecureLib/PlatformSecureLib.inf
+
   # SimpleFbDxe
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
-
-!if $(TARGET) != RELEASE
-  SerialPortLib|sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
-!endif
 
   PlatformBootManagerLib|sdm845Pkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
   MemoryInitPeiLib|sdm845Pkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
@@ -101,6 +114,9 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"$(FIRMWARE_VER)"
 
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0xC0000000
+
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x83300000
 
   # We bring up eight cores here!
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
@@ -121,7 +137,7 @@
 
   # GUID of the UI app
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x21, 0xaa, 0x2c, 0x46, 0x14, 0x76, 0x03, 0x45, 0x83, 0x6e, 0x8a, 0xb6, 0xf4, 0x66, 0x23, 0x31 }
-  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|5
+  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|0
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdResetOnMemoryTypeInformationChange|FALSE
 
@@ -138,7 +154,7 @@
   # Make VariableRuntimeDxe work at emulated non-volatile variable mode.
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
-  
+
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
@@ -168,7 +184,15 @@
   #
   ArmPkg/Drivers/CpuDxe/CpuDxe.inf
   MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
-  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
+
+  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf {
+    <LibraryClasses>
+      NULL|SecurityPkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.inf
+  }
+  SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+  SecurityPkg/EnrollFromDefaultKeysApp/EnrollFromDefaultKeysApp.inf
+  SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf
+
   MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
   EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
@@ -179,13 +203,13 @@
   MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
   MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
-  
-!if $(TARGET) != RELEASE  
+
+!if $(TARGET) != RELEASE
   MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
 !endif
 
   MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
-  
+
   ArmPkg/Drivers/ArmGic/ArmGicDxe.inf
   ArmPkg/Drivers/TimerDxe/TimerDxe.inf
 
@@ -241,6 +265,7 @@
   MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
   MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
   MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
+  MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
   FatPkg/EnhancedFatDxe/Fat.inf
 
   #
@@ -317,5 +342,4 @@
   ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-
-  sdm845Pkg/Binary/845/UsbfnMsdApp/UsbfnMsdApp.inf
+  sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf

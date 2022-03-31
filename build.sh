@@ -4,12 +4,8 @@
 DEVICES=(
 	dipper
 	enchilada
-	enchilada-8g
 	fajita
-	fajita-8g
-	fajita-10g
 	polaris
-	polaris-8g
 	beryllium
 	perseus
 	nx616j
@@ -41,9 +37,11 @@ function _help(){
 	echo "Options: "
 	echo "	--device DEV, -d DEV:    build for DEV. (${DEVICES[*]})"
 	echo "	--all, -a:               build all devices."
-	echo "	--chinese, -c:           use Fastgit for submodule cloning."
-	echo "  --release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
-	echo "	--acpi, -A:              compile acpi. (not implemented yet)"
+	echo "	--chinese, -c:           use hub.fastgit.xyz for submodule cloning."
+	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
+	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
+	echo "	--uart, -u:              compile with UART support, print debug messages to uart debug port."
+	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
 	echo "	--outputdir, -O:         output folder."
@@ -62,8 +60,8 @@ function _build(){
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
-	if "${GEN_ACPI}" && ! iasl -ve "sdm845Pkg/AcpiTables/${DEVICE}/Dsdt.asl"
-	then echo "iasl failed with ${?}" >&2;return 1
+	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
+	then echo "asl build failed. Have you installed wine?" >&2;return 1
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
@@ -75,13 +73,14 @@ function _build(){
 		-s \
 		-n 0 \
 		-a AARCH64 \
-		-t GCC5 \
+		-t "${TOOLCHAIN}" \
 		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
+		-D USE_UART="${USE_UART}" \
 		||return "$?"
 	gzip -c \
-		< "workspace/Build/sdm845Pkg/${_MODE}_GCC5/FV/SDM845PKG_UEFI.fd" \
+		< "workspace/Build/sdm845Pkg/${_MODE}_${TOOLCHAIN}/FV/SDM845PKG_UEFI.fd" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \
@@ -111,9 +110,11 @@ MODE=RELEASE
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
+TOOLCHAIN=GCC5
+USE_UART=0
 export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o d:hacACDO:r: -l device:,help,all,chinese,acpi,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -125,6 +126,8 @@ do	case "${1}" in
 		-D|--distclean)DISTCLEAN=true;shift;;
 		-O|--outputdir)OUTDIR="${2}";shift 2;;
 		-r|--release)MODE="${2}";shift 2;;
+		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
+		-u|--uart)USE_UART=1;shift;;
 		-h|--help)_help 0;shift;;
 		--)shift;break;;
 		*)_help 1;;
@@ -138,29 +141,29 @@ then	set -e
 	echo "Updating submodules"
 	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
 	if "${CHINESE}"
-	then	git submodule set-url edk2                         https://hub.fastgit.org/tianocore/edk2.git
-		git submodule set-url edk2-platforms               https://hub.fastgit.org/tianocore/edk2-platforms.git
-		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.org/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url sdm845Pkg/Library/StdLib     https://hub.fastgit.org/tianocore/edk2-libc.git
-		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.org/BigfootACA/simple-init.git
+	then	git submodule set-url edk2                         https://hub.fastgit.xyz/tianocore/edk2.git
+		git submodule set-url edk2-platforms               https://hub.fastgit.xyz/tianocore/edk2-platforms.git
+		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.xyz/edk2-porting/edk2-sdm845-binary.git
+		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.xyz/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd edk2
 
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.fastgit.org/openssl/openssl.git
-		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://hub.fastgit.org/google/brotli.git
-		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://git.cryptomilk.org/projects/cmocka.git
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.org/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.fastgit.org/google/brotli.git
-		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.fastgit.org/kkos/oniguruma.git
-		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://hub.fastgit.org/akheron/jansson.git
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.xyz/ucb-bar/berkeley-softfloat-3.git
+		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.fastgit.xyz/openssl/openssl.git
+		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://hub.fastgit.xyz/google/brotli.git
+		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://hub.fastgit.xyz/tianocore/edk2-cmocka.git
+		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.xyz/ucb-bar/berkeley-softfloat-3.git
+		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.fastgit.xyz/google/brotli.git
+		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.fastgit.xyz/kkos/oniguruma.git
+		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://hub.fastgit.xyz/akheron/jansson.git
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
 		pushd sdm845Pkg/Library/SimpleInit
-		git submodule set-url libs/lvgl     https://hub.fastgit.org/lvgl/lvgl.git
-		git submodule set-url libs/lodepng  https://hub.fastgit.org/lvandeve/lodepng.git
-		git submodule set-url libs/freetype https://hub.fastgit.org/freetype/freetype.git
+		git submodule set-url libs/lvgl     https://hub.fastgit.xyz/lvgl/lvgl.git
+		git submodule set-url libs/lodepng  https://hub.fastgit.xyz/lvandeve/lodepng.git
+		git submodule set-url libs/freetype https://hub.fastgit.xyz/freetype/freetype.git
+		git submodule set-url libs/nanosvg  https://hub.fastgit.xyz/memononen/nanosvg.git
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
@@ -180,12 +183,6 @@ do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
 		break
 	fi
 done
-for i in "${EDK2_LIBC}" sdm845Pkg/Library/StdLib ./edk2-libc ../edk2-libc
-do	if [ -n "${i}" ]&&[ -d "${i}/StdLib" ]
-	then	_EDK2_LIBC="$(realpath "${i}")"
-		break
-	fi
-done
 for i in "${EDK2_PLATFORMS}" ./edk2-platforms ../edk2-platforms
 do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 	then	_EDK2_PLATFORMS="$(realpath "${i}")"
@@ -199,14 +196,14 @@ do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
 	fi
 done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
-[ -n "${_EDK2_LIBC}" ]||_error "EDK2-LibC not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
 [ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE}"
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_EDK2_LIBC:$_SIMPLE_INIT:$PWD"
+export CLANG38_AARCH64_PREFIX="${CROSS_COMPILE}"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_SIMPLE_INIT:$PWD"
 export WORKSPACE="${PWD}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT
