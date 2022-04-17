@@ -343,3 +343,6 @@
 !endif #$(INCLUDE_TFTP_COMMAND)
 
   sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable
