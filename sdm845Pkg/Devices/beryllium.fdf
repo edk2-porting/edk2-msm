@@ -511,7 +511,11 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbMsdDxe/UsbMsdDxe.efi
     SECTION UI = "UsbMsdDxe"
   }
-
+  
+    FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION PE32 = sdm845Pkg/Binary/845/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
+  }
 
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
@@ -592,6 +596,10 @@ APRIORI DXE {
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
 
+  #
+  # Simple Init GUI
+  #
+  INF src/main/SimpleInitMain.inf
   INF src/kernelfdt/KernelFdtDxe.inf
 
 [FV.FVMAIN_COMPACT]
