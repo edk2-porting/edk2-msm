@@ -25,3 +25,12 @@
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"AYN"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Odin"
   gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"ayn-odin"
+
+  # Synaptics Touchscren
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress|0x70
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin|104
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin|125
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice|6
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX|1080
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY|1920
+  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX|TRUE
