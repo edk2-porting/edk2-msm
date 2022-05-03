@@ -1,0 +1,56 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SynapticsTouchDeviceDxe
+  FILE_GUID                      = f0d87c5e-4d5d-4fb5-939f-a6768ae8a310
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SynaDeviceInitialize
+
+[Sources.common]
+  SynapticsTouchDevice.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  sdm845Pkg/sdm845Pkg.dec
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -Wno-error=unused-variable
+
+[LibraryClasses]
+  ArmLib
+  UefiDriverEntryPoint
+  IoLib
+  TimerLib
+  BaseLib
+  DebugLib
+  PrintLib
+  CompilerIntrinsicsLib
+  CacheMaintenanceLib
+  UefiLib
+
+[Pcd]
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice
+  gsdm845PkgTokenSpaceGuid.PcdTouchMinX
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX
+  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX
+  gsdm845PkgTokenSpaceGuid.PcdTouchMinY
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY
+  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedY
+
+[Protocols]
+  gQcomI2cProtocolGuid
+  gQcomTlmmProtocolGuid
+  gHardwareInterruptProtocolGuid
+  gSynapticsTouchDeviceProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[Depex]
+  gQcomI2cProtocolGuid AND gQcomTlmmProtocolGuid
+

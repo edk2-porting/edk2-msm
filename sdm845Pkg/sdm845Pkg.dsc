@@ -344,5 +344,8 @@
 
   sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
+  sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
+  sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
+
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable
