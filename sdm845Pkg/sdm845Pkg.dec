@@ -69,11 +69,12 @@
   # Touch Screen
   gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress|0|UINT16|0x0000a501
   gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin|0|UINT32|0x0000a502
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin|0|UINT32|0x0000a503
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice|0|UINT32|0x0000a504
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinX|0|UINT32|0x0000a505
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX|0|UINT32|0x0000a506
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX|FALSE|BOOLEAN|0x0000a507
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinY|0|UINT32|0x0000a508
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY|0|UINT32|0x0000a509
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedY|FALSE|BOOLEAN|0x0000a50a
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrVregPin|0|UINT32|0x0000a503
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin|0|UINT32|0x0000a504
+  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice|0|UINT32|0x0000a505
+  gsdm845PkgTokenSpaceGuid.PcdTouchMinX|0|UINT32|0x0000a506
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX|0|UINT32|0x0000a507
+  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX|FALSE|BOOLEAN|0x0000a508
+  gsdm845PkgTokenSpaceGuid.PcdTouchMinY|0|UINT32|0x0000a509
+  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY|0|UINT32|0x0000a50a
+  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedY|FALSE|BOOLEAN|0x0000a50b
