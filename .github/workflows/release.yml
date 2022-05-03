@@ -30,6 +30,7 @@ jobs:
           - olympic
           - pafm00
           - pd1821
+          - ayn-odin
           - perseus
           - polaris
           - skr-a0
