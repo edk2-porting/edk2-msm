@@ -160,13 +160,7 @@ then	set -e
 		popd
 		pushd sdm845Pkg/Library/SimpleInit
 		git submodule set-url libs/lvgl     https://hub.fastgit.xyz/lvgl/lvgl.git
-		git submodule set-url libs/lodepng  https://hub.fastgit.xyz/lvandeve/lodepng.git
 		git submodule set-url libs/freetype https://hub.fastgit.xyz/freetype/freetype.git
-		git submodule set-url libs/nanosvg  https://hub.fastgit.xyz/memononen/nanosvg.git
-		git submodule set-url libs/mxml     https://hub.fastgit.xyz/michaelrsweet/mxml.git
-		git submodule set-url libs/json-c   https://hub.fastgit.xyz/json-c/json-c.git
-		git submodule set-url libs/stb      https://hub.fastgit.xyz/nothings/stb.git
-		git submodule set-url libs/lua      https://hub.fastgit.xyz/lua/lua.git
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
