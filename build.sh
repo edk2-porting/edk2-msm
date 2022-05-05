@@ -135,7 +135,7 @@ done
 if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
-if ! [ -f edk2/edksetup.sh ] || ! [ -f ../edk2/edksetup.sh ]
+if ! [ -f edk2/edksetup.sh ] && ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
 	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
