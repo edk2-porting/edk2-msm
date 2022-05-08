@@ -17,9 +17,9 @@ QQ中文交流群:
 
 [996450026 (Renegade-Project OffTopic 2)](https://jq.qq.com/?_wv=1027&k=16xaDJnU)
 
-[996450026 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
+[543536453 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
 
-[996450026 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
+[390610032 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
 
 [737223105 (Renegade-Project Linux/edk2)](https://jq.qq.com/?_wv=1027&k=KsQdNXl6)
 
