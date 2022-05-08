@@ -14,11 +14,16 @@
 QQ中文交流群:
 
 [697666196 (Renegade-Project OffTopic 1)](https://jq.qq.com/?_wv=1027&k=JbOy29zv)
+
 [996450026 (Renegade-Project OffTopic 2)](https://jq.qq.com/?_wv=1027&k=16xaDJnU)
+
 [996450026 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
+
 [996450026 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
+
 [737223105 (Renegade-Project Linux/edk2)](https://jq.qq.com/?_wv=1027&k=KsQdNXl6)
-991796138（情感交流群，仅限邀请）
+
+991796138（屁眼通红群，请勿进入）
 766060878（核心管理群，暂不开放）
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
