@@ -17,9 +17,9 @@ QQ中文交流群:
 
 [996450026 (Renegade-Project OffTopic 2)](https://jq.qq.com/?_wv=1027&k=16xaDJnU)
 
-[996450026 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
+[543536453 (Renegade-Project OffTopic 3)](https://jq.qq.com/?_wv=1027&k=o9jN36Nn)
 
-[996450026 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
+[390610032 (Renegade-Project OffTopic 4)](https://jq.qq.com/?_wv=1027&k=YxXrIR7s)
 
 [737223105 (Renegade-Project Linux/edk2)](https://jq.qq.com/?_wv=1027&k=KsQdNXl6)
 
@@ -82,14 +82,14 @@ index 0df728f..247c917 100644
 
 **不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04**
 
-1.克隆此项目（默认使用国内cnpmjs.org镜像加速）
+1.克隆此项目（默认使用国内fastgit镜像加速）
 
 ```bash
-git clone https://github.com.cnpmjs.org/edk2-porting/edk2-sdm845.git --depth=1
+git clone https://hub.fastgit.xyz/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.1 编译此项目（默认使用cnpmjs加速submodule克隆，若不需要请删去 `--chinese`）
+2.1 编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
 
 ```bash
 bash build.sh --chinese --device DEVICE
