@@ -176,7 +176,7 @@ then	set -e
 		git submodule init;git submodule update
 		popd
 		pushd sdm845Pkg/Application/TetrisApp
-		git submodule init;git submodule update
+		git submodule init;git submodule update; git checkout master; git pull
 		popd
 	fi
 	set +e
