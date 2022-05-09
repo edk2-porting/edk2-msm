@@ -626,7 +626,7 @@ APRIORI DXE {
 #
 #TetrisApp
 #
-INF sdm845Pkg/Application/tetris.inf
+INF sdm845Pkg/Application/TetrisApp/tetris.inf
 
   INF src/kernelfdt/KernelFdtDxe.inf
 
