@@ -683,6 +683,12 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
       &gLinuxSimpleMassStorageGuid, L"USB Attached SCSI (UAS) Storage", LOAD_OPTION_ACTIVE);
 #endif
 
+//
+// Register TetrisApp
+//
+  PlatformRegisterFvBootOption(
+      &gTetrisAppFileGuid, L"Play Tetris", LOAD_OPTION_ACTIVE);
+
 #ifdef AB_SLOTS_SUPPORT
   //
   // Register Switch Slots App
