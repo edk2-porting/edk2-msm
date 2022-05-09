@@ -297,6 +297,11 @@
   sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
+#
+#TetrisApp
+#
+sdm845Pkg/Application/TetrisApp/tetris.inf
+
   #
   # Bds
   #
