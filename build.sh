@@ -163,12 +163,19 @@ then	set -e
 		git submodule set-url libs/freetype https://hub.fastgit.xyz/freetype/freetype.git
 		git submodule init;git submodule update
 		popd
+		pushd sdm845Pkg/Application/TetrisApp
+		git submodule set-url sdm845Pkg/Application/TetrisApp https://hub.fastgit.xyz/j0sh1x/TetrisApp.git
+		git submodule init;git submodule update
+		popd
 		git checkout .gitmodules
 	else	git submodule init;git submodule update --depth 1
 		pushd edk2
 		git submodule init;git submodule update
 		popd
 		pushd sdm845Pkg/Library/SimpleInit
+		git submodule init;git submodule update
+		popd
+		pushd sdm845Pkg/Application/TetrisApp
 		git submodule init;git submodule update
 		popd
 	fi
