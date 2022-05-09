@@ -13,3 +13,6 @@
 [submodule "sdm845Pkg/Library/SimpleInit"]
 	path = sdm845Pkg/Library/SimpleInit
 	url = https://github.com/BigfootACA/simple-init.git
+[submodule "sdm845Pkg/Application/TetrisApp"]
+	path = sdm845Pkg/Application/TetrisApp
+	url = https://github.com/j0sh1x/TetrisApp.git
