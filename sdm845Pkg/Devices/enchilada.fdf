@@ -619,6 +619,7 @@ APRIORI DXE {
   # Simple Init GUI
   #
   INF src/main/SimpleInitMain.inf
+  INF sdm845Pkg/Application/TetrisApp/tetris.inf
 
   INF src/kernelfdt/KernelFdtDxe.inf
 
