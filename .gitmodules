@@ -16,3 +16,4 @@
 [submodule "sdm845Pkg/Application/TetrisApp"]
 	path = sdm845Pkg/Application/TetrisApp
 	url = https://github.com/j0sh1x/TetrisApp.git
+	branch = master
