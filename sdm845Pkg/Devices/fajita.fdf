@@ -623,6 +623,11 @@ APRIORI DXE {
   #
   INF src/main/SimpleInitMain.inf
 
+#
+#TetrisApp
+#
+INF sdm845Pkg/Application/tetris.inf
+
   INF src/kernelfdt/KernelFdtDxe.inf
 
 [FV.FVMAIN_COMPACT]
