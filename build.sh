@@ -87,7 +87,7 @@ function _build(){
 		"device_specific/${DEVICE}.dtb" \
 		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		||return "$?"
-	mkbootimg \
+	python3 ./mkbootimg.py \
 		--kernel "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		--ramdisk ramdisk \
 		--kernel_offset 0x00000000 \
