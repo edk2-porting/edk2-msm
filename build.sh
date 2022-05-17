@@ -87,10 +87,16 @@ function _build(){
 		"device_specific/${DEVICE}.dtb" \
 		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		||return "$?"
-	abootimg \
-		--create "${OUTDIR}/boot-${DEVICE}.img" \
-		-k "workspace/uefi-${DEVICE}.img.gz-dtb" \
-		-r ramdisk \
+	mkbootimg \
+		--kernel "workspace/uefi-${DEVICE}.img.gz-dtb" \
+		--ramdisk ramdisk \
+		--kernel_offset 0x00000000 \
+		--ramdisk_offset 0x00000000 \
+		--tags_offset 0x00000000 \
+		--os_version 12.0.0 \
+		--os_patch_level 2022-04 \
+		--header_version 1 \
+		-o "${OUTDIR}/boot-${DEVICE}.img" \
 		||return "$?"
 	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
 	set +x

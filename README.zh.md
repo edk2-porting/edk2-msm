@@ -57,7 +57,7 @@ Ubuntu 20.04:
 ```bash
 sudo apt update
 sudo apt upgrade
-sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext
+sudo apt install build-essential uuid-dev iasl git nasm gcc-aarch64-linux-gnu mkbootimg python3-distutils python3-pil python3-git gettext
 ```
 
 如果你的编译器为 GCC 11+, 请手动修改 `edk2/BaseTools/Source/C/Makefiles/header.makefile`
