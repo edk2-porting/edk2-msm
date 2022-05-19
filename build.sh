@@ -68,12 +68,16 @@ function _build(){
 		RELEASE)_MODE=RELEASE;;
 		*)_MODE=DEBUG;;
 	esac
+	if [ -f "devices/${DEVICE}.conf" ]
+	then source "devices/${DEVICE}.conf"
+	else source "devices/default.conf"
+	fi
 	build \
 		-s \
 		-n 0 \
 		-a AARCH64 \
 		-t "${TOOLCHAIN}" \
-		-p "sdm845Pkg/Devices/${DEVICE}.dsc" \
+		-p "${DSC_FILE}" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
@@ -93,8 +97,8 @@ function _build(){
 		--kernel_offset 0x00000000 \
 		--ramdisk_offset 0x00000000 \
 		--tags_offset 0x00000000 \
-		--os_version 12.0.0 \
-		--os_patch_level 2022-04 \
+		--os_version "${BOOTIMG_OS_VERSION}" \
+		--os_patch_level "${BOOTIMG_OS_PATCH_LEVEL}" \
 		--header_version 1 \
 		-o "${OUTDIR}/boot-${DEVICE}.img" \
 		||return "$?"
