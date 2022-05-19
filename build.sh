@@ -6,7 +6,8 @@ DEVICES=(
 	enchilada
 	fajita
 	polaris
-	beryllium
+	beryllium-tianma
+	beryllium-ebbg
 	perseus
 	nx616j
 	m1882
@@ -59,11 +60,26 @@ function _build(){
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
+	
+	EXT="" #support for both panels of beryllium
+	if [ "${DEVICE}" == "beryllium-tianma" ]
+	then cp sdm845Pkg/AcpiTables/beryllium/panel-tianma.asl sdm845Pkg/AcpiTables/beryllium/panel.asl
+		DEVICE="beryllium"
+		EXT="-tianma"
+		GEN_ACPI=true
+	fi
+	if [ "${DEVICE}" == "beryllium-ebbg" ]
+	then cp sdm845Pkg/AcpiTables/beryllium/panel-ebbg.asl sdm845Pkg/AcpiTables/beryllium/panel.asl
+		DEVICE="beryllium"
+		EXT="-ebbg"
+		GEN_ACPI=true
+	fi
+	
 	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
 	then echo "asl build failed. Have you installed wine?" >&2;return 1
 	fi
 	# based on the instructions from edk2-platform
-	rm -f "${OUTDIR}/boot-${DEVICE}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
+	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	case "${MODE}" in
 		RELEASE)_MODE=RELEASE;;
 		*)_MODE=DEBUG;;
@@ -100,9 +116,9 @@ function _build(){
 		--os_version "${BOOTIMG_OS_VERSION}" \
 		--os_patch_level "${BOOTIMG_OS_PATCH_LEVEL}" \
 		--header_version 1 \
-		-o "${OUTDIR}/boot-${DEVICE}.img" \
+		-o "${OUTDIR}/boot-${DEVICE}${EXT}.img" \
 		||return "$?"
-	echo "Build done: ${OUTDIR}/boot-${DEVICE}.img"
+	echo "Build done: ${OUTDIR}/boot-${DEVICE}${EXT}.img"
 	set +x
 }
 

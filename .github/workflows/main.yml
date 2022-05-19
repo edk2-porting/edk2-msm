@@ -26,7 +26,8 @@ jobs:
           - enchilada
           - fajita
           - polaris
-          - beryllium
+          - beryllium-tianma
+          - beryllium-ebbg
           - perseus
           - nx616j
           - m1892
@@ -54,7 +55,7 @@ jobs:
       - name: Install requires packages
         run: |
           sudo apt-get update
-          sudo apt-get -y install build-essential uuid-dev iasl nasm gcc-aarch64-linux-gnu python3-distutils python3-pil python3-git gettext
+          sudo apt-get -y install build-essential uuid-dev iasl nasm gcc-aarch64-linux-gnu python3-distutils python3-pil python3-git gettext wine
 
       - name: Build device ${{ matrix.device }}
         run: |
