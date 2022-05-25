@@ -11,10 +11,16 @@
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT
+
 [PcdsFixedAtBuild.common]
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2242
+
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Smartisan"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"R1"
