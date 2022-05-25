@@ -34,6 +34,7 @@
 #include <Protocol/EmbeddedGpio.h>
 #include <Protocol/LoadedImage.h>
 #include <Protocol/PlatformBootManager.h>
+#include <Protocol/QcomSmem.h>
 
 #include "sdm845Dxe.h"
 
@@ -41,9 +42,25 @@ EFI_CPU_ARCH_PROTOCOL *gCpu;
 
 VOID InitPeripherals(IN VOID)
 {
+  EFI_STATUS              Status;
+  EFI_QCOM_SMEM_PROTOCOL *pEfiSmemProtocol = NULL;
+  UINT32                  Size             = 0;
+  UINTN                  *pAddr;
+
   // Lock the QcomWdogTimer in a cage on certain devices
   MmioWrite32(0x17980008, 0x000000);
   DEBUG((EFI_D_WARN, "\n \v The Dog has been locked in a cage :)\v"));
+
+  Status = gBS->LocateProtocol(
+      &gQcomSMEMProtocolGuid, NULL, (VOID **)&pEfiSmemProtocol);
+
+  Status = pEfiSmemProtocol->SmemGetAddr(137, &Size, (VOID **)&pAddr);
+  if (EFI_ERROR(Status)) {
+    DEBUG((EFI_D_ERROR, "%a: SmemGetAddr failed. %r\n", __FUNCTION__, Status));
+  }
+
+  DEBUG((EFI_D_ERROR, "%a: SmemGetAddr result: 0x%p\n", __FUNCTION__, pAddr));
+  // gBS->Stall(5000000);
 }
 
 /**

@@ -25,6 +25,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
+  sdm845Pkg/sdm845Pkg.dec
 
 [LibraryClasses]
   BaseMemoryLib
@@ -40,6 +41,7 @@
   gEfiDevicePathFromTextProtocolGuid
   gEfiLoadedImageProtocolGuid
   gEfiCpuArchProtocolGuid
+  gQcomSMEMProtocolGuid
 
 [Guids]
   gEfiEndOfDxeEventGroupGuid
