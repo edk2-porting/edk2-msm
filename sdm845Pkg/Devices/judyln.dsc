@@ -9,7 +9,13 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = sdm845Pkg/Devices/judyln.fdf
   
+  # Enable A/B Slot Environment
+  DEFINE AB_SLOTS_SUPPORT        = TRUE
+
 !include sdm845Pkg/sdm845Pkg.dsc
+
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
 
@@ -17,7 +23,7 @@
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|3120
 
   # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|550
 
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"LG"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"G7 ThinQ"
