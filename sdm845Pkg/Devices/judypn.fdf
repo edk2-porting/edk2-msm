@@ -597,6 +597,16 @@ APRIORI DXE {
   INF MdeModulePkg/Application/UiApp/UiApp.inf
   INF sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
 
+  #
+  # OnePlus 6(T) A/B Slot Support
+  #
+!ifdef $(AB_SLOTS_SUPPORT)
+  INF sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  INF sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
+!else
+  # Old unstable solution, remove once BootSlotDxe fully tested
+  INF sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+!endif #$(AB_SLOTS_SUPPORT)
 
   #
   # Simple Init GUI
