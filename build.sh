@@ -26,6 +26,7 @@ DEVICES=(
 	ayn-odin
 	akershus
 	equuleus
+	starqltechn
 )
 #####################################
 
