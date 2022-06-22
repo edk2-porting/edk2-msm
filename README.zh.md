@@ -85,7 +85,7 @@ index 0df728f..247c917 100644
 1.克隆此项目（默认使用国内cnpmjs.org镜像加速）
 
 ```bash
-git clone https://github.com.cnpmjs.org/edk2-porting/edk2-sdm845.git --depth=1
+git clone https://hub.fastgit.xyz/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
