@@ -12,12 +12,14 @@
 !include sdm845Pkg/sdm845Pkg.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1 -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+  GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|410
 
   gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MI 8 UD"
