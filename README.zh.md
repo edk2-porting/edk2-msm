@@ -28,9 +28,9 @@ QQ中文交流群:
 
 [Windows 驱动](https://github.com/edk2-porting/WOA-Drivers)
 
-[项目官网](https://renegade-project.org/)
+[项目官网](https://renegade-project.cn/)
 
-[项目论坛](https://forum.renegade-project.org/)
+[项目论坛](https://forum.renegade-project.cn/)
 
 ## 警告
 
@@ -44,7 +44,7 @@ QQ中文交流群:
 
 ## 已支持的设备
 
-参阅[Windows设备支持状态](https://renegade-project.org/#/zh/windows/state-frame.html)
+参阅[Windows设备支持状态](https://renegade-project.cn/#/zh/windows/state-frame.html)
 
 ## 依赖
 
@@ -82,14 +82,14 @@ index 0df728f..247c917 100644
 
 **不建议使用Ubuntu 18.04版本，请使用Ubuntu 20.04**
 
-1.克隆此项目（默认使用国内cnpmjs.org镜像加速）
+1.克隆此项目（默认使用国内fastgit镜像加速）
 
 ```bash
 git clone https://hub.fastgit.xyz/edk2-porting/edk2-sdm845.git --depth=1
 cd edk2-sdm845
 ```
 
-2.1 编译此项目（默认使用cnpmjs加速submodule克隆，若不需要请删去 `--chinese`）
+2.1 编译此项目（默认使用fastgit加速submodule克隆，若不需要请删去 `--chinese`）
 
 ```bash
 bash build.sh --chinese --device DEVICE
