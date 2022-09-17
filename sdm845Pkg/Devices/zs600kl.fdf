@@ -53,7 +53,6 @@ NumBlocks     = 0x600
 #
 # Implement the Linux kernel header layout so that the loader will identify
 # it as something bootable, and execute it with a FDT pointer in x0 or r2.
-#
 0x00000000|0x00008000
 DATA = {
   0x01, 0x00, 0x00, 0x10,                         # code0: adr x1, .
@@ -257,8 +256,8 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
   FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.efi
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/zs600kl/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/zs600kl/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
   }
 
@@ -316,7 +315,6 @@ APRIORI DXE {
   }
 
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
-
 }
 
   INF MdeModulePkg/Core/Dxe/DxeMain.inf
@@ -473,7 +471,7 @@ APRIORI DXE {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
     SECTION UI = "UsbfnDwc3Dxe"
   }
-  
+
   FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
     SECTION PE32 = sdm845Pkg/Binary/845/UsbKbDxe/UsbKbDxe.efi
     SECTION UI = "UsbKbDxe"
@@ -498,8 +496,8 @@ APRIORI DXE {
   }
 
   FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = sdm845Pkg/Binary/Perseus/ButtonsDxe/ButtonsDxe.efi
+    SECTION DXE_DEPEX = sdm845Pkg/Binary/zs600kl/ButtonsDxe/ButtonsDxe.depex
+    SECTION PE32 = sdm845Pkg/Binary/zs600kl/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
   }
 
@@ -515,6 +513,10 @@ APRIORI DXE {
     SECTION UI = "UsbMsdDxe"
   }
 
+  FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION PE32 = sdm845Pkg/Binary/845/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
+  }
 
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
@@ -525,6 +527,7 @@ APRIORI DXE {
   INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
 
   #
   # FAT filesystem + GPT/MBR partitioning
@@ -548,7 +551,7 @@ APRIORI DXE {
 
   FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
     SECTION RAW = sdm845Pkg/AcpiTables/Common/DBG2.aml
-    SECTION RAW = sdm845Pkg/AcpiTables/legacy/perseus/DSDT.aml
+    SECTION RAW = sdm845Pkg/AcpiTables/polaris/DSDT.AML
     SECTION RAW = sdm845Pkg/AcpiTables/Common/MADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/FADT.aml
     SECTION RAW = sdm845Pkg/AcpiTables/Common/GTDT.aml
@@ -563,7 +566,7 @@ APRIORI DXE {
   INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
 
   FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
-    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-generic-msd.dtb
+    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-asus-zs600kl.dtb
   }
 
   #

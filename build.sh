@@ -26,6 +26,7 @@ DEVICES=(
 	ayn-odin
 	akershus
 	equuleus
+	zs600kl
 )
 #####################################
 
@@ -41,6 +42,7 @@ function _help(){
 	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
 	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
 	echo "	--uart, -u:              compile with UART support, print debug messages to uart debug port."
+	echo " 	--skip-rootfs-gen:       skip generating SimpleInit rootfs to speed up building."
 	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
@@ -139,7 +141,8 @@ TOOLCHAIN=GCC5
 USE_UART=0
 export OUTDIR="${PWD}"
 export GEN_ACPI=false
-OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+export GEN_ROOTFS=true
+OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -150,6 +153,7 @@ do	case "${1}" in
 		-C|--clean)CLEAN=true;shift;;
 		-D|--distclean)DISTCLEAN=true;shift;;
 		-O|--outputdir)OUTDIR="${2}";shift 2;;
+		--skip-rootfs-gen)GEN_ROOTFS=false;shift;;
 		-r|--release)MODE="${2}";shift 2;;
 		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
 		-u|--uart)USE_UART=1;shift;;
@@ -241,9 +245,11 @@ do	[ -f "${i}" ]||continue
 	mkdir -p "${_path}"
 	msgfmt -o "${_path}/simple-init.mo" "${i}"
 done
-bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
+if "${GEN_ROOTFS}"
+then bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
 	"${_SIMPLE_INIT}" \
 	"${_SIMPLE_INIT}/build"
+fi
 if [ "${DEVICE}" == "all" ]
 then	E=0
 	for i in "${DEVICES[@]}"

@@ -584,6 +584,7 @@ APRIORI DXE {
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
+  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # Bds
@@ -614,8 +615,6 @@ APRIORI DXE {
   INF src/main/SimpleInitMain.inf
 
   INF src/kernelfdt/KernelFdtDxe.inf
-
-  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
 [FV.FVMAIN_COMPACT]
 FvAlignment        = 8

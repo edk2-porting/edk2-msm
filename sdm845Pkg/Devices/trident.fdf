@@ -570,11 +570,13 @@ APRIORI DXE {
   #
   # FDT support
   #
-#   INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+  INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
 
-#   FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
-#     SECTION RAW = sdm845Pkg/FdtBlob/sdm845-oneplus-fajita.dtb
-#   }
+  FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+    SECTION RAW = sdm845Pkg/FdtBlob/sdm845-generic-msd.dtb
+  }
+
+  INF sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # SMBIOS Support

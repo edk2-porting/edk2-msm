@@ -7,7 +7,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/845.fdf
+  FLASH_DEFINITION               = sdm845Pkg/Devices/zs600kl.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
@@ -17,8 +17,11 @@
 [PcdsFixedAtBuild.common]
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"OPPO"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Find X"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"pafm00"
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|420
+
+  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Asus"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"ROG Phone"
+  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"zs600kl"
