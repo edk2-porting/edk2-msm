@@ -11,6 +11,9 @@
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
+[BuildOptions.common]
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+
 [PcdsFixedAtBuild.common]
 
   gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440

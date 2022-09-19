@@ -348,4 +348,4 @@
   sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable
+  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable -march=armv8.2-a+crypto+rcpc -mtune=cortex-a75.cortex-a55
