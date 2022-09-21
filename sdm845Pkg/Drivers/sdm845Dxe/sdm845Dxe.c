@@ -48,9 +48,14 @@ VOID InitPeripherals(IN VOID)
   UINTN                  *pAddr;
 
   // Lock the QcomWdogTimer in a cage on certain devices
+#ifdef SM7125_TEST
+  MmioWrite32(0x17c10008, 0x000000);
+#else
   MmioWrite32(0x17980008, 0x000000);
+#endif
   DEBUG((EFI_D_WARN, "\n \v The Dog has been locked in a cage :)\v"));
 
+#ifndef SM7125_TEST
   Status = gBS->LocateProtocol(
       &gQcomSMEMProtocolGuid, NULL, (VOID **)&pEfiSmemProtocol);
 
@@ -60,6 +65,7 @@ VOID InitPeripherals(IN VOID)
   }
 
   DEBUG((EFI_D_ERROR, "%a: SmemGetAddr result: 0x%p\n", __FUNCTION__, pAddr));
+#endif
   // gBS->Stall(5000000);
 }
 

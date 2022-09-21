@@ -25,7 +25,11 @@
 #include <Library/FdtParserLib.h>
 
 // This varies by device
+#ifdef SM7125_TEST
+#include <Configuration/DeviceMemoryMap7125.h>
+#else
 #include <Configuration/DeviceMemoryMap.h>
+#endif
 
 #define SIZE_KB ((UINTN)(1024))
 #define SIZE_MB ((UINTN)(SIZE_KB * 1024))

@@ -27,6 +27,7 @@ DEVICES=(
 	akershus
 	equuleus
 	zs600kl
+	atoll
 )
 #####################################
 

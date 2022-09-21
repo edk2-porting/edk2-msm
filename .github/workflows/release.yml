@@ -37,6 +37,7 @@ jobs:
           - skr-a0
           - star2qltechn
           - trident
+          - atoll
 
     steps:
       - name: Checkout repository
