@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"OPPO"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Find X"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"pafm00"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"OPPO"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Find X"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"pafm00"

@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2246
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2246
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"ASUS"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"ZenFone 5Z"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"draco"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"ASUS"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"ZenFone 5Z"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"draco"

@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Meizu"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"16th"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"m1882"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Meizu"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"16th"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"m1882"

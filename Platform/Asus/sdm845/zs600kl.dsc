@@ -16,12 +16,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|420
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Asus"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"ROG Phone"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"zs600kl"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Asus"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"ROG Phone"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"zs600kl"

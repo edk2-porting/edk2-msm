@@ -16,12 +16,12 @@
   GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MIX2S"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"polaris"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"MIX2S"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"polaris"

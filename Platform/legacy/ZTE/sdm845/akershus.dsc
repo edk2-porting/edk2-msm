@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"ZTE"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Axon 9 Pro"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"akershus"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"ZTE"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Axon 9 Pro"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"akershus"

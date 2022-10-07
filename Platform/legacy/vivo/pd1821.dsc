@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"VIVO"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"NEX Dual Display"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"pd1821"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"VIVO"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"NEX Dual Display"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"pd1821"

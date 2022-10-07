@@ -29,6 +29,7 @@
   ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   Platform/RenegadePkg/RenegadePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
   SimpleInit.dec
 
 [LibraryClasses]

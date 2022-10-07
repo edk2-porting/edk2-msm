@@ -19,12 +19,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|3120
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1440
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|3120
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|550
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"LG"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"G7 ThinQ"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"Judyln"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"LG"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G7 ThinQ"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"Judyln"

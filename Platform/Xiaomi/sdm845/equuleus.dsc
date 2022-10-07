@@ -16,11 +16,11 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
 
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|410
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MI 8 UD"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"equuleus"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"MI 8 UD"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"equuleus"

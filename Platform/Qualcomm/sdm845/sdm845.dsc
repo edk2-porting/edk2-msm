@@ -154,7 +154,7 @@
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9d400000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
 
@@ -218,7 +218,7 @@
 
   EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf {
     <LibraryClasses>
-	  RealTimeClockLib|sdm845Pkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
+	  RealTimeClockLib|Silicon/Qualcomm/QcomPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
   }
 
   MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf

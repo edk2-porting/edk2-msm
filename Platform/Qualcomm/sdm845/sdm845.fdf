@@ -24,7 +24,7 @@
 #
 ################################################################################
 
-[FD.sdm845Pkg_UEFI]
+[FD.sdm845_UEFI]
 BaseAddress   = 0xd0000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in NOR Flash.
 Size          = 0x00600000|gArmTokenSpaceGuid.PcdFdSize         # The size in bytes of the FLASH Device
 ErasePolarity = 1

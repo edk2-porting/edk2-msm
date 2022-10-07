@@ -15,12 +15,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2280
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Nubia"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"X"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"nx616j"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Nubia"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"X"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"nx616j"

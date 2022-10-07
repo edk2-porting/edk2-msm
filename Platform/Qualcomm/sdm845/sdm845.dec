@@ -5,7 +5,6 @@
   PACKAGE_VERSION                = 0.1
 
 [Includes.common]
-  Include
 
 [Protocols]
 

@@ -16,15 +16,15 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|1920
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|369
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"AYN"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Odin"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"ayn-odin"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"AYN"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Odin"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"ayn-odin"
 
   # Synaptics Touchscren
   gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress|0x70

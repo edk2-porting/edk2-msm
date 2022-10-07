@@ -16,9 +16,9 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"BlackShark"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"One"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"skr-a0"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"BlackShark"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"One"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"skr-a0"

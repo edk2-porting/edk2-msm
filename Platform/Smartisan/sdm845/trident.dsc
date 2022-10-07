@@ -19,12 +19,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2242
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2242
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Smartisan"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"R1"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"trident"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Smartisan"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"R1"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"trident"

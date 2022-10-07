@@ -153,7 +153,7 @@
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9c000000
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9c000000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
 

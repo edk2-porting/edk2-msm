@@ -64,18 +64,19 @@ function _build(){
 	
 	EXT="" #support for both panels of beryllium
 	if [ "${DEVICE}" == "beryllium-tianma" ]
-	then cp sdm845Pkg/AcpiTables/beryllium/panel-tianma.asl sdm845Pkg/AcpiTables/beryllium/panel.asl
+	then cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-tianma.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
 		DEVICE="beryllium"
 		EXT="-tianma"
 		GEN_ACPI=true
 	fi
 	if [ "${DEVICE}" == "beryllium-ebbg" ]
-	then cp sdm845Pkg/AcpiTables/beryllium/panel-ebbg.asl sdm845Pkg/AcpiTables/beryllium/panel.asl
+	then cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-ebbg.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
 		DEVICE="beryllium"
 		EXT="-ebbg"
 		GEN_ACPI=true
 	fi
 	
+	# TODO: fix GEN_ACPI
 	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
 	then echo "asl build failed. Have you installed wine?" >&2;return 1
 	fi
@@ -87,9 +88,9 @@ function _build(){
 		*) _MODE=DEBUG;;
 	esac
 
-	if [ -f "devices/${DEVICE}.conf" ]
-	then source "devices/${DEVICE}.conf"
-	else source "devices/default.conf"
+	if [ -f "configs/${DEVICE}.conf" ]
+	then source "configs/${DEVICE}.conf"
+	else _error "cannot find device config"
 	fi
 	build \
 		-s \
@@ -102,15 +103,15 @@ function _build(){
 		-D USE_UART="${USE_UART}" \
 		||return "$?"
 	gzip -c \
-		< "workspace/Build/sdm845Pkg/${_MODE}_${TOOLCHAIN}/FV/SDM845PKG_UEFI.fd" \
+		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \
 		"workspace/uefi-${DEVICE}.img.gz" \
-		"device_specific/${DEVICE}.dtb" \
+		"${DTB_FILE}" \
 		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		||return "$?"
-	python3 ./mkbootimg.py \
+	python3 ./tools/mkbootimg.py \
 		--kernel "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		--ramdisk ramdisk \
 		--kernel_offset 0x00000000 \
@@ -129,13 +130,7 @@ function _clean(){ rm --one-file-system --recursive --force ./workspace boot-*.i
 
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 
-#############################################
-echo "The repo is currently being refactored"
-exit 0
-#############################################
-
 cd "$(dirname "$0")"||exit 1
-[ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
 typeset -u MODE
 DEVICE=""
@@ -171,7 +166,7 @@ done
 if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
-if ! [ -f edk2/edksetup.sh ] && ! [ -f ../edk2/edksetup.sh ]
+if ! [ -f Common/edk2/edksetup.sh ] && ! [ -f ../Common/edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
 	if "${CHINESE}"
@@ -209,19 +204,19 @@ then	set -e
 	fi
 	set +e
 fi
-for i in "${EDK2}" ./edk2 ../edk2
+for i in "${EDK2}" ./Common/edk2 ../Common/edk2
 do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
 	then	_EDK2="$(realpath "${i}")"
 		break
 	fi
 done
-for i in "${EDK2_PLATFORMS}" ./edk2-platforms ../edk2-platforms
+for i in "${EDK2_PLATFORMS}" ./Common/edk2-platforms ../Common/edk2-platforms
 do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 	then	_EDK2_PLATFORMS="$(realpath "${i}")"
 		break
 	fi
 done
-for i in "${SIMPLE_INIT}" sdm845Pkg/Library/SimpleInit ./simple-init ../simple-init
+for i in "${SIMPLE_INIT}" Platform/RenegadePkg/Library/SimpleInit ./simple-init ../simple-init
 do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
 	then	_SIMPLE_INIT="$(realpath "${i}")"
 		break
@@ -241,7 +236,6 @@ GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT
 echo > ramdisk
 set -e
-python3 assets/generate-logo.py "${GITCOMMIT}"
 mkdir -p "${_SIMPLE_INIT}/build" "${_SIMPLE_INIT}/root/usr/share/locale"
 for i in "${_SIMPLE_INIT}/po/"*.po
 do	[ -f "${i}" ]||continue

@@ -16,12 +16,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|410
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"MI 8"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"dipper"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"MI 8"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"dipper"

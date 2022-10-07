@@ -16,12 +16,12 @@
 
 [PcdsFixedAtBuild.common]
 
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2248
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"QRD 720"
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"atoll"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"QRD 720"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"atoll"
