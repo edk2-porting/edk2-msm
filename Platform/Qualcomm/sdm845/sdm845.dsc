@@ -16,11 +16,11 @@
 #
 ################################################################################
 
-!include sdm845Pkg/CommonDsc.dsc.inc
+!include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
 
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
-  ArmPlatformLib|sdm845Pkg/Library/sdm845Lib/sdm845Lib.inf
+  ArmPlatformLib|Silicon/Qualcomm/sdm845/Library/sdm845Lib/sdm845Lib.inf
   CompilerIntrinsicsLib|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
@@ -34,9 +34,9 @@
   BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
 
 !if $(USE_UART) == 1
-  SerialPortLib|sdm845Pkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
+  SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
 !else
-  SerialPortLib|sdm845Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+  SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 !endif
 
   RealTimeClockLib|EmbeddedPkg/Library/VirtualRealTimeClockLib/VirtualRealTimeClockLib.inf
@@ -78,12 +78,12 @@
   # SimpleFbDxe
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
 
-  PlatformBootManagerLib|sdm845Pkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
-  MemoryInitPeiLib|sdm845Pkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
-  PlatformPeiLib|sdm845Pkg/Library/PlatformPeiLib/PlatformPeiLib.inf
+  PlatformBootManagerLib|Platform/RenegadePkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
+  MemoryInitPeiLib|Silicon/Qualcomm/QcomPkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformPeiLib|Silicon/Qualcomm/QcomPkg/Library/PlatformPeiLib/PlatformPeiLib.inf
 
 !ifdef $(AB_SLOTS_SUPPORT)
-  BootSlotLib|sdm845Pkg/Library/BootSlotLib/BootSlotLib.inf
+  BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
 [LibraryClasses.common.SEC]
@@ -91,8 +91,8 @@
   ExtractGuidedSectionLib|EmbeddedPkg/Library/PrePiExtractGuidedSectionLib/PrePiExtractGuidedSectionLib.inf
   HobLib|EmbeddedPkg/Library/PrePiHobLib/PrePiHobLib.inf
   MemoryAllocationLib|EmbeddedPkg/Library/PrePiMemoryAllocationLib/PrePiMemoryAllocationLib.inf
-  MemoryInitPeiLib|sdm845Pkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
-  PlatformPeiLib|sdm845Pkg/Library/PlatformPeiLib/PlatformPeiLib.inf
+  MemoryInitPeiLib|Silicon/Qualcomm/QcomPkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformPeiLib|Silicon/Qualcomm/QcomPkg/Library/PlatformPeiLib/PlatformPeiLib.inf
   PrePiHobListPointerLib|ArmPlatformPkg/Library/PrePiHobListPointerLib/PrePiHobListPointerLib.inf
 
 ################################################################################
@@ -225,16 +225,12 @@
   MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
 
   #
-  # GPIO
-  #
-
-  #
   # Virtual Keyboard
   #
   EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
 
-  sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
-  sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
+  Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
   #
   # USB Host Support
@@ -283,17 +279,17 @@
   #
   # SMBIOS Support
   #
-  sdm845Pkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
+  Platform/RenegadePkg/Drivers/PlatformSmbiosDxe/PlatformSmbiosDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 
   #
   # OnePlus 6T A/B Slot Support
   # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
   #
-  sdm845Pkg/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+  Platform/Oneplus/sdm845/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
 !ifdef $(AB_SLOTS_SUPPORT)
-  sdm845Pkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-  sdm845Pkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
+  Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
   #
@@ -316,7 +312,7 @@
       NULL|MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerUiLib.inf
       PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   }
-  sdm845Pkg/Drivers/LogoDxe/LogoDxe.inf
+  Platform/RenegadePkg/Drivers/LogoDxe/LogoDxe.inf
 
   ShellPkg/Application/Shell/Shell.inf {
     <LibraryClasses>
@@ -341,10 +337,10 @@
   ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  sdm845Pkg/Binary/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
-  sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
 
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable -march=armv8.2-a+crypto+rcpc -mtune=cortex-a75.cortex-a55

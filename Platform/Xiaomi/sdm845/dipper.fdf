@@ -520,12 +520,6 @@ APRIORI DXE {
     SECTION UI = "DDRInfoDxe"
   }
 
-  # FILE DRIVER = 90a49afd-422f-08ae-9611-e788d3804845 {
-  #   SECTION DXE_DEPEX = sdm845Pkg/Binary/845/EnvDxe/EnvDxe.depex
-  #   SECTION PE32 = sdm845Pkg/Binary/845/EnvDxe/EnvDxe.efi
-  #   SECTION UI = "EnvDxe"
-  # }
-
   INF sdm845Pkg/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF sdm845Pkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
   
@@ -575,7 +569,6 @@ APRIORI DXE {
   FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
     SECTION RAW = sdm845Pkg/FdtBlob/sdm845-generic-msd.dtb
   }
-
 
   #
   # SMBIOS Support

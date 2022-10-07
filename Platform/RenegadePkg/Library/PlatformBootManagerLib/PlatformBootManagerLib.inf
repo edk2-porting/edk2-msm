@@ -33,7 +33,7 @@
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   ShellPkg/ShellPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec
   SimpleInit.dec
 
 [LibraryClasses]

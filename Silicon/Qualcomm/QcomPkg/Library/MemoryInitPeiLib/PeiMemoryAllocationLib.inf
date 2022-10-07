@@ -29,7 +29,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
   SimpleInit.dec
 
 [LibraryClasses]

@@ -16,7 +16,7 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [LibraryClasses]
   BaseLib
@@ -35,9 +35,9 @@
   gEfiCpuArchProtocolGuid
 
 [FixedPcd]
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
 
 [Guids]
   gEfiMdeModulePkgTokenSpaceGuid

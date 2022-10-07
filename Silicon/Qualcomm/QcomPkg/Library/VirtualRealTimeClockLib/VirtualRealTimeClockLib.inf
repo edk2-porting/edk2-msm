@@ -30,7 +30,7 @@
   ArmPkg/ArmPkg.dec
   MdePkg/MdePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [LibraryClasses]
   IoLib
@@ -40,4 +40,4 @@
   PcdLib
 
 [FixedPcd]
-  gsdm845PkgTokenSpaceGuid.PcdBootShimInfo1
+  gQcomTokenSpaceGuid.PcdBootShimInfo1

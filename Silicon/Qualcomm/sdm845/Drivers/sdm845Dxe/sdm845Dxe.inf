@@ -25,7 +25,8 @@
   EmbeddedPkg/EmbeddedPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/sdm845/sdm845.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [LibraryClasses]
   BaseMemoryLib

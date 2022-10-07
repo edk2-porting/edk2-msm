@@ -28,7 +28,7 @@
   ArmPlatformPkg/ArmPlatformPkg.dec
   ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec
   SimpleInit.dec
 
 [LibraryClasses]
@@ -51,9 +51,9 @@
   gArmTokenSpaceGuid.PcdSystemMemoryBase
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName
 
 [Protocols]
   gEfiSmbiosProtocolGuid                      # PROTOCOL ALWAYS_CONSUMED

@@ -13,7 +13,7 @@
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [BuildOptions.AARCH64]
   GCC:*_*_*_CC_FLAGS = -Werror -Wno-error=unused-variable
@@ -31,18 +31,18 @@
   UefiLib
 
 [Pcd]
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinX
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinY
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedY
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gQcomTokenSpaceGuid.PcdTouchCtlrAddress
+  gQcomTokenSpaceGuid.PcdTouchCtlrResetPin
+  gQcomTokenSpaceGuid.PcdTouchCtlrIntPin
+  gQcomTokenSpaceGuid.PcdTouchCtlrI2cDevice
+  gQcomTokenSpaceGuid.PcdTouchMinX
+  gQcomTokenSpaceGuid.PcdTouchMaxX
+  gQcomTokenSpaceGuid.PcdTouchInvertedX
+  gQcomTokenSpaceGuid.PcdTouchMinY
+  gQcomTokenSpaceGuid.PcdTouchMaxY
+  gQcomTokenSpaceGuid.PcdTouchInvertedY
 
 [Protocols]
   gQcomI2cProtocolGuid

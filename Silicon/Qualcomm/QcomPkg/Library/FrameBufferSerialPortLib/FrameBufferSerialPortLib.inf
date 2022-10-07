@@ -12,7 +12,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [LibraryClasses]
   ArmLib
@@ -23,9 +23,9 @@
   CacheMaintenanceLib
 
 [Pcd]
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight

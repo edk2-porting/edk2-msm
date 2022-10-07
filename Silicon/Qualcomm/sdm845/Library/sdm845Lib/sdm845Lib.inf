@@ -24,7 +24,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  sdm845Pkg/sdm845Pkg.dec
+  Silicon/Qualcomm/sdm845/sdm845.dec
   SimpleInit.dec
 
 [LibraryClasses]

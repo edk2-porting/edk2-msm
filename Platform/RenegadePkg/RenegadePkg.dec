@@ -1,0 +1,19 @@
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001A
+  PACKAGE_NAME                   = RenegadePkg
+  PACKAGE_GUID                   = 29a4aa51-8abf-47bc-8958-78c930466ce6
+  PACKAGE_VERSION                = 1.0
+
+[Includes]
+  Include
+
+[Guids]
+  gRenegadePkgTokenSpaceGuid          = { 0xa03432a9, 0x9683, 0x4743, { 0xb1, 0x64, 0xf3, 0x8e, 0x16, 0x0f, 0x18, 0x88 } }
+
+  gSwitchSlotsAppFileGuid             = { 0xD5BC0FB1, 0xA833, 0x4607, { 0xB7, 0xB6, 0x5E, 0xF9, 0xD1, 0x0B, 0xEE, 0xB7 } }
+
+[PcdsFixedAtBuild]
+  # Device Info
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"|VOID*|0x0000a301
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Snapdragon 845 Device"|VOID*|0x0000a302
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"sdm845"|VOID*|0x0000a303

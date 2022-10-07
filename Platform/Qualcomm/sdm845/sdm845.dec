@@ -1,80 +1,14 @@
-#
-#  Copyright (c) 2018, Linaro Limited. All rights reserved.
-#
-#  This program and the accompanying materials
-#  are licensed and made available under the terms and conditions of the BSD License
-#  which accompanies this distribution.  The full text of the license may be found at
-#  http://opensource.org/licenses/bsd-license.php
-#
-#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
-#
-
 [Defines]
   DEC_SPECIFICATION              = 0x0001001a
-  PACKAGE_NAME                   = sdm845Pkg
+  PACKAGE_NAME                   = sdm845
   PACKAGE_GUID                   = 7eb1de03-3910-4d1d-84ce-c17b53636b9a
   PACKAGE_VERSION                = 0.1
 
-################################################################################
-#
-# Include Section - list of Include Paths that are provided by this package.
-#                   Comments are used for Keywords and Module Types.
-#
-# Supported Module Types:
-#  BASE SEC PEI_CORE PEIM DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER UEFI_APPLICATION
-#
-################################################################################
 [Includes.common]
-  Include                        # Root include for the package
-
-[Guids.common]
-  gsdm845PkgTokenSpaceGuid        = { 0x99a14446, 0xaad7, 0xe460, {0xb4, 0xe5, 0x1f, 0x79, 0xaa, 0xa4, 0x93, 0xfd } }
-  gEfiEmmcUserPartitionGuid       = { 0xb615f1f5, 0x5088, 0x43cd, { 0x80, 0x9c, 0xa1, 0x6e, 0x52, 0x48, 0x7d, 0x00 } }
-  gEfiUfsLU0Guid                  = { 0x860845c1, 0xbe09, 0x4355, { 0x8b, 0xc1, 0x30, 0xd6, 0x4f, 0xf8, 0xe6, 0x3a } }
-  gEfiUfsLU1Guid                  = { 0x8d90d477, 0x39a3, 0x4a38, { 0xab, 0x9e, 0x58, 0x6f, 0xf6, 0x9e, 0xd0, 0x51 } }
-  gEfiUfsLU2Guid                  = { 0xedf85868, 0x87ec, 0x4f77, { 0x9c, 0xda, 0x5f, 0x10, 0xdf, 0x2f, 0xe6, 0x01 } }
-  gEfiUfsLU3Guid                  = { 0x1ae69024, 0x8aeb, 0x4df8, { 0xbc, 0x98, 0x00, 0x32, 0xdb, 0xdf, 0x50, 0x24 } }
-  gEfiUfsLU4Guid                  = { 0xd33f1985, 0xf107, 0x4a85, { 0xbe, 0x38, 0x68, 0xdc, 0x7a, 0xd3, 0x2c, 0xea } }
-  gEfiUfsLU5Guid                  = { 0x4ba1d05f, 0x088e, 0x483f, { 0xa9, 0x7e, 0xb1, 0x9b, 0x9c, 0xcf, 0x59, 0xb0 } }
-  gEfiUfsLU6Guid                  = { 0x4acf98f6, 0x26fa, 0x44d2, { 0x81, 0x32, 0x28, 0x2f, 0x2d, 0x19, 0xa4, 0xc5 } }
-  gEfiUfsLU7Guid                  = { 0x8598155f, 0x34de, 0x415c, { 0x8b, 0x55, 0x84, 0x3e, 0x33, 0x22, 0xd3, 0x6f } }
+  Include
 
 [Protocols]
-  gEfiMemCardInfoProtocolGuid       = { 0x85c1f7d2, 0xbce6, 0x4f31, { 0x8f, 0x4d, 0xd3, 0x7e, 0x03, 0xd0, 0x5e, 0xaa } }
-  gSynapticsTouchDeviceProtocolGuid = { 0xf6ba192f, 0x9ee4, 0x4e3b, { 0xb1, 0x7a, 0xda, 0x75, 0x40, 0x3f, 0xa5, 0xa7 } }
-  gQcomI2cProtocolGuid              = { 0xb27ae8b1, 0x3e10, 0x4d07, { 0xab, 0x5c, 0xeb, 0x9a, 0x6d, 0xc6, 0xfa, 0x8f } }
-  gQcomTlmmProtocolGuid             = { 0xad9aec18, 0x7bf0, 0x4809, { 0x9e, 0x96, 0x30, 0x12, 0x30, 0x9f, 0x3d, 0xf7 } }
-  gQcomTlmmRTProtocolGuid           = { 0xcc3f4da6, 0xa51e, 0x4fb7, { 0x98, 0xd1, 0xa0, 0x6e, 0xb8, 0x5d, 0x8e, 0x1e } }
-  gQcomPmicVregProtocolGuid         = { 0x22d38d3d, 0xe8b6, 0x4f8f, { 0x9c, 0x26, 0xbc, 0xeb, 0x07, 0xd6, 0xcb, 0x68 } }
-  gQcomSMEMProtocolGuid             = { 0xf4e5c7d0, 0xd239, 0x47cb, { 0xaa, 0xcd, 0x7f, 0x66, 0xef, 0x76, 0x32, 0x38 } }
 
 [Guids]
-  gSwitchSlotsAppFileGuid             = { 0xD5BC0FB1, 0xA833, 0x4607, { 0xB7, 0xB6, 0x5E, 0xF9, 0xD1, 0x0B, 0xEE, 0xB7 } }
 
 [PcdsFixedAtBuild.common]
-  # Simple FrameBuffer
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x00400000|UINT32|0x0000a400
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080|UINT32|0x0000a401
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2160|UINT32|0x0000a402
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404
-  gsdm845PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|2160|UINT32|0x0000a405
-  # RTC information
-  gsdm845PkgTokenSpaceGuid.PcdBootShimInfo1|0xb0000000|UINT64|0x00000a601
-  # Device Info
-  gsdm845PkgTokenSpaceGuid.PcdDeviceVendor|"Qualcomm"|VOID*|0x0000a301
-  gsdm845PkgTokenSpaceGuid.PcdDeviceProduct|"Snapdragon 845 Device"|VOID*|0x0000a302
-  gsdm845PkgTokenSpaceGuid.PcdDeviceCodeName|"sdm845"|VOID*|0x0000a303
-  # Touch Screen
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress|0|UINT16|0x0000a501
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin|0|UINT32|0x0000a502
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrVregPin|0|UINT32|0x0000a503
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin|0|UINT32|0x0000a504
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice|0|UINT32|0x0000a505
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinX|0|UINT32|0x0000a506
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX|0|UINT32|0x0000a507
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX|FALSE|BOOLEAN|0x0000a508
-  gsdm845PkgTokenSpaceGuid.PcdTouchMinY|0|UINT32|0x0000a509
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY|0|UINT32|0x0000a50a
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedY|FALSE|BOOLEAN|0x0000a50b
