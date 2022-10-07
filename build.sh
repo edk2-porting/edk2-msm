@@ -82,11 +82,10 @@ function _build(){
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	
-	## This makes VSCode highlighting confused, please fix
-	#case "${MODE}" in
-	#	RELEASE)_MODE=RELEASE;;
-	#	*)_MODE=DEBUG;;
-	#esac
+	case "${MODE}" in
+		RELEASE) _MODE=RELEASE;;
+		*) _MODE=DEBUG;;
+	esac
 
 	if [ -f "devices/${DEVICE}.conf" ]
 	then source "devices/${DEVICE}.conf"
@@ -152,25 +151,23 @@ export GEN_ROOTFS=true
 OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
-
-## This makes VSCode highlighting confused, please fix
-# do	case "${1}" in
-# 		-d|--device)DEVICE="${2}";shift 2;;
-# 		-a|--all)DEVICE=all;shift;;
-# 		-c|--chinese)CHINESE=true;shift;;
-# 		-A|--acpi)GEN_ACPI=true;shift;;
-# 		-C|--clean)CLEAN=true;shift;;
-# 		-D|--distclean)DISTCLEAN=true;shift;;
-# 		-O|--outputdir)OUTDIR="${2}";shift 2;;
-# 		--skip-rootfs-gen)GEN_ROOTFS=false;shift;;
-# 		-r|--release)MODE="${2}";shift 2;;
-# 		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
-# 		-u|--uart)USE_UART=1;shift;;
-# 		-h|--help)_help 0;shift;;
-# 		--)shift;break;;
-# 		*)_help 1;;
-# 	esac
-# done
+do	case "${1}" in
+		-d|--device) DEVICE="${2}";shift 2;;
+		-a|--all) DEVICE=all;shift;;
+		-c|--chinese) CHINESE=true;shift;;
+		-A|--acpi) GEN_ACPI=true;shift;;
+		-C|--clean) CLEAN=true;shift;;
+		-D|--distclean) DISTCLEAN=true;shift;;
+		-O|--outputdir) OUTDIR="${2}";shift 2;;
+		--skip-rootfs-gen) GEN_ROOTFS=false;shift;;
+		-r|--release) MODE="${2}";shift 2;;
+		-t|--toolchain) TOOLCHAIN="${2}";shift 2;;
+		-u|--uart) USE_UART=1;shift;;
+		-h|--help) _help 0;shift;;
+		--) shift;break;;
+		*) _help 1;;
+	esac
+done
 if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
