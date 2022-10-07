@@ -1,2 +1,0 @@
-URL:    https://github.com/tianocore/edk2/tree/master/MdeModulePkg/Bus/Isa/Ps2KeyboardDxe
-BRANCH: master @ 35dadd7c54

@@ -2,39 +2,37 @@
 
 ##### Change this to add device #####
 DEVICES=(
-	dipper
-	enchilada
-	fajita
-	polaris
-	beryllium-tianma
+	akershus
+	atoll
+	ayn-odin
 	beryllium-ebbg
-	perseus
-	nx616j
-	m1882
-	m1892
-	skr-a0
+	beryllium-tianma
+	dipper
+	draco
+	enchilada
+	equuleus
+	fajita
 	judyln
 	judyp
 	judypn
-	star2qltechn
-	dipper-old
+	m1882
+	m1892
+	nx616j
 	pafm00
-	trident
-	olympic
-	draco
 	pd1821
-	ayn-odin
-	akershus
-	equuleus
+	perseus
+	polaris
+	skr-a0
+	star2qltechn
+	trident
 	zs600kl
-	atoll
 )
 #####################################
 
 function _help(){
 	echo "Usage: build.sh --device DEV"
 	echo
-	echo "Build edk2 for Qualcomm SDM845 platform."
+	echo "Build edk2 for Qualcomm Snapdragon platforms."
 	echo
 	echo "Options: "
 	echo "	--device DEV, -d DEV:    build for DEV. (${DEVICES[*]})"
@@ -50,7 +48,7 @@ function _help(){
 	echo "	--outputdir, -O:         output folder."
 	echo "	--help, -h:              show this help."
 	echo
-	echo "MainPage: https://github.com/edk2-porting/edk2-sdm845"
+	echo "MainPage: https://github.com/edk2-porting/edk2-msm"
 	exit "${1}"
 }
 
@@ -83,10 +81,13 @@ function _build(){
 	fi
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	case "${MODE}" in
-		RELEASE)_MODE=RELEASE;;
-		*)_MODE=DEBUG;;
-	esac
+	
+	## This makes VSCode highlighting confused, please fix
+	#case "${MODE}" in
+	#	RELEASE)_MODE=RELEASE;;
+	#	*)_MODE=DEBUG;;
+	#esac
+
 	if [ -f "devices/${DEVICE}.conf" ]
 	then source "devices/${DEVICE}.conf"
 	else source "devices/default.conf"
@@ -129,6 +130,11 @@ function _clean(){ rm --one-file-system --recursive --force ./workspace boot-*.i
 
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 
+#############################################
+echo "The repo is currently being refactored"
+exit 0
+#############################################
+
 cd "$(dirname "$0")"||exit 1
 [ -f sdm845Pkg/sdm845Pkg.dsc ]||_error "cannot find sdm845Pkg/sdm845Pkg.dsc"
 typeset -l DEVICE
@@ -146,37 +152,38 @@ export GEN_ROOTFS=true
 OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
-do	case "${1}" in
-		-d|--device)DEVICE="${2}";shift 2;;
-		-a|--all)DEVICE=all;shift;;
-		-c|--chinese)CHINESE=true;shift;;
-		-A|--acpi)GEN_ACPI=true;shift;;
-		-C|--clean)CLEAN=true;shift;;
-		-D|--distclean)DISTCLEAN=true;shift;;
-		-O|--outputdir)OUTDIR="${2}";shift 2;;
-		--skip-rootfs-gen)GEN_ROOTFS=false;shift;;
-		-r|--release)MODE="${2}";shift 2;;
-		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
-		-u|--uart)USE_UART=1;shift;;
-		-h|--help)_help 0;shift;;
-		--)shift;break;;
-		*)_help 1;;
-	esac
-done
+
+## This makes VSCode highlighting confused, please fix
+# do	case "${1}" in
+# 		-d|--device)DEVICE="${2}";shift 2;;
+# 		-a|--all)DEVICE=all;shift;;
+# 		-c|--chinese)CHINESE=true;shift;;
+# 		-A|--acpi)GEN_ACPI=true;shift;;
+# 		-C|--clean)CLEAN=true;shift;;
+# 		-D|--distclean)DISTCLEAN=true;shift;;
+# 		-O|--outputdir)OUTDIR="${2}";shift 2;;
+# 		--skip-rootfs-gen)GEN_ROOTFS=false;shift;;
+# 		-r|--release)MODE="${2}";shift 2;;
+# 		-t|--toolchain)TOOLCHAIN="${2}";shift 2;;
+# 		-u|--uart)USE_UART=1;shift;;
+# 		-h|--help)_help 0;shift;;
+# 		--)shift;break;;
+# 		*)_help 1;;
+# 	esac
+# done
 if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
 if ! [ -f edk2/edksetup.sh ] && ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
-	[ -e sdm845Pkg/AcpiTables/.git ]||git clone https://git.renegade-project.org/edk2-sdm845-acpi.git sdm845Pkg/AcpiTables
 	if "${CHINESE}"
-	then	git submodule set-url edk2                         https://hub.fastgit.xyz/tianocore/edk2.git
-		git submodule set-url edk2-platforms               https://hub.fastgit.xyz/tianocore/edk2-platforms.git
-		git submodule set-url sdm845Pkg/Binary             https://hub.fastgit.xyz/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url sdm845Pkg/Library/SimpleInit https://hub.fastgit.xyz/BigfootACA/simple-init.git
+	then	git submodule set-url Common/edk2                                       https://hub.fastgit.xyz/tianocore/edk2.git
+		git submodule set-url Common/edk2-platforms                                 https://hub.fastgit.xyz/tianocore/edk2-platforms.git
+		git submodule set-url Platform/EFI_Binaries                                 https://hub.fastgit.xyz/edk2-porting/edk2-sdm845-binary.git
+		git submodule set-url Platform/RenegadePkg/Library/SimpleInit               https://hub.fastgit.xyz/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
-		pushd edk2
+		pushd Common/edk2
 
 		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.fastgit.xyz/ucb-bar/berkeley-softfloat-3.git
 		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.fastgit.xyz/openssl/openssl.git
@@ -189,17 +196,17 @@ then	set -e
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
-		pushd sdm845Pkg/Library/SimpleInit
+		pushd Platform/RenegadePkg/Library/SimpleInit
 		git submodule set-url libs/lvgl     https://hub.fastgit.xyz/lvgl/lvgl.git
 		git submodule set-url libs/freetype https://hub.fastgit.xyz/freetype/freetype.git
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
 	else	git submodule init;git submodule update --depth 1
-		pushd edk2
+		pushd Common/edk2
 		git submodule init;git submodule update
 		popd
-		pushd sdm845Pkg/Library/SimpleInit
+		pushd Platform/RenegadePkg/Library/SimpleInit
 		git submodule init;git submodule update
 		popd
 	fi

@@ -1,5 +1,0 @@
-services:
-  edk2:
-    build: .
-    volumes:
-      - .:/build

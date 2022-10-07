@@ -1,0 +1,95 @@
+#include "Platform.h"
+#include "Socdata.h"
+#include <ACPI.h>
+#include <ACPIDmaRGDefs.h>
+
+#pragma pack(push, 1)
+
+#define ACPI_CSRT_RG_DEVICE_ID_TIMER     0x100A
+#define ACPI_CSRT_RG_DEVICE_ID_DMA       0x1002
+#define ACPI_CSRT_RG_DEVICE_ID_INTERRUPT 0x1003
+#define ACPI_CSRT_RG_DEVICE_ID_WDOG_TIMER 0x100B
+
+typedef enum _RD_TIMER_TYPE {
+    UnknownTimer = 0,
+    QWdogTimer = 2
+} RD_TIMER_TYPE, *PRD_TIMER_TYPE;
+
+typedef struct {
+    CSRT_RESOURCE_DESCRIPTOR_HEADER Header;
+    RD_TIMER_TYPE Type;
+    UINT64 BaseAddress;
+    UINT32 Frequency;
+    UINT32 Gsi;
+} RD_TIMER, *PRD_TIMER;
+
+typedef struct {
+    CSRT_RESOURCE_GROUP_HEADER Header;
+    RD_TIMER Timer1;
+} RG_TIMER;
+
+// number of ADM channels mapped into Scorpion domain
+// CSRT structure for this platform
+//------------------------------------------------------------------------
+
+typedef struct {
+    ACPI_HEADER Header;
+    RG_TIMER TimerResourceGroup;
+} CSRT;
+
+#define RG_HEADER(_TYPE, _DEVID, _SHARED_SIZE) \
+    sizeof(_TYPE),                  /* Resource Group Length */\
+    SIGNATURE4('Q','C','O','M'),    /* VendorId              */\
+    0,                              /* SubvendorId           */\
+    _DEVID,                         /* DeviceId              */\
+    0,                              /* SubdeviceId           */\
+    0,                              /* Revision              */\
+    0,                              /* Reserved              */\
+    _SHARED_SIZE                    /* Size of shared area   */\
+
+//------------------------------------------------------------------------
+// CSRT structure for this platform
+//------------------------------------------------------------------------
+typedef struct {
+    ACPI_HEADER       CsrtHeader;
+    RG_TIMER          Timer1;
+    SOCDTABLE_SOCD    SocData;
+} ACPI_CSRT_TABLE;
+
+ACPI_CSRT_TABLE Csrt = {
+    //------------------------------------------------------------------------
+    // CSRT Header
+    //------------------------------------------------------------------------
+    ACPI_CSRT_SIGNATURE,        // Signature
+    sizeof(ACPI_CSRT_TABLE),    // Length
+    ACPI_CSRT_REVISION,         // Revision
+    0x00,                       // Checksum calculated at runtime.
+    ACPI_OEM_ID,                // OEMID is a 6 bytes long field.
+    ACPI_OEM_TABLE_ID,          // OEM table identification(8 bytes long).
+    ACPI_OEM_REVISION,          // OEM revision number.
+    ACPI_CREATOR_ID,            // ASL compiler vendor ID.
+    ACPI_CREATOR_REVISION,      // ASL compiler revision number.
+
+    //------------------------------------------------------------------------
+    // Timer Resource Group - Shared (memory-mapped) QTimer
+    //------------------------------------------------------------------------
+
+    RG_HEADER(RG_TIMER, ACPI_CSRT_RG_DEVICE_ID_WDOG_TIMER, 0),
+
+    
+    // Timer1 Resource Descriptor
+    
+
+    sizeof(RD_TIMER),
+    CSRT_RD_TYPE_TIMER,
+    CSRT_RD_SUBTYPE_TIMER,
+    1,
+    QWdogTimer,
+    0x17980000,  //  Timer base address
+    32765,    //  frequency
+    32,          //  GSIV 
+    .SocData=SOCDTABLE_SOCD_VAR,
+};
+
+#pragma pack(pop)
+
