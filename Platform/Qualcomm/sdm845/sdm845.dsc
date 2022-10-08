@@ -20,7 +20,6 @@
 
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
-  ArmPlatformLib|Silicon/Qualcomm/sdm845/Library/sdm845Lib/sdm845Lib.inf
   CompilerIntrinsicsLib|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
@@ -79,21 +78,15 @@
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
 
   PlatformBootManagerLib|Platform/RenegadePkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
-  MemoryInitPeiLib|Silicon/Qualcomm/QcomPkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
-  PlatformPeiLib|Silicon/Qualcomm/QcomPkg/Library/PlatformPeiLib/PlatformPeiLib.inf
+
+  # Ported from SurfaceDuoPkg
+  MemoryInitPeiLib|Silicon/Qualcomm/sdm845/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformPeiLib|Silicon/Qualcomm/sdm845/Library/PlatformPeiLib/PlatformPeiLib.inf
+  PlatformPrePiLib|Silicon/Qualcomm/sdm845/Library/PlatformPrePiLib/PlatformPrePiLib.inf
 
 !ifdef $(AB_SLOTS_SUPPORT)
   BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
 !endif #$(AB_SLOTS_SUPPORT)
-
-[LibraryClasses.common.SEC]
-  PrePiLib|EmbeddedPkg/Library/PrePiLib/PrePiLib.inf
-  ExtractGuidedSectionLib|EmbeddedPkg/Library/PrePiExtractGuidedSectionLib/PrePiExtractGuidedSectionLib.inf
-  HobLib|EmbeddedPkg/Library/PrePiHobLib/PrePiHobLib.inf
-  MemoryAllocationLib|EmbeddedPkg/Library/PrePiMemoryAllocationLib/PrePiMemoryAllocationLib.inf
-  MemoryInitPeiLib|Silicon/Qualcomm/QcomPkg/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
-  PlatformPeiLib|Silicon/Qualcomm/QcomPkg/Library/PlatformPeiLib/PlatformPeiLib.inf
-  PrePiHobListPointerLib|ArmPlatformPkg/Library/PrePiHobListPointerLib/PrePiHobListPointerLib.inf
 
 ################################################################################
 #
@@ -114,7 +107,14 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"$(FIRMWARE_VER)"
 
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0xC0000000
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x17AE00000        # 6GB Size
+
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x04230000         # UefiMemorySize, DXE heap size
+  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x19100000  # Start here, DXE heap
+
+  gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0x9ff8c000     # CPU Vectors
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FF90000      # UEFI Stack
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00020000      # 128K stack
 
   #
   # SimpleInit
@@ -164,11 +164,6 @@
 #
 ################################################################################
 [Components.common]
-  #
-  # PEI Phase modules
-  #
-  ArmPlatformPkg/PrePi/PeiUniCore.inf
-
   #
   # DXE
   #
@@ -229,7 +224,7 @@
   #
   EmbeddedPkg/Drivers/VirtualKeyboardDxe/VirtualKeyboardDxe.inf
 
-  Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
+  # Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
   #
@@ -343,4 +338,5 @@
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable -march=armv8.2-a+crypto+rcpc -mtune=cortex-a75.cortex-a55
+  *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -Wno-unused-variable -Wno-unused-but-set-variable -Wno-self-assign -Wno-non-literal-null-conversion -Wno-uninitialized -Wno-initializer-overrides
+  *_*_*_ASM_FLAGS = -Wa,-march=armv8.2-a+crypto+rcpc,-mabi=lp64

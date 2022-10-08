@@ -92,6 +92,12 @@ function _build(){
 	then source "configs/${DEVICE}.conf"
 	else _error "cannot find device config"
 	fi
+
+	echo "Building BootShim"
+	pushd tools/BootShim
+	make UEFI_BASE=0xD0000000 UEFI_SIZE=0x00600000
+	popd
+
 	build \
 		-s \
 		-n 0 \
@@ -102,8 +108,13 @@ function _build(){
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
 		||return "$?"
+	cat \
+		"tools/BootShim/BootShim.bin" \
+		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd" \
+		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd-bootshim" \
+		||return "$?"
 	gzip -c \
-		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd" \
+		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd-bootshim" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \

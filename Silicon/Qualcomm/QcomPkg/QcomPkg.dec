@@ -30,6 +30,10 @@
   gQcomSMEMProtocolGuid             = { 0xf4e5c7d0, 0xd239, 0x47cb, { 0xaa, 0xcd, 0x7f, 0x66, 0xef, 0x76, 0x32, 0x38 } }
 
 [PcdsFixedAtBuild.common]
+  # Memory allocation
+  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x1AB00000|UINT64|0x00000a106 # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x3500000|UINT32|0x00000a107         # UefiMemorySize
+
   # Simple FrameBuffer
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x00400000|UINT32|0x0000a400
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080|UINT32|0x0000a401

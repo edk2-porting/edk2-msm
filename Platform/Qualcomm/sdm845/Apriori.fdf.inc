@@ -210,5 +210,5 @@ APRIORI DXE {
     SECTION UI = "DDRInfoDxe"
   }
 
-  INF Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
+  # INF Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
 }

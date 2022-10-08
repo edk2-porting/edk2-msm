@@ -1,19 +1,11 @@
 /** @file
- *
- *  Copyright (c) 2011-2015, ARM Limited. All rights reserved.
- *
- *  This program and the accompanying materials
- *  are licensed and made available under the terms and conditions of the BSD
- *License which accompanies this distribution.  The full text of the license may
- *be found at http://opensource.org/licenses/bsd-license.php
- *
- *  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR
- *IMPLIED.
- *
- **/
 
-#define FDT_DIRECT
+  Copyright (c) 2011-2015, ARM Limited. All rights reserved.
+
+  SPDX-License-Identifier: BSD-2-Clause-Patent
+
+**/
+
 #include <PiPei.h>
 
 #include <Library/ArmMmuLib.h>
@@ -22,27 +14,14 @@
 #include <Library/HobLib.h>
 #include <Library/MemoryAllocationLib.h>
 #include <Library/PcdLib.h>
-#include <Library/FdtParserLib.h>
 
 // This varies by device
-#ifdef SM7125_TEST
-#include <Configuration/DeviceMemoryMap7125.h>
-#else
 #include <Configuration/DeviceMemoryMap.h>
-#endif
-
-#define SIZE_KB ((UINTN)(1024))
-#define SIZE_MB ((UINTN)(SIZE_KB * 1024))
-#define SIZE_GB ((UINTN)(SIZE_MB * 1024))
-#define SIZE_MB_BIG(_Size,_Value) ((_Size) > ((_Value) * SIZE_MB))
-#define SIZE_MB_SMALL(_Size,_Value) ((_Size) < ((_Value) * SIZE_MB))
-#define SIZE_MB_IN(_Min,_Max,_Size) \
-  if (SIZE_MB_BIG((MemoryTotal), (_Min)) && SIZE_MB_SMALL((MemoryTotal), (_Max)))\
-    Mem = Mem##_Size##G, MemGB = _Size
 
 extern UINT64 mSystemMemoryEnd;
 
 VOID BuildMemoryTypeInformationHob(VOID);
+
 
 STATIC
 VOID InitMmu(IN ARM_MEMORY_REGION_DESCRIPTOR *MemoryTable)
@@ -70,7 +49,11 @@ VOID AddHob(PARM_MEMORY_REGION_DESCRIPTOR_EX Desc)
   BuildResourceDescriptorHob(
       Desc->ResourceType, Desc->ResourceAttribute, Desc->Address, Desc->Length);
 
-  BuildMemoryAllocationHob(Desc->Address, Desc->Length, Desc->MemoryType);
+  if (Desc->ResourceType == EFI_RESOURCE_SYSTEM_MEMORY ||
+      Desc->MemoryType == EfiRuntimeServicesData)
+  {
+    BuildMemoryAllocationHob(Desc->Address, Desc->Length, Desc->MemoryType);
+  }
 }
 
 /*++
@@ -97,59 +80,28 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
   PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
       gDeviceMemoryDescriptorEx;
   ARM_MEMORY_REGION_DESCRIPTOR
-  MemoryDescriptor[MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT];
+        MemoryDescriptor[MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT];
   UINTN Index = 0;
-  UINTN Node = 0;
-  UINTN MemoryBase = 0;
-  UINTN MemorySize = 0;
-  UINTN MemoryTotal = 0;
-  DeviceMemoryAddHob Mem = Mem4G;
-  UINT8 MemGB = 4;
-  fdt *Fdt;
 
-  Fdt = GetFdt();
-  ASSERT(Fdt != NULL);
-
-  while (fdt_get_memory(Fdt, (int)Node, (uint64_t*)&MemoryBase, (uint64_t*)&MemorySize)) {
-    MemoryTotal += MemorySize;
-    DEBUG((
-      EFI_D_INFO,
-      "FDT Memory %-2d: 0x%016llx - 0x%016llx (0x%016llx)\n",
-      Node, MemoryBase, (MemoryBase + MemorySize), MemorySize
-    ));
-    Node++;
-  }
-
-  // Memory   Min    Max   Config
-  SIZE_MB_IN (3072,  4608, 4);
-  SIZE_MB_IN (5120,  6656, 6);
-  SIZE_MB_IN (7168,  8704, 8);
-  SIZE_MB_IN (9216, 10752, 10);
-
-  DEBUG((EFI_D_INFO, "FDT Memory Total: 0x%016lx (%d GiB)\n", MemoryTotal, MemoryTotal / SIZE_GB));
-  DEBUG((EFI_D_INFO, "Select Config: %d GiB\n", MemGB));
+  // Ensure PcdSystemMemorySize has been set
+  ASSERT(PcdGet64(PcdSystemMemorySize) != 0);
 
   // Run through each memory descriptor
   while (MemoryDescriptorEx->Length != 0) {
-    if (MemoryDescriptorEx->MemoryType == EfiConventionalMemory)
-      MemoryTotal += MemoryDescriptorEx->Length;
     switch (MemoryDescriptorEx->HobOption) {
-    case Mem4G:
-    case Mem6G:
-    case Mem8G:
-    case Mem10G:
-      if (MemoryDescriptorEx->HobOption != Mem) {
-        MemoryDescriptorEx++;
-        continue;
-      }
-      // fallthrough
     case AddMem:
     case AddDev:
+    case HobOnlyNoCacheSetting:
       AddHob(MemoryDescriptorEx);
       break;
     case NoHob:
     default:
       goto update;
+    }
+
+    if (MemoryDescriptorEx->HobOption == HobOnlyNoCacheSetting) {
+      MemoryDescriptorEx++;
+      continue;
     }
 
   update:

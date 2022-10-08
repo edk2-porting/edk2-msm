@@ -25,7 +25,7 @@
 ################################################################################
 
 [FD.sdm845_UEFI]
-BaseAddress   = 0xd0000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in NOR Flash.
+BaseAddress   = 0xD0000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in NOR Flash.
 Size          = 0x00600000|gArmTokenSpaceGuid.PcdFdSize         # The size in bytes of the FLASH Device
 ErasePolarity = 1
 
@@ -140,7 +140,7 @@ READ_LOCK_STATUS   = TRUE
 # BSP drivers
 !include Platform/Qualcomm/sdm845/dxe.fdf.inc
 
-  INF Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
+  # INF Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf
   INF Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
   #
@@ -208,7 +208,8 @@ READ_LOCK_STATUS   = TRUE
   #
   INF src/main/SimpleInitMain.inf
 
-  INF src/kernelfdt/KernelFdtDxe.inf
+  # TODO: Kernel Fdt Dxe
+  # INF src/kernelfdt/KernelFdtDxe.inf
 
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)
@@ -231,7 +232,7 @@ READ_STATUS        = TRUE
 READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 
-  INF ArmPlatformPkg/PrePi/PeiUniCore.inf
+  INF Silicon/Qualcomm/QcomPkg/PrePi/PrePi.inf
 
   FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
     SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {

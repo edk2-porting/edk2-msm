@@ -337,4 +337,4 @@
 !endif #$(INCLUDE_TFTP_COMMAND)
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable -march=armv8.2-a+crypto+rcpc -mtune=cortex-a75.cortex-a55
+  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable -march=armv8.2-a+crypto+rcpc
