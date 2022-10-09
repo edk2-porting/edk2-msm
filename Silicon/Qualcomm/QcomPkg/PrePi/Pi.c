@@ -64,8 +64,8 @@ PrePiMain(
 
   DEBUG(
       (EFI_D_INFO | EFI_D_LOAD,
-       "UEFI Memory Base = 0x%llx, Size = 0x%llx, Stack Base = 0x%llx, Stack "
-       "Size = 0x%llx\n",
+       "UEFI Memory Base = 0x%llx, Size = 0x%llx \n"
+       "Stack Base = 0x%llx, Stack Size = 0x%llx \n",
        UefiMemoryBase, UefiMemorySize, StackBase, StackSize));
 
   // Set up HOB
@@ -93,7 +93,7 @@ PrePiMain(
   SetBootMode (BOOT_WITH_DEFAULT_SETTINGS);
 
   // Initialize Platform HOBs (CpuHob and FvHob)
-  Status = PlatformPeim();
+  // Status = PlatformPeim();
   ASSERT_EFI_ERROR (Status);
 
   // Now, the HOB List has been initialized, we can register performance information

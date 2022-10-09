@@ -111,11 +111,11 @@ function _build(){
 		||return "$?"
 	cat \
 		"tools/BootShim/BootShim.bin" \
-		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd" \
-		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd-bootshim" \
+		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd" \
+		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
 		||return "$?"
 	gzip -c \
-		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd-bootshim" \
+		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \

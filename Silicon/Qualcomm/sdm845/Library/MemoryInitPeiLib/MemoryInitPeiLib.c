@@ -124,7 +124,7 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
   MemoryDescriptor[Index].Attributes   = 0;
 
   // Build Memory Allocation Hob
-  DEBUG((EFI_D_INFO, "Configure MMU In \n"));
+  DEBUG((EFI_D_INFO, "\nConfigure MMU In \n"));
   InitMmu(MemoryDescriptor);
   DEBUG((EFI_D_INFO, "Configure MMU Out \n"));
 

@@ -33,7 +33,7 @@
   LzmaDecompressLib
   MemoryAllocationLib
   MemoryInitPeiLib
-  PlatformPeiLib
+  # PlatformPeiLib
   PlatformPrePiLib
   PrePiHobListPointerLib
   PrePiLib
