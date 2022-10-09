@@ -75,19 +75,24 @@ _DonNotTrap_VFP_SIMD:
 _SetupPrimaryCoreStack:
   ldr x0, _StackBase     /* Stack base arg0 */
   ldr x1, _StackSize     /* Stack size arg1 */
-  
-  /*Zero Init stack */
-  mov x2, #0 
-  mov x3, #0 
-  
+
+  /* Zero Init stack */
+  add x2, x0, x1         /* End of Stack */
+  mov x3, x0             /* Stack Base */
+
+  mov v4.d[0], xzr
+  mov v4.d[1], xzr
+  mov v5.16b, v4.16b
+  mov v6.16b, v4.16b
+  mov v7.16b, v4.16b
+
 _ClearStack:
-  str     x3, [x0, x2] 
-  adds    x2, x2, #8      /* Fill every 8 byte */ 
-  cmp     x2, x1          /* Compare Size */ 
-  bne     _ClearStack 
-  
-  add x4, x0, x1
-  add sp, x4, #0
+  /* Assumes StackBase is 128-bit aligned, StackSize is a multiple of 64B */
+  st4   {v4.16b, v5.16b, v6.16b, v7.16b}, [x3], #64  /* Fill every 64 bytes */
+  cmp   x3, x2                                   /* Compare Size */
+  b.lt  _ClearStack
+
+  add sp, x2, xzr                                /* Initalize SP */
 
 _EnableCache:
   bl ArmInvalidateDataCache
