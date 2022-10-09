@@ -27,5 +27,3 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
   gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight

@@ -17,6 +17,7 @@ DEVICES=(
 	judypn
 	m1882
 	m1892
+	mh2lm
 	nx616j
 	pafm00
 	pd1821
@@ -110,11 +111,11 @@ function _build(){
 		||return "$?"
 	cat \
 		"tools/BootShim/BootShim.bin" \
-		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd" \
-		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd-bootshim" \
+		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd" \
+		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd-bootshim" \
 		||return "$?"
 	gzip -c \
-		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SDM845_UEFI.fd-bootshim" \
+		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC}_UEFI.fd-bootshim" \
 		> "workspace/uefi-${DEVICE}.img.gz" \
 		||return "$?"
 	cat \

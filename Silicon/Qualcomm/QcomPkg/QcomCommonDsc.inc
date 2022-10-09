@@ -70,8 +70,9 @@
   ArmSmcLib|ArmPkg/Library/ArmSmcLib/ArmSmcLib.inf
   ArmHvcLib|ArmPkg/Library/ArmHvcLib/ArmHvcLib.inf
 
-  ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
+  # ArmMmuLib|Silicon/Qualcomm/sdm845/Library/ArmMmuLib/ArmMmuBaseLib.inf
 
+  ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
   ResetSystemLib|ArmPkg/Library/ArmSmcPsciResetSystemLib/ArmSmcPsciResetSystemLib.inf
 
   # ARM PL011 UART Driver
@@ -251,8 +252,8 @@
   *_*_*_DLINK_FLAGS = -z common-page-size=0x1000
 
 [BuildOptions.common.EDKII.DXE_RUNTIME_DRIVER]
-  GCC:*_*_ARM_DLINK_FLAGS = -z common-page-size=0x1000
-  GCC:*_*_AARCH64_DLINK_FLAGS = -z common-page-size=0x10000
+  *_*_ARM_DLINK_FLAGS = -z common-page-size=0x1000
+  *_*_AARCH64_DLINK_FLAGS = -z common-page-size=0x10000
 
 ################################################################################
 #
