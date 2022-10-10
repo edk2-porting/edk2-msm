@@ -213,8 +213,7 @@ READ_LOCK_STATUS   = TRUE
   #
   INF src/main/SimpleInitMain.inf
 
-  # TODO: Kernel Fdt Dxe
-  # INF src/kernelfdt/KernelFdtDxe.inf
+  INF src/kernelfdt/KernelFdtDxe.inf
 
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)

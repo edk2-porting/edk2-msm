@@ -27,6 +27,9 @@ _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
 _ModuleEntryPoint:
+  mov x10, FixedPcdGet64 (PcdDeviceTreeStore)
+  str x0, [x10] // oh my fdt
+
   mov x0, #0
   mov x1, #0
 

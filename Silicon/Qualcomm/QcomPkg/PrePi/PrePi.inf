@@ -21,6 +21,7 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  SimpleInit.dec
 
 [LibraryClasses]
   ArmLib
@@ -33,7 +34,7 @@
   LzmaDecompressLib
   MemoryAllocationLib
   MemoryInitPeiLib
-  # PlatformPeiLib
+  PlatformPeiLib
   PlatformPrePiLib
   PrePiHobListPointerLib
   PrePiLib
@@ -71,3 +72,4 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
   gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
