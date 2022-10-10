@@ -37,8 +37,8 @@
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x05800000         # UefiMemorySize, DXE heap size
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x17C00000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x07B30000         # UefiMemorySize, DXE heap size
+  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x15800000  # Start here, DXE heap
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9D400000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
@@ -68,4 +68,4 @@
   # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
 
 [Components.common]
-  Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  # Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
