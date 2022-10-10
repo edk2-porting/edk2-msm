@@ -14,7 +14,8 @@
       EFI_RESOURCE_ATTRIBUTE_WRITE_BACK_CACHEABLE |                            \
       EFI_RESOURCE_ATTRIBUTE_EXECUTION_PROTECTABLE
 
-typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, MaxMem } DeviceMemoryAddHob;
+typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, 
+               Mem4G, Mem6G, Mem8G, Mem10G, MaxMem } DeviceMemoryAddHob;
 
 #define MEMORY_REGION_NAME_MAX_LENGTH 32
 
@@ -102,7 +103,16 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     /* RAM partition regions */
     {"RAM Partition",     0xA0000000, 0x030000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"UEFI FD",           0xD0000000, 0x000600000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
-    {"RAM Partition",     0xD0600000, 0x12A800000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+
+    /* 4GiB Memory */
+    {"RAM Partition",     0xD0600000, 0x0AD9A0000, Mem4G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    /* 6GiB Memory */
+    {"RAM Partition",     0xD0600000, 0x12A800000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    /* 8GiB Memory */
+    {"RAM Partition",     0xD0600000, 0x0AFA00000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0x180000000,0x0FC8A0000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    /* 10GiB Memory */
+    {"RAM Partition",     0xD0600000, 0x2244C0000, Mem10G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
     /* Other memory regions */
     {"AOP_SS_MSG_RAM",    0x0C300000, 0x00100000,  NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
