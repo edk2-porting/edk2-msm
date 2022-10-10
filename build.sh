@@ -1,43 +1,13 @@
 #!/bin/bash
 
-##### Change this to add device #####
-DEVICES=(
-	akershus
-	atoll
-	ayn-odin
-	beryllium-ebbg
-	beryllium-tianma
-	dipper
-	draco
-	enchilada
-	equuleus
-	fajita
-	judyln
-	judyp
-	judypn
-	m1882
-	m1892
-	mh2lm
-	nx616j
-	pafm00
-	pd1821
-	perseus
-	polaris
-	skr-a0
-	star2qltechn
-	trident
-	zs600kl
-)
-#####################################
-
 function _help(){
 	echo "Usage: build.sh --device DEV"
 	echo
 	echo "Build edk2 for Qualcomm Snapdragon platforms."
 	echo
 	echo "Options: "
-	echo "	--device DEV, -d DEV:    build for DEV. (${DEVICES[*]})"
-	echo "	--all, -a:               build all devices."
+	echo "	--device DEV, -d DEV:    build for DEV."
+#	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use hub.fastgit.xyz for submodule cloning."
 	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
 	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
@@ -91,7 +61,7 @@ function _build(){
 
 	if [ -f "configs/${DEVICE}.conf" ]
 	then source "configs/${DEVICE}.conf"
-	else _error "cannot find device config"
+	else _error "Device configuration not found"
 	fi
 
 	echo "Building BootShim"
@@ -237,6 +207,7 @@ done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
 [ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
+[ -f "configs/${DEVICE}.conf" ]||_error "Device configuration not found"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
@@ -256,25 +227,29 @@ do	[ -f "${i}" ]||continue
 	mkdir -p "${_path}"
 	msgfmt -o "${_path}/simple-init.mo" "${i}"
 done
+
 if "${GEN_ROOTFS}"
 then bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
 	"${_SIMPLE_INIT}" \
 	"${_SIMPLE_INIT}/build"
 fi
-if [ "${DEVICE}" == "all" ]
-then	E=0
-	for i in "${DEVICES[@]}"
-	do	echo "Building ${i}"
-		rm --recursive --force --one-file-system ./workspace||true
-		_build "${i}"||E="$?"
-	done
-	exit "${E}"
-else	HAS=false
-	for i in "${DEVICES[@]}"
-	do	[ "${i}" == "${DEVICE}" ]||continue
-		HAS=true
-		break
-	done
-	[ "${HAS}" == "true" ]||_error "build.sh: unknown build target device ${DEVICE}."
-	_build "${DEVICE}"
-fi
+
+_build "${DEVICE}"
+
+# if [ "${DEVICE}" == "all" ]
+# then	E=0
+# 	for i in "${DEVICES[@]}"
+# 	do	echo "Building ${i}"
+# 		rm --recursive --force --one-file-system ./workspace||true
+# 		_build "${i}"||E="$?"
+# 	done
+# 	exit "${E}"
+# else	HAS=false
+# 	for i in "${DEVICES[@]}"
+# 	do	[ "${i}" == "${DEVICE}" ]||continue
+# 		HAS=true
+# 		break
+# 	done
+# 	[ "${HAS}" == "true" ]||_error "build.sh: unknown build target device ${DEVICE}."
+# 	_build "${DEVICE}"
+# fi
