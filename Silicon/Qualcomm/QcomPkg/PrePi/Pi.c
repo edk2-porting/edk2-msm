@@ -93,7 +93,7 @@ PrePiMain(
   SetBootMode (BOOT_WITH_DEFAULT_SETTINGS);
 
   // Initialize Platform HOBs (CpuHob and FvHob)
-  // Status = PlatformPeim();
+  Status = PlatformPeim();
   ASSERT_EFI_ERROR (Status);
 
   // Now, the HOB List has been initialized, we can register performance information

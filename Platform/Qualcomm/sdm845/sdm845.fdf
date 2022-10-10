@@ -211,7 +211,7 @@ READ_LOCK_STATUS   = TRUE
   #
   # Simple Init GUI
   #
-  # INF src/main/SimpleInitMain.inf
+  INF src/main/SimpleInitMain.inf
 
   # TODO: Kernel Fdt Dxe
   # INF src/kernelfdt/KernelFdtDxe.inf
