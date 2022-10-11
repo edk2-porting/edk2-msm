@@ -18,5 +18,5 @@ Device(SPMI)
       Return(RBUF)
    }
 
-   Include("../Common/spmi_conf.asl")
+   Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/spmi_conf.asl")
 }

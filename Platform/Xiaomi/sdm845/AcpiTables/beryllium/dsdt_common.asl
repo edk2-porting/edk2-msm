@@ -26,19 +26,19 @@ Name (TCML, 0x01400000)         // Holds TrEE Carveout Memory Length
 // Name (SOSI, 0xdeadbeefffffffff) // Holds the base address of the SoCInfo shared memory region used by ChipInfoLib
 
 //Audio Drivers
-Include("audio.asl")
+Include("../audio.asl")
 Include("audio_bus.asl")
 		
         //
         // Storage - UFS/SD 
         //
-        Include("../Common/ufs.asl")
-        Include("../Common/sdc.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/ufs.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/sdc.asl")
         
         //
         // ASL Bridge Device
         //
-		Include("../Common/abd.asl")
+		Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/abd.asl")
 			
 		 Name (ESNL, 20) // Exsoc name limit 20 characters
 		 Name (DBFL, 23) // buffer Length, should be ESNL+3
@@ -46,55 +46,59 @@ Include("audio_bus.asl")
 //
 // PMIC driver 
 //
-Include("../Common/pmic_core.asl")
+Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/pmic_core.asl")
 
 //
 // PMICTCC driver
 //
-Include("pmic_batt.asl")
+Include("../pmic_batt.asl")
 			
         Include("pep.asl")
-        Include("../Common/bam.asl")
-        Include("buses.asl")
+        Include("../pep_defaults.asl")
+        Include("../pep_tsens.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/bam.asl")
+        Include("../buses.asl")
+        Include("../wcnss_wlan.asl")
+        Include("../wlan_11ad.asl")
         // MPROC Drivers (PIL Driver and Subsystem Drivers)
-        Include("../Common/win_mproc.asl")
-        Include("../Common/syscache.asl")
-        Include("../Common/HoyaSmmu.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/win_mproc.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/syscache.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/HoyaSmmu.asl")
         Include("graphics.asl")
 
-        Include("../Common/SCM.asl");
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/SCM.asl");
 
 		//
 		// SPMI driver 
         //
-        Include("../Common/spmi.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/spmi.asl")
 
         //
         // TLMM controller.
         //
-        Include("qcgpio.asl")
+        Include("../qcgpio.asl")
 
-        Include("../Common/pcie.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/pcie.asl")
 
-        Include("../Common/cbsp_mproc.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/cbsp_mproc.asl")
 
-        Include("../Common/adsprpc.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/adsprpc.asl")
       
         //
         // RemoteFS
         // 
-        Include("../Common/rfs.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/rfs.asl")
 
 
         // Test Drivers
-        Include("testdev.asl")
+        Include("../testdev.asl")
 		//
 
         //
         // Qualcomm IPA
-        Include("../Common/ipa.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/ipa.asl")
 		
-        Include("../Common/gsi.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/gsi.asl")
 		
         //
         //Qualcomm DIAG Service
@@ -108,8 +112,8 @@ Include("pmic_batt.asl")
            Name (_HID, "QCOM0225")
 		   Alias(\_SB.PSUB, _SUB)
         }
-        Include("../Common/qcdb.asl")       
-		Include("../Common/pep_lpi.asl")
+        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/qcdb.asl")       
+		Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/pep_lpi.asl")
 
 	//
 	//  QcRNG Driver (qcsecuremsm)
@@ -135,15 +139,15 @@ Include("pmic_batt.asl")
 	//
 	// QCOM GPS 
 	// 
-	Include("../Common/gps.asl")
+	Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/gps.asl")
 			
     // QDSS driver
-    Include("../Common/Qdss.asl")
+    Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/Qdss.asl")
 
 // QUPV3 GPI device node and resources
 //
-Include("../Common/qgpi.asl")
+Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/qgpi.asl")
 
 //Include("nfc.asl")
 
-Include("../Common/sar_manager.asl")
+Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/sar_manager.asl")

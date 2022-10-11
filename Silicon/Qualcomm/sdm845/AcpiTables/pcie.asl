@@ -704,7 +704,7 @@ Device (PCI0) {
 	}
 	
 	//Wlan_11ad ACPI Enumeration
-	Include("wlan_11ad.asl")
+	//Include("wlan_11ad.asl")
 
 	Method(_PSC) {
 		Return(Zero)
@@ -992,4 +992,4 @@ Device (PCI0) {
     }
 } // End PCI0
 
-Include("../Common/pcie1.asl")
+Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/pcie1.asl")
