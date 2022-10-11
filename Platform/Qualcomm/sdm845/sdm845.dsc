@@ -79,6 +79,6 @@
   Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
-  Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
