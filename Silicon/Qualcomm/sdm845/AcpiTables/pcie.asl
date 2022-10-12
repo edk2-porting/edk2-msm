@@ -992,4 +992,4 @@ Device (PCI0) {
     }
 } // End PCI0
 
-Include("../Common/pcie1.asl")
+Include("pcie1.asl")

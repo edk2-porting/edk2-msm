@@ -5,7 +5,7 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
 {
     Scope(\_SB_) {
 
-		Include("../Common/addSub.asl")
+		Include("addSub.asl")
         Include("dsdt_common.asl")
 		Include("cust_dsdt.asl") 
 
@@ -32,7 +32,7 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
         //
         // Data components
         //
-        Include("../Common/data.asl")
+        Include("data.asl")
 
         //
         //Qualcomm Diagnostic Consumer Interface
@@ -50,7 +50,7 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
         //
         // Bluetooth
         //
-        Include("../Common/wcnss_bt.asl")
+        Include("wcnss_bt.asl")
 
         //
         // ADC driver
