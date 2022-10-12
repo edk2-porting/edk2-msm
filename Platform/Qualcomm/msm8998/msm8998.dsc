@@ -68,4 +68,4 @@
   # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
 
 [Components.common]
-  # Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
