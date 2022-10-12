@@ -33,6 +33,8 @@ function _build(){
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
 	
+	SPLIT_DSDT=false
+	
 	if [ -f "configs/${DEVICE}.conf" ]
 	then source "configs/${DEVICE}.conf"
 	else _error "Device configuration not found"
