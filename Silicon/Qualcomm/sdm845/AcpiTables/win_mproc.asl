@@ -154,7 +154,7 @@ Device (ADSP)
 
 
 
-    Include("../Common/slimbus.asl") 
+    Include("slimbus.asl") 
 }
 
 

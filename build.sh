@@ -33,6 +33,12 @@ function _build(){
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
 	
+	if [ -f "configs/${DEVICE}.conf" ]
+	then source "configs/${DEVICE}.conf"
+	else _error "Device configuration not found"
+	fi
+	typeset -l SOC_PLATFORM_L=$SOC_PLATFORM
+
 	EXT="" #support for both panels of beryllium
 	if [ "${DEVICE}" == "beryllium-tianma" ]
 	then cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-tianma.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
@@ -47,10 +53,20 @@ function _build(){
 		GEN_ACPI=true
 	fi
 	
-	# TODO: fix GEN_ACPI
-	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
-	then echo "asl build failed. Have you installed wine?" >&2;return 1
+	if "${GEN_ACPI}" 
+		then if "${SPLIT_DSDT}"
+			then rm -rf workspace/Build/${DEVICE}/ACPI
+			mkdir -p workspace/Build/${DEVICE}/ACPI
+			pushd workspace/Build/${DEVICE}/ACPI
+			cp ../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables/* ./
+			cp ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/{*.asl,${DEVICE}/*} ./
+			wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
+			cp DSDT.AML ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
+			popd
+		else _error "Building DSDT is unsupported for this device"
+		fi
 	fi
+
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	
@@ -58,11 +74,6 @@ function _build(){
 		RELEASE) _MODE=RELEASE;;
 		*) _MODE=DEBUG;;
 	esac
-
-	if [ -f "configs/${DEVICE}.conf" ]
-	then source "configs/${DEVICE}.conf"
-	else _error "Device configuration not found"
-	fi
 
 	echo "Building BootShim"
 	pushd tools/BootShim
@@ -74,7 +85,7 @@ function _build(){
 		-n 0 \
 		-a AARCH64 \
 		-t "${TOOLCHAIN}" \
-		-p "${DSC_FILE}" \
+		-p "Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/${PLATFORM_NAME}.dsc" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
@@ -90,7 +101,7 @@ function _build(){
 		||return "$?"
 	cat \
 		"workspace/uefi-${DEVICE}.img.gz" \
-		"${DTB_FILE}" \
+		"Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/FdtBlob_compat/${PLATFORM_NAME}.dtb" \
 		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
 		||return "$?"
 	python3 ./tools/mkbootimg.py \

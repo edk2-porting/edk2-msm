@@ -18,5 +18,5 @@ Device(SPMI)
       Return(RBUF)
    }
 
-   Include("../Common/spmi_conf.asl")
+   Include("spmi_conf.asl")
 }

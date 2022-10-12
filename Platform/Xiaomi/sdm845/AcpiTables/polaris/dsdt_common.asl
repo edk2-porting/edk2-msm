@@ -31,13 +31,13 @@ Include("audio.asl")
         //
         // Storage - UFS/SD 
         //
-        Include("../Common/ufs.asl")
-        // Include("../Common/sdc.asl") // No SD support on polaris
+        Include("ufs.asl")
+        // Include("sdc.asl") // No SD support on polaris
         
         //
         // ASL Bridge Device
         //
-		Include("../Common/abd.asl")
+		Include("abd.asl")
 			
 		 Name (ESNL, 20) // Exsoc name limit 20 characters
 		 Name (DBFL, 23) // buffer Length, should be ESNL+3
@@ -45,7 +45,7 @@ Include("audio.asl")
 //
 // PMIC driver 
 //
-Include("../Common/pmic_core.asl")
+Include("pmic_core.asl")
 
 //
 // PMICTCC driver
@@ -53,36 +53,36 @@ Include("../Common/pmic_core.asl")
 Include("pmic_batt.asl")
 			
         Include("pep.asl")
-        Include("../Common/bam.asl")
+        Include("bam.asl")
         Include("buses.asl")
         // MPROC Drivers (PIL Driver and Subsystem Drivers)
-        Include("../Common/win_mproc.asl")
-        Include("../Common/syscache.asl")
-        Include("../Common/HoyaSmmu.asl")
+        Include("win_mproc.asl")
+        Include("syscache.asl")
+        Include("HoyaSmmu.asl")
         Include("graphics.asl")
 
-        Include("../Common/SCM.asl");
+        Include("SCM.asl");
 
 		//
 		// SPMI driver 
         //
-        Include("../Common/spmi.asl")
+        Include("spmi.asl")
 
         //
         // TLMM controller.
         //
         Include("qcgpio.asl")
 
-        Include("../Common/pcie.asl")
+        Include("pcie.asl")
 
-        Include("../Common/cbsp_mproc.asl")
+        Include("cbsp_mproc.asl")
 
-        Include("../Common/adsprpc.asl")
+        Include("adsprpc.asl")
       
         //
         // RemoteFS
         // 
-        Include("../Common/rfs.asl")
+        Include("rfs.asl")
 
 
         // Test Drivers
@@ -91,9 +91,9 @@ Include("pmic_batt.asl")
 
         //
         // Qualcomm IPA
-        Include("../Common/ipa.asl")
+        Include("ipa.asl")
 		
-        Include("../Common/gsi.asl")
+        Include("gsi.asl")
 		
         //
         //Qualcomm DIAG Service
@@ -107,8 +107,8 @@ Include("pmic_batt.asl")
            Name (_HID, "QCOM0225")
 		   Alias(\_SB.PSUB, _SUB)
         }
-        Include("../Common/qcdb.asl")       
-		Include("../Common/pep_lpi.asl")
+        Include("qcdb.asl")       
+		Include("pep_lpi.asl")
 
 	//
 	//  QcRNG Driver (qcsecuremsm)
@@ -134,15 +134,15 @@ Include("pmic_batt.asl")
 	//
 	// QCOM GPS 
 	// 
-	Include("../Common/gps.asl")
+	Include("gps.asl")
 			
     // QDSS driver
-    Include("../Common/Qdss.asl")
+    Include("Qdss.asl")
 
 // QUPV3 GPI device node and resources
 //
-Include("../Common/qgpi.asl")
+Include("qgpi.asl")
 
 Include("nfc.asl")
 
-Include("../Common/sar_manager.asl")
+Include("sar_manager.asl")

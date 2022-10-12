@@ -1,5 +1,5 @@
 [Defines]
-  PLATFORM_NAME                  = sdm845Pkg
+  PLATFORM_NAME                  = ayn-odin
   PLATFORM_GUID                  = 28f1a3bf-193a-47e3-a7b9-5a435eaab2ee
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010019
@@ -7,9 +7,10 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/ayn-odin.fdf
+  FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
+  DEVICE_DXE_FV_COMPONENTS       = Platform/AYN/sdm845/ayn-odin.fdf.inc
 
-!include sdm845Pkg/sdm845Pkg.dsc
+!include Platform/Qualcomm/sdm845/sdm845.dsc
 
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
@@ -27,10 +28,10 @@
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"ayn-odin"
 
   # Synaptics Touchscren
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrAddress|0x70
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrResetPin|104
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrIntPin|125
-  gsdm845PkgTokenSpaceGuid.PcdTouchCtlrI2cDevice|6
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxX|1080
-  gsdm845PkgTokenSpaceGuid.PcdTouchMaxY|1920
-  gsdm845PkgTokenSpaceGuid.PcdTouchInvertedX|TRUE
+  gQcomTokenSpaceGuid.PcdTouchCtlrAddress|0x70
+  gQcomTokenSpaceGuid.PcdTouchCtlrResetPin|104
+  gQcomTokenSpaceGuid.PcdTouchCtlrIntPin|125
+  gQcomTokenSpaceGuid.PcdTouchCtlrI2cDevice|6
+  gQcomTokenSpaceGuid.PcdTouchMaxX|1080
+  gQcomTokenSpaceGuid.PcdTouchMaxY|1920
+  gQcomTokenSpaceGuid.PcdTouchInvertedX|TRUE

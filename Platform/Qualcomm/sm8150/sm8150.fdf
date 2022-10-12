@@ -187,7 +187,7 @@ READ_LOCK_STATUS   = TRUE
   INF ShellPkg/DynamicCommand/TftpDynamicCommand/TftpDynamicCommand.inf
 !endif #$(INCLUDE_TFTP_COMMAND)
 
-  INF Platform/EFI_Binaries/845/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  INF Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
 
   #
   # Bds

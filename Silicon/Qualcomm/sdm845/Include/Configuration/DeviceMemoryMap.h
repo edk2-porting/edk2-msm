@@ -75,13 +75,15 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"AOP CMD DB",        0x85FE0000, 0x00020000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     {"SMEM",              0x86000000, 0x00200000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED},
     {"TZ",                0x86200000, 0x00B00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
-    {"TZApps",            0x86D00000, 0x00E00000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
-    {"HLOS 3",            0x87B00000, 0x03000000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
+    // secapp-region
+    {"TZApps",            0x86D00000, 0x03C00000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
+    {"HLOS 3",            0x8A900000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
 
     // qseecom_mem
     {"TGCM",              0x8AB00000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
-	  {"PIL_REGION",        0x8BF00000, 0x0BD00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"DXE Heap",          0x97C00000, 0x05730000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    // LG has the largest PIL region, define as is
+	  {"PIL_REGION",        0x8BF00000, 0x0D200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
+    {"DXE Heap",          0x99100000, 0x04230000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"DBI Dump",          0x9D330000, 0x000D0000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
     {"Display Reserved",  0x9D400000, 0x02400000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
     {"FV Region",         0x9F800000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
