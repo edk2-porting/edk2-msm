@@ -2,7 +2,7 @@
 // Camera Platform, Camera Sensors, White LED Flash, JPEG HW, VFE Moved to a dedicated asl
 // This is done to support Multiple platforms and Multiple OEM Projects in CRM Builds
 //
-Include("../cust_camera.asl")
+Include("cust_camera.asl")
 Include("cust_sensors.asl")
 
 // GPIO_11

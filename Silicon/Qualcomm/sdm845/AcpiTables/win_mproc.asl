@@ -154,7 +154,7 @@ Device (ADSP)
 
 
 
-    Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/slimbus.asl") 
+    Include("../Common/slimbus.asl") 
 }
 
 
@@ -212,7 +212,7 @@ Device (AMSS)
         })
     }
 	
-    //Include("wcnss_wlan.asl")
+    Include("wcnss_wlan.asl")
 }
 
 

@@ -48,16 +48,9 @@ function _build(){
 	fi
 	
 	# TODO: fix GEN_ACPI
-	ASL_LOCATION=$(find -wholename *${DEVICE}/Dsdt.asl)
-	FOLDER_LOCATION=${ASL_LOCATION::-8}
-	PARENT_DIRECTORY=$(realpath .)
-	echo ${ASL_LOCATION}
-	echo ${FOLDER_LOCATION}
-	echo ${PARENT_DIRECTORY}
-	if "${GEN_ACPI}" && ! (cd ${FOLDER_LOCATION} && wine ${PARENT_DIRECTORY}/tools/asl-x64.exe Dsdt.asl && cd ${PARENT_DIRECTORY})
+	if "${GEN_ACPI}" && ! (cd sdm845Pkg/AcpiTables/${DEVICE}/ && wine ../bin/asl-x64.exe Dsdt.asl && cd ../../..)
 	then echo "asl build failed. Have you installed wine?" >&2;return 1
 	fi
-	
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
 	
@@ -66,8 +59,8 @@ function _build(){
 		*) _MODE=DEBUG;;
 	esac
 
-	if [ -f "configs/${DEVICE}${EXT}.conf" ]
-	then source "configs/${DEVICE}${EXT}.conf"
+	if [ -f "configs/${DEVICE}.conf" ]
+	then source "configs/${DEVICE}.conf"
 	else _error "Device configuration not found"
 	fi
 

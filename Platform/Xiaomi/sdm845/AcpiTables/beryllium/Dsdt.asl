@@ -5,19 +5,19 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
 {
     Scope(\_SB_) {
 
-		Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/addSub.asl")
+		Include("../Common/addSub.asl")
         Include("dsdt_common.asl")
 		Include("cust_dsdt.asl") 
 
         Include("usb.asl")
 
         // Thermal Zone devices depend on PEP (included in dsdt_common). Please be CAREFUL on location
-		Include("../cust_thermal_zones.asl")
+		Include("cust_thermal_zones.asl")
 
 		//
         // Hardware Notifications
 		//
-        Include("../cust_hwn.asl")
+        Include("cust_hwn.asl")
 
         //
         // Touch and panel xml
@@ -27,12 +27,12 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
 		//
         // Buttons
 		//
-        Include("../cust_arraybutton.asl")
+        Include("cust_arraybutton.asl")
 
         //
         // Data components
         //
-        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/data.asl")
+        Include("../Common/data.asl")
 
         //
         //Qualcomm Diagnostic Consumer Interface
@@ -50,12 +50,12 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
         //
         // Bluetooth
         //
-        Include("../../../../../Silicon/Qualcomm/sdm845/AcpiTables/wcnss_bt.asl")
+        Include("../Common/wcnss_bt.asl")
 
         //
         // ADC driver
         //
-        Include("../adc.asl")
+        Include("adc.asl")
    }
 
 }

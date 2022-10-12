@@ -2,7 +2,7 @@
 // ACPI device definitions, configuration and look-up tables.
 //
 
-Include("../cust_pmic_batt.asl")
+Include("cust_pmic_batt.asl")
 
     // PMIC EIC
     //Device (PEIC)

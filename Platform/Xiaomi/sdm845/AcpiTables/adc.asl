@@ -705,4 +705,4 @@ Device(ADC1)
    }
 }
 
-Include("../cust_adc.asl")
+Include("cust_adc.asl")
