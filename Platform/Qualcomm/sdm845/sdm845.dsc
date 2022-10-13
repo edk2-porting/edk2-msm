@@ -62,11 +62,13 @@
 !endif #$(AB_SLOTS_SUPPORT)
 
   # Ported from SurfaceDuoPkg
+  AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
+
   MemoryInitPeiLib|Silicon/Qualcomm/sdm845/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sdm845/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sdm845/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  # AslUpdateLib|SurfaceDuoFamilyPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
-  # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
+  RFSProtectionLib|Silicon/Qualcomm/sdm845/Library/RFSProtectionLib/RFSProtectionLib.inf
+  MsPlatformDevicesLib|Silicon/Qualcomm/sdm845/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
 
 [Components.common]
   #

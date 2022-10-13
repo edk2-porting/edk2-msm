@@ -46,6 +46,7 @@
   DxeServicesLib
   HobLib
   MemoryAllocationLib
+  MsPlatformDevicesLib
   PcdLib
   PrintLib
   UefiBootManagerLib

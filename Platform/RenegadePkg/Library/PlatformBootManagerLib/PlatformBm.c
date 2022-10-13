@@ -22,6 +22,9 @@
 #include <Library/UefiBootManagerLib.h>
 #include <Library/UefiLib.h>
 #include <Library/UefiRuntimeServicesTableLib.h>
+
+#include <Library/MsPlatformDevicesLib.h>
+
 #include <Protocol/DevicePath.h>
 #include <Protocol/EsrtManagement.h>
 #include <Protocol/GraphicsOutput.h>
@@ -690,6 +693,8 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
   PlatformRegisterFvBootOption(
       &gSwitchSlotsAppFileGuid, L"Reboot to other slot", LOAD_OPTION_ACTIVE);
 #endif
+
+  PlatformSetup();
 }
 
 /**
