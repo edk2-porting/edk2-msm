@@ -65,7 +65,6 @@ function _build(){
 			wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
 			cp DSDT.AML ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
 			popd
-			./tools/sosi-patcher-x64 workspace/Build/${DEVICE}/ACPI/DSDT.AML Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/DSDT.AML 0x860098D8
 		else _error "Building DSDT is unsupported for this device"
 		fi
 	fi
