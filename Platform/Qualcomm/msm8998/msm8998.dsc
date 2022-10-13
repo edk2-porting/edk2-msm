@@ -66,6 +66,7 @@
   PlatformPrePiLib|Silicon/Qualcomm/msm8998/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   # AslUpdateLib|SurfaceDuoFamilyPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
   # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
+  MsPlatformDevicesLib|Silicon/Qualcomm/msm8998/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
 
 [Components.common]
   Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
