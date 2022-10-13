@@ -22,7 +22,7 @@ Device (SEN2)
         Return("845")
     }
     Method(PLAT, 0x0, NotSerialized) {
-        Return("MTP")
+        Return("BERYLLIUM")
     }
 	Method(_STA, 0)
 	{
