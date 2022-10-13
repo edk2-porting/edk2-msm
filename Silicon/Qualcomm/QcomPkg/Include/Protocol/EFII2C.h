@@ -1,5 +1,5 @@
-#ifndef __EFI_QCOM_I2C_H__
-#define __EFI_QCOM_I2C_H__
+#ifndef __EFII2C_H__
+#define __EFII2C_H__
 #include <Uefi.h>
 #define QCOM_I2C_PROTOCOL_GUID                                                 \
   {                                                                            \
