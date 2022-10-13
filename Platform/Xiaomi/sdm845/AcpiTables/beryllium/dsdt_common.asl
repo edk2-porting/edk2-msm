@@ -23,7 +23,7 @@ Name (TPMA, 0x11111111)         // Holds whether TPM is seperate app or combined
 Name (TDTV, 0x6654504D)         // Holds TPM type, by default it set to fTPM type
 Name (TCMA, 0x8AB00000)         // Holds TrEE Carveout Memory Address
 Name (TCML, 0x01400000)         // Holds TrEE Carveout Memory Length
-// Name (SOSI, 0xdeadbeefffffffff) // Holds the base address of the SoCInfo shared memory region used by ChipInfoLib
+Name (SOSI, 0xdeadbeefffffffff) // Holds the base address of the SoCInfo shared memory region used by ChipInfoLib
 
 //Audio Drivers
 Include("audio.asl")
