@@ -7,8 +7,8 @@
 #include <Library/DebugLib.h>
 
 #include <Protocol/AbsolutePointer.h>
-#include <Protocol/QcomTlmm.h>
-#include <Protocol/QcomI2c.h>
+#include <Protocol/EFITlmm.h>
+#include <Protocol/EFII2C.h>
 
 #include "SynapticsRmi4.h"
 
