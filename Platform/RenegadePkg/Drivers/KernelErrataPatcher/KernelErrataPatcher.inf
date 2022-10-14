@@ -1,0 +1,50 @@
+/** @file
+
+  Patches NTOSKRNL to not cause a bugcheck when attempting to use
+  PSCI_MEMPROTECT Due to an issue in QHEE
+
+  Copyright (c) 2022 DuoWoA authors
+
+  SPDX-License-Identifier: MIT
+
+**/
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = KernelErrataPatcher
+  FILE_GUID                      = 964EFA94-9929-4EF8-9E68-8F6F6FA62E63
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = KernelErrataPatcherEntryPoint
+
+[Sources]
+  KernelErrataPatcher.c
+  Utilities.c
+
+[Sources.AARCH64]
+  OsLoaderHelper.S | GCC
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  ArmLib
+  ArmMmuLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+
+[Guids]
+  gEfiEventExitBootServicesGuid       ## CONSUMES
+
+[Protocols]
+
+[Pcd]
+
+[Depex]
+  TRUE

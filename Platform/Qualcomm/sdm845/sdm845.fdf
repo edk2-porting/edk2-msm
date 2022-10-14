@@ -209,6 +209,11 @@ READ_LOCK_STATUS   = TRUE
   INF Platform/RenegadePkg/Drivers/LogoDxe/LogoDxe.inf
 
   #
+  # Windows kernel patcher
+  #
+  INF Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf
+  
+  #
   # Simple Init GUI
   #
   INF src/main/SimpleInitMain.inf
