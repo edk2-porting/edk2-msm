@@ -29,6 +29,49 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include <Protocol/EFIChipInfo.h>
 #include <Protocol/EFIPlatformInfo.h>
 #include <Protocol/EFISmem.h>
+#include <Protocol/EFIClock.h>
+
+EFI_STATUS
+EFIAPI
+SetupAPSSCpuPerfLevels()
+{
+  EFI_STATUS             Status                       = EFI_SUCCESS;
+  EFI_CLOCK_PROTOCOL    *pClockProtocol               = NULL;
+  UINT32                 perfLevel                    = 0;
+  UINT32                 frequencyHz                  = 0;
+
+  Status = gBS->LocateProtocol(
+      &gEfiClockProtocolGuid, 
+      NULL, 
+      (VOID **)&pClockProtocol
+  );
+
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  DEBUG((EFI_D_INFO, "\n\n\n\n\n\n\n\n\n\n\n\n\n"));
+  for (int i = 0; i < 8; i++) {
+    Status = pClockProtocol->GetMaxPerfLevel(pClockProtocol, i, &perfLevel);
+
+    if (EFI_ERROR(Status)) {
+      DEBUG((EFI_D_ERROR, "%a: Failed to get the maximum performance level for CPU %d, Status: %r\n", __FUNCTION__, i, Status));
+      return Status;
+    }
+
+    Status = pClockProtocol->SetCpuPerfLevel(pClockProtocol, i, perfLevel, &frequencyHz);
+
+    if (EFI_ERROR(Status)) {
+      DEBUG((EFI_D_ERROR, "%a: Failed to set the maximum performance level for CPU %d, Status: %r\n", __FUNCTION__, i, Status));
+      return Status;
+    }
+
+    DEBUG((EFI_D_INFO, "%a: CPU %d Now running at %d Hz\n", __FUNCTION__, i, frequencyHz));
+  }
+
+  // gBS->Stall(10 * 1000 * 1000);
+  return Status;
+}
 
 EFI_STATUS
 EFIAPI
@@ -186,6 +229,8 @@ VOID
 EFIAPI
 PlatformSetup()
 {
+  SetupAPSSCpuPerfLevels();
+
   // Allow MPSS and HLOS to access the allocated RFS Shared Memory Region
   // Normally this would be done by a driver in Linux
   // TODO: Move to a better place!
