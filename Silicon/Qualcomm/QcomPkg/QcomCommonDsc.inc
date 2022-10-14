@@ -12,7 +12,7 @@
 
 [BuildOptions.common]
   *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG
-  *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -Wno-unused-variable -Wno-unused-but-set-variable -Wno-self-assign -Wno-non-literal-null-conversion -Wno-uninitialized -Wno-initializer-overrides
+  *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -Wno-unused-variable
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]
   *_*_*_DLINK_FLAGS = -z common-page-size=0x1000
