@@ -34,20 +34,20 @@ Device (HAL0)
 //
 // Storage - UFS/SD 
 //
-Include("ufs.asl")
-Include("sdc.asl")
+Include("../Common/ufs.asl")
+Include("../Common/sdc.asl")
 
 //
 // ASL Bridge Device
 //
-Include("abd.asl")
+Include("../Common/abd.asl")
 Name (ESNL, 0x14)   // Exsoc name limit 20 characters
 Name (DBFL, 0x17)   // buffer Length, should be ESNL+3
 
 //
 // PMIC driver 
 //
-Include("pmic_core.asl")
+Include("../Common/pmic_core.asl")
 
 //
 // PMICTCC driver
@@ -55,41 +55,41 @@ Include("pmic_core.asl")
 Include("pmic_batt.asl")
 
 Include("pep.asl")
-Include("bam.asl")
+Include("../Common/bam.asl")
 Include("buses.asl")
 
 // MPROC Drivers (PIL Driver and Subsystem Drivers)
-Include("win_mproc.asl")
-Include("HoyaSmmu.asl")
+Include("../Common/win_mproc.asl")
+Include("../Common/HoyaSmmu.asl")
 Include("graphics.asl")
 
-Include("SCM.asl")
+Include("../Common/SCM.asl")
 
 //
 // SPMI driver 
 //
-Include("spmi.asl")
+Include("../Common/spmi.asl")
 
 //
 // TLMM controller.
 //
 Include("qcgpio.asl")
 
-Include("pcie.asl")
+Include("../Common/pcie.asl")
 
-Include("cbsp_mproc.asl")
+Include("../Common/cbsp_mproc.asl")
 
-Include("adsprpc.asl")
+Include("../Common/adsprpc.asl")
 
 //
 // RemoteFS
 // 
-Include("rfs.asl")
+Include("../Common/rfs.asl")
 
 //
 // Qualcomm IPA
-Include("ipa.asl")
-Include("gsi.asl")
+Include("../Common/ipa.asl")
+Include("../Common/gsi.asl")
 
 //
 //  Qualcomm DIAG Service
@@ -104,9 +104,9 @@ Device (QDIG)
     Alias (\_SB.PSUB, _SUB)
 }
 
-Include("qcdb.asl")
-Include("ssm.asl")
-Include("pep_lpi.asl")
+Include("../Common/qcdb.asl")
+Include("../Common/ssm.asl")
+Include("../Common/pep_lpi.asl")
 
 //
 //  QcRNG Driver (qcsecuremsm)
@@ -135,4 +135,4 @@ Device (QRNG)
 //
 // QCOM GPS 
 // 
-Include("gps.asl")
+Include("../Common/gps.asl")

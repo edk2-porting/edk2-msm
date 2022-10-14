@@ -10,6 +10,6 @@ Scope (\_SB.AMSS)
 {
     Method (_STA, 0, NotSerialized)  // _STA: Status
     {
-        Return (Zero)
+        Return (0x0F)
     }
 }

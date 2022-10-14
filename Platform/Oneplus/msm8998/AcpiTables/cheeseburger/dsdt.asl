@@ -1,7 +1,7 @@
 //
 // NOTE: The 3rd parameter (i.e. ComplianceRevision) must be >=2 for 64-bit integer support.
 //
-DefinitionBlock ("DSDT.AML", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
+DefinitionBlock ("", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
 {
     External (BLCK, IntObj)
     External (PCF1, IntObj)
@@ -12,12 +12,12 @@ DefinitionBlock ("DSDT.AML", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
 
     Scope (\_SB) {
 
-        Include("addSub.asl")
+        Include("../Common/addSub.asl")
         Include("dsdt_common.asl")
         Include("cust_dsdt.asl") 
 
         // what the fuck
-        Include("wtf.asl")
+        Include("../Common/wtf.asl")
 
         Include("usb.asl")
         
@@ -42,7 +42,7 @@ DefinitionBlock ("DSDT.AML", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
         //
         // Data components
         //
-        Include("data.asl")
+        Include("../Common/data.asl")
 
         //
         // Qualcomm Diagnostic Consumer Interface
@@ -60,7 +60,7 @@ DefinitionBlock ("DSDT.AML", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
         //
         // Bluetooth
         //
-        Include("wcnss_bt.asl")
+        Include("../Common/wcnss_bt.asl")
 
         //
         // ADC driver

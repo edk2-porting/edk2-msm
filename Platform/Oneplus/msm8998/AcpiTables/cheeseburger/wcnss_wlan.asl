@@ -1,11 +1,13 @@
 Device (QWLN)
 {
     Name (_ADR, 0)
-    Name(_PRW, Package() {0,0})    // wakeable from S0
-    Name(_S0W, 2)                  // S0 should put device in D2 for wake
-    Name(_S4W, 2)                  // all other Sx (just in case) should also wake from D2
-    Name(_PRR, Package(0x1) { \_SB.AMSS.QWLN.WRST })  // Power resource reference for device reset and recovery.
-
+    Name (_PRW, Package() {0,0})    // wakeable from S0
+    Name (_S0W, 0x02)  // _S0W: S0 Device Wake State
+    Name (_S4W, 0x02)  // _S4W: S4 Device Wake State
+    Name (_PRR, Package (One)  // _PRR: Power Resource for Reset
+    {
+        \_SB.AMSS.QWLN.WRST
+    })
     Method (_STA, 0, NotSerialized)  // _STA: Status
     {
         Return (0x0F)
