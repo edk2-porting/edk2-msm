@@ -6446,37 +6446,43 @@ Device (GPU0)
 
     Name (BLOK, Zero)
     Name (BLBK, Zero)
-    Method (BLCP, 1, NotSerialized)
-    {
-        Name (RBUF, Buffer (0x08){})
-        CreateDWordField (RBUF, Zero, PKHR)
-        PKHR = Zero
-        CreateDWordField (RBUF, 0x04, EOP)
-        EOP = Zero
-        If ((Arg0 <= 0x64))
-        {
-            BLBK = ToInteger (Arg0)
-            If ((BLOK == One))
-            {
-                Acquire (\_SB.MUT0, 0xFFFF)
-            }
-            ElseIf (Acquire (\_SB.MUT0, 0x0014))
-            {
-                Return (RBUF) /* \_SB_.GPU0.BLCP.RBUF */
-            }
+    ///
+    // BLCP Method - Backlight control packet method, returns a 
+    //               command buffer for a specific backlight level
+    //
+    // Input Parameters
+    //    Backlight level - Integer from 0% to 100%
+    //
+    // Output Parameters
+    //
+    // Packet format:
+    //   +--32bits--+-----variable (8bit alignment)--+
+    //   |  Header  |       Packet payload           |
+    //   +----------+--------------------------------+
+    //
+    //  For DSI Command packets, payload data must be in this format
+    //
+    //  +-- 8 bits-+----variable (8bit alignment)----+
+    //  | Cmd Type |           Packet Data           |
+    //  +----------+---------------------------------+
+    //
+    //  For I2C Command packets, payload data must be in this format
+    //
+    //  +-- 16 bits-+----variable (8bit alignment)----+
+    //  |  Address  |         Command Data            |
+    //  +-----------+---------------------------------+
+    //
+    //  All packets must follow with a DWORD header with 0x0
+    //
+    Method (BLCP, 1, NotSerialized) {
+    
+        // Create Response buffer
+        Name(RBUF, Buffer(0x100){})
 
-            If ((\_SB.ECOK == One))
-            {
-                \_SB.I2C7.BSTA = Zero
-                \_SB.I2C7.BLEN = One
-                \_SB.I2C7.DAT1 = ToInteger (Arg0)
-                \_SB.I2C7.APIB = \_SB.I2C7.BUF1
-            }
+        // Details to be populated by OEM based on the platform requirements
 
-            Release (\_SB.MUT0)
-        }
-
-        Return (RBUF) /* \_SB_.GPU0.BLCP.RBUF */
+        // Return the packet data
+        Return(RBUF)
     }
 
     Method (ROM2, 3, NotSerialized)

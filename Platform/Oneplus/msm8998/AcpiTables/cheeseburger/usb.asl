@@ -11,44 +11,30 @@ Device (USB0)
     Name (_CCA, Zero)  // _CCA: Cache Coherency Attribute
     Name (_ADR, Zero)  // _ADR: Address
     Name (_S0W, 0x03)  // _S0W: S0 Device Wake State
-    Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
-    {
-        ToPLD (
-            PLD_Revision           = 0x2,
-            PLD_IgnoreColor        = 0x1,
-            PLD_Red                = 0x0,
-            PLD_Green              = 0x0,
-            PLD_Blue               = 0x0,
-            PLD_Width              = 0x0,
-            PLD_Height             = 0x0,
-            PLD_UserVisible        = 0x1,
-            PLD_Dock               = 0x0,
-            PLD_Lid                = 0x0,
-            PLD_Panel              = "BACK",
-            PLD_VerticalPosition   = "CENTER",
-            PLD_HorizontalPosition = "LEFT",
-            PLD_Shape              = "VERTICALRECTANGLE",
-            PLD_GroupOrientation   = 0x0,
-            PLD_GroupToken         = 0x0,
-            PLD_GroupPosition      = 0x1,
-            PLD_Bay                = 0x0,
-            PLD_Ejectable          = 0x0,
-            PLD_EjectRequired      = 0x0,
-            PLD_CabinetNumber      = 0x0,
-            PLD_CardCageNumber     = 0x0,
-            PLD_Reference          = 0x0,
-            PLD_Rotation           = 0x0,
-            PLD_Order              = 0x0,
-            PLD_VerticalOffset     = 0xFFFF,
-            PLD_HorizontalOffset   = 0xFFFF)
 
-    })
-    Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+    // _PLD as defined in the ACPI spec. The GroupToken and GroupPosition are used to
+    // derive a unique "Connector ID". The other fields are not really important.
+    Name(_PLD, Package()
     {
-        One, 
-        0x09, 
-        Zero, 
-        Zero
+        Buffer()
+        {
+            0x82,                   // Revision 2, ignore color.
+            0x00,0x00,0x00,         // Color (ignored).
+            0x00,0x00,0x00,0x00,    // Width and height.
+            0x69,                   // User visible; Back panel; VerticalPos:Center.
+            0x0c,                   // HorizontalPos:0; Shape:Vertical Rectangle; GroupOrientation:0.
+            0x80,0x00,              // Group Token:0; Group Position:1; So Connector ID is 1.
+            0x00,0x00,0x00,0x00,    // Not ejectable.
+            0xFF,0xFF,0xFF,0xFF     // Vert. and horiz. offsets not supplied.
+        }
+    })
+    // _UPC as defined in the ACPI spec.
+    Name(_UPC, Package()
+    {
+        0x01,                       // Port is connectable.
+        0x09,                       // Connector type: Type C connector - USB2 and SS with switch.
+        0x00000000,                 // Reserved0 - must be zero.
+        0x00000000                  // Reserved1 - must be zero.
     })
     Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
     {
@@ -69,7 +55,6 @@ Device (USB0)
             0x00000113,
         }
     })
-    //In order to use windbg debugging, USB is disabled
     Method (_STA, 0, NotSerialized)  // _STA: Status
     {
         Return (Zero)
