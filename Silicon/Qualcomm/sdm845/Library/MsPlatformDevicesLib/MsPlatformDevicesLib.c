@@ -51,7 +51,9 @@ SetupAPSSCpuPerfLevels()
   }
 
   DEBUG((EFI_D_INFO, "\n\n\n\n\n\n\n\n\n\n\n\n\n"));
-  for (int i = 0; i < 8; i++) {
+
+  // The 9th cluster is L3 cache
+  for (int i = 0; i < 9; i++) {
     Status = pClockProtocol->GetMaxPerfLevel(pClockProtocol, i, &perfLevel);
 
     if (EFI_ERROR(Status)) {
