@@ -1,0 +1,481 @@
+Scope (\_SB.PEP0)
+{
+    Method (CPR4, 0, NotSerialized)
+    {
+        Return (CPRF) /* \_SB_.PEP0.CPRF */
+    }
+
+    // CPR data
+    Name (CPRF, Package (0x08)
+    {
+        "CPR_SW_SETTING", 
+        Zero, 
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x0124, 
+            One, 
+            Zero, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }, 
+
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x0124, 
+            0x02, 
+            Zero, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }, 
+
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x0124, 
+            0x02, 
+            One, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }, 
+
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x013F, 
+            One, 
+            Zero, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }, 
+
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x013F, 
+            0x02, 
+            Zero, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }, 
+
+        Package (0x05)
+        {
+            "CPR_CHIP_INFO", 
+            0x013F, 
+            0x02, 
+            One, 
+            Package (0x24)
+            {
+                "CPR_SW_CONTROLLER_SETTING", 
+                Zero, 
+                Zero, 
+                "GFX", 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x0C, 
+                0x08, 
+                0x0F, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                0x00017700, 
+                0x0FA0, 
+                0x05061000, 
+                0x1000, 
+                0x00780000, 
+                0x7000, 
+                One, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Zero, 
+                Package (0x0C)
+                {
+                    "CPR_SW_LOGIC_AGING", 
+                    "Tur_L1", 
+                    0x00109A00, 
+                    0x1D, 
+                    0x00FFFFFF, 
+                    Zero, 
+                    0x03E8, 
+                    0x0654, 
+                    One, 
+                    0x0F, 
+                    0x1C, 
+                    One
+                }, 
+
+                Package (0x08)
+                {
+                    "CPR_SW_THREAD_SETTING", 
+                    Zero, 
+                    Zero, 
+                    Zero, 
+                    0x02, 
+                    Zero, 
+                    0x02, 
+                    Package (0x04)
+                    {
+                        "CPR_SW_CLIENT_SETTING", 
+                        "/vdd/gfx", 
+                        "GPU", 
+                        Zero
+                    }
+                }
+            }
+        }
+    })
+}
