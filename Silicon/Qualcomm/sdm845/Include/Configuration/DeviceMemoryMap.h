@@ -112,7 +112,7 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"RAM Partition",     0xD0600000, 0x12A800000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 8GiB Memory */
     {"RAM Partition",     0xD0600000, 0x0AFA00000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"RAM Partition",     0x180000000,0x0FC8A0000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0x180000000,0x0FC7A0000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 10GiB Memory */
     {"RAM Partition",     0xD0600000, 0x2244C0000, Mem10G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
