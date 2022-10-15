@@ -9,9 +9,9 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/Smartisan/sdm845/trident.fdf.inc
-  
+
   # Enable A/B Slot Environment
-  # DEFINE AB_SLOTS_SUPPORT        = TRUE
+  DEFINE AB_SLOTS_SUPPORT        = TRUE
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
