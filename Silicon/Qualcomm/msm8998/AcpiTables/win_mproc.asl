@@ -257,6 +257,10 @@ Device (ADSP)
     }
 }
 
+
+//
+// AMSS Driver: Used for loading the modem binaries
+//
 Device (AMSS)
 {
     Name (_CCA, Zero)  // _CCA: Cache Coherency Attribute
@@ -278,22 +282,13 @@ Device (AMSS)
         Return (One)
     }
 
+    //[WIP] On oneplus5, the SOID value is 292, which may be a problem
     Method (RPEM, 0, NotSerialized)
     {
-        If ((\_SB.SOID == 0x0124))
+        Return (Package (0x01)
         {
-            Return (Package (0x01)
-            {
-                0x03
-            })
-        }
-        Else
-        {
-            Return (Package (0x01)
-            {
-                One
-            })
-        }
+            0x03
+        })
     }
 
     Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
@@ -325,6 +320,9 @@ Device (AMSS)
     Include("wcnss_wlan.asl")
 }
 
+
+// QMI Service manager
+//
 Device (QSM)
 {
     Name (_HID, "QCOM00BD")  // _HID: Hardware ID
@@ -349,6 +347,10 @@ Device (QSM)
     }
 }
 
+//
+// Subsys Dependency Device
+//    Subsys devices that use QCCI should have an dependency on this
+//
 Device (SSDD)
 {
     Name (_HID, "QCOM00D6")  // _HID: Hardware ID
@@ -360,6 +362,9 @@ Device (SSDD)
     })
 }
 
+//
+// PDSR device
+//
 Device (PDSR)
 {
     Name (_HID, "QCOM00D3")  // _HID: Hardware ID
@@ -372,6 +377,9 @@ Device (PDSR)
     })
 }
 
+//
+// TFTP Device
+//
 Device (TFTP)
 {
     Name (_HID, "QCOM00FE")  // _HID: Hardware ID
