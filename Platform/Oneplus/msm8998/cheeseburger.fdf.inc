@@ -7,7 +7,7 @@ FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
 
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
-  SECTION RAW = Platform/Oneplus/msm8998/AcpiTables/cheeseburger/dsdt.aml
+  SECTION RAW = Platform/Oneplus/msm8998/AcpiTables/cheeseburger/DSDT.aml
   SECTION RAW = Silicon/Qualcomm/msm8998/AcpiTables/Csrt.acp
   SECTION RAW = Silicon/Qualcomm/msm8998/AcpiTables/dbg2.acp
   SECTION RAW = Silicon/Qualcomm/msm8998/AcpiTables/Facp.acp

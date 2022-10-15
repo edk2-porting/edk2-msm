@@ -4,23 +4,22 @@
 // To adjust the number, the MAX_SOCID_LEN macro as defined in ABD device.h should be
 // adjusted at the same time. 
 
-Name (SOID, 0x00000124)         // Holds the Chip Id
-Name (SIDS, "MSM8998")          // Holds the Chip ID translated to a string
-Name (SIDV, 0x00020001)         // Holds the Chip Version
-Name (SVMJ, 0x0002)             // Holds the major Chip Version
-Name (SVMI, 0x0001)             // Holds the minor Chip Version
-Name (SDFE, 0x0043)             // Holds the Chip Family enum
-Name (SFES, "899800000000000")  // Holds the Chip Family translated to a string
-Name (SIDM, 0x0000000FFFFF00FF) // Holds the Modem Support bit field
-Name (SOSN, 0x000003F2741EA3B7) // SoC serial number
-Name (RMTB, 0x85E00000)         // RemoteFS Shared Memory base
-Name (RMTX, 0x00200000)         // RemoteFS Shared Memory size
-Name (FUCB, 0x94500000)         // MBA subsystem load address
-Name (FUCX, 0x00200000)         // MBA subsystem size
-Name (RFMB, 0x00000000)         // RFSA MPSS Shared Memory base
-Name (RFMS, 0x00000000)         // RFSA MPSS Shared Memory size
-Name (RFAB, 0x00000000)         // RFSA ADSP Shared Memory base
-Name (RFAS, 0x00000000)         // RFSA ADSP Shared Memory size
+Name (SOID, 0xffffffff)          // Holds the Chip Id
+Name (SIDS, "899800000000000")   // Holds the Chip ID translated to a string
+Name (SIDV, 0xffffffff)          // Holds the Chip Version as (major<<16)|(minor&0xffff)
+Name (SVMJ, 0xffff)              // Holds the major Chip Version
+Name (SVMI, 0xffff)              // Holds the minor Chip Version
+Name (SDFE, 0xffff)              // Holds the Chip Family enum
+Name (SFES, "899800000000000")   // Holds the Chip Family translated to a string
+Name (SIDM, 0xfffffffff)         // Holds the Modem Support bit field
+Name (SOSN, 0xaaaaaaaabbbbbbbb)  // Holds the Chip Serial Number
+Name (PLST, 0xffffffff)  		 // Holds the Device platform subtype
+Name (RMTB, 0xaaaaaaaa)
+Name (RMTX, 0xbbbbbbbb)
+Name (RFMB, 0xcccccccc)
+Name (RFMS, 0xdddddddd)
+Name (RFAB, 0xeeeeeeee)
+Name (RFAS, 0x77777777)
 Name (PRP0, 0x0)                // Holds the enable/disable flag for PCIe
 Name (WLEN, One)                // Holds the enable/disable flag for WLAN
 
@@ -34,20 +33,20 @@ Device (HAL0)
 //
 // Storage - UFS/SD 
 //
-Include("../Common/ufs.asl")
-Include("../Common/sdc.asl")
+Include("ufs.asl")
+Include("sdc.asl")
 
 //
 // ASL Bridge Device
 //
-Include("../Common/abd.asl")
+Include("abd.asl")
 Name (ESNL, 0x14)   // Exsoc name limit 20 characters
 Name (DBFL, 0x17)   // buffer Length, should be ESNL+3
 
 //
 // PMIC driver 
 //
-Include("../Common/pmic_core.asl")
+Include("pmic_core.asl")
 
 //
 // PMICTCC driver
@@ -55,41 +54,41 @@ Include("../Common/pmic_core.asl")
 Include("pmic_batt.asl")
 
 Include("pep.asl")
-Include("../Common/bam.asl")
+Include("bam.asl")
 Include("buses.asl")
 
 // MPROC Drivers (PIL Driver and Subsystem Drivers)
-Include("../Common/win_mproc.asl")
-Include("../Common/HoyaSmmu.asl")
+Include("win_mproc.asl")
+Include("HoyaSmmu.asl")
 Include("graphics.asl")
 
-Include("../Common/SCM.asl")
+Include("SCM.asl")
 
 //
 // SPMI driver 
 //
-Include("../Common/spmi.asl")
+Include("spmi.asl")
 
 //
 // TLMM controller.
 //
 Include("qcgpio.asl")
 
-Include("../Common/pcie.asl")
+Include("pcie.asl")
 
-Include("../Common/cbsp_mproc.asl")
+Include("cbsp_mproc.asl")
 
-Include("../Common/adsprpc.asl")
+Include("adsprpc.asl")
 
 //
 // RemoteFS
 // 
-Include("../Common/rfs.asl")
+Include("rfs.asl")
 
 //
 // Qualcomm IPA
-Include("../Common/ipa.asl")
-Include("../Common/gsi.asl")
+Include("ipa.asl")
+Include("gsi.asl")
 
 //
 //  Qualcomm DIAG Service
@@ -104,9 +103,9 @@ Device (QDIG)
     Alias (\_SB.PSUB, _SUB)
 }
 
-Include("../Common/qcdb.asl")
-Include("../Common/ssm.asl")
-Include("../Common/pep_lpi.asl")
+Include("qcdb.asl")
+Include("ssm.asl")
+Include("pep_lpi.asl")
 
 //
 //  QcRNG Driver (qcsecuremsm)
@@ -135,4 +134,4 @@ Device (QRNG)
 //
 // QCOM GPS 
 // 
-Include("../Common/gps.asl")
+Include("gps.asl")

@@ -37,8 +37,8 @@ Device (PILC)
         })
 
         // Copy ACPI globals for Address for this subsystem into above package for use in driver
-        Store (FUCB, Index(DeRefOf(Index (PKGG, 0)), 0))
-        Store (FUCX, Index(DeRefOf(Index (PKGG, 0)), 1))
+        Store (RMTB, Index(DeRefOf(Index (PKGG, 0)), 0))
+        Store (RMTX, Index(DeRefOf(Index (PKGG, 0)), 1))
         
         Return (PKGG)
     }
