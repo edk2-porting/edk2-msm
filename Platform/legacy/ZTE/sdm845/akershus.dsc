@@ -7,7 +7,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = sdm845Pkg/Devices/trident.fdf
+  FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
 
 !include sdm845Pkg/sdm845Pkg.dsc
 
