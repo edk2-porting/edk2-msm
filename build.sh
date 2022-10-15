@@ -62,8 +62,14 @@ function _build(){
 			pushd workspace/Build/${DEVICE}/ACPI
 			cp ../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables/* ./
 			cp ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/{*.asl,${DEVICE}/*} ./
-			wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
-			cp DSDT.AML ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
+			if "${USE_IASL}"
+			then iasl -ve Dsdt.asl ||_error "iasl failed"
+			else wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
+			fi
+			if "${USE_IASL}"
+			then cp DSDT.aml ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
+			else cp DSDT.AML ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
+			fi
 			popd
 		else _error "Building DSDT is unsupported for this device"
 		fi
