@@ -129,7 +129,7 @@ Device (IC15)
    Name (_HID, "QCOM0220")
    Alias(\_SB.PSUB, _SUB)
    Name (_UID, 15)
-   Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP0})
+   Name (_DEP, Package(){\_SB_.PEP0,\_SB_.QGP1})
    Name (_CCA, 0)
 
    Method (_CRS, 0x0, NotSerialized)
