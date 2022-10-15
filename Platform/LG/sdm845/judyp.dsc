@@ -12,7 +12,7 @@
   # Enable A/B Slot Environment
   DEFINE AB_SLOTS_SUPPORT        = TRUE
 
-!include sdm845Pkg/sdm845Pkg.dsc
+!include Platform/Qualcomm/sdm845/sdm845.dsc
 
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -DLG_PIL_FIXED=1 -DAB_SLOTS_SUPPORT=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE

@@ -9,7 +9,7 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = sdm845Pkg/Devices/dipper.fdf
 
-!include sdm845Pkg/sdm845Pkg.dsc
+!include Platform/Qualcomm/sdm845/sdm845.dsc
 
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -DXIAOMI_PIL_FIXED=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
