@@ -922,7 +922,6 @@ Scope(\_SB_.PEP0)
                 {
                     "FSTATE",
                     0x0, // f0 state
-                    /*
                     package()
                     {
                         "TLMMGPIO", // TLMMGPIO resource 
@@ -975,13 +974,11 @@ Scope(\_SB_.PEP0)
                             0,   // Drive Strength: 0x0 = 2mA
                         },
                     },     
-					*/                                       
                 },
                 Package()
                 {
                     "FSTATE",
                     0x1, // f1 state
-                    /*
                     package()
                     {
                         "TLMMGPIO", // TLMMGPIO resource 
@@ -1034,7 +1031,6 @@ Scope(\_SB_.PEP0)
                             0,   // Drive Strength: 0x0 = 2mA
                         },
                     },  
-					*/                                                          
                 },
             },    
             Package()

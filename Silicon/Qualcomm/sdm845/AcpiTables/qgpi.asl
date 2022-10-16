@@ -32,7 +32,7 @@ Device (QGP0)
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {278} // GPII-ID 0x2
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {279} // GPII-ID 0x3
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {280} // GPII-ID 0x4
-      //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {281} // GPII-ID 0x5
+      Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {281} // GPII-ID 0x5
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {282} // GPII-ID 0x6
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {283} // GPII-ID 0x7
       //Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive, , , ) {284} // GPII-ID 0x8

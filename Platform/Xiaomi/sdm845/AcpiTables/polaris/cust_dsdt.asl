@@ -58,14 +58,14 @@ Device(RHPX)
 		)                          // VendorData
 
 		// // Index 1
-		// GpioIo (Shared, PullNone, 0, 0, IoRestrictionNone, "\\_SB.GPO2",) {0}  // Pin 21 of JP1 (GPIO_S5[00])
+		// GpioIo (Shared, PullNone, 0, 0, IoRestrictionNone, "\\_SB.GIO0",) {14}  // Pin 21 of JP1 (GPIO_S5[00])
 		// // Index 2
-		// GpioInt(Edge, ActiveBoth, SharedAndWake, PullNone, 0,"\\_SB.GPO2",) {0}
+		// GpioInt(Edge, ActiveBoth, SharedAndWake, PullNone, 0,"\\_SB.GIO0",) {14}
 
 		// // Index 3
-		// GpioIo (Shared, PullNone, 0, 0, IoRestrictionNone, "\\_SB.GPO2",) {1}  // Pin 23 of JP1 (GPIO_S5[01])
+		// GpioIo (Shared, PullNone, 0, 0, IoRestrictionNone, "\\_SB.GIO0",) {25}  // Pin 23 of JP1 (GPIO_S5[01])
 		// // Index 4
-		// GpioInt(Edge, ActiveBoth, SharedAndWake, PullNone, 0,"\\_SB.GPO2",) {1}
+		// GpioInt(Edge, ActiveBoth, SharedAndWake, PullNone, 0,"\\_SB.GIO0",) {25}
 	})
 
 	Name(_DSD, Package()
