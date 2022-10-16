@@ -16,7 +16,6 @@
 
 [Packages]
   ArmPkg/ArmPkg.dec
-  ArmPlatformPkg/ArmPlatformPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
@@ -54,22 +53,11 @@
   gArmTokenSpaceGuid.PcdSystemMemoryBase
   gArmTokenSpaceGuid.PcdSystemMemorySize
   gArmTokenSpaceGuid.PcdCpuVectorBaseAddress
-  gArmTokenSpaceGuid.PcdFvBaseAddress
-  gArmTokenSpaceGuid.PcdFvSize
   gArmTokenSpaceGuid.PcdFdBaseAddress
   gArmTokenSpaceGuid.PcdFdSize
-  gArmTokenSpaceGuid.PcdGicDistributorBase
-  gArmTokenSpaceGuid.PcdGicRedistributorsBase
-  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase
-  gArmPlatformTokenSpaceGuid.PcdCoreCount
-  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultBaudRate
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
   gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize
   gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
