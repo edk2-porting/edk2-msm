@@ -30,16 +30,17 @@ STATIC EFI_EXIT_BOOT_SERVICES EfiExitBootServices  = NULL;
 #endif
 
 VOID KernelErrataPatcherApplyPatches(
-    COPY_TO CopyTo, VOID *Base, UINTN Size, BOOLEAN IsInFirmwareContext)
+    COPY_TO CopyTo, EFI_PHYSICAL_ADDRESS Base, UINTN Size,
+    BOOLEAN IsInFirmwareContext)
 {
   // Fix up #0 (PsciMemProtect -> C0 03 5F D6) (PsciMemProtect -> RET)
-  UINT8  RetInstruction[] = {0xC0, 0x03, 0x5F, 0xD6};
-  UINT64 PsciMemProtect =
-      FindPattern(
-          Base, Size, "D5 02 00 18 03 00 80 D2 02 00 80 D2 01 00 80 D2") -
-      ARM64_TOTAL_INSTRUCTION_LENGTH(8);
+  UINT8                RetInstruction[] = {0xC0, 0x03, 0x5F, 0xD6};
+  EFI_PHYSICAL_ADDRESS PatternMatch     = FindPattern(
+          Base, Size, "D5 02 00 18 03 00 80 D2 02 00 80 D2 01 00 80 D2");
+  EFI_PHYSICAL_ADDRESS PsciMemProtect =
+      PatternMatch - ARM64_TOTAL_INSTRUCTION_LENGTH(8);
 
-  if (PsciMemProtect != 0) {
+  if (PatternMatch != 0) {
     if (IsInFirmwareContext) {
       FirmwarePrint(
           L"PsciMemProtect            -> (phys) 0x%p\n", PsciMemProtect);
@@ -49,7 +50,9 @@ VOID KernelErrataPatcherApplyPatches(
           L"PsciMemProtect            -> (virt) 0x%p\n", PsciMemProtect);
     }
 
-    CopyTo((UINT64 *)PsciMemProtect, RetInstruction, sizeof(RetInstruction));
+    CopyTo(
+        PsciMemProtect, (EFI_PHYSICAL_ADDRESS)RetInstruction,
+        sizeof(RetInstruction));
   }
 }
 
@@ -58,29 +61,35 @@ EFIAPI
 KernelErrataPatcherExitBootServices(
     IN EFI_HANDLE ImageHandle, IN UINTN MapKey,
     IN PLOADER_PARAMETER_BLOCK loaderBlockX19,
-    IN PLOADER_PARAMETER_BLOCK loaderBlockX20, IN UINTN returnAddress)
+    IN PLOADER_PARAMETER_BLOCK loaderBlockX20,
+    IN EFI_PHYSICAL_ADDRESS    returnAddress)
 {
   // Might be called multiple times by winload in a loop failing few times
   gBS->ExitBootServices = EfiExitBootServices;
 
   PLOADER_PARAMETER_BLOCK loaderBlock = loaderBlockX19;
 
-  if (loaderBlock == NULL || ((UINTN)loaderBlock & 0xFFFFFFF000000000) == 0) {
+  if (loaderBlock == NULL ||
+      ((EFI_PHYSICAL_ADDRESS)loaderBlock & 0xFFFFFFF000000000) == 0) {
     loaderBlock = loaderBlockX20;
   }
 
-  if (loaderBlock == NULL || ((UINTN)loaderBlock & 0xFFFFFFF000000000) == 0) {
+  if (loaderBlock == NULL ||
+      ((EFI_PHYSICAL_ADDRESS)loaderBlock & 0xFFFFFFF000000000) == 0) {
     FirmwarePrint(
         L"Failed to find OslLoaderBlock! loaderBlock -> 0x%p\n", loaderBlock);
     goto exit;
   }
 
+  EFI_PHYSICAL_ADDRESS PatternMatch = FindPattern(
+      returnAddress, SCAN_MAX,
+      "1F 04 00 71 33 11 88 9A 28 00 40 B9 1F 01 00 6B");
+
   // BlpArchSwitchContext
   BlpArchSwitchContext =
-      (BL_ARCH_SWITCH_CONTEXT)(FindPattern((VOID *)returnAddress, SCAN_MAX, "1F 04 00 71 33 11 88 9A 28 00 40 B9 1F 01 00 6B") - ARM64_TOTAL_INSTRUCTION_LENGTH(9));
+      (BL_ARCH_SWITCH_CONTEXT)(PatternMatch - ARM64_TOTAL_INSTRUCTION_LENGTH(9));
 
-  if (BlpArchSwitchContext == NULL ||
-      ((UINTN)BlpArchSwitchContext & 0xFFFFFFF000000000) != 0) {
+  if (PatternMatch == 0 || (PatternMatch & 0xFFFFFFF000000000) != 0) {
     FirmwarePrint(
         L"Failed to find BlpArchSwitchContext! BlpArchSwitchContext -> 0x%p\n",
         BlpArchSwitchContext);
@@ -130,8 +139,8 @@ KernelErrataPatcherExitBootServices(
     goto exitToFirmware;
   }
 
-  UINTN kernelBase = (UINTN)kernelModule.DllBase;
-  UINTN kernelSize = kernelModule.SizeOfImage;
+  EFI_PHYSICAL_ADDRESS kernelBase = (EFI_PHYSICAL_ADDRESS)kernelModule.DllBase;
+  UINTN                kernelSize = kernelModule.SizeOfImage;
 
   ContextPrint(L"OsKernel                  -> (virt) 0x%p\n", kernelBase);
 
@@ -142,7 +151,7 @@ KernelErrataPatcherExitBootServices(
 
     // Fix up ntoskrnl.exe
     KernelErrataPatcherApplyPatches(
-        CopyToReadOnly, (VOID *)kernelBase, kernelSize, FALSE);
+        CopyToReadOnly, kernelBase, kernelSize, FALSE);
   }
 
 exitToFirmware:

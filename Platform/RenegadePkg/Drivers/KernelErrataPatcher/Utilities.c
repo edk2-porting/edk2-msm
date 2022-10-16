@@ -13,7 +13,8 @@
 **/
 #include "KernelErrataPatcher.h"
 
-VOID CopyMemory(VOID *destination, VOID *source, UINTN size)
+VOID CopyMemory(
+    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size)
 {
   UINT8 *dst = (UINT8 *)(destination);
   UINT8 *src = (UINT8 *)(source);
@@ -22,43 +23,43 @@ VOID CopyMemory(VOID *destination, VOID *source, UINTN size)
   }
 }
 
-VOID CopyToReadOnly(VOID *destination, VOID *source, UINTN size)
+VOID CopyToReadOnly(
+    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size)
 {
   BOOLEAN intstate = ArmGetInterruptState();
   if (intstate)
     ArmDisableInterrupts();
 
-  ArmClearMemoryRegionReadOnly((EFI_PHYSICAL_ADDRESS)destination, size);
+  ArmClearMemoryRegionReadOnly(destination, size);
   CopyMemory(destination, source, size);
-  ArmSetMemoryRegionReadOnly((EFI_PHYSICAL_ADDRESS)destination, size);
+  ArmSetMemoryRegionReadOnly(destination, size);
 
   if (intstate)
     ArmEnableInterrupts();
 }
 
-UINT64 FindPattern(VOID *baseAddress, UINT64 size, const CHAR8 *pattern)
+EFI_PHYSICAL_ADDRESS
+FindPattern(EFI_PHYSICAL_ADDRESS baseAddress, UINTN size, const CHAR8 *pattern)
 {
-  UINT8       *firstMatch     = NULL;
-  const CHAR8 *currentPattern = pattern;
+  EFI_PHYSICAL_ADDRESS firstMatch     = 0;
+  const CHAR8         *currentPattern = pattern;
 
-  UINT8 *start = (UINT8 *)(baseAddress);
-  UINT8 *end   = start + size;
-
-  for (UINT8 *current = start; current < end; current++) {
+  for (EFI_PHYSICAL_ADDRESS current = baseAddress; current < baseAddress + size;
+       current++) {
     UINT8 byte = currentPattern[0];
     if (!byte)
-      return (UINT64)(firstMatch);
+      return firstMatch;
     if (byte == '\?' ||
         *(UINT8 *)(current) == GET_BYTE(byte, currentPattern[1])) {
       if (!firstMatch)
         firstMatch = current;
       if (!currentPattern[2])
-        return (UINT64)(firstMatch);
+        return firstMatch;
       ((byte == '\?') ? (currentPattern += 2) : (currentPattern += 3));
     }
     else {
       currentPattern = pattern;
-      firstMatch     = NULL;
+      firstMatch     = 0;
     }
   }
 

@@ -43,22 +43,27 @@
 #define GET_BYTE(a, b) (GET_BITS(a) << 4 | GET_BITS(b))
 
 typedef VOID (*BL_ARCH_SWITCH_CONTEXT)(UINT32 target);
-typedef VOID (*COPY_TO)(VOID *destination, VOID *source, UINTN size);
+typedef VOID (*COPY_TO)(
+    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
 
 EFI_STATUS
 EFIAPI
 KernelErrataPatcherExitBootServices(
     IN EFI_HANDLE ImageHandle, IN UINTN MapKey,
     IN PLOADER_PARAMETER_BLOCK loaderBlockX19,
-    IN PLOADER_PARAMETER_BLOCK loaderBlockX20, IN UINTN returnAddress);
+    IN PLOADER_PARAMETER_BLOCK loaderBlockX20,
+    IN EFI_PHYSICAL_ADDRESS    returnAddress);
 
 EFI_STATUS
 EFIAPI
 ExitBootServicesWrapper(IN EFI_HANDLE ImageHandle, IN UINTN MapKey);
 
-VOID   CopyMemory(VOID *destination, VOID *source, UINTN size);
-VOID   CopyToReadOnly(VOID *destination, VOID *source, UINTN size);
-UINT64 FindPattern(VOID *baseAddress, UINT64 size, const CHAR8 *pattern);
+VOID CopyMemory(
+    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
+VOID CopyToReadOnly(
+    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
+UINT64 FindPattern(
+    EFI_PHYSICAL_ADDRESS baseAddress, UINT64 size, const CHAR8 *pattern);
 KLDR_DATA_TABLE_ENTRY *GetModule(LIST_ENTRY *list, const CHAR16 *name);
 
 #endif /* _KERNEL_ERRATA_PATCHER_H_ */
