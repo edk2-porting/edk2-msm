@@ -20,7 +20,7 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
   # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|350
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"MIX2S"
