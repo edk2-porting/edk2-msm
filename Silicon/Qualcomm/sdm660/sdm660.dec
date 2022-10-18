@@ -1,0 +1,13 @@
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001A
+  PACKAGE_NAME                   = sdm660Pkg
+  PACKAGE_GUID                   = 8f169043-4634-42b9-adab-5040f633596c
+  PACKAGE_VERSION                = 1.0
+
+[Includes]
+  Include
+
+[Guids]
+  gsdm660PkgTokenSpaceGuid        = { 0x32cba3d5, 0x05df, 0x4f84, {0x93, 0x5d, 0x9a, 0x61, 0x8a, 0xf5, 0x5a, 0x79 } }
+
+[PcdsFixedAtBuild.common]
