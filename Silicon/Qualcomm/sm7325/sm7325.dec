@@ -1,0 +1,13 @@
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001A
+  PACKAGE_NAME                   = sm7325Pkg
+  PACKAGE_GUID                   = 8f169043-4634-42b9-adab-5040f633596c
+  PACKAGE_VERSION                = 1.0
+
+[Includes]
+  Include
+
+[Guids]
+  gsm7325PkgTokenSpaceGuid        = { 0x99a14446, 0xaad7, 0xe460, {0xb4, 0xe5, 0x1f, 0x79, 0xaa, 0xa4, 0x93, 0xfd } }
+
+[PcdsFixedAtBuild.common]
