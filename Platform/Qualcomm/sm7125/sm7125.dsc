@@ -19,7 +19,8 @@
 !include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
 
 [Defines]
-  DEFINE SOC_PLATFORM = SM7125
+  SOC_PLATFORM            = SM7125
+  USE_PHYSICAL_TIMER      = TRUE
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address

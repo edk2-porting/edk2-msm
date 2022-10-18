@@ -19,7 +19,8 @@
 !include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
 
 [Defines]
-  DEFINE SOC_PLATFORM = SDM845
+  SOC_PLATFORM            = SDM845
+  USE_PHYSICAL_TIMER      = TRUE
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address
