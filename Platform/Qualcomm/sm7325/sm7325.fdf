@@ -104,7 +104,7 @@ READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 
 # Apriori
-# !include Platform/Qualcomm/sm7325/Apriori.fdf.inc
+!include Platform/Qualcomm/sm7325/Apriori.fdf.inc
 
   INF MdeModulePkg/Core/Dxe/DxeMain.inf
 
@@ -135,6 +135,7 @@ READ_LOCK_STATUS   = TRUE
   #
   # Multiple Console IO support
   #
+  INF EmbeddedPkg/SimpleTextInOutSerial/SimpleTextInOutSerial.inf
   INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
   INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
   INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
@@ -146,7 +147,7 @@ READ_LOCK_STATUS   = TRUE
   INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 
 # BSP drivers
-# !include Platform/Qualcomm/sm7325/dxe.fdf.inc
+!include Platform/Qualcomm/sm7325/dxe.fdf.inc
 
   INF Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
