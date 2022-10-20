@@ -16,11 +16,11 @@
 #
 ################################################################################
 
-!include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
-
 [Defines]
   SOC_PLATFORM            = MSM8998
   USE_PHYSICAL_TIMER      = TRUE
+
+!include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address

@@ -16,11 +16,11 @@
 #
 ################################################################################
 
-!include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
-
 [Defines]
   SOC_PLATFORM            = SM7325
   USE_PHYSICAL_TIMER      = FALSE
+
+!include Silicon/Qualcomm/QcomPkg/QcomCommonDsc.inc
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address
