@@ -94,6 +94,9 @@ APRIORI DXE {
     SECTION UI = "ClockDxe"
   }
 
+  // Used to speed up booting. must be loaded after ClockDxe
+  INF Platform/RenegadePkg/Drivers/SetCPUFreqDxe/SetCPUFreqDxe.inf
+
   FILE DRIVER = 5824f9de-17d2-4b1f-a5fe-5eb77fa53093 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/ICBDxe/ICBDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/ICBDxe/ICBDxe.efi
@@ -129,6 +132,12 @@ APRIORI DXE {
     SECTION UI = "I2C"
   }
 
+  FILE DRIVER = 3ae17db7-3cc5-4b89-9304-9549211057ef {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/ResetRuntimeDxe/ResetRuntimeDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/ResetRuntimeDxe/ResetRuntimeDxe.efi
+    SECTION UI = "ResetRuntimeDxe"
+  }
+
   FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/PmicDxe/PmicDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/PmicDxe/PmicDxe.efi
@@ -148,9 +157,19 @@ APRIORI DXE {
 
   INF FatPkg/EnhancedFatDxe/Fat.inf
 
+  FILE DRIVER = cf6dfc66-14ab-4e13-84db-9c02912d1404 {
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/TzDxeLA/TzDxeLA.efi
+    SECTION UI = "TzDxeLA"
+  }
+
   INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
 
-  
+  FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
+  }
+
   INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf

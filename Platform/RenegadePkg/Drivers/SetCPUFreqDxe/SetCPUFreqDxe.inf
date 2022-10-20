@@ -1,0 +1,28 @@
+[Defines]
+  INF_VERSION                    = 0x0010005
+  BASE_NAME                      = SetCPUFreqDxe
+  FILE_GUID                      = 13d1c8d2-c995-4fd2-a169-734ddc12fd23
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SetCPUFreqDxeMain
+
+[Packages]
+  MdePkg/MdePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  DebugLib
+  UefiDriverEntryPoint
+
+[Sources]
+  SetCPUFreqDxe.c
+
+[Pcd]
+
+[Protocols]
+  gEfiClockProtocolGuid
+
+[Depex]
+  TRUE

@@ -95,6 +95,9 @@ APRIORI DXE {
     SECTION UI = "ClockDxe"
   }
 
+  // Used to speed up booting. must be loaded after ClockDxe
+  INF Platform/RenegadePkg/Drivers/SetCPUFreqDxe/SetCPUFreqDxe.inf
+
   INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
   INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
 
