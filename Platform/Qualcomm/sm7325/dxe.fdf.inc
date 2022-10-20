@@ -35,11 +35,11 @@
     SECTION UI = "DALTLMM"
   }
 
-  # FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.depex
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.efi
-  #   SECTION UI = "DDRInfoDxe"
-  # }
+  FILE DRIVER = 7DB0793A-4402-4BE1-906E-D0FABAD2707E {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/DDRInfoDxe/DDRInfoDxe.efi
+    SECTION UI = "DDRInfoDxe"
+  }
 
   FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/HALIOMMU/HALIOMMU.depex
@@ -101,6 +101,12 @@
   #   SECTION UI = "QcomWDogDxe"
   # }
 
+  FILE DRIVER = 3ae17db7-3cc5-4b89-9304-9549211057ef {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/ResetRuntimeDxe/ResetRuntimeDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/ResetRuntimeDxe/ResetRuntimeDxe.efi
+    SECTION UI = "ResetRuntimeDxe"
+  }
+
   FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219766 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/RpmhDxe/RpmhDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/RpmhDxe/RpmhDxe.efi
@@ -130,11 +136,10 @@
     SECTION UI = "SPMI"
   }
 
-  # FILE DRIVER = 6925fad3-e243-4b69-ad61-3f978c8abc60 {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/TzDxe/TzDxe.depex
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/TzDxe/TzDxe.efi
-  #   SECTION UI = "TzDxe"
-  # }
+  FILE DRIVER = cf6dfc66-14ab-4e13-84db-9c02912d1404 {
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/TzDxeLA/TzDxeLA.efi
+    SECTION UI = "TzDxeLA"
+  }
 
   FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UFSDxe/UFSDxe.depex
