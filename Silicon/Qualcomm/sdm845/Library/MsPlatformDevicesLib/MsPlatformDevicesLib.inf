@@ -43,5 +43,4 @@
   gEfiChipInfoProtocolGuid                      ## CONSUMES
   gQcomSMEMProtocolGuid                         ## CONSUMES
   gEfiPlatformInfoProtocolGuid                  ## CONSUMES
-  gEfiClockProtocolGuid
   
