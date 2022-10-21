@@ -49,7 +49,7 @@
   #
   # SimpleInit
   #
-  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x9DA00000
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x80780000
   gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
 [LibraryClasses.common]

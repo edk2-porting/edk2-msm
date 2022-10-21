@@ -155,7 +155,7 @@ READ_LOCK_STATUS   = TRUE
   # Helper drivers
   #
   INF Platform/RenegadePkg/Drivers/SetCPUFreqDxe/SetCPUFreqDxe.inf
-  
+
   #
   # USB Host Support
   #
@@ -225,7 +225,7 @@ READ_LOCK_STATUS   = TRUE
   #
   INF src/main/SimpleInitMain.inf
 
-  # INF src/kernelfdt/KernelFdtDxe.inf
+  INF src/kernelfdt/KernelFdtDxe.inf
 
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)
