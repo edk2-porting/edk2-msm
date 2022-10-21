@@ -32,9 +32,9 @@ function _build(){
 	[ -d "${WORKSPACE}" ]||mkdir "${WORKSPACE}"
 	set -x
 	make -C "${_EDK2}/BaseTools"||exit "$?"
-	
+
 	SPLIT_DSDT=false
-	
+
 	if [ -f "configs/${DEVICE}.conf" ]
 	then source "configs/${DEVICE}.conf"
 	else _error "Device configuration not found"
@@ -43,21 +43,25 @@ function _build(){
 
 	EXT="" #support for both panels of beryllium
 	if [ "${DEVICE}" == "beryllium-tianma" ]
-	then cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-tianma.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
+	then
+		cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-tianma.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
 		DEVICE="beryllium"
 		EXT="-tianma"
 		GEN_ACPI=true
 	fi
 	if [ "${DEVICE}" == "beryllium-ebbg" ]
-	then cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-ebbg.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
+	then
+		cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-ebbg.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
 		DEVICE="beryllium"
 		EXT="-ebbg"
 		GEN_ACPI=true
 	fi
-	
-	if "${GEN_ACPI}" 
-		then if "${SPLIT_DSDT}"
-			then rm -rf "workspace/Build/${DEVICE}/ACPI"
+
+	if "${GEN_ACPI}"
+	then
+		if "${SPLIT_DSDT}"
+		then
+			rm -rf "workspace/Build/${DEVICE}/ACPI"
 			mkdir -p "workspace/Build/${DEVICE}/ACPI"
 			pushd "workspace/Build/${DEVICE}/ACPI"
 			cp "../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables"/* ./
@@ -71,13 +75,14 @@ function _build(){
 			else cp DSDT.AML "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
 			fi
 			popd
-		else _error "Building DSDT is unsupported for this device"
+		else
+			_error "Building DSDT is unsupported for this device"
 		fi
 	fi
 
 	# based on the instructions from edk2-platform
 	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
-	
+
 	case "${MODE}" in
 		RELEASE) _MODE=RELEASE;;
 		*) _MODE=DEBUG;;
@@ -168,10 +173,12 @@ if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
 if ! [ -f Common/edk2/edksetup.sh ] && ! [ -f ../edk2/edksetup.sh ]
-then	set -e
+then
+	set -e
 	echo "Updating submodules"
 	if "${CHINESE}"
-	then	git submodule set-url Common/edk2                                       https://hub.fastgit.xyz/tianocore/edk2.git
+	then
+		git submodule set-url Common/edk2                                           https://hub.fastgit.xyz/tianocore/edk2.git
 		git submodule set-url Common/edk2-platforms                                 https://hub.fastgit.xyz/tianocore/edk2-platforms.git
 		git submodule set-url Platform/EFI_Binaries                                 https://hub.fastgit.xyz/edk2-porting/edk2-sdm845-binary.git
 		git submodule set-url Platform/RenegadePkg/Library/SimpleInit               https://hub.fastgit.xyz/BigfootACA/simple-init.git
@@ -195,7 +202,8 @@ then	set -e
 		git submodule init;git submodule update
 		popd
 		git checkout .gitmodules
-	else	git submodule init;git submodule update --depth 1
+	else
+		git submodule init;git submodule update --depth 1
 		pushd Common/edk2
 		git submodule init;git submodule update
 		popd
@@ -206,20 +214,26 @@ then	set -e
 	set +e
 fi
 for i in "${EDK2}" ./Common/edk2 ../edk2
-do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
-	then	_EDK2="$(realpath "${i}")"
+do
+	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
+	then
+		_EDK2="$(realpath "${i}")"
 		break
 	fi
 done
 for i in "${EDK2_PLATFORMS}" ./Common/edk2-platforms ../edk2-platforms
-do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
-	then	_EDK2_PLATFORMS="$(realpath "${i}")"
+do
+	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
+	then
+		_EDK2_PLATFORMS="$(realpath "${i}")"
 		break
 	fi
 done
 for i in "${SIMPLE_INIT}" Platform/RenegadePkg/Library/SimpleInit ./simple-init ../simple-init
-do	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
-	then	_SIMPLE_INIT="$(realpath "${i}")"
+do
+	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
+	then
+		_SIMPLE_INIT="$(realpath "${i}")"
 		break
 	fi
 done
@@ -240,7 +254,8 @@ echo > ramdisk
 set -e
 mkdir -p "${_SIMPLE_INIT}/build" "${_SIMPLE_INIT}/root/usr/share/locale"
 for i in "${_SIMPLE_INIT}/po/"*.po
-do	[ -f "${i}" ]||continue
+do
+	[ -f "${i}" ]||continue
 	_name="$(basename "$i" .po)"
 	_path="${_SIMPLE_INIT}/root/usr/share/locale/${_name}/LC_MESSAGES"
 	mkdir -p "${_path}"
@@ -248,15 +263,18 @@ do	[ -f "${i}" ]||continue
 done
 
 if "${GEN_ROOTFS}"
-then bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
-	"${_SIMPLE_INIT}" \
-	"${_SIMPLE_INIT}/build"
+then
+	 bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
+		"${_SIMPLE_INIT}" \
+		"${_SIMPLE_INIT}/build"
 fi
 
 if [ "${DEVICE}" == "all" ]
-then	E=0
+then
+	E=0
 	for i in configs/*.conf
-	do	DEV="$(basename "$i" .conf)"
+	do
+		DEV="$(basename "$i" .conf)"
 		echo "Building ${DEV}"
 		_build "${DEV}"||E="$?"
 	done
