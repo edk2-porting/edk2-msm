@@ -23,5 +23,5 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|300
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Oneplus"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"6"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"5"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"cheeseburger"
