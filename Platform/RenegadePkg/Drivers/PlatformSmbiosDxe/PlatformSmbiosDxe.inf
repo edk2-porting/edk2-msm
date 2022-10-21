@@ -44,6 +44,7 @@
   PrintLib
   TimeBaseLib
   SimpleInitLib
+  SOCSmbiosInfoLib
 
 [Guids]
   gEfiGlobalVariableGuid
