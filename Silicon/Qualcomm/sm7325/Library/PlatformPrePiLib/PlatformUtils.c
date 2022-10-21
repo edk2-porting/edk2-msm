@@ -70,7 +70,7 @@ VOID UartInit(VOID)
   SerialPortInitialize();
   InitializeSharedUartBuffers();
 
-  DEBUG((EFI_D_INFO, "\nProjectMu on Duo 2 (AArch64)\n"));
+  DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64)\n"));
   DEBUG(
       (EFI_D_INFO, "Firmware version %s built %a %a\n\n",
        (CHAR16 *)PcdGetPtr(PcdFirmwareVersionString), __TIME__, __DATE__));
