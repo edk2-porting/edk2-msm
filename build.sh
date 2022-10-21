@@ -7,7 +7,7 @@ function _help(){
 	echo
 	echo "Options: "
 	echo "	--device DEV, -d DEV:    build for DEV."
-#	echo "	--all, -a:               build all devices."
+	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use hub.fastgit.xyz for submodule cloning."
 	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
 	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
@@ -253,22 +253,14 @@ then bash "${_SIMPLE_INIT}/scripts/gen-rootfs-source.sh" \
 	"${_SIMPLE_INIT}/build"
 fi
 
-_build "${DEVICE}"
-
-# if [ "${DEVICE}" == "all" ]
-# then	E=0
-# 	for i in "${DEVICES[@]}"
-# 	do	echo "Building ${i}"
-# 		rm --recursive --force --one-file-system ./workspace||true
-# 		_build "${i}"||E="$?"
-# 	done
-# 	exit "${E}"
-# else	HAS=false
-# 	for i in "${DEVICES[@]}"
-# 	do	[ "${i}" == "${DEVICE}" ]||continue
-# 		HAS=true
-# 		break
-# 	done
-# 	[ "${HAS}" == "true" ]||_error "build.sh: unknown build target device ${DEVICE}."
-# 	_build "${DEVICE}"
-# fi
+if [ "${DEVICE}" == "all" ]
+then	E=0
+	for i in configs/*.conf
+	do	DEV="$(basename "$i" .conf)"
+		echo "Building ${DEV}"
+		_build "${DEV}"||E="$?"
+	done
+	exit "${E}"
+else
+	_build "${DEVICE}"
+fi
