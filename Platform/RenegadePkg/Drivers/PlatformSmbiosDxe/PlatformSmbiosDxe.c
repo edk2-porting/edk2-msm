@@ -105,7 +105,7 @@ SMBIOS_TABLE_TYPE0 mBIOSInfoType0 = {
 };
 
 CHAR8 mBiosVendor[128]  = "Renegade-Project";
-CHAR8 mBiosVersion[128] = "edk2-sdm845";
+CHAR8 mBiosVersion[128] = "edk2-msm";
 CHAR8 mBiosDate[12]     = __DATE__;
 
 CHAR8 *mBIOSInfoType0Strings[] = {
@@ -732,7 +732,7 @@ SMBIOS_TABLE_TYPE11 mOemStringsType11 = {
     1 // StringCount
 };
 CHAR8 *mOemStringsType11Strings[] = {
-    "https://github.com/edk2-porting/edk2-sdm845", NULL};
+    "https://github.com/edk2-porting/edk2-msm", NULL};
 
 /***********************************************************************
         SMBIOS data definition  TYPE16  Physical Memory ArrayInformation
@@ -983,7 +983,7 @@ PlatformSmbiosDriverEntryPoint(
 
   // TYPE0 BIOS Information
   AsciiSPrint(
-      mBiosVersion, sizeof(mBiosVersion), "edk2-sdm845 %s",
+      mBiosVersion, sizeof(mBiosVersion), "edk2-msm %s",
       (CHAR16 *)FixedPcdGetPtr(PcdFirmwareVersionString));
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mBIOSInfoType0, mBIOSInfoType0Strings, NULL);
