@@ -167,7 +167,7 @@ done
 if "${DISTCLEAN}";then _distclean;exit "$?";fi
 if "${CLEAN}";then _clean;exit "$?";fi
 [ -z "${DEVICE}" ]&&_help 1
-if ! [ -f Common/edk2/edksetup.sh ] && ! [ -f ../Common/edk2/edksetup.sh ]
+if ! [ -f Common/edk2/edksetup.sh ] && ! [ -f ../edk2/edksetup.sh ]
 then	set -e
 	echo "Updating submodules"
 	if "${CHINESE}"
@@ -205,13 +205,13 @@ then	set -e
 	fi
 	set +e
 fi
-for i in "${EDK2}" ./Common/edk2 ../Common/edk2
+for i in "${EDK2}" ./Common/edk2 ../edk2
 do	if [ -n "${i}" ]&&[ -f "${i}/edksetup.sh" ]
 	then	_EDK2="$(realpath "${i}")"
 		break
 	fi
 done
-for i in "${EDK2_PLATFORMS}" ./Common/edk2-platforms ../Common/edk2-platforms
+for i in "${EDK2_PLATFORMS}" ./Common/edk2-platforms ../edk2-platforms
 do	if [ -n "${i}" ]&&[ -d "${i}/Platform" ]
 	then	_EDK2_PLATFORMS="$(realpath "${i}")"
 		break
