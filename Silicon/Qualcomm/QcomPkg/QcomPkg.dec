@@ -64,3 +64,5 @@
   gQcomTokenSpaceGuid.PcdTouchInvertedY|FALSE|BOOLEAN|0x0000a50b
   # RTC information
   gQcomTokenSpaceGuid.PcdBootShimInfo1|0xb0000000|UINT64|0x00000a601
+  # Debug UART settings
+  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa84000|UINT64|0x00000a701
