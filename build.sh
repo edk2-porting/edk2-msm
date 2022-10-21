@@ -39,7 +39,7 @@ function _build(){
 	then source "configs/${DEVICE}.conf"
 	else _error "Device configuration not found"
 	fi
-	typeset -l SOC_PLATFORM_L=$SOC_PLATFORM
+	typeset -l SOC_PLATFORM_L="$SOC_PLATFORM"
 
 	EXT="" #support for both panels of beryllium
 	if [ "${DEVICE}" == "beryllium-tianma" ]
@@ -57,18 +57,18 @@ function _build(){
 	
 	if "${GEN_ACPI}" 
 		then if "${SPLIT_DSDT}"
-			then rm -rf workspace/Build/${DEVICE}/ACPI
-			mkdir -p workspace/Build/${DEVICE}/ACPI
-			pushd workspace/Build/${DEVICE}/ACPI
-			cp ../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables/* ./
-			cp ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/{*.asl,${DEVICE}/*} ./
+			then rm -rf "workspace/Build/${DEVICE}/ACPI"
+			mkdir -p "workspace/Build/${DEVICE}/ACPI"
+			pushd "workspace/Build/${DEVICE}/ACPI"
+			cp "../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables"/* ./
+			cp "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"{*.asl,"${DEVICE}/"*} ./
 			if "${USE_IASL}"
 			then iasl -ve Dsdt.asl ||_error "iasl failed"
 			else wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
 			fi
 			if "${USE_IASL}"
-			then cp DSDT.aml ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
-			else cp DSDT.AML ../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/
+			then cp DSDT.aml "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
+			else cp DSDT.AML "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
 			fi
 			popd
 		else _error "Building DSDT is unsupported for this device"
