@@ -11,3 +11,6 @@
 
 [Packages]
   MdePkg/MdePkg.dec
+
+[Pcd]
+  gQcomTokenSpaceGuid.PcdDebugUartPortBase
