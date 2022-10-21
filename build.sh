@@ -25,6 +25,21 @@ function _help(){
 
 function _error(){ echo "${@}" >&2;exit 1; }
 
+function _call_hook(){
+	local NAME="${1}"
+	shift
+	if declare -F "${NAME}" &>/dev/null
+	then eval "${NAME}" "${@}"||return 1
+	fi
+	return 0
+}
+
+function _load_platform_hooks(){
+	if [ -f "${ROOTDIR}/${1}" ]
+	then source "${ROOTDIR}/${1}"
+	fi
+}
+
 function _build(){
 	local DEVICE="${1}"
 	shift
@@ -34,45 +49,40 @@ function _build(){
 	make -C "${_EDK2}/BaseTools"||exit "$?"
 
 	SPLIT_DSDT=false
+	EXT=""
 
 	if [ -f "configs/${DEVICE}.conf" ]
 	then source "configs/${DEVICE}.conf"
 	else _error "Device configuration not found"
 	fi
 	typeset -l SOC_PLATFORM_L="$SOC_PLATFORM"
+	_load_platform_hooks Platform/platform.sh.inc
+	_load_platform_hooks Silicon/platform.sh.inc
+	_load_platform_hooks "Silicon/${SOC_VENDOR}/platform.sh.inc"
+	_load_platform_hooks "Platform/${VENDOR_NAME}/platform.sh.inc"
+	_load_platform_hooks "Silicon/${SOC_VENDOR}/${SOC_PLATFORM_L}/platform.sh.inc"
+	_load_platform_hooks "Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/platform.sh.inc"
+	_load_platform_hooks "Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/${PLATFORM_NAME}.sh.inc"
+	_load_platform_hooks "Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/${DEVICE}.sh.inc"
 
-	EXT="" #support for both panels of beryllium
-	if [ "${DEVICE}" == "beryllium-tianma" ]
-	then
-		cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-tianma.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
-		DEVICE="beryllium"
-		EXT="-tianma"
-		GEN_ACPI=true
-	fi
-	if [ "${DEVICE}" == "beryllium-ebbg" ]
-	then
-		cp Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel-ebbg.asl Platform/Xiaomi/sdm845/AcpiTables/beryllium/panel.asl
-		DEVICE="beryllium"
-		EXT="-ebbg"
-		GEN_ACPI=true
-	fi
+	_call_hook platform_pre_acpi||return "$?"
 
 	if "${GEN_ACPI}"
 	then
 		if "${SPLIT_DSDT}"
 		then
-			rm -rf "workspace/Build/${DEVICE}/ACPI"
-			mkdir -p "workspace/Build/${DEVICE}/ACPI"
-			pushd "workspace/Build/${DEVICE}/ACPI"
-			cp "../../../../Silicon/Qualcomm/${SOC_PLATFORM_L}/AcpiTables"/* ./
-			cp "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"{*.asl,"${DEVICE}/"*} ./
-			if "${USE_IASL}"
+			rm -rf "${WORKSPACE}/Build/${DEVICE}/ACPI"
+			mkdir -p "${WORKSPACE}/Build/${DEVICE}/ACPI"
+			pushd "${WORKSPACE}/Build/${DEVICE}/ACPI"
+			cp "${ROOTDIR}/Silicon/${SOC_VENDOR}/${SOC_PLATFORM_L}/AcpiTables"/* ./
+			cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"{*.asl,"${DEVICE}/"*} ./
+			if [ "${USE_IASL}" == "true" ]
 			then iasl -ve Dsdt.asl ||_error "iasl failed"
-			else wine ../../../../tools/asl-x64.exe Dsdt.asl ||_error "asl.exe failed"
+			else wine "${ROOTDIR}/tools/asl-x64.exe" Dsdt.asl ||_error "asl.exe failed"
 			fi
-			if "${USE_IASL}"
-			then cp DSDT.aml "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
-			else cp DSDT.AML "../../../../Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
+			if [ "${USE_IASL}" == "true" ]
+			then cp DSDT.aml "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
+			else cp DSDT.AML "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
 			fi
 			popd
 		else
@@ -81,7 +91,7 @@ function _build(){
 	fi
 
 	# based on the instructions from edk2-platform
-	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" uefi_img "uefi-${DEVICE}.img.gz" "uefi-${DEVICE}.img.gz-dtb"
+	rm -f "${OUTDIR}/boot-${DEVICE}${EXT}.img" "${OUTDIR}/uefi-${DEVICE}"*
 
 	case "${MODE}" in
 		RELEASE) _MODE=RELEASE;;
@@ -89,54 +99,34 @@ function _build(){
 	esac
 
 	echo "Building BootShim"
-	pushd tools/BootShim
+	pushd "${ROOTDIR}/tools/BootShim"
 	make UEFI_BASE=0xD0000000 UEFI_SIZE=0x00600000
 	popd
 
+	_call_hook platform_pre_build||return "$?"
 	build \
 		-s \
 		-n 0 \
 		-a AARCH64 \
 		-t "${TOOLCHAIN}" \
-		-p "Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/${PLATFORM_NAME}.dsc" \
+		-p "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/${PLATFORM_NAME}.dsc" \
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
 		||return "$?"
-	cat \
-		"tools/BootShim/BootShim.bin" \
-		"workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd" \
-		> "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
-		||return "$?"
-	gzip -c \
-		< "workspace/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
-		> "workspace/uefi-${DEVICE}.img.gz" \
-		||return "$?"
-	cat \
-		"workspace/uefi-${DEVICE}.img.gz" \
-		"Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/FdtBlob_compat/${PLATFORM_NAME}.dtb" \
-		> "workspace/uefi-${DEVICE}.img.gz-dtb" \
-		||return "$?"
-	python3 ./tools/mkbootimg.py \
-		--kernel "workspace/uefi-${DEVICE}.img.gz-dtb" \
-		--ramdisk ramdisk \
-		--kernel_offset 0x00000000 \
-		--ramdisk_offset 0x00000000 \
-		--tags_offset 0x00000000 \
-		--os_version "${BOOTIMG_OS_VERSION}" \
-		--os_patch_level "${BOOTIMG_OS_PATCH_LEVEL}" \
-		--header_version 1 \
-		-o "${OUTDIR}/boot-${DEVICE}${EXT}.img" \
-		||return "$?"
+	_call_hook platform_build_kernel||return "$?"
+	_call_hook platform_build_bootimg||return "$?"
 	echo "Build done: ${OUTDIR}/boot-${DEVICE}${EXT}.img"
 	set +x
 }
 
-function _clean(){ rm --one-file-system --recursive --force ./workspace boot-*.img uefi-*.img*; }
+function _clean(){ rm --one-file-system --recursive --force "${WORKSPACE}" "${OUTDIR}"/boot-*.img "${OUTDIR}"/uefi-*.img*; }
 
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 
-cd "$(dirname "$0")"||exit 1
+OUTDIR="${PWD}"
+ROOTDIR="$(dirname "$0")"
+cd "${ROOTDIR}"||exit 1
 typeset -l DEVICE
 typeset -u MODE
 DEVICE=""
@@ -145,8 +135,9 @@ CHINESE=false
 CLEAN=false
 DISTCLEAN=false
 TOOLCHAIN=GCC5
+SOC_VENDOR=Qualcomm
 USE_UART=0
-export OUTDIR="${PWD}"
+export ROOTDIR OUTDIR SOC_VENDOR
 export GEN_ACPI=false
 export GEN_ROOTFS=true
 OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
@@ -247,7 +238,7 @@ export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE}"
 export CLANG38_AARCH64_PREFIX="${CROSS_COMPILE}"
 export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_SIMPLE_INIT:$PWD"
-export WORKSPACE="${PWD}/workspace"
+export WORKSPACE="${OUTDIR}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT
 echo > ramdisk
