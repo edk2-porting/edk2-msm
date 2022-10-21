@@ -8,7 +8,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/msm8998/msm8998.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/Oneplus/msm8998/sagit.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/msm8998/sagit.fdf.inc
 
 !include Platform/Qualcomm/msm8998/msm8998.dsc
 
