@@ -72,6 +72,7 @@
   PlatformPrePiLib|Silicon/Qualcomm/sm7125/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm7125/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
+  SOCSmbiosInfoLib|Silicon/Qualcomm/sm7125/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
   #

@@ -68,6 +68,7 @@
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
   RFSProtectionLib|Silicon/Qualcomm/msm8998/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/msm8998/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
+  SOCSmbiosInfoLib|Silicon/Qualcomm/msm8998/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
   Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
