@@ -42,6 +42,8 @@
   gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x13C00000  # Start here, DXE heap
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
 
+  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa88000
+
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
   gArmPlatformTokenSpaceGuid.PcdClusterCount|2
 
