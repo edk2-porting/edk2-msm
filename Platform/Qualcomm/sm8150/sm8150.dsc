@@ -67,12 +67,13 @@
   # Ported from SurfaceDuoPkg
   # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
-  MemoryInitPeiLib|Silicon/Qualcomm/sm7125/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
-  PlatformPeiLib|Silicon/Qualcomm/sm7125/Library/PlatformPeiLib/PlatformPeiLib.inf
-  PlatformPrePiLib|Silicon/Qualcomm/sm7125/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
-  MsPlatformDevicesLib|Silicon/Qualcomm/sm7125/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
-  SOCSmbiosInfoLib|Silicon/Qualcomm/sm7125/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
+  MemoryInitPeiLib|Silicon/Qualcomm/sm8150/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformPeiLib|Silicon/Qualcomm/sm8150/Library/PlatformPeiLib/PlatformPeiLib.inf
+  PlatformPrePiLib|Silicon/Qualcomm/sm8150/Library/PlatformPrePiLib/PlatformPrePiLib.inf
+  # RFSProtectionLib|Silicon/Qualcomm/sm8150/Library/RFSProtectionLib/RFSProtectionLib.inf
+  # Will be added after
+  # MsPlatformDevicesLib|Silicon/Qualcomm/sm8150/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
+  SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
   #
