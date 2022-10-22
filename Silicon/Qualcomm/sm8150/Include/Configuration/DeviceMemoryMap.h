@@ -14,7 +14,8 @@
       EFI_RESOURCE_ATTRIBUTE_WRITE_BACK_CACHEABLE |                            \
       EFI_RESOURCE_ATTRIBUTE_EXECUTION_PROTECTABLE
 
-typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, MaxMem } DeviceMemoryAddHob;
+typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, 
+               Mem4G, Mem6G, Mem8G, Mem10G, MaxMem } DeviceMemoryAddHob;
 
 #define MEMORY_REGION_NAME_MAX_LENGTH 32
 
@@ -47,7 +48,7 @@ typedef struct {
 #define MmIO EfiMemoryMappedIO
 
 #define NS_DEVICE ARM_MEMORY_REGION_ATTRIBUTE_NONSECURE_DEVICE
-#define DEVICE ARM_MEMORY_REGION_ATTRIBUTE_NONSECURE_DEVICE
+#define DEVICE ARM_MEMORY_REGION_ATTRIBUTE_DEVICE
 #define WRITE_THROUGH ARM_MEMORY_REGION_ATTRIBUTE_WRITE_THROUGH
 #define WRITE_THROUGH_XN ARM_MEMORY_REGION_ATTRIBUTE_WRITE_THROUGH
 #define WRITE_BACK ARM_MEMORY_REGION_ATTRIBUTE_WRITE_BACK
@@ -59,7 +60,7 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     /* Name               Address     Length      HobOption        ResourceAttribute    ArmAttributes
                                                           ResourceType          MemoryType */
     /* DDR Regions */
-#if USE_DISPLAYDXE == 1
+#ifdef USE_DISPLAYDXE
     {"Kernel",            0x80000000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN}, /* Added */
     {"Display Reserved",  0x80600000, 0x02400000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
 #else
@@ -69,7 +70,7 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"DBI Dump",          0x82A00000, 0x00D22000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
     {"HLOS 1",            0x83722000, 0x01FDE000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"Hypervisor",        0x85700000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE}, /* Added */
-#if MEMMAP_XIAOMI_HACKS == 1
+#ifdef MEMMAP_XIAOMI_HACKS
     {"RAM Partition",     0x85D00000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
 #else
     {"MPSS_EFS",          0x85D00000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
@@ -82,17 +83,15 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"TZ",                0x86200000, 0x01800000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE}, /* Added */
     {"TZApps",            0x87A00000, 0x02100000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
     {"RAM Partition",     0x89B00000, 0x01C00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
-#if MEMMAP_LG_HACKS == 1
+#ifdef MEMMAP_LG_HACKS
 	{"PIL_REGION",        0x8B700000, 0x0F800000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"DXE Heap",          0x9AF00000, 0x00D00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #else
 	{"PIL_REGION",        0x8B700000, 0x0F400000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"DXE Heap",          0x9AB00000, 0x01100000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #endif
-//  {"DXE Heap",          0x9AB00000, 0x03500000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-//  {"Sched Heap",        0x9E000000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"Sched Heap",        0x9BC00000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
-#if USE_DISPLAYDXE != 1
+#ifndef USE_DISPLAYDXE
     {"Display Reserved",  0x9C000000, 0x02400000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
 #endif
     {"TGCM",              0x9E400000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
@@ -114,57 +113,47 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Info Blk",          0x9FFFF000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, RtData, WRITE_BACK_XN},
 
     /* RAM partition regions */
-
-#if HAS_MLVM == 1
-
-#if RAM_SIZE == 6
-    {"MLVM",              0xA0000000, 0x1CC00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
-#elif RAM_SIZE == 8
-    {"MLVM",              0xA0000000, 0x1BB00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
-#else
-#error Unknown RAM size
-#endif
-
-#else
-
-#if RAM_SIZE == 6
-    {"RAM Partition",     0xA0000000, 0x1CC00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
-#elif RAM_SIZE == 8
-    {"RAM Partition",     0xA0000000, 0x1BB00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv, WRITE_BACK_XN},
-#else
-#error Unknown RAM size
-#endif
-
-#endif
-
-    //6GB
+    // 6GB
     // Memory hole: 0xBCC00000 - 0xBFFFFFFF
     // Size: 0x33FFFFF
 
-    //8GB
+    // 8GB
     // Memory hole: 0xBBB00000 - 0xBFFFFFFF
     // Size: 0x44FFFFF
-#if MEMMAP_XIAOMI_HACKS == 1
-    {"MPSS_EFS",          0x0C0000000, 0x00300000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"RAM Partition",     0x0C0300000, 0x7FD00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+
+    // 6GB Memory
+#ifdef HAS_MLVM
+    {"MLVM",              0xA0000000, 0x1CC00000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
 #else
-    {"RAM Partition",     0x0C0000000, 0x80000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xA0000000, 0x1CC00000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #endif
-
-
-#if USE_MEMORY_FOR_SERIAL_OUTPUT == 1
-    {"RAM Partition",     0x140000000, 0x3FE00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"PStore",            0x17FE00000, 0x00200000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
-    {"RAM Partition",     0x180000000, 0x80000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    // Memory hole
+#ifdef MEMMAP_XIAOMI_HACKS
+    {"MPSS_EFS",          0xC0000000, 0x00300000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
+    {"RAM Partition",     0xC0300000, 0x7FD00000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #else
-    {"RAM Partition",     0x140000000, 0xC0000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xC0000000, 0x80000000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #endif
 
+    {"RAM Partition",    0x140000000, 0xC0000000,  Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
-#if RAM_SIZE == 8
-    /* 2GB Extra Region For 8GB RAM Devices */
-    {"RAM Partition",     0x200000000,0x80000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+
+    // 8GB Memory
+#ifdef HAS_MLVM
+    {"MLVM",              0xA0000000, 0x1BB00000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
+#else
+    {"RAM Partition",     0xA0000000, 0x1BB00000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #endif
+    // Memory hole
+#ifdef MEMMAP_XIAOMI_HACKS
+    {"MPSS_EFS",          0xC0000000, 0x00300000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
+    {"RAM Partition",     0xC0300000, 0x7FD00000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+#else
+    {"RAM Partition",     0xC0000000, 0x80000000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+#endif
+
+    {"RAM Partition",    0x140000000, 0xC0000000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",    0x200000000, 0x80000000,  Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
     /* Other memory regions */
     {"AOP_SS_MSG_RAM",    0x0C300000, 0x00100000,  NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
@@ -186,7 +175,8 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"GPU_CC",            0x02C90000, 0x0000A000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"GPU_CPR",           0x02C9A000, 0x00004000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"TLMM_WEST",         0x03100000, 0x00300000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
-    {"TLMM_EAST",         0x03500000, 0x00700000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"TLMM_EAST",         0x03500000, 0x00300000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"TLMM_NORTH",        0x03900000, 0x00300000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"TLMM_SOUTH",        0x03D00000, 0x00300000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"QUPV3_SSC_GSI",     0x05A00000, 0x000D0000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"PERIPH_SS",         0x08800000, 0x00200000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
@@ -199,7 +189,9 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"USB_MP_RUMI1",      0x0A520000, 0x00010000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"USB_MP_RUMI2",      0x0A522000, 0x00010000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"VIDEO_CC",          0x0AB00000, 0x00020000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"TITAN_SS_TITAN_1",  0x0AC00000, 0x0004A000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"TITAN_A_CCI",       0x0AC4A000, 0x00004000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"TITAN_SS_TITAN_2",  0x0AC4E000, 0x000B2000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"TITAN_CAM_CC",      0x0AD00000, 0x00020000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"DISP_CC",           0x0AF00000, 0x00020000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"PDC_DISPLAY",       0x0B290000, 0x00020000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
@@ -216,6 +208,11 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"SILVER_CLK_CTL",    0x18280000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"GOLD_CLK_CTL",      0x18282000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"L3_CLK_CTL",        0x18284000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"GOLDPLUS_CLK_CTL",  0x18286000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"SILVER_ACD",        0x18290000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"GOLD_ACD",          0x18292000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"L3_ACD",            0x18294000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
+    {"GOLDPLUS_ACD",      0x18296000, 0x00001000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"APSS_RSC_APPS_RSCC",0x18200000, 0x00030000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"APSS_ACTPM_WRAP",   0x18300000, 0x000B0000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
     {"APSS_GIC500_GICD",  0x17A00000, 0x00010000,  AddDev, MMAP_IO, UNCACHEABLE, MmIO,   NS_DEVICE},
