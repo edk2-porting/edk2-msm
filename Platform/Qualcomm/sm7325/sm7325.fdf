@@ -218,7 +218,7 @@ READ_LOCK_STATUS   = TRUE
   #
   # Windows kernel patcher
   #
-  # INF Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf
+  INF Platform/RenegadePkg/Drivers/KernelErrataPatcher_lahaina/KernelErrataPatcher.inf
   
   #
   # Simple Init GUI
