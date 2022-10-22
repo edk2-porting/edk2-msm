@@ -15,4 +15,4 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   Silicon/Qualcomm/QcomPkg/QcomPkg.dec
-  Silicon/Qualcomm/sdm845/sdm845.dec
+  Silicon/Qualcomm/sm7325/sm7325.dec
