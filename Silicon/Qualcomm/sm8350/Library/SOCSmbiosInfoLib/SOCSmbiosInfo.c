@@ -7,7 +7,7 @@
 /***********************************************************************
         SMBIOS data definition  TYPE4  Processor Information
 ************************************************************************/
-SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a78_big = {
+SMBIOS_TABLE_TYPE4 mProcessorInfoType4_x1 = {
     {EFI_SMBIOS_TYPE_PROCESSOR_INFORMATION, sizeof(SMBIOS_TABLE_TYPE4), 0},
     1,                // Socket String
     CentralProcessor, // ProcessorType;          ///< The enumeration value from
@@ -31,8 +31,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a78_big = {
         1  // ProcessorVoltageIndicateLegacy      :1;
     },
     0,                     // ExternalClock;
-    2400,                  // MaxSpeed;
-    2400,                  // CurrentSpeed;
+    2840,                  // MaxSpeed;
+    2840,                  // CurrentSpeed;
     0x41,                  // Status;
     ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
                            // value from PROCESSOR_UPGRADE.
@@ -86,8 +86,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a78 = {
         1  // ProcessorVoltageIndicateLegacy      :1;
     },
     0,                     // ExternalClock;
-    2200,                  // MaxSpeed;
-    2200,                  // CurrentSpeed;
+    2420,                  // MaxSpeed;
+    2420,                  // CurrentSpeed;
     0x41,                  // Status;
     ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
                            // value from PROCESSOR_UPGRADE.
@@ -141,8 +141,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a55 = {
         1  // ProcessorVoltageIndicateLegacy      :1;
     },
     0,                     // ExternalClock;
-    1900,                  // MaxSpeed;
-    1900,                  // CurrentSpeed;
+    1800,                  // MaxSpeed;
+    1800,                  // CurrentSpeed;
     0x41,                  // Status;
     ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
                            // value from PROCESSOR_UPGRADE.
@@ -522,7 +522,7 @@ VOID RegisterSOCSmbiosInfo(
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a78_L1D,
       mCacheInfoType7Strings, &SmbiosHandle);
-  mProcessorInfoType4_a78_big.L1CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_x1.L1CacheHandle = (UINT16)SmbiosHandle;
   mProcessorInfoType4_a78.L1CacheHandle = (UINT16)SmbiosHandle;
 
   LogSmbiosData(
@@ -533,7 +533,7 @@ VOID RegisterSOCSmbiosInfo(
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a78_L2,
       mCacheInfoType7Strings, &SmbiosHandle);
-  mProcessorInfoType4_a78_big.L2CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_x1.L2CacheHandle = (UINT16)SmbiosHandle;
   mProcessorInfoType4_a78.L2CacheHandle = (UINT16)SmbiosHandle;
 
   LogSmbiosData(
@@ -543,7 +543,7 @@ VOID RegisterSOCSmbiosInfo(
 
   // TYPE4 Processor Information
   LogSmbiosData(
-      (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a78_big,
+      (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_x1,
       mProcessorInfoType4Strings, NULL);
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a78,
