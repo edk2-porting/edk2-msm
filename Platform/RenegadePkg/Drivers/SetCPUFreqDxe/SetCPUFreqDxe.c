@@ -32,7 +32,6 @@ SetCPUFreqDxeMain (
 
   DEBUG((EFI_D_INFO, "\n\n\n\n\n\n\n\n\n\n\n\n\n"));
 
-  // one A55 cluster, two A78 clusters, one L3 cache on sm7325
   // here we assume 4 cpu + 4 cpu + L3 cache
   for (int i = 0; i < 9; i++) {
     Status = pClockProtocol->GetMaxPerfLevel(pClockProtocol, i, &perfLevel);
@@ -40,9 +39,12 @@ SetCPUFreqDxeMain (
     if (EFI_ERROR(Status)) {
       DEBUG((EFI_D_INFO, "%a: Failed to get the maximum performance level for CPU %d, Status: %r\n", __FUNCTION__, i, Status));
       DEBUG((EFI_D_INFO, "%a: This CPU may not exist on current platform\n", __FUNCTION__));
+      // gBS->Stall(10 * 1000 * 1000);
       return Status;
     }
 
+    // Helps to set proper freq in PrePi
+    DEBUG((EFI_D_INFO, "CPU %d has max perfLevel of %d              \n", i, perfLevel));
     Status = pClockProtocol->SetCpuPerfLevel(pClockProtocol, i, perfLevel, &frequencyHz);
 
     if (EFI_ERROR(Status)) {
