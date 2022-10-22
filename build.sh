@@ -125,7 +125,7 @@ function _clean(){ rm --one-file-system --recursive --force "${WORKSPACE}" "${OU
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 
 OUTDIR="${PWD}"
-ROOTDIR="$(dirname "$0")"
+ROOTDIR="$(cd "$(dirname "$0")";pwd)"
 cd "${ROOTDIR}"||exit 1
 typeset -l DEVICE
 typeset -u MODE
