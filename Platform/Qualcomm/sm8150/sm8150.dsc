@@ -70,9 +70,8 @@
   MemoryInitPeiLib|Silicon/Qualcomm/sm8150/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm8150/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm8150/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  # RFSProtectionLib|Silicon/Qualcomm/sm8150/Library/RFSProtectionLib/RFSProtectionLib.inf
-  # Will be added after
-  # MsPlatformDevicesLib|Silicon/Qualcomm/sm8150/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
+  RFSProtectionLib|Silicon/Qualcomm/sm8150/Library/RFSProtectionLib/RFSProtectionLib.inf
+  MsPlatformDevicesLib|Silicon/Qualcomm/sm8150/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
