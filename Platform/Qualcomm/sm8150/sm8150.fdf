@@ -104,7 +104,7 @@ READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 
 # Apriori
-# !include Platform/Qualcomm/sdm845/Apriori.fdf.inc
+!include Platform/Qualcomm/sm8150/Apriori.fdf.inc
 
   INF MdeModulePkg/Core/Dxe/DxeMain.inf
 
@@ -116,8 +116,6 @@ READ_LOCK_STATUS   = TRUE
   INF MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
   INF MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
 !include ArmPlatformPkg/SecureBootDefaultKeys.fdf.inc
-  INF SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
-  INF SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf
   INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
   INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
@@ -138,7 +136,7 @@ READ_LOCK_STATUS   = TRUE
   INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 
 # BSP drivers
-# !include Platform/Qualcomm/sdm845/dxe.fdf.inc
+# !include Platform/Qualcomm/sm8150/dxe.fdf.inc
 
   INF Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
 
