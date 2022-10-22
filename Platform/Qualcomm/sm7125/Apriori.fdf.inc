@@ -127,14 +127,14 @@ APRIORI DXE {
   #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7125/QcomWDogDxe/QcomWDogDxe.efi
   #   SECTION UI = "QcomWDogDxe"
   # }
-  
+
   INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
   INF MdeModulePkg/Universal/PrintDxe/PrintDxe.inf
   INF MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
-  
+
 !if $(SECURE_BOOT_ENABLE) == TRUE
   INF SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
   INF SecurityPkg/VariableAuthenticated/SecureBootDefaultKeysDxe/SecureBootDefaultKeysDxe.inf

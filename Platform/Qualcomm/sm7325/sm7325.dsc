@@ -69,7 +69,7 @@
   MemoryInitPeiLib|Silicon/Qualcomm/sm7325/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm7325/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm7325/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  # RFSProtectionLib|SurfaceDuo1Pkg/Library/RFSProtectionLib/RFSProtectionLib.inf
+  # RFSProtectionLib|Silicon/Qualcomm/sm7325/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm7325/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm7325/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 

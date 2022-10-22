@@ -62,8 +62,7 @@ VOID UartInit(VOID)
 {
   SerialPortInitialize();
 
-  // TODO: test this
-  // InitializeSharedUartBuffers();
+  InitializeSharedUartBuffers();
 
   DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64)\n"));
   DEBUG(
