@@ -23,12 +23,15 @@
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
   Silicon/Qualcomm/sm8150/sm8150.dec
+  SimpleInit.dec
 
 [LibraryClasses]
   DebugLib
   HobLib
   ArmMmuLib
+  SimpleInitLib
 
 [Guids]
   gEfiMemoryTypeInformationGuid
@@ -39,6 +42,7 @@
 [FixedPcd]
   gArmTokenSpaceGuid.PcdSystemMemoryBase
   gArmTokenSpaceGuid.PcdSystemMemorySize
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
 
 [Depex]
   TRUE
