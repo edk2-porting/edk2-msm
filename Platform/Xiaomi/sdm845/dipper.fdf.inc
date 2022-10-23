@@ -8,7 +8,7 @@ FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/DBG2.aml
-  SECTION RAW = Platform/Xiaomi/sdm845/AcpiTables/dipper/DSDT.aml
+  SECTION RAW = Platform/Xiaomi/sdm845/AcpiTables/dipper/DSDT.AML
   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/MADT.aml
   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/FADT.aml
   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/GTDT.aml
