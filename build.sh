@@ -13,6 +13,7 @@ function _help(){
 	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
 	echo "	--uart, -u:              compile with UART support, print debug messages to uart debug port."
 	echo " 	--skip-rootfs-gen:       skip generating SimpleInit rootfs to speed up building."
+	echo " 	--no-exception-disp:     do not display exception information in DEBUG builds"
 	echo "	--acpi, -A:              compile DSDT using MS asl with wine"
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
@@ -113,6 +114,7 @@ function _build(){
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
+		-D NO_EXCEPTION_DISPLAY="${NO_EXCEPTION_DISPLAY}" \
 		||return "$?"
 	_call_hook platform_build_kernel||return "$?"
 	_call_hook platform_build_bootimg||return "$?"
@@ -137,10 +139,11 @@ DISTCLEAN=false
 TOOLCHAIN=GCC5
 SOC_VENDOR=Qualcomm
 USE_UART=0
+NO_EXCEPTION_DISPLAY=0
 export ROOTDIR OUTDIR SOC_VENDOR
 export GEN_ACPI=false
 export GEN_ROOTFS=true
-OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,no-exception-disp,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -152,6 +155,7 @@ do	case "${1}" in
 		-D|--distclean) DISTCLEAN=true;shift;;
 		-O|--outputdir) OUTDIR="${2}";shift 2;;
 		--skip-rootfs-gen) GEN_ROOTFS=false;shift;;
+		--no-exception-disp) NO_EXCEPTION_DISPLAY=1;shift;;
 		-r|--release) MODE="${2}";shift 2;;
 		-t|--toolchain) TOOLCHAIN="${2}";shift 2;;
 		-u|--uart) USE_UART=1;shift;;
