@@ -24,25 +24,24 @@
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0xFDFA0000         # Limit to 4GB Size here
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x200000000
 
   gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0x9FF8C000     # CPU Vectors
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000
-  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|17
-  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|18
+  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|29
+  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
   gArmTokenSpaceGuid.PcdGicDistributorBase|0x17a00000
-  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17a60000
+  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17B40000
 
-  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007180
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007280
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FF90000      # UEFI Stack
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
+  gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09BC0000
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x08400000         # UefiMemorySize, DXE heap size
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x13C00000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x20000000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x07900000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
-
-  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa88000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
   gArmPlatformTokenSpaceGuid.PcdClusterCount|2
@@ -50,8 +49,8 @@
   #
   # SimpleInit
   #
-  #gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x9DA00000
-  #gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x9DA00000
+  gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
 [LibraryClasses.common]
 !if $(USE_UART) == 1
@@ -65,7 +64,7 @@
 # !endif
 
   # Ported from SurfaceDuoPkg
-  # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
+  AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
   MemoryInitPeiLib|Silicon/Qualcomm/sm8150/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm8150/Library/PlatformPeiLib/PlatformPeiLib.inf
@@ -86,7 +85,7 @@
 # !endif
 
   Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
+  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
+  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
 
   Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf

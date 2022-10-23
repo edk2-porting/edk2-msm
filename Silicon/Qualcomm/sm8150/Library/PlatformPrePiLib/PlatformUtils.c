@@ -62,8 +62,7 @@ VOID UartInit(VOID)
 {
   SerialPortInitialize();
 
-  // TODO: test this
-  // InitializeSharedUartBuffers();
+  InitializeSharedUartBuffers();
 
   DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64)\n"));
   DEBUG(
@@ -99,7 +98,7 @@ VOID PlatformInitialize()
   // fix it.
 
   // TODO: test if this works
-  // ConfigureIOMMUContextBankCacheSetting(UFS_CTX_BANK, TRUE);
+  ConfigureIOMMUContextBankCacheSetting(UFS_CTX_BANK, TRUE);
 
   // Disable WatchDog Timer
   SetWatchdogState(FALSE);
