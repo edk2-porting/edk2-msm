@@ -60,7 +60,7 @@
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000000
 !else
   gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x0f
-  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000040
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x800B05C7
 !endif
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x06
   gEfiMdeModulePkgTokenSpaceGuid.PcdResetOnMemoryTypeInformationChange|FALSE
