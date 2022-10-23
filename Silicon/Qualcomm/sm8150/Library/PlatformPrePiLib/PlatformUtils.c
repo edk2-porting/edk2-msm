@@ -98,7 +98,7 @@ VOID PlatformInitialize()
   // fix it.
 
   // TODO: test if this works
-  // ConfigureIOMMUContextBankCacheSetting(UFS_CTX_BANK, TRUE);
+  ConfigureIOMMUContextBankCacheSetting(UFS_CTX_BANK, TRUE);
 
   // Disable WatchDog Timer
   SetWatchdogState(FALSE);

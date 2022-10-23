@@ -251,3 +251,9 @@
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/PciHostBridgeDxe.efi
     SECTION UI = "PciHostBridge"
   }
+
+  FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/UFSDxe/UFSDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/UFSDxe.efi
+    SECTION UI = "UFSDxe"
+  }
