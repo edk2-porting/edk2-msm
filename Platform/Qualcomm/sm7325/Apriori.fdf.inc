@@ -170,6 +170,19 @@ APRIORI DXE {
     SECTION UI = "DDRInfoDxe"
   }
 
+  FILE DRIVER = 42031f68-1f0b-429b-93f1-0eb0cf89ddbf {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/IPCCDxe/IPCCDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/IPCCDxe/IPCCDxe.efi
+    SECTION UI = "IPCCDxe"
+  }
+
+  FILE DRIVER = 7942a7eb-b7d5-4e2e-b908-831e4de55b58 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/GlinkDxe/GlinkDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/GlinkDxe/GlinkDxe.efi
+    SECTION UI = "GlinkDxe"
+  }
+
+  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
   INF EmbeddedPkg/EmbeddedMonotonicCounter/EmbeddedMonotonicCounter.inf
   INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   INF EmbeddedPkg/RealTimeClockRuntimeDxe/RealTimeClockRuntimeDxe.inf
@@ -184,7 +197,45 @@ APRIORI DXE {
 
   INF MdeModulePkg/Universal/BdsDxe/BdsDxe.inf  
 
-  INF MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
+  FILE DRIVER = 6d4a9cf7-cc0c-42b0-aa89-f6a6a8d99273 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/PmicGlinkDxe/PmicGlinkDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/PmicGlinkDxe/PmicGlinkDxe.efi
+    SECTION UI = "PmicGlinkDxe"
+  }
+
+  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
+  }
+
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
+
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/XhciPciEmulation/XhciPciEmulation.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
+
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
+
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.efi
+    SECTION UI = "UsbConfigDxe"
+  }
 
   FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/ButtonsDxe/ButtonsDxe.depex
@@ -197,9 +248,5 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
   INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
-
-  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
-  INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
-  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
 }

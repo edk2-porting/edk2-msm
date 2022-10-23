@@ -41,6 +41,12 @@
     SECTION UI = "DDRInfoDxe"
   }
 
+  FILE DRIVER = 7942a7eb-b7d5-4e2e-b908-831e4de55b58 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/GlinkDxe/GlinkDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/GlinkDxe/GlinkDxe.efi
+    SECTION UI = "GlinkDxe"
+  }
+
   FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/HALIOMMU/HALIOMMU.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/HALIOMMU/HALIOMMU.efi
@@ -53,16 +59,22 @@
     SECTION UI = "HWIODxeDriver"
   }
 
+  FILE DRIVER = 04DE8591-D2B3-4077-BBBE-B12070094EB6 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/I2C/I2C.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/I2C/I2C.efi
+    SECTION UI = "I2C"
+  }
+
   FILE DRIVER = 5824f9de-17d2-4b1f-a5fe-5eb77fa53093 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/ICBDxe/ICBDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/ICBDxe/ICBDxe.efi
     SECTION UI = "ICBDxe"
   }
 
-  FILE DRIVER = 04DE8591-D2B3-4077-BBBE-B12070094EB6 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/I2C/I2C.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/I2C/I2C.efi
-    SECTION UI = "I2C"
+  FILE DRIVER = 42031f68-1f0b-429b-93f1-0eb0cf89ddbf {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/IPCCDxe/IPCCDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/IPCCDxe/IPCCDxe.efi
+    SECTION UI = "IPCCDxe"
   }
 
   FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219711 {
@@ -87,6 +99,12 @@
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/PmicDxe/PmicDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/PmicDxe/PmicDxe.efi
     SECTION UI = "PmicDxe"
+  }
+
+  FILE DRIVER = 6d4a9cf7-cc0c-42b0-aa89-f6a6a8d99273 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/PmicGlinkDxe/PmicGlinkDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/PmicGlinkDxe/PmicGlinkDxe.efi
+    SECTION UI = "PmicGlinkDxe"
   }
 
   FILE DRIVER = 0401b830-bff9-44a2-a5f6-95734a33c017 {
@@ -153,44 +171,40 @@
     SECTION UI = "ULogDxe"
   }
 
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.efi
+    SECTION UI = "UsbConfigDxe"
+  }
+
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
+  }
+
+  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
+  }
+
   FILE DRIVER = 8bd3b475-401a-4b0b-9315-edee61a1eae5 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/VcsDxe/VcsDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/VcsDxe/VcsDxe.efi
     SECTION UI = "VcsDxe"
   }
 
-  # FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciPciEmulation/XhciPciEmulation.efi
-  #   SECTION UI = "XhciPciEmulation"
-  # }
+  FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciDxe/XhciDxe.efi
+    SECTION UI = "XhciDxe"
+  }
 
-  # FILE DRIVER = b7f50e91-a759-412c-ade4-dcd03e7f7c28 {
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciDxe/XhciDxe.efi
-  #   SECTION UI = "XhciDxe"
-  # }
-
-  # FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
-  #   SECTION UI = "UsbPwrCtrlDxe"
-  # }
-
-  # FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-  #   SECTION UI = "UsbfnDwc3Dxe"
-  # }
-
-  # FILE DRIVER = 2d2e62cf-9ecf-43b7-8219-94e7fc713dfe {
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbKbDxe/UsbKbDxe.efi
-  #   SECTION UI = "UsbKbDxe"
-  # }
-
-  # FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.depex
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/UsbConfigDxe/UsbConfigDxe.efi
-  #   SECTION UI = "UsbConfigDxe"
-  # }
+  FILE DRIVER = beb12bee-f6e1-11e1-9fb8-6c626de4aeb1 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/XhciPciEmulation/XhciPciEmulation.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7325/XhciPciEmulation/XhciPciEmulation.efi
+    SECTION UI = "XhciPciEmulation"
+  }
 
   # FILE DRIVER = 0A134F0E-075E-40B3-9C63-3B3906804663 {
   #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7325/UsbInitDxe/UsbInitDxe.depex
