@@ -45,11 +45,11 @@ APRIORI DXE {
     SECTION UI = "PlatformInfoDxeDriver"
   }
 
-  FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7125/HALIOMMU/HALIOMMU.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7125/HALIOMMU/HALIOMMU.efi
-    SECTION UI = "HALIOMMU"
-  }
+  # FILE DRIVER = 9A00771F-36D4-4DD5-8916-C48ED9B16B86 {
+  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7125/HALIOMMU/HALIOMMU.depex
+  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7125/HALIOMMU/HALIOMMU.efi
+  #   SECTION UI = "HALIOMMU"
+  # }
 
   INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
 
