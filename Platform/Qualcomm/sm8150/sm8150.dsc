@@ -28,28 +28,28 @@
 
   gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0x9FF8C000     # CPU Vectors
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000
-  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|29
-  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
+  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|17
+  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|18
   gArmTokenSpaceGuid.PcdGicDistributorBase|0x17a00000
-  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17B40000
+  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17a60000
 
-  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007280
-  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FF90000      # UEFI Stack
-  gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00008150
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FFB0000      # UEFI Stack
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00020000      # 256K stack
   gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09BC0000
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x20000000  # Start here, DXE heap
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x07900000         # UefiMemorySize, DXE heap size
+  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x40300000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x04230000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
-  gArmPlatformTokenSpaceGuid.PcdClusterCount|2
+  gArmPlatformTokenSpaceGuid.PcdClusterCount|3
 
   #
   # SimpleInit
   #
-  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x9DA00000
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x9E000000
   gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
 [LibraryClasses.common]
@@ -84,7 +84,7 @@
 #   Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 # !endif
 
-  Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
+  # Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
   # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
   # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
 
