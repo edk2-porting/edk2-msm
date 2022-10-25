@@ -36,10 +36,9 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00008150
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FFB0000      # UEFI Stack
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00020000      # 256K stack
-  gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09BC0000
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x40300000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xC0300000         # DXE Heap base address
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x04230000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
 
@@ -66,7 +65,7 @@
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
-  MemoryInitPeiLib|Silicon/Qualcomm/sm8150/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformMemoryMapLib|Silicon/Qualcomm/sm8150/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm8150/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm8150/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   RFSProtectionLib|Silicon/Qualcomm/sm8150/Library/RFSProtectionLib/RFSProtectionLib.inf
@@ -74,16 +73,3 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-  #
-  # OnePlus 6T A/B Slot Support
-  # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
-  #
-#   Platform/Oneplus/sdm845/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
-# !ifdef $(AB_SLOTS_SUPPORT)
-#   Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-#   Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
-# !endif
-
-  # Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
-  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf

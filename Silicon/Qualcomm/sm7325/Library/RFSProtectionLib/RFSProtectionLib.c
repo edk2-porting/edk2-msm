@@ -9,13 +9,15 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 #include <Library/UefiRuntimeServicesTableLib.h>
+#include <Library/MemoryMapHelperLib.h>
 
 #include <Library/BaseMemoryLib.h>
 #include <Protocol/EFIScm.h>
 #include <Protocol/scm_sip_interface.h>
-#include <Configuration/DeviceMemoryMap.h>
 
 #include <Library/RFSProtectionLib.h>
+
+#define MAX_DESTINATION_VMS 3
 
 EFI_STATUS
 EFIAPI
@@ -31,7 +33,7 @@ RFSProtectSharedArea(UINT64 efsBaseAddr, UINT64 efsBaseSize)
 
   // Allow both HLOS (Windows) and MSS (Modem Subsystem) to access the shared memory region
   // This is needed otherwise the Modem Subsystem will CRASH when attempting to read data
-  hyp_memprot_dstVM_perm_info_t dstVM_perm_info[3] = {
+  hyp_memprot_dstVM_perm_info_t dstVM_perm_info[MAX_DESTINATION_VMS] = {
     {
       AC_VM_HLOS, 
       (VM_PERM_R | VM_PERM_W), 
@@ -71,7 +73,7 @@ RFSProtectSharedArea(UINT64 efsBaseAddr, UINT64 efsBaseSize)
 
   dataSize = sizeof(hyp_memprot_ipa_info_t) + 
                   sizeof(sourceVM) +
-                  (3 * sizeof(hyp_memprot_dstVM_perm_info_t)) + 
+                  (MAX_DESTINATION_VMS * sizeof(hyp_memprot_dstVM_perm_info_t)) + 
                   4;
 
   data = AllocateZeroPool(dataSize);
@@ -110,10 +112,10 @@ RFSProtectSharedArea(UINT64 efsBaseAddr, UINT64 efsBaseSize)
   CopyMem(
       (VOID *)assign->destVMlist, 
       dstVM_perm_info,
-      3 * sizeof(hyp_memprot_dstVM_perm_info_t)
+      MAX_DESTINATION_VMS * sizeof(hyp_memprot_dstVM_perm_info_t)
   );
 
-  assign->destVMlistsize = 3 * sizeof(hyp_memprot_dstVM_perm_info_t);
+  assign->destVMlistsize = MAX_DESTINATION_VMS * sizeof(hyp_memprot_dstVM_perm_info_t);
   assign->spare          = 0;
 
   // Send the hypervisor call
@@ -132,15 +134,10 @@ EFI_STATUS
 EFIAPI
 RFSLocateAndProtectSharedArea()
 {
-  PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
-      gDeviceMemoryDescriptorEx;
+  ARM_MEMORY_REGION_DESCRIPTOR_EX MpssEfs;
 
-  // Run through each memory descriptor
-  while (MemoryDescriptorEx->Length != 0) {
-    if (AsciiStriCmp("MPSS_EFS", MemoryDescriptorEx->Name) == 0) {
-      return RFSProtectSharedArea(MemoryDescriptorEx->Address, MemoryDescriptorEx->Length);
-    }
-    MemoryDescriptorEx++;
+  if (!EFI_ERROR(LocateMemoryMapAreaByName("MPSS_EFS", &MpssEfs))) {
+      return RFSProtectSharedArea(MpssEfs.Address, MpssEfs.Length);
   }
 
   return EFI_NOT_FOUND;

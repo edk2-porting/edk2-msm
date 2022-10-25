@@ -37,6 +37,7 @@
   UefiBootServicesTableLib
   UefiLib
   AslUpdateLib
+  MemoryMapHelperLib
 
 [Protocols]
   gEfiChipInfoProtocolGuid                      ## CONSUMES

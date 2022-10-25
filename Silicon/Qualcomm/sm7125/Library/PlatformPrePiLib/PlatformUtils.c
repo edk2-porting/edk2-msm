@@ -8,13 +8,10 @@
 #include <Library/SerialPortLib.h>
 #include <Library/PrintLib.h>
 #include <Library/BaseLib.h>
-
-#include <IndustryStandard/ArmStdSmc.h>
-#include <Library/ArmSmcLib.h>
+#include <Library/MemoryMapHelperLib.h>
 #include <Library/PlatformPrePiLib.h>
 
 #include "PlatformUtils.h"
-#include <Configuration/DeviceMemoryMap.h>
 
 
 VOID InitializeSharedUartBuffers(VOID)

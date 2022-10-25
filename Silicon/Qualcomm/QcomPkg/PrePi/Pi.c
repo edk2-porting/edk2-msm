@@ -58,7 +58,7 @@ PrePiMain(
   // Declare UEFI region
   MemoryBase     = FixedPcdGet32(PcdSystemMemoryBase);
   MemorySize     = FixedPcdGet32(PcdSystemMemorySize);
-  UefiMemoryBase = MemoryBase + FixedPcdGet32(PcdPreAllocatedMemorySize);
+  UefiMemoryBase = FixedPcdGet32(PcdUefiMemPoolBase);
   UefiMemorySize = FixedPcdGet32(PcdUefiMemPoolSize);
   StackBase      = (VOID *)(UefiMemoryBase + UefiMemorySize - StackSize);
 
@@ -93,6 +93,7 @@ PrePiMain(
   SetBootMode (BOOT_WITH_DEFAULT_SETTINGS);
 
   // Initialize Platform HOBs (CpuHob and FvHob)
+  DEBUG((EFI_D_INFO, "PlatformPeim In \n"));
   Status = PlatformPeim();
   ASSERT_EFI_ERROR (Status);
 
@@ -103,10 +104,12 @@ PrePiMain(
   ProcessLibraryConstructorList();
 
   // Assume the FV that contains the SEC (our code) also contains a compressed FV.
+  DEBUG((EFI_D_INFO, "DecompressFirstFv In \n"));
   Status = DecompressFirstFv();
   ASSERT_EFI_ERROR (Status);
 
   // Load the DXE Core and transfer control to it
+  DEBUG((EFI_D_INFO, "LoadDxeCoreFromFv In \n"));
   Status = LoadDxeCoreFromFv(NULL, 0);
   ASSERT_EFI_ERROR (Status);
 }

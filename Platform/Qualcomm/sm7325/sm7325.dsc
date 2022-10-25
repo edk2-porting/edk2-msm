@@ -31,15 +31,14 @@
   gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|29
   gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
   gArmTokenSpaceGuid.PcdGicDistributorBase|0x17a00000
-  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17B40000
+  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17A60000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007280
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9FF90000      # UEFI Stack
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
-  gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09BC0000
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x20B00000  # Start here, DXE heap
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xA0B00000         # DXE Heap base address
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x07900000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0xE1000000
 
@@ -65,7 +64,7 @@
 
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
-  MemoryInitPeiLib|Silicon/Qualcomm/sm7325/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformMemoryMapLib|Silicon/Qualcomm/sm7325/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm7325/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm7325/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   RFSProtectionLib|Silicon/Qualcomm/sm7325/Library/RFSProtectionLib/RFSProtectionLib.inf
@@ -73,16 +72,3 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm7325/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-  #
-  # OnePlus 6T A/B Slot Support
-  # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
-  #
-#   Platform/Oneplus/sdm845/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
-# !ifdef $(AB_SLOTS_SUPPORT)
-#   Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-#   Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
-# !endif
-
-  Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
-  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  # Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf

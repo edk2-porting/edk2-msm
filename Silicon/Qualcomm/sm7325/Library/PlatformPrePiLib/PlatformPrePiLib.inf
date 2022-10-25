@@ -8,15 +8,9 @@
 
 [Sources]
   PlatformUtils.c
-  EarlyQGic/EarlyQGic.c
-
-[Sources.AARCH64]
-  EarlyQGic/ArmGicV3.S | GCC
-  SecondaryModuleEntryPoint.S | GCC
 
 [Packages]
   ArmPkg/ArmPkg.dec
-  ArmPlatformPkg/ArmPlatformPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
@@ -25,7 +19,6 @@
 
 [LibraryClasses]
   ArmLib
-  ArmGicLib
   ArmMmuLib
   BaseLib
   DebugLib
@@ -47,21 +40,14 @@
   PlatformPeiLib
   PlatformPrePiLib
   TimerLib
-  # MpPark
-  ArmSmcLib
   PrintLib
+  MemoryMapHelperLib
 
 [Pcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
 
 [FixedPcd]
-  gArmTokenSpaceGuid.PcdCpuVectorBaseAddress
-  gArmTokenSpaceGuid.PcdGicDistributorBase
   gArmTokenSpaceGuid.PcdGicRedistributorsBase
-  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase
-  gArmPlatformTokenSpaceGuid.PcdCoreCount
-  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase
-  gEmbeddedTokenSpaceGuid.PcdPrePiStackSize
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight

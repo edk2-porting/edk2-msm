@@ -38,6 +38,7 @@
   UefiLib
   # AslUpdateLib
   # RFSProtectionLib
+  MemoryMapHelperLib
 
 [Protocols]
   gEfiChipInfoProtocolGuid                      ## CONSUMES

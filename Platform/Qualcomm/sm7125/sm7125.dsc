@@ -38,14 +38,14 @@
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0x93C00000         # DXE Heap base address
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x08400000         # UefiMemorySize, DXE heap size
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x13C00000  # Start here, DXE heap
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
-
-  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa88000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
   gArmPlatformTokenSpaceGuid.PcdClusterCount|2
+
+  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa88000
 
   #
   # SimpleInit
@@ -67,7 +67,7 @@
   # Ported from SurfaceDuoPkg
   # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
-  MemoryInitPeiLib|Silicon/Qualcomm/sm7125/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
+  PlatformMemoryMapLib|Silicon/Qualcomm/sm7125/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm7125/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm7125/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   # RFSProtectionLib|Silicon/Qualcomm/sm7125/Library/RFSProtectionLib/RFSProtectionLib.inf
@@ -75,16 +75,3 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm7125/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-  #
-  # OnePlus 6T A/B Slot Support
-  # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
-  #
-#   Platform/Oneplus/sdm845/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
-# !ifdef $(AB_SLOTS_SUPPORT)
-#   Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-#   Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
-# !endif
-
-  Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf

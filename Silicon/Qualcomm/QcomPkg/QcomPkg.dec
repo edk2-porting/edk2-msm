@@ -40,8 +40,8 @@
 
 [PcdsFixedAtBuild.common]
   # Memory allocation
-  gQcomTokenSpaceGuid.PcdPreAllocatedMemorySize|0x1AB00000|UINT64|0x00000a106 # Start here, DXE heap
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x3500000|UINT32|0x00000a107         # UefiMemorySize
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0|UINT64|0x00000a106
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0|UINT32|0x00000a107
 
   # Simple FrameBuffer
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x00400000|UINT32|0x0000a400

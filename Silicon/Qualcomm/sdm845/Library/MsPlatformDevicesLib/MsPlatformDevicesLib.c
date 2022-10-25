@@ -18,44 +18,23 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include <Library/PcdLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
-
 #include <Library/AslUpdateLib.h>
+#include <Library/MemoryMapHelperLib.h>
 
 #include <Configuration/BootDevices.h>
-
-#include <Configuration/DeviceMemoryMap.h>
 
 #include <Protocol/EFIChipInfo.h>
 #include <Protocol/EFIPlatformInfo.h>
 #include <Protocol/EFISmem.h>
-
-EFI_STATUS
-EFIAPI
-MemoryMapLocateArea(PARM_MEMORY_REGION_DESCRIPTOR_EX *MemoryDescriptor, CHAR8 *Name)
-{
-  PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
-      gDeviceMemoryDescriptorEx;
-
-  // Run through each memory descriptor
-  while (MemoryDescriptorEx->Length != 0) {
-    if (AsciiStriCmp(Name, MemoryDescriptorEx->Name) == 0) {
-      *MemoryDescriptor = MemoryDescriptorEx;
-      return EFI_SUCCESS;
-    }
-    MemoryDescriptorEx++;
-  }
-
-  return EFI_NOT_FOUND;
-}
 
 VOID
 PlatformUpdateAcpiTables(VOID)
 {
   EFI_STATUS Status;
 
-  PARM_MEMORY_REGION_DESCRIPTOR_EX MPSSEFSRegion = NULL;
-  PARM_MEMORY_REGION_DESCRIPTOR_EX ADSPEFSRegion = NULL;
-  PARM_MEMORY_REGION_DESCRIPTOR_EX TGCMRegion    = NULL;
+  ARM_MEMORY_REGION_DESCRIPTOR_EX MPSSEFSRegion;
+  ARM_MEMORY_REGION_DESCRIPTOR_EX ADSPEFSRegion;
+  ARM_MEMORY_REGION_DESCRIPTOR_EX TGCMRegion;
 
   UINT32                              SOID  = 0;
   UINT32                              SIDV  = 0;
@@ -110,10 +89,6 @@ PlatformUpdateAcpiTables(VOID)
     return;
   }
 
-  MemoryMapLocateArea(&MPSSEFSRegion, "MPSS_EFS");
-  MemoryMapLocateArea(&ADSPEFSRegion, "ADSP_EFS");
-  MemoryMapLocateArea(&TGCMRegion, "TGCM");
-
   mBoardProtocol->GetChipId(mBoardProtocol, &SOID);
   mBoardProtocol->GetChipVersion(mBoardProtocol, &SIDV);
   mBoardProtocol->GetChipFamily(mBoardProtocol, (EFIChipInfoFamilyType *)&SDFE);
@@ -131,21 +106,24 @@ PlatformUpdateAcpiTables(VOID)
   UINT64 SOSN = ((UINT64)SOSN2 << 32) | SOSN1;
   UINT32 PLST = PlatformInfo.subtype;
 
-  if (MPSSEFSRegion != NULL) {
-    RMTB = MPSSEFSRegion->Address;
-    RMTX = MPSSEFSRegion->Length;
+  if (!EFI_ERROR(LocateMemoryMapAreaByName("MPSS_EFS", &MPSSEFSRegion))) {
+    RMTB = MPSSEFSRegion.Address;
+    RMTX = MPSSEFSRegion.Length;
   }
 
-  if (ADSPEFSRegion != NULL) {
-    RFAB = ADSPEFSRegion->Address;
-    RFAS = ADSPEFSRegion->Length / 2;
-    RFMB = ADSPEFSRegion->Address + ADSPEFSRegion->Length / 2;
-    RFMS = ADSPEFSRegion->Length / 2;
+  if (!EFI_ERROR(LocateMemoryMapAreaByName("ADSP_EFS", &ADSPEFSRegion))) {
+    RFMB = ADSPEFSRegion.Address + ADSPEFSRegion.Length / 2;
+    RFMS = ADSPEFSRegion.Length / 2;
+    RFAB = ADSPEFSRegion.Address;
+    RFAS = ADSPEFSRegion.Length / 2;
   }
 
-  if (TGCMRegion != NULL) {
-    TCMA = TGCMRegion->Address;
-    TCML = TGCMRegion->Length;
+  if (!EFI_ERROR(LocateMemoryMapAreaByName("TGCM", &TGCMRegion))) {
+    TCMA = TGCMRegion.Address;
+    TCML = TGCMRegion.Length;
+  } else {
+    TCMA = 0xDEADBEEF;
+    TCML = 0xBEEFDEAD;
   }
 
   DEBUG((EFI_D_INFO, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));

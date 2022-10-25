@@ -9,9 +9,9 @@
 #include <Library/MemoryAllocationLib.h>
 #include <Library/PcdLib.h>
 #include <Library/SerialPortLib.h>
+#include <Library/MemoryMapHelperLib.h>
 
 // This varies by device
-#include <Configuration/DeviceMemoryMap.h>
 #include <Configuration/DeviceConfigurationMap.h>
 
 typedef EFI_STATUS (*GET_CONFIG_STRING)(

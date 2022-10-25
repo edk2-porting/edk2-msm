@@ -40,9 +40,8 @@
   PlatformPeiLib
   PlatformPrePiLib
   TimerLib
-  # MpPark
-  ArmSmcLib
   PrintLib
+  MemoryMapHelperLib
 
 [Pcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString

@@ -23,19 +23,7 @@ EFI_STATUS
 CfgGetMemInfoByName(
     CHAR8 *RegionName, ARM_MEMORY_REGION_DESCRIPTOR_EX *MemRegions)
 {
-  PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
-      gDeviceMemoryDescriptorEx;
-
-  // Run through each memory descriptor
-  while (MemoryDescriptorEx->Length != 0) {
-    if (AsciiStriCmp(RegionName, MemoryDescriptorEx->Name) == 0) {
-      *MemRegions = *MemoryDescriptorEx;
-      return EFI_SUCCESS;
-    }
-    MemoryDescriptorEx++;
-  }
-
-  return EFI_NOT_FOUND;
+  return LocateMemoryMapAreaByName(RegionName, MemRegions);
 }
 
 STATIC
@@ -43,19 +31,7 @@ EFI_STATUS
 CfgGetMemInfoByAddress(
     UINT64 RegionBaseAddress, ARM_MEMORY_REGION_DESCRIPTOR_EX *MemRegions)
 {
-  PARM_MEMORY_REGION_DESCRIPTOR_EX MemoryDescriptorEx =
-      gDeviceMemoryDescriptorEx;
-
-  // Run through each memory descriptor
-  while (MemoryDescriptorEx->Length != 0) {
-    if (MemoryDescriptorEx->Address == RegionBaseAddress) {
-      *MemRegions = *MemoryDescriptorEx;
-      return EFI_SUCCESS;
-    }
-    MemoryDescriptorEx++;
-  }
-
-  return EFI_NOT_FOUND;
+  return LocateMemoryMapAreaByAddress(RegionBaseAddress, MemRegions);
 }
 
 STATIC
