@@ -1,5 +1,6 @@
 /** @file
 
+  Patches NTOSKRNL to not cause a SError when reading/writing ACTLR_EL1
   Patches NTOSKRNL to not cause a bugcheck when attempting to use
   PSCI_MEMPROTECT Due to an issue in QHEE
 
@@ -19,12 +20,11 @@
 #include <Library/UefiLib.h>
 #include <Uefi.h>
 
-#include <Library/ArmLib.h>
-#include <Library/ArmMmuLib.h>
 #include <Library/BaseLib.h>
 #include <Library/BaseMemoryLib.h>
 #include <Library/DebugLib.h>
 #include <Library/MemoryAllocationLib.h>
+#include <Library/PcdLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 
 #include "ntdef.h"
@@ -43,8 +43,6 @@
 #define GET_BYTE(a, b) (GET_BITS(a) << 4 | GET_BITS(b))
 
 typedef VOID (*BL_ARCH_SWITCH_CONTEXT)(UINT32 target);
-typedef VOID (*COPY_TO)(
-    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
 
 EFI_STATUS
 EFIAPI
@@ -59,8 +57,6 @@ EFIAPI
 ExitBootServicesWrapper(IN EFI_HANDLE ImageHandle, IN UINTN MapKey);
 
 VOID CopyMemory(
-    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
-VOID CopyToReadOnly(
     EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size);
 UINT64 FindPattern(
     EFI_PHYSICAL_ADDRESS baseAddress, UINT64 size, const CHAR8 *pattern);

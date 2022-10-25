@@ -1,5 +1,6 @@
 /** @file
 
+  Patches NTOSKRNL to not cause a SError when reading/writing ACTLR_EL1
   Patches NTOSKRNL to not cause a bugcheck when attempting to use
   PSCI_MEMPROTECT Due to an issue in QHEE
 
@@ -21,21 +22,6 @@ VOID CopyMemory(
   for (UINTN i = 0; i < size; i++) {
     dst[i] = src[i];
   }
-}
-
-VOID CopyToReadOnly(
-    EFI_PHYSICAL_ADDRESS destination, EFI_PHYSICAL_ADDRESS source, UINTN size)
-{
-  BOOLEAN intstate = ArmGetInterruptState();
-  if (intstate)
-    ArmDisableInterrupts();
-
-  ArmClearMemoryRegionReadOnly(destination, size);
-  CopyMemory(destination, source, size);
-  ArmSetMemoryRegionReadOnly(destination, size);
-
-  if (intstate)
-    ArmEnableInterrupts();
 }
 
 EFI_PHYSICAL_ADDRESS

@@ -73,4 +73,3 @@
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
   
-  Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf

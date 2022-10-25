@@ -1,5 +1,6 @@
 /** @file
 
+  Patches NTOSKRNL to not cause a SError when reading/writing ACTLR_EL1
   Patches NTOSKRNL to not cause a bugcheck when attempting to use
   PSCI_MEMPROTECT Due to an issue in QHEE
 
@@ -24,14 +25,11 @@
   OsLoaderHelper.S | GCC
 
 [Packages]
-  ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
 
 [LibraryClasses]
-  ArmLib
-  ArmMmuLib
   BaseMemoryLib
   DebugLib
   MemoryAllocationLib
@@ -41,10 +39,6 @@
 
 [Guids]
   gEfiEventExitBootServicesGuid       ## CONSUMES
-
-[Protocols]
-
-[Pcd]
 
 [Depex]
   TRUE

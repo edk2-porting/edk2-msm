@@ -469,4 +469,5 @@
 
   # Helper drivers
   Platform/RenegadePkg/Drivers/SetCPUFreqDxe/SetCPUFreqDxe.inf
+  Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf
   
