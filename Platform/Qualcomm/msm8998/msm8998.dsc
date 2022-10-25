@@ -66,7 +66,6 @@
   PlatformPeiLib|Silicon/Qualcomm/msm8998/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/msm8998/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
-  RFSProtectionLib|Silicon/Qualcomm/msm8998/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/msm8998/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/msm8998/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 

@@ -65,7 +65,6 @@
   MemoryInitPeiLib|Silicon/Qualcomm/sdm660/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sdm660/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sdm660/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  RFSProtectionLib|Silicon/Qualcomm/sdm660/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sdm660/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sdm660/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 

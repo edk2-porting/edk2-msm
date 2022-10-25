@@ -68,7 +68,6 @@
   MemoryInitPeiLib|Silicon/Qualcomm/sdm845/Library/MemoryInitPeiLib/PeiMemoryAllocationLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sdm845/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sdm845/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  RFSProtectionLib|Silicon/Qualcomm/sdm845/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sdm845/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sdm845/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
