@@ -317,7 +317,11 @@
   # PrePI
   Silicon/Qualcomm/QcomPkg/PrePi/PrePi.inf {
     <LibraryClasses>
+    !if $(USE_UART) == 1
+      SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
+    !else
       SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+    !endif
   }
 
   # DXE
@@ -338,10 +342,14 @@
   # Processor Core Services
   ArmPkg/Drivers/CpuDxe/CpuDxe.inf {
     <LibraryClasses>
+    !if $(USE_UART) == 1
+      SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
+    !else
     !if $(NO_EXCEPTION_DISPLAY) == TRUE
       SerialPortLib|Common/edk2/MdePkg/Library/BaseSerialPortLibNull/BaseSerialPortLibNull.inf
     !else
       SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+    !endif
     !endif
   }
   ArmPkg/Drivers/TimerDxe/TimerDxe.inf

@@ -11,6 +11,7 @@
 
 [Packages]
   MdePkg/MdePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
 
 [Pcd]
   gQcomTokenSpaceGuid.PcdDebugUartPortBase
