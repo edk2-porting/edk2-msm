@@ -1,5 +1,5 @@
 [Defines]
-  PLATFORM_NAME                  = sdm845Pkg
+  PLATFORM_NAME                  = pafm00
   PLATFORM_GUID                  = 28f1a3bf-193a-47e3-a7b9-5a435eaab2ee
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010019
@@ -8,11 +8,12 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
+  DEVICE_DXE_FV_COMPONENTS       = Platform/legacy/sdm845/OPPO/pafm00.fdf.inc
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT
 
 [PcdsFixedAtBuild.common]
 
