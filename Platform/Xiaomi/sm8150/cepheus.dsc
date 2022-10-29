@@ -13,7 +13,7 @@
 !include Platform/Qualcomm/sm8150/sm8150.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DHAS_MLVM -DRAM_SIZE=6 -DMEMMAP_XIAOMI_HACKS=1 -DENABLE_SIMPLE_INIT 
+  GCC:*_*_AARCH64_CC_FLAGS = -DHAS_MLVM -DMEMMAP_XIAOMI_HACKS=1 -DENABLE_SIMPLE_INIT 
 
 [PcdsFixedAtBuild.common]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
