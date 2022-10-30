@@ -160,6 +160,12 @@
     SECTION UI = "UsbfnDwc3Dxe"
   }
 
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/UsbConfigDxe/UsbConfigDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/UsbConfigDxe.efi
+    SECTION UI = "UsbConfigDxe"
+  }
+
   FILE DRIVER = f09ad92e-485c-9cdb-3e05-3385c38f94cc {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/TsensDxe/TsensDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/TsensDxe/TsensDxe.efi
@@ -242,7 +248,7 @@
 
   FILE DRIVER = 9a00771f-36d4-4dd5-8916-c48ed9b16b86 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/HALIOMMU/HALIOMMU.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/HALIOMMU.efi
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/mh2lm/CustomizedBinaries/HALIOMMU.efi
     SECTION UI = "HALIOMMU"
   }
 
