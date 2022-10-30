@@ -35,13 +35,27 @@ PlatformUpdateAcpiTables(VOID)
 
   ARM_MEMORY_REGION_DESCRIPTOR_EX MPSSEFSRegion;
   ARM_MEMORY_REGION_DESCRIPTOR_EX ADSPEFSRegion;
+  ARM_MEMORY_REGION_DESCRIPTOR_EX TGCMRegion;
 
   UINT32                              SOID  = 0;
+  UINT32                              STOR  = 0x1;
   UINT32                              SIDV  = 0;
   UINT16                              SDFE  = 0;
   UINT16                              SIDM  = 0;
+  UINT32                              SUFS  = 0xFFFFFFFF;
+  UINT32                              PUS3  = 0x0;
+  UINT32                              SUS3  = 0xFFFFFFFF;
+  UINT32                             *pSIDT = (UINT32 *)0x784130;
+  UINT32                              SIDT  = (*pSIDT & 0xFF00000) >> 20;
   UINT32                              SOSN1 = 0;
   UINT32                              SOSN2 = 0;
+  UINT32                              TPMA  = 0x1;
+  UINT32                              TDTV  = 0x6654504D;
+  UINT64                              SOSI  = 0;
+  UINT32                              PRP0  = 0xFFFFFFFF;
+  UINT32                              PRP1  = 0xFFFFFFFF;
+  UINT32                              PRP2  = 0xFFFFFFFF;
+  UINT32                              PRP3  = 0xFFFFFFFF;
   CHAR8                               SIDS[EFICHIPINFO_MAX_ID_LENGTH] = {0};
   EFI_PLATFORMINFO_PLATFORM_INFO_TYPE PlatformInfo;
   UINT32                              RMTB = 0;
@@ -50,6 +64,8 @@ PlatformUpdateAcpiTables(VOID)
   UINT32                              RFMS = 0;
   UINT32                              RFAB = 0;
   UINT32                              RFAS = 0;
+  UINT32                              TCMA = 0;
+  UINT32                              TCML = 0;
 
   EFI_CHIPINFO_PROTOCOL     *mBoardProtocol           = NULL;
   EFI_SMEM_PROTOCOL         *pEfiSmemProtocol         = NULL;
@@ -92,6 +108,8 @@ PlatformUpdateAcpiTables(VOID)
   mBoardProtocol->GetQFPROMChipId(mBoardProtocol, (EFIChipInfoQFPROMChipIdType *)&SOSN2);
   mBoardProtocol->GetChipIdString(mBoardProtocol, SIDS, EFICHIPINFO_MAX_ID_LENGTH);
 
+  pEfiSmemProtocol->GetFunc(137, &SmemSize, (VOID **)&SOSI);
+
   pEfiPlatformInfoProtocol->GetPlatformInfo(pEfiPlatformInfoProtocol, &PlatformInfo);
 
   UINT16 SVMJ = (UINT16)((SIDV >> 16) & 0xFFFF);
@@ -102,6 +120,11 @@ PlatformUpdateAcpiTables(VOID)
   if (!EFI_ERROR(LocateMemoryMapAreaByName("MPSS_EFS", &MPSSEFSRegion))) {
     RMTB = MPSSEFSRegion.Address;
     RMTX = MPSSEFSRegion.Length;
+
+    // Allow MPSS and HLOS to access the allocated RFS Shared Memory Region
+    // Normally this would be done by a driver in Linux
+    // TODO: Move to a better place!
+    RFSLocateAndProtectSharedArea();
   }
 
   if (!EFI_ERROR(LocateMemoryMapAreaByName("ADSP_EFS", &ADSPEFSRegion))) {
@@ -109,6 +132,14 @@ PlatformUpdateAcpiTables(VOID)
     RFMS = ADSPEFSRegion.Length / 2;
     RFAB = ADSPEFSRegion.Address;
     RFAS = ADSPEFSRegion.Length / 2;
+  }
+
+  if (!EFI_ERROR(LocateMemoryMapAreaByName("TGCM", &TGCMRegion))) {
+    TCMA = TGCMRegion.Address;
+    TCML = TGCMRegion.Length;
+  } else {
+    TCMA = 0xDEADBEEF;
+    TCML = 0xBEEFDEAD;
   }
 
   DEBUG((EFI_D_INFO, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));
@@ -123,11 +154,16 @@ PlatformUpdateAcpiTables(VOID)
 
   // gBS->Stall(10 * 1000 * 1000);
   UpdateNameAslCode(SIGNATURE_32('S', 'O', 'I', 'D'), &SOID, 4);
+  UpdateNameAslCode(SIGNATURE_32('S', 'T', 'O', 'R'), &STOR, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'I', 'D', 'V'), &SIDV, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'V', 'M', 'J'), &SVMJ, 2);
   UpdateNameAslCode(SIGNATURE_32('S', 'V', 'M', 'I'), &SVMI, 2);
   UpdateNameAslCode(SIGNATURE_32('S', 'D', 'F', 'E'), &SDFE, 2);
   UpdateNameAslCode(SIGNATURE_32('S', 'I', 'D', 'M'), &SIDM, 2);
+  UpdateNameAslCode(SIGNATURE_32('S', 'U', 'F', 'S'), &SUFS, 4);
+  UpdateNameAslCode(SIGNATURE_32('P', 'U', 'S', '3'), &PUS3, 4);
+  UpdateNameAslCode(SIGNATURE_32('S', 'U', 'S', '3'), &SUS3, 4);
+  UpdateNameAslCode(SIGNATURE_32('S', 'I', 'D', 'T'), &SIDT, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'O', 'S', 'N'), &SOSN, 8);
   UpdateNameAslCode(SIGNATURE_32('P', 'L', 'S', 'T'), &PLST, 4);
   UpdateNameAslCode(SIGNATURE_32('R', 'M', 'T', 'B'), &RMTB, 4);
@@ -136,6 +172,15 @@ PlatformUpdateAcpiTables(VOID)
   UpdateNameAslCode(SIGNATURE_32('R', 'F', 'M', 'S'), &RFMS, 4);
   UpdateNameAslCode(SIGNATURE_32('R', 'F', 'A', 'B'), &RFAB, 4);
   UpdateNameAslCode(SIGNATURE_32('R', 'F', 'A', 'S'), &RFAS, 4);
+  UpdateNameAslCode(SIGNATURE_32('T', 'P', 'M', 'A'), &TPMA, 4);
+  UpdateNameAslCode(SIGNATURE_32('T', 'D', 'T', 'V'), &TDTV, 4);
+  UpdateNameAslCode(SIGNATURE_32('T', 'C', 'M', 'A'), &TCMA, 4);
+  UpdateNameAslCode(SIGNATURE_32('T', 'C', 'M', 'L'), &TCML, 4);
+  UpdateNameAslCode(SIGNATURE_32('S', 'O', 'S', 'I'), &SOSI, 8);
+  UpdateNameAslCode(SIGNATURE_32('P', 'R', 'P', '0'), &PRP0, 4);
+  UpdateNameAslCode(SIGNATURE_32('P', 'R', 'P', '1'), &PRP1, 4);
+  UpdateNameAslCode(SIGNATURE_32('P', 'R', 'P', '2'), &PRP2, 4);
+  UpdateNameAslCode(SIGNATURE_32('P', 'R', 'P', '3'), &PRP3, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'I', 'D', 'S'), &SIDS, EFICHIPINFO_MAX_ID_LENGTH);
 }
 
@@ -143,11 +188,6 @@ VOID
 EFIAPI
 PlatformSetup()
 {
-  // Allow MPSS and HLOS to access the allocated RFS Shared Memory Region
-  // Normally this would be done by a driver in Linux
-  // TODO: Move to a better place!
-  RFSLocateAndProtectSharedArea();
-
   // Patch ACPI Tables
   PlatformUpdateAcpiTables();
 }
