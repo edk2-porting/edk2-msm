@@ -8,7 +8,7 @@
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
-    SECTION RAW = Platform/Xiaomi/sm8150/AcpiTables/DSDT.aml
+    SECTION RAW = Platform/Xiaomi/sm8150/AcpiTables/cepheus/DSDT.aml
 # 	Common Tables
 	SECTION RAW = Silicon/Qualcomm/sm8150/AcpiTables/BuiltIn/APIC.aml
 # 	SECTION RAW = Silicon/Qualcomm/sm8150/AcpiTables/BuiltIn/BERT.aml
