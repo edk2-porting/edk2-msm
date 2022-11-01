@@ -18,6 +18,7 @@ function _help(){
 	echo "	--clean, -C:             clean workspace and output."
 	echo "	--distclean, -D:         clean up all files that are not in repo."
 	echo "	--outputdir, -O:         output folder."
+	echo "	--boot, -b:              fastboot boot image."
 	echo "	--help, -h:              show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-msm"
@@ -143,12 +144,14 @@ NO_EXCEPTION_DISPLAY=0
 export ROOTDIR OUTDIR SOC_VENDOR
 export GEN_ACPI=false
 export GEN_ROOTFS=true
-OPTS="$(getopt -o t:d:hacACDO:r:u -l toolchain:,device:,help,all,chinese,acpi,skip-rootfs-gen,no-exception-disp,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+export FASTBOOT=false
+OPTS="$(getopt -o t:d:habcACDO:r:u -l toolchain:,device:,help,all,boot,chinese,acpi,skip-rootfs-gen,no-exception-disp,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
 		-d|--device) DEVICE="${2}";shift 2;;
 		-a|--all) DEVICE=all;shift;;
+		-b|--boot) FASTBOOT=true;shift;;
 		-c|--chinese) CHINESE=true;shift;;
 		-A|--acpi) GEN_ACPI=true;shift;;
 		-C|--clean) CLEAN=true;shift;;
@@ -276,4 +279,9 @@ then
 	exit "${E}"
 else
 	_build "${DEVICE}"
+fi
+
+if "${FASTBOOT}"
+then
+    fastboot boot ${OUTDIR}/boot-${DEVICE}${EXT}.img
 fi
