@@ -10,7 +10,7 @@ function _help(){
 	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use hub.fastgit.xyz for submodule cloning."
 	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
-	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
+	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'CLANG38'."
 	echo "	--uart, -u:              compile with UART support, print debug messages to uart debug port."
 	echo " 	--skip-rootfs-gen:       skip generating SimpleInit rootfs to speed up building."
 	echo " 	--no-exception-disp:     do not display exception information in DEBUG builds"
@@ -102,7 +102,8 @@ function _build(){
 
 	echo "Building BootShim"
 	pushd "${ROOTDIR}/tools/BootShim"
-	make UEFI_BASE=0xD0000000 UEFI_SIZE=0x00600000
+	rm -f BootShim.bin BootShim.elf
+	make UEFI_BASE=0xCE000000 UEFI_SIZE=0x02000000
 	popd
 
 	_call_hook platform_pre_build||return "$?"
@@ -137,7 +138,7 @@ MODE=RELEASE
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
-TOOLCHAIN=GCC5
+TOOLCHAIN=CLANG38
 SOC_VENDOR=Qualcomm
 USE_UART=0
 NO_EXCEPTION_DISPLAY=0
