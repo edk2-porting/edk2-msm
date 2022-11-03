@@ -11,7 +11,8 @@
 ##
 
 [BuildOptions.common]
-  *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG
+  # FIXME: use less -Wno- flags 
+  *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG -Wno-self-assign -Wno-uninitialized -Wno-initializer-overrides -Wno-non-literal-null-conversion -Wno-unused-but-set-variable -Wno-string-plus-int
   *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -Wno-unused-variable
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]
@@ -62,6 +63,7 @@
   gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x0f
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x800B05C7
 !endif
+# Use 0x807B55FF to enable all debug messages
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x06
   gEfiMdeModulePkgTokenSpaceGuid.PcdResetOnMemoryTypeInformationChange|FALSE
 
