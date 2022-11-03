@@ -11,8 +11,6 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Runtime Data",      0x85600000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtData, WRITE_BACK_XN},
     {"Runtime Code",      0x85680000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtCode, WRITE_BACK_XN},
     {"Hypervisor",        0x85700000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
-
-    // Check: RFSLocateAndProtectSharedArea will get called
     {"MPSS_EFS",          0x85D00000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"GPU PRR",           0x85F00000, 0x00010000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     {"HLOS 2",            0x85F10000, 0x000B0000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
@@ -23,12 +21,11 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     // secapp-region
     {"TZApps",            0x86D00000, 0x03C00000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
     {"HLOS 3",            0x8A900000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
-
     // qseecom_mem
     {"TGCM",              0x8AB00000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     // LG has the largest PIL region, define as is
-	  {"PIL_REGION",        0x8BF00000, 0x0D200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"DXE Heap",          0x99100000, 0x04230000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+	{"PIL_REGION",        0x8BF00000, 0x0D200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
+    {"HLOS 4",            0x99100000, 0x04230000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"DBI Dump",          0x9D330000, 0x000D0000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
     {"Display Reserved",  0x9D400000, 0x02400000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
     {"FV Region",         0x9F800000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
@@ -48,18 +45,18 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Info Blk",          0x9FFFF000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
 
     /* RAM partition regions */
-    {"RAM Partition",     0xA0000000, 0x030000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"UEFI FD",           0xD0000000, 0x000600000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
+    {"DXE Heap",          0xA0000000, 0x2E000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"UEFI FD",           0xCE000000, 0x02000000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
 
     /* 4GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x0AD9A0000, Mem4G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x0ADFA0000, Mem4G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 6GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x12A800000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x12AE00000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 8GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x0AFA00000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x0B0000000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"RAM Partition",     0x180000000,0x0FC7A0000, Mem8G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 10GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x2244C0000, Mem10G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x224AC0000, Mem10G,  SYS_MEM, SYS_MEM_CAP, Conv,  WRITE_BACK_XN},
 
     /* Other memory regions */
     {"AOP_SS_MSG_RAM",    0x0C300000, 0x00100000,  NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
