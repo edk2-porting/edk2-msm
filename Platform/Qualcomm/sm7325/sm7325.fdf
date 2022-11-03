@@ -25,13 +25,13 @@
 ################################################################################
 
 [FD.sm7325_UEFI]
-BaseAddress   = 0xD0000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in NOR Flash.
-Size          = 0x00600000|gArmTokenSpaceGuid.PcdFdSize         # The size in bytes of the FLASH Device
+BaseAddress   = 0xCE000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware
+Size          = 0x02000000|gArmTokenSpaceGuid.PcdFdSize
 ErasePolarity = 1
 
 # This one is tricky, it must be: BlockSize * NumBlocks = Size
 BlockSize     = 0x00001000
-NumBlocks     = 0x600
+NumBlocks     = 0x2000
 
 ################################################################################
 #
@@ -49,7 +49,7 @@ NumBlocks     = 0x600
 #
 ################################################################################
 
-0x00000000|0x00600000
+0x00000000|0x02000000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
