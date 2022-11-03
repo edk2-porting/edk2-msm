@@ -38,8 +38,8 @@
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xA7900000         # DXE heap base address
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x08700000         # UefiMemorySize, DXE heap size
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xC0000000         # DXE heap base address
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x0E000000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9c000000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8

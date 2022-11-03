@@ -11,8 +11,6 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Runtime Data",      0x85700000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtData, WRITE_BACK_XN},
     {"Runtime Code",      0x85780000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtCode, WRITE_BACK_XN},
     {"Hypervisor",        0x85800000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
-
-    // Check: RFSLocateAndProtectSharedArea will get called
     {"MPSS_EFS",          0x85E00000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"SMEM",              0x86000000, 0x00200000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED},
     {"TZ",                0x86200000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
@@ -20,15 +18,15 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"TZApps",            0x86600000, 0x02200000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
     // no qseecom_mem found in dt
     {"TGCM",              0x87B00000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"HLOS 3",            0x88F00000, 0x01E00000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
+    {"HLOS 2",            0x88F00000, 0x01E00000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
 
     // not sure about this, but the original value in edk2-msm8998 doesn't make sense
 	  {"PIL_REGION",        0x8AD00000, 0x0AB00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"DXE Heap",          0x95800000, 0x07B30000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"HLOS 3",            0x95800000, 0x07B30000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"DBI Dump",          0x9D330000, 0x000D0000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
     {"Display Reserved",  0x9D400000, 0x02400000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
     {"FV Region",         0x9F800000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
-    {"UEFI FD",           0x9FC00000, 0x00300000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
+    {"HLOS 4",            0x9FC00000, 0x00300000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
     {"SEC Heap",          0x9FF00000, 0x0008C000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"CPU Vectors",       0x9FF8C000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
     {"MMU PageTables",    0x9FF8D000, 0x00003000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
@@ -43,16 +41,15 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"RSRV2",             0x9FFE3000, 0x00014000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
     {"Log Buffer",        0x9FFF7000, 0x00008000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
     {"Info Blk",          0x9FFFF000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
-    // copy end
 
     /* RAM partition regions */
-    {"RAM Partition",     0xA0000000, 0x030000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"UEFI FD",           0xD0000000, 0x000600000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
+    {"DXE Heap",          0xA0000000, 0x2E000000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"UEFI FD",           0xCE000000, 0x02000000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
 
     /* 4GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x0ADEC0000, Mem4G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x0AE4C0000, Mem4G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* 6GiB Memory */
-    {"RAM Partition",     0xD0600000, 0x02FA00000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xD0000000, 0x030000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"RAM Partition",     0x100000000,0x0BD8C0000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
     /* Other memory regions */

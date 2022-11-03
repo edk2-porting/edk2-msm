@@ -12,8 +12,6 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"AOP Image",         0x80800000, 0x00020000, AddMem, MEM_RES, UNCACHEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     {"AOP CMD DB",        0x80820000, 0x00020000, AddMem, MEM_RES, UNCACHEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     {"GPU PRR",           0x80840000, 0x00010000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
-
-    // 80850000 - 808FF000 usable
     {"HLOS 1",            0x80850000, 0x000AF000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"SEC APPs",          0x808FF000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"SMEM",              0x80900000, 0x00200000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED},
@@ -21,14 +19,14 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     // secapp-region
     {"TZApps",            0x82200000, 0x02200000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
 	  {"PIL_REGION",        0x84400000, 0x0F800000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"DXE Heap",          0x93C00000, 0x08400000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"HLOS 2",            0x93C00000, 0x08400000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"Display Reserved",  0x9C000000, 0x01800000, AddMem, MEM_RES, SYS_MEM_CAP, Reserv, WRITE_THROUGH_XN},
     {"Runtime Data",      0x9D800000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtData, WRITE_BACK_XN},
     {"Runtime Code",      0x9D880000, 0x00080000, AddMem, SYS_MEM, SYS_MEM_CAP, RtCode, WRITE_BACK_XN},
-    {"HLOS 2",            0x9D900000, 0x00700000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
+    {"HLOS 3",            0x9D900000, 0x00700000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     // qseecom_mem
     {"TGCM",              0x9E000000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"HLOS 3",            0x9F400000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
+    {"HLOS 4",            0x9F400000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"FV Region",         0x9F800000, 0x00400000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
     {"UEFI FD",           0x9FC00000, 0x00300000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
     {"SEC Heap",          0x9FF00000, 0x0008C000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
@@ -46,21 +44,20 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Log Buffer",        0x9FFF7000, 0x00008000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
     {"Info Blk",          0x9FFFF000, 0x00001000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
 
-
     /* RAM partition regions */
     {"Secure DSP",        0xA0000000, 0x01200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, WRITE_BACK_XN},
-    {"RAM Partition",     0xA1200000, 0x1B700000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"DXE Heap",          0xA1200000, 0x1B700000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     /* Memory hole */
     /* 0xBC900000 - 0xBFFFFFFF */
     {"DBI Dump",          0xC0000000, 0x00F00000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
-    {"RAM Partition",     0xC0F00000, 0x0F100000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"UEFI FD",           0xD0000000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
-    {"RAM Partition",     0xD0600000, 0xAFA00000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",     0xC0F00000, 0x0D100000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"UEFI FD",           0xCE000000, 0x02000000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK},
+    {"RAM Partition",     0xD0000000, 0xB0000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
-    {"RAM Partition",     0x180000000, 0x020000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"RAM Partition",     0x1a0000000, 0x020000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"RAM Partition",     0x1c0000000, 0x020000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
-    {"RAM Partition",     0x1e0000000, 0x020000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",    0x180000000, 0x20000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",    0x1a0000000, 0x20000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",    0x1c0000000, 0x20000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"RAM Partition",    0x1e0000000, 0x20000000, Mem6G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
     /* Other memory regions */
     {"AOP_SS_MSG_RAM",    0x0C300000, 0x00100000,  NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
