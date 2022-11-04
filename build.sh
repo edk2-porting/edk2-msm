@@ -77,7 +77,10 @@ function _build(){
 			mkdir -p "${WORKSPACE}/Build/${DEVICE}/ACPI"
 			pushd "${WORKSPACE}/Build/${DEVICE}/ACPI"
 			cp "${ROOTDIR}/Silicon/${SOC_VENDOR}/${SOC_PLATFORM_L}/AcpiTables"/* ./
-			cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"{*.asl,"${DEVICE}/"*} ./
+			if compgen -G "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/*.asl" > /dev/null; then
+				cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"*.asl ./
+			fi
+			cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"* ./
 			if [ "${USE_IASL}" == "true" ]
 			then iasl -ve Dsdt.asl ||_error "iasl failed"
 			else wine "${ROOTDIR}/tools/asl-x64.exe" Dsdt.asl ||_error "asl.exe failed"
