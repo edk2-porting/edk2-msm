@@ -7,7 +7,7 @@
 /***********************************************************************
         SMBIOS data definition  TYPE4  Processor Information
 ************************************************************************/
-SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a76 = {
+SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a77_big = {
     {EFI_SMBIOS_TYPE_PROCESSOR_INFORMATION, sizeof(SMBIOS_TABLE_TYPE4), 0},
     1,                // Socket String
     CentralProcessor, // ProcessorType;          ///< The enumeration value from
@@ -31,8 +31,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a76 = {
         1  // ProcessorVoltageIndicateLegacy      :1;
     },
     0,                     // ExternalClock;
-    2300,                  // MaxSpeed;
-    2300,                  // CurrentSpeed;
+    2840,                  // MaxSpeed;
+    2840,                  // CurrentSpeed;
     0x41,                  // Status;
     ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
                            // value from PROCESSOR_UPGRADE.
@@ -42,8 +42,63 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a76 = {
     0,                     // SerialNumber;
     0,                     // AssetTag;
     7,                     // PartNumber;
-    2,                     // CoreCount;
-    2,                     // EnabledCoreCount;
+    1,                     // CoreCount;
+    1,                     // EnabledCoreCount;
+    0,                     // ThreadCount;
+    0xEC, // ProcessorCharacteristics; ///< The enumeration value from
+          // PROCESSOR_CHARACTERISTIC_FLAGS ProcessorReserved1              :1;
+          // ProcessorUnknown                :1;
+          // Processor64BitCapble            :1;
+          // ProcessorMultiCore              :1;
+          // ProcessorHardwareThread         :1;
+          // ProcessorExecuteProtection      :1;
+          // ProcessorEnhancedVirtualization :1;
+          // ProcessorPowerPerformanceCtrl    :1;
+          // Processor128bitCapble            :1;
+          // ProcessorReserved2               :7;
+    ProcessorFamilyARM, // ARM Processor Family;
+    0,                  // CoreCount2;
+    0,                  // EnabledCoreCount2;
+    0,                  // ThreadCount2;
+};
+
+SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a77 = {
+    {EFI_SMBIOS_TYPE_PROCESSOR_INFORMATION, sizeof(SMBIOS_TABLE_TYPE4), 0},
+    1,                // Socket String
+    CentralProcessor, // ProcessorType;          ///< The enumeration value from
+                      // PROCESSOR_TYPE_DATA.
+    ProcessorFamilyIndicatorFamily2, // ProcessorFamily;        ///< The
+                                     // enumeration value from
+                                     // PROCESSOR_FAMILY2_DATA.
+    2,                               // ProcessorManufacture String;
+    {                                // ProcessorId;
+     {0x00, 0x00, 0x00, 0x00},
+     {0x00, 0x00, 0x00, 0x00}},
+    3, // ProcessorVersion String;
+    {
+        // Voltage;
+        0, // ProcessorVoltageCapability5V        :1;
+        0, // ProcessorVoltageCapability3_3V      :1;
+        0, // ProcessorVoltageCapability2_9V      :1;
+        0, // ProcessorVoltageCapabilityReserved  :1; ///< Bit 3, must be zero.
+        0, // ProcessorVoltageReserved            :3; ///< Bits 4-6, must be
+           // zero.
+        1  // ProcessorVoltageIndicateLegacy      :1;
+    },
+    0,                     // ExternalClock;
+    2420,                  // MaxSpeed;
+    2420,                  // CurrentSpeed;
+    0x41,                  // Status;
+    ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
+                           // value from PROCESSOR_UPGRADE.
+    0,                     // L1CacheHandle;
+    0,                     // L2CacheHandle;
+    0xFFFF,                // L3CacheHandle;
+    0,                     // SerialNumber;
+    0,                     // AssetTag;
+    7,                     // PartNumber;
+    3,                     // CoreCount;
+    3,                     // EnabledCoreCount;
     0,                     // ThreadCount;
     0xEC, // ProcessorCharacteristics; ///< The enumeration value from
           // PROCESSOR_CHARACTERISTIC_FLAGS ProcessorReserved1              :1;
@@ -86,8 +141,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a55 = {
         1  // ProcessorVoltageIndicateLegacy      :1;
     },
     0,                     // ExternalClock;
-    1766,                  // MaxSpeed;
-    1766,                  // CurrentSpeed;
+    1800,                  // MaxSpeed;
+    1800,                  // CurrentSpeed;
     0x41,                  // Status;
     ProcessorUpgradeOther, // ProcessorUpgrade;         ///< The enumeration
                            // value from PROCESSOR_UPGRADE.
@@ -97,8 +152,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4_a55 = {
     0,                     // SerialNumber;
     0,                     // AssetTag;
     6,                     // PartNumber;
-    6,                     // CoreCount;
-    6,                     // EnabledCoreCount;
+    4,                     // CoreCount;
+    4,                     // EnabledCoreCount;
     0,                     // ThreadCount;
     0xEC, // ProcessorCharacteristics; ///< The enumeration value from
           // PROCESSOR_CHARACTERISTIC_FLAGS ProcessorReserved1              :1;
@@ -125,7 +180,7 @@ CHAR8 *mProcessorInfoType4Strings[] = {
 /***********************************************************************
         SMBIOS data definition  TYPE7  Cache Information
 ************************************************************************/
-SMBIOS_TABLE_TYPE7 mCacheInfoType7_a76_L1I = {
+SMBIOS_TABLE_TYPE7 mCacheInfoType7_a77_L1I = {
     {EFI_SMBIOS_TYPE_CACHE_INFORMATION, sizeof(SMBIOS_TABLE_TYPE7), 0},
     1,     // SocketDesignation String
     0x380, // Cache Configuration
@@ -208,7 +263,7 @@ SMBIOS_TABLE_TYPE7 mCacheInfoType7_a55_L1I = {
 };
 CHAR8 *mCacheInfoType7Strings[] = {"L1 Instruction", "L1 Data", "L2", NULL};
 
-SMBIOS_TABLE_TYPE7 mCacheInfoType7_a76_L1D = {
+SMBIOS_TABLE_TYPE7 mCacheInfoType7_a77_L1D = {
     {EFI_SMBIOS_TYPE_CACHE_INFORMATION, sizeof(SMBIOS_TABLE_TYPE7), 0},
     2,     // SocketDesignation String
     0x180, // Cache Configuration
@@ -290,7 +345,7 @@ SMBIOS_TABLE_TYPE7 mCacheInfoType7_a55_L1D = {
     CacheAssociativity4Way // Associativity
 };
 
-SMBIOS_TABLE_TYPE7 mCacheInfoType7_a76_L2 = {
+SMBIOS_TABLE_TYPE7 mCacheInfoType7_a77_L2 = {
     {EFI_SMBIOS_TYPE_CACHE_INFORMATION, sizeof(SMBIOS_TABLE_TYPE7), 0},
     3,      // SocketDesignation String
     0x0181, // Cache Configuration
@@ -391,7 +446,7 @@ SMBIOS_TABLE_TYPE17 mMemDevInfoType17 = {
     0,                          // DeviceSet;
     1,                          // DeviceLocator String
     2,                          // BankLocator String
-    MemoryTypeLpddr4, // MemoryType;                     ///< The enumeration
+    MemoryTypeLpddr5, // MemoryType;                     ///< The enumeration
                       // value from MEMORY_DEVICE_TYPE.
     {
         // TypeDetail;
@@ -412,7 +467,7 @@ SMBIOS_TABLE_TYPE17 mMemDevInfoType17 = {
         1, // Unbuffered      :1;
         0, // Reserved1       :1;
     },
-    1866,                 // Speed; (unknown)
+    3200,                 // Speed; (unknown)
     2,                    // Manufacturer String
     0,                    // SerialNumber String
     0,                    // AssetTag String
@@ -458,16 +513,17 @@ VOID RegisterSOCSmbiosInfo(
   EFI_SMBIOS_HANDLE SmbiosHandle;
   // TYPE7 Cache Information
   LogSmbiosData(
-      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a76_L1I,
+      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a77_L1I,
       mCacheInfoType7Strings, NULL);
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a55_L1I,
       mCacheInfoType7Strings, NULL);
 
   LogSmbiosData(
-      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a76_L1D,
+      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a77_L1D,
       mCacheInfoType7Strings, &SmbiosHandle);
-  mProcessorInfoType4_a76.L1CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_a77_big.L1CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_a77.L1CacheHandle = (UINT16)SmbiosHandle;
 
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a55_L1D,
@@ -475,9 +531,10 @@ VOID RegisterSOCSmbiosInfo(
   mProcessorInfoType4_a55.L1CacheHandle = (UINT16)SmbiosHandle;
 
   LogSmbiosData(
-      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a76_L2,
+      (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a77_L2,
       mCacheInfoType7Strings, &SmbiosHandle);
-  mProcessorInfoType4_a76.L2CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_a77_big.L2CacheHandle = (UINT16)SmbiosHandle;
+  mProcessorInfoType4_a77.L2CacheHandle = (UINT16)SmbiosHandle;
 
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mCacheInfoType7_a55_L2,
@@ -486,7 +543,10 @@ VOID RegisterSOCSmbiosInfo(
 
   // TYPE4 Processor Information
   LogSmbiosData(
-      (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a76,
+      (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a77_big,
+      mProcessorInfoType4Strings, NULL);
+  LogSmbiosData(
+      (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a77,
       mProcessorInfoType4Strings, NULL);
   LogSmbiosData(
       (EFI_SMBIOS_TABLE_HEADER *)&mProcessorInfoType4_a55,
