@@ -1,10 +1,4 @@
 // sort alphabetically
-  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8250/ButtonsDxe/ButtonsDxe.efi
-    SECTION UI = "ButtonsDxe"
-  }
-
   FILE DRIVER = 10e193df-9966-44e7-b17c-59dd831e20fc {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/ChipInfo/ChipInfo.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8250/ChipInfo/ChipInfo.efi
