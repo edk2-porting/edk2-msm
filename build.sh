@@ -107,6 +107,7 @@ function _build(){
 	popd
 
 	_call_hook platform_pre_build||return "$?"
+	cp "${ROOTDIR}/tools/"{build_rule.txt,tools_def.txt} "${ROOTDIR}/Common/edk2/Conf/"
 	build \
 		-s \
 		-n 0 \
