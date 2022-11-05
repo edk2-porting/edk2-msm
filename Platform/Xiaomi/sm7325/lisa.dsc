@@ -20,7 +20,7 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2400
 
   # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|350
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Lite NE 5G"
