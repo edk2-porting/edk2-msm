@@ -85,10 +85,8 @@ function _build(){
 			then iasl -ve Dsdt.asl ||_error "iasl failed"
 			else wine "${ROOTDIR}/tools/asl-x64.exe" Dsdt.asl ||_error "asl.exe failed"
 			fi
-			if [ "${USE_IASL}" == "true" ]
-			then cp DSDT.aml "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
-			else cp DSDT.AML "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
-			fi
+			test -e DSDT.aml && cp DSDT.aml "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/DSDT.aml"
+			test -e DSDT.AML && cp DSDT.AML "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/DSDT.aml"
 			popd
 		else
 			_error "Building DSDT is unsupported for this device"

@@ -8,7 +8,7 @@
 // ACPI Tables
 # FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
 #   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/DBG2.aml
-#   SECTION RAW = Platform/Xiaomi/sdm845/AcpiTables/polaris/DSDT.AML
+#   SECTION RAW = Platform/Xiaomi/sdm845/AcpiTables/polaris/DSDT.aml
 #   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/MADT.aml
 #   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/FADT.aml
 #   SECTION RAW = Silicon/Qualcomm/sdm845/AcpiTables/GTDT.aml

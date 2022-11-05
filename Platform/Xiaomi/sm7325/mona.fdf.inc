@@ -8,7 +8,7 @@
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {   
   SECTION RAW = Silicon/Qualcomm/sm7325/AcpiTables/dbg2.aml
-  SECTION RAW = Platform/Xiaomi/sm7325/AcpiTables/mona/DSDT.AML
+  SECTION RAW = Platform/Xiaomi/sm7325/AcpiTables/mona/DSDT.aml
   SECTION RAW = Silicon/Qualcomm/sm7325/AcpiTables/Madt.aml
   SECTION RAW = Silicon/Qualcomm/sm7325/AcpiTables/Facp.aml
   SECTION RAW = Silicon/Qualcomm/sm7325/AcpiTables/Gtdt.aml
