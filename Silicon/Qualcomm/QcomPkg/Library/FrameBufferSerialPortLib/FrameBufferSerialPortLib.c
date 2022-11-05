@@ -1,6 +1,7 @@
 #include <PiDxe.h>
 
 #include <Library/ArmLib.h>
+#include <Library/BaseMemoryLib.h>
 #include <Library/CacheMaintenanceLib.h>
 #include <Library/HobLib.h>
 #include <Library/SerialPortLib.h>
@@ -144,7 +145,6 @@ newline:
   m_Position.y += scale_factor;
   m_Position.x = 0;
   if (m_Position.y >= m_MaxPosition.y - scale_factor) {
-    ResetFb();
     FbConFlush();
     m_Position.y = 0;
 
@@ -153,6 +153,9 @@ newline:
     goto paint;
   }
   else {
+    Pixels = (void *)FixedPcdGet32(PcdMipiFrameBufferAddress);
+    Pixels += m_Position.y * ((gBpp / 8) * FONT_HEIGHT * gWidth);
+    ZeroMem(Pixels, ((gBpp / 8) * FONT_HEIGHT * gWidth) * scale_factor);
     FbConFlush();
     if (intstate)
       ArmEnableInterrupts();
