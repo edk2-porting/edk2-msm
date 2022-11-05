@@ -3,7 +3,7 @@ Device (UFS0)
 {
 	Method(_STA, 0)
     {
-        Return (0x0) // Set to 0xF to enable
+        Return (0xF) // Set to 0xF to enable
     }
 
    Name (_HID, "QCOM24A5")
