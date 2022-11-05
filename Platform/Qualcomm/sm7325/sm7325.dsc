@@ -30,7 +30,7 @@
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000
   gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|29
   gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
-  gArmTokenSpaceGuid.PcdGicDistributorBase|0x17a00000
+  gArmTokenSpaceGuid.PcdGicDistributorBase|0x17A00000
   gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17A60000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007280
@@ -38,8 +38,8 @@
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xA0B00000         # DXE Heap base address
-  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x07900000         # UefiMemorySize, DXE heap size
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase|0xB0400000         # DXE Heap base address
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x09300000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0xE1000000
 
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8

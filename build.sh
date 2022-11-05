@@ -10,7 +10,7 @@ function _help(){
 	echo "	--all, -a:               build all devices."
 	echo "	--chinese, -c:           use hub.fastgit.xyz for submodule cloning."
 	echo "	--release MODE, -r MODE: Release mode for building, default is 'RELEASE', 'DEBUG' alternatively."
-	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'GCC5'."
+	echo "	--toolchain TOOLCHAIN:   Set toolchain, default is 'CLANG38'."
 	echo "	--uart, -u:              compile with UART support, print debug messages to uart debug port."
 	echo " 	--skip-rootfs-gen:       skip generating SimpleInit rootfs to speed up building."
 	echo " 	--no-exception-disp:     do not display exception information in DEBUG builds"
@@ -77,15 +77,16 @@ function _build(){
 			mkdir -p "${WORKSPACE}/Build/${DEVICE}/ACPI"
 			pushd "${WORKSPACE}/Build/${DEVICE}/ACPI"
 			cp "${ROOTDIR}/Silicon/${SOC_VENDOR}/${SOC_PLATFORM_L}/AcpiTables"/* ./
-			cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"{*.asl,"${DEVICE}/"*} ./
+			if compgen -G "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/*.asl" > /dev/null; then
+				cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/"*.asl ./
+			fi
+			cp "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"* ./
 			if [ "${USE_IASL}" == "true" ]
 			then iasl -ve Dsdt.asl ||_error "iasl failed"
 			else wine "${ROOTDIR}/tools/asl-x64.exe" Dsdt.asl ||_error "asl.exe failed"
 			fi
-			if [ "${USE_IASL}" == "true" ]
-			then cp DSDT.aml "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
-			else cp DSDT.AML "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/"
-			fi
+			test -e DSDT.aml && cp DSDT.aml "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/DSDT.aml"
+			test -e DSDT.AML && cp DSDT.AML "${ROOTDIR}/Platform/${VENDOR_NAME}/${SOC_PLATFORM_L}/AcpiTables/${DEVICE}/DSDT.aml"
 			popd
 		else
 			_error "Building DSDT is unsupported for this device"
@@ -102,10 +103,12 @@ function _build(){
 
 	echo "Building BootShim"
 	pushd "${ROOTDIR}/tools/BootShim"
-	make UEFI_BASE=0xD0000000 UEFI_SIZE=0x00600000
+	rm -f BootShim.bin BootShim.elf
+	make UEFI_BASE=0xCE000000 UEFI_SIZE=0x02000000
 	popd
 
 	_call_hook platform_pre_build||return "$?"
+	cp "${ROOTDIR}/tools/"{build_rule.txt,tools_def.txt} "${ROOTDIR}/Common/edk2/Conf/"
 	build \
 		-s \
 		-n 0 \
@@ -137,7 +140,7 @@ MODE=RELEASE
 CHINESE=false
 CLEAN=false
 DISTCLEAN=false
-TOOLCHAIN=GCC5
+TOOLCHAIN=CLANG38
 SOC_VENDOR=Qualcomm
 USE_UART=0
 NO_EXCEPTION_DISPLAY=0
