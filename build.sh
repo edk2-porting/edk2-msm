@@ -53,11 +53,16 @@ function _build(){
 	SPLIT_DSDT=false
 	EXT=""
 
-	if [ -f "configs/${DEVICE}.conf" ]
-	then source "configs/${DEVICE}.conf"
+	if [ -f "configs/devices/${DEVICE}.conf" ]
+	then source "configs/devices/${DEVICE}.conf"
 	else _error "Device configuration not found"
 	fi
 	typeset -l SOC_PLATFORM_L="$SOC_PLATFORM"
+	if [ -f "configs/${SOC_PLATFORM_L}.conf" ]
+	then source "configs/${SOC_PLATFORM_L}.conf"
+	else _error "SoC configuration not found"
+	fi
+
 	_load_platform_hooks Platform/platform.sh.inc
 	_load_platform_hooks Silicon/platform.sh.inc
 	_load_platform_hooks "Silicon/${SOC_VENDOR}/platform.sh.inc"
@@ -104,7 +109,7 @@ function _build(){
 	echo "Building BootShim"
 	pushd "${ROOTDIR}/tools/BootShim"
 	rm -f BootShim.bin BootShim.elf
-	make UEFI_BASE=0xCE000000 UEFI_SIZE=0x02000000
+	make UEFI_BASE=${FD_BASE} UEFI_SIZE=${FD_SIZE}
 	popd
 
 	_call_hook platform_pre_build||return "$?"
@@ -241,7 +246,7 @@ done
 [ -n "${_EDK2}" ]||_error "EDK2 not found, please see README.md"
 [ -n "${_EDK2_PLATFORMS}" ]||_error "EDK2 Platforms not found, please see README.md"
 [ -n "${_SIMPLE_INIT}" ]||_error "SimpleInit not found, please see README.md"
-[ -f "configs/${DEVICE}.conf" ]||_error "Device configuration not found"
+[ -f "configs/devices/${DEVICE}.conf" ]||_error "Device configuration not found"
 echo "EDK2 Path: ${_EDK2}"
 echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
