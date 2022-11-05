@@ -22,3 +22,7 @@
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|320
+
+  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"MI 9"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"cepheus"
