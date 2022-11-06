@@ -62,6 +62,8 @@ function _build(){
 	then source "configs/${SOC_PLATFORM_L}.conf"
 	else _error "SoC configuration not found"
 	fi
+	# for overriding config
+	source "configs/devices/${DEVICE}.conf"
 
 	_load_platform_hooks Platform/platform.sh.inc
 	_load_platform_hooks Silicon/platform.sh.inc
