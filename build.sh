@@ -126,6 +126,7 @@ function _build(){
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
 		-D NO_EXCEPTION_DISPLAY="${NO_EXCEPTION_DISPLAY}" \
+		-D FD_BASE="${FD_BASE}" -D FD_SIZE="${FD_SIZE}" \
 		||return "$?"
 	_call_hook platform_build_kernel||return "$?"
 	_call_hook platform_build_bootimg||return "$?"

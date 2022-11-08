@@ -25,8 +25,8 @@
 ################################################################################
 
 [FD.msm8998_UEFI]
-BaseAddress   = 0xCE000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware
-Size          = 0x02000000|gArmTokenSpaceGuid.PcdFdSize
+BaseAddress   = $(FD_BASE)|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware
+Size          = $(FD_SIZE)|gArmTokenSpaceGuid.PcdFdSize
 ErasePolarity = 1
 
 # This one is tricky, it must be: BlockSize * NumBlocks = Size
