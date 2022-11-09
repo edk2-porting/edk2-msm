@@ -187,38 +187,45 @@ then
 	echo "Updating submodules"
 	if "${CHINESE}"
 	then
-		git submodule set-url Common/edk2                                           https://hub.nuaa.cf/tianocore/edk2.git
-		git submodule set-url Common/edk2-platforms                                 https://hub.nuaa.cf/tianocore/edk2-platforms.git
-		git submodule set-url Platform/EFI_Binaries                                 https://hub.nuaa.cf/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url Platform/RenegadePkg/Library/SimpleInit               https://hub.nuaa.cf/BigfootACA/simple-init.git
-		git submodule init;git submodule update --depth 1
-		pushd Common/edk2
-
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.nuaa.cf/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url CryptoPkg/Library/OpensslLib/openssl                  https://hub.nuaa.cf/openssl/openssl.git
-		git submodule set-url BaseTools/Source/C/BrotliCompress/brotli              https://hub.nuaa.cf/google/brotli.git
-		git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka         https://hub.nuaa.cf/tianocore/edk2-cmocka.git
-		git submodule set-url ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3   https://hub.nuaa.cf/ucb-bar/berkeley-softfloat-3.git
-		git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.nuaa.cf/google/brotli.git
-		git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.nuaa.cf/kkos/oniguruma.git
-		git submodule set-url RedfishPkg/Library/JsonLib/jansson                    https://hub.nuaa.cf/akheron/jansson.git
-		git submodule init;git submodule update
-		git checkout .gitmodules
-		popd
-		pushd Platform/RenegadePkg/Library/SimpleInit
-		git submodule set-url libs/lvgl     https://hub.nuaa.cf/lvgl/lvgl.git
-		git submodule set-url libs/freetype https://hub.nuaa.cf/freetype/freetype.git
-		git submodule init;git submodule update
-		popd
-		git checkout .gitmodules
-	else
-		git submodule init;git submodule update --depth 1
-		pushd Common/edk2
-		git submodule init;git submodule update
-		popd
-		pushd Platform/RenegadePkg/Library/SimpleInit
-		git submodule init;git submodule update
-		popd
+                git submodule set-url Common/edk2 https://hub.nuaa.cf/tianocore/edk2.git
+                git submodule set-url Common/edk2-platforms https://hub.nuaa.cf/tianocore/edk2-platforms.git
+                git submodule set-url Platform/EFI_Binaries https://hub.nuaa.cf/edk2-porting/edk2-sdm845-binary.git
+                git submodule set-url Platform/RenegadePkg/Library/SimpleInit https://hub.nuaa.cf/BigfootACA/simple-init.git
+                git submodule init;git submodule update --depth 1
+                pushd Common/edk2
+                git submodule set-url CryptoPkg/Library/OpensslLib/openssl https://hub.nuaa.cf/openssl/openssl.git
+                git submodule set-url SoftFloat https://hub.nuaa.cf/ucb-bar/berkeley-softfloat-3.git
+                git submodule set-url UnitTestFrameworkPkg/Library/CmockaLib/cmocka https://hub.nuaa.cf/tianocore/edk2-cmocka.git
+                git submodule set-url MdeModulePkg/Universal/RegularExpressionDxe/oniguruma https://hub.nuaa.cf/kkos/oniguruma.git
+                git submodule set-url MdeModulePkg/Library/BrotliCustomDecompressLib/brotli https://hub.nuaa.cf/google/brotli.git
+                git submodule set-url BaseTools/Source/C/BrotliCompress/brotli https://hub.nuaa.cf/google/brotli.git
+                git submodule set-url RedfishPkg/Library/JsonLib/jansson https://hub.nuaa.cf/akheron/jansson.git
+                git submodule init;git submodule update
+                pushd CryptoPkg/Library/OpensslLib/openssl
+                git submodule set-url boringssl https://hub.nuaa.cf/google/boringssl
+                git submodule set-url pyca.cryptography https://hub.nuaa.cf/pyca/cryptography.git
+                git submodule set-url krb5 https://hub.nuaa.cf/krb5/krb5
+                git submodule init;git submodule update
+                popd
+                git checkout .gitmodules
+                popd
+                pushd Common/edk2-platforms
+                git submodule set-url Silicon/RISC-V/ProcessorPkg/Library/RiscVOpensbiLib/opensbi https://hub.nuaa.cf/riscv/opensbi
+                git submodule init;git submodule update
+                popd
+                pushd Platform/RenegadePkg/Library/SimpleInit
+                git submodule set-url libs/freetype https://hub.nuaa.cf/freetype/freetype.git
+                git submodule init;git submodule update
+                popd
+                git checkout .gitmodules
+        else
+                git submodule init;git submodule update --depth 1
+                pushd Common/edk2
+                git submodule init;git submodule update 
+                popd
+                pushd Platform/RenegadePkg/Library/SimpleInit
+                git submodule init;git submodule update
+                popd
 	fi
 	set +e
 fi
