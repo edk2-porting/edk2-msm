@@ -377,14 +377,6 @@ SynaPowerUpController(RMI4_INTERNAL_DATA *Instance)
   }
 
   // Power Seq
-  Config = EFI_GPIO_CFG( 59, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
-  Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
-  Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
-
-  Config = EFI_GPIO_CFG( 152, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
-  Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
-  Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
-
   Config = EFI_GPIO_CFG( ResetLine, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA );
   Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
 
