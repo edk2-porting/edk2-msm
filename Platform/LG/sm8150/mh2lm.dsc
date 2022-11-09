@@ -26,3 +26,11 @@
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"LG"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8X"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"mh2lm"
+
+  # Synaptics Touchscren
+  gQcomTokenSpaceGuid.PcdTouchCtlrAddress|0x20
+  gQcomTokenSpaceGuid.PcdTouchCtlrResetPin|54
+  gQcomTokenSpaceGuid.PcdTouchCtlrIntPin|122
+  gQcomTokenSpaceGuid.PcdTouchCtlrI2cDevice|18
+  gQcomTokenSpaceGuid.PcdTouchMaxX|1080
+  gQcomTokenSpaceGuid.PcdTouchMaxY|2340
