@@ -48,7 +48,7 @@ TCM_INTERNAL_DATA mInstanceTemplate = {
     0,
     0,
     0,
-};
+}, *gI2CInstance;
 
 // Binding
 EFI_DRIVER_BINDING_PROTOCOL gTCMDriverBinding = {
@@ -59,6 +59,9 @@ EFI_DRIVER_BINDING_PROTOCOL gTCMDriverBinding = {
     NULL,
     NULL,
 };
+
+static SYNAPTICS_I2C_DEVICE *gTCMI2cDeviceIo = NULL;
+STATIC EFI_EVENT        ExitBootServicesEvent;
 
 EFI_STATUS
 EFIAPI
@@ -128,6 +131,9 @@ TCMAbsolutePointerDriverBindingStart(
   }
 
   bI2COpened = TRUE;
+
+  gTCMI2cDeviceIo = TCMI2cDeviceIo;
+  gI2CInstance = Instance;
 
   Status = SynaPowerUpController(Instance);
   if (EFI_ERROR(Status)) {
@@ -895,6 +901,19 @@ TcmGetReportConfig(
   return EFI_SUCCESS;
 }
 
+STATIC
+VOID
+SynapticsTcmDxeExitBootService (
+   EFI_EVENT  Event,
+   VOID *Context
+)
+{
+  if(gTCMI2cDeviceIo != NULL && gI2CInstance != NULL)
+    gTCMI2cDeviceIo->I2cQupProtocol->Close(gI2CInstance->I2cController);
+
+  DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Closing i2c instance\n"));
+}
+
 EFI_STATUS
 EFIAPI
 SynaInitialize(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
@@ -905,6 +924,15 @@ SynaInitialize(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
       ImageHandle, SystemTable, &gTCMDriverBinding, ImageHandle,
       &gTCMDriverComponentName, &gTCMDriverComponentName2);
   ASSERT_EFI_ERROR(Status);
+
+  gBS->CreateEventEx(
+      EVT_NOTIFY_SIGNAL,
+      TPL_CALLBACK,
+      SynapticsTcmDxeExitBootService,
+      NULL,
+      &gEfiEventExitBootServicesGuid,
+      &ExitBootServicesEvent
+   );
 
   return EFI_SUCCESS;
 }

@@ -40,5 +40,8 @@
   gSynapticsTouchDeviceProtocolGuid
   gEfiDevicePathProtocolGuid
 
+[Guids]
+  gEfiEventExitBootServicesGuid
+
 [Depex]
   gSynapticsTouchDeviceProtocolGuid
