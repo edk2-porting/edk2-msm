@@ -89,6 +89,7 @@ Rmi4AbsolutePointerDriverBindingStart(
   I2C_STATUS            I2CStatus;
   SYNAPTICS_I2C_DEVICE *Rmi4I2cDeviceIo;
   RMI4_INTERNAL_DATA *  Instance;
+  BOOLEAN               bI2COpened = FALSE;
 
   UINT8 InfoData[TOUCH_RMI_PAGE_INFO_BYTES] = {0};
   UINT8 Address                             = TOUCH_RMI_PAGE_INFO_ADDRESS;
@@ -124,6 +125,8 @@ Rmi4AbsolutePointerDriverBindingStart(
     Status = EFI_DEVICE_ERROR;
     goto exit;
   }
+
+  bI2COpened = TRUE;
 
   Status = SynaPowerUpController(Instance);
   if (EFI_ERROR(Status)) {
@@ -219,6 +222,11 @@ Rmi4AbsolutePointerDriverBindingStart(
       FALSE);
 
 exit:
+  if(bI2COpened == TRUE && Status == EFI_DEVICE_ERROR) {
+    Rmi4I2cDeviceIo->I2cQupProtocol->Close(
+      Instance->I2cController);
+      DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Error: Closing i2c instance\n"));
+  }
   gBS->RestoreTPL(OldTpl);
   return Status;
 }
@@ -232,6 +240,7 @@ Rmi4AbsolutePointerDriverBindingStop(
   EFI_STATUS                     Status;
   EFI_ABSOLUTE_POINTER_PROTOCOL *AbsolutePointerProtocol;
   RMI4_INTERNAL_DATA *           Instance;
+  SYNAPTICS_I2C_DEVICE          *Rmi4I2cDeviceIo;
 
   Status = gBS->OpenProtocol(
       Controller, &gEfiAbsolutePointerProtocolGuid,
@@ -253,6 +262,15 @@ Rmi4AbsolutePointerDriverBindingStop(
 
   gBS->CloseEvent(Instance->PollingTimerEvent);
   gBS->CloseEvent(Instance->AbsPointerProtocol.WaitForInput);
+
+  Status = gBS->OpenProtocol(
+      Controller, &gSynapticsTouchDeviceProtocolGuid, (VOID **)&Rmi4I2cDeviceIo,
+      This->DriverBindingHandle, Controller, EFI_OPEN_PROTOCOL_BY_DRIVER);
+
+  Rmi4I2cDeviceIo->I2cQupProtocol->Close(
+    Instance->I2cController);
+  
+  DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Closing i2c instance\n"));
 
   return EFI_SUCCESS;
 }
@@ -359,6 +377,14 @@ SynaPowerUpController(RMI4_INTERNAL_DATA *Instance)
   }
 
   // Power Seq
+  Config = EFI_GPIO_CFG( 59, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
+  Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+  Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
+
+  Config = EFI_GPIO_CFG( 152, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
+  Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+  Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
+
   Config = EFI_GPIO_CFG( ResetLine, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA );
   Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
 
