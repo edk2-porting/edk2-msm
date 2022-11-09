@@ -24,7 +24,6 @@ SYNAPTICS_I2C_DEVICE mTemplate = {
   .ControllerResetPin     = 0,
   .ControllerInterruptPin = 0,
   .ControllerI2cDevice    = 0,
-  .GpioTlmmProtocol       = 0,
   .GpioTlmmProtocol       = NULL,
   .I2cQupProtocol         = NULL,
   .SlaveCfg               = {
