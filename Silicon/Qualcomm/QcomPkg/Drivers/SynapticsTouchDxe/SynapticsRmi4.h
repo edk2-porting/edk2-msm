@@ -137,6 +137,4 @@ EFI_STATUS
 EFIAPI
 SyncGetTouchData(RMI4_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer);
 
-VOID EFIAPI SyncPollCallback(IN EFI_EVENT Event, IN VOID *Context);
-
 #endif
