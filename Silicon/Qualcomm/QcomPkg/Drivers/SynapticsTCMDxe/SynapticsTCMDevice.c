@@ -55,6 +55,9 @@ EFI_STATUS EFIAPI SynaDeviceInitialize(
   Instance->ControllerI2cDevice    = PcdGet32(PcdTouchCtlrI2cDevice);
   Instance->ControllerResetPin     = PcdGet32(PcdTouchCtlrResetPin);
   Instance->ControllerInterruptPin = PcdGet32(PcdTouchCtlrIntPin);
+  Instance->ControllerVddPin       = PcdGet32(PcdTouchCtlrVddPin);
+  Instance->ControllerVddIoPin     = PcdGet32(PcdTouchCtlrVddIoPin);
+  Instance->ControllerVddCtlActiveLow     = PcdGetBool(PcdTouchCtlrVddPinActiveLow);
   Instance->XMax                   = PcdGet32(PcdTouchMaxX);
   Instance->XMin                   = PcdGet32(PcdTouchMinX);
   Instance->XInverted              = PcdGetBool(PcdTouchInvertedX);
@@ -65,10 +68,12 @@ EFI_STATUS EFIAPI SynaDeviceInitialize(
     "SynapticsTCMDevice: "
     "Address: 0x%X Device: %d "
     "ResetPin: %d IntPin: %d "
+    "VddPin: %d VddIoPin: %d "
     "X: %d - %d (Inverted: %d) "
     "Y: %d - %d (Inverted: %d)\n",
     Instance->SlaveCfg.SlaveAddress, Instance->ControllerI2cDevice,
     Instance->ControllerResetPin, Instance->ControllerInterruptPin,
+    Instance->ControllerVddPin, Instance->ControllerVddIoPin,
     Instance->XMin, Instance->XMax, Instance->XInverted,
     Instance->YMax, Instance->YMax, Instance->YInverted
     ));

@@ -62,6 +62,9 @@
   gQcomTokenSpaceGuid.PcdTouchMinY|0|UINT32|0x0000a509
   gQcomTokenSpaceGuid.PcdTouchMaxY|0|UINT32|0x0000a50a
   gQcomTokenSpaceGuid.PcdTouchInvertedY|FALSE|BOOLEAN|0x0000a50b
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddPin|0|UINT32|0x0000a50c
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddIoPin|0|UINT32|0x0000a50d
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddPinActiveLow|FALSE|BOOLEAN|0x0000a50e
   # RTC information
   gQcomTokenSpaceGuid.PcdBootShimInfo1|0xb0000000|UINT64|0x00000a601
   # Debug UART settings

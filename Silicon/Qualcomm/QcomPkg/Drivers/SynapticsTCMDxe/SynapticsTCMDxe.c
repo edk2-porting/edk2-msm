@@ -355,14 +355,30 @@ SynaPowerUpController(TCM_INTERNAL_DATA *Instance)
     goto exit;
   }
 
-  Config = EFI_GPIO_CFG( 59, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
-  Status = Instance->TCMDevice->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
-  Instance->TCMDevice->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
+  if(Instance->TCMDevice->ControllerVddPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->TCMDevice->ControllerVddPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->TCMDevice->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->TCMDevice->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->TCMDevice->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
 
-  Config = EFI_GPIO_CFG( 152, 0, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA );
-  Status = Instance->TCMDevice->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
-  Instance->TCMDevice->GpioTlmmProtocol->GpioOut(Config, GPIO_HIGH_VALUE);
-
+  if(Instance->TCMDevice->ControllerVddIoPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->TCMDevice->ControllerVddIoPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->TCMDevice->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->TCMDevice->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->TCMDevice->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
+  
   // Power Seq
   Config = EFI_GPIO_CFG( ResetLine, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA );
   Status = Instance->TCMDevice->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);

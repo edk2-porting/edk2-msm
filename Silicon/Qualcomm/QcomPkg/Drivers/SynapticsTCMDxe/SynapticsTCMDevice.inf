@@ -43,6 +43,9 @@
   gQcomTokenSpaceGuid.PcdTouchMinY
   gQcomTokenSpaceGuid.PcdTouchMaxY
   gQcomTokenSpaceGuid.PcdTouchInvertedY
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddPin
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddIoPin
+  gQcomTokenSpaceGuid.PcdTouchCtlrVddPinActiveLow
 
 [Protocols]
   gQcomI2cProtocolGuid
