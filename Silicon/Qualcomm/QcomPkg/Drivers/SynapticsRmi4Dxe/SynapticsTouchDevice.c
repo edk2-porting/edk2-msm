@@ -54,6 +54,9 @@ EFI_STATUS EFIAPI SynaDeviceInitialize(
   Instance->ControllerI2cDevice    = PcdGet32(PcdTouchCtlrI2cDevice);
   Instance->ControllerResetPin     = PcdGet32(PcdTouchCtlrResetPin);
   Instance->ControllerInterruptPin = PcdGet32(PcdTouchCtlrIntPin);
+  Instance->ControllerVddPin       = PcdGet32(PcdTouchCtlrVddPin);
+  Instance->ControllerVddIoPin     = PcdGet32(PcdTouchCtlrVddIoPin);
+  Instance->ControllerVddCtlActiveLow     = PcdGetBool(PcdTouchCtlrVddPinActiveLow);
   Instance->XMax                   = PcdGet32(PcdTouchMaxX);
   Instance->XMin                   = PcdGet32(PcdTouchMinX);
   Instance->XInverted              = PcdGetBool(PcdTouchInvertedX);

@@ -382,6 +382,30 @@ SynaPowerUpController(RMI4_INTERNAL_DATA *Instance)
     goto exit;
   }
 
+  if(Instance->Rmi4Device->ControllerVddPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->Rmi4Device->ControllerVddPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->Rmi4Device->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
+
+  if(Instance->Rmi4Device->ControllerVddIoPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->Rmi4Device->ControllerVddIoPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->Rmi4Device->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
+
   // Power Seq
   Config = EFI_GPIO_CFG( ResetLine, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA );
   Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
