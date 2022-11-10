@@ -597,8 +597,8 @@ APRIORI DXE {
   #
   # Touchscreen
   #
-  INF sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  INF sdm845Pkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
+  INF sdm845Pkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDevice.inf
+  INF sdm845Pkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDxe.inf
 
   #
   # Simple Init GUI

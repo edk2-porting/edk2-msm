@@ -41,7 +41,7 @@ RMI4_INTERNAL_DATA mInstanceTemplate = {
     FALSE,
     NULL,
     NULL,
-};
+}, *gI2CInstance;;
 
 // Binding
 EFI_DRIVER_BINDING_PROTOCOL gRmi4DriverBinding = {
@@ -52,6 +52,9 @@ EFI_DRIVER_BINDING_PROTOCOL gRmi4DriverBinding = {
     NULL,
     NULL,
 };
+
+static SYNAPTICS_I2C_DEVICE *gRmi4I2cDeviceIo = NULL;
+STATIC EFI_EVENT        ExitBootServicesEvent;
 
 EFI_STATUS
 EFIAPI
@@ -127,6 +130,9 @@ Rmi4AbsolutePointerDriverBindingStart(
   }
 
   bI2COpened = TRUE;
+
+  gRmi4I2cDeviceIo = Rmi4I2cDeviceIo;
+  gI2CInstance = Instance;
 
   Status = SynaPowerUpController(Instance);
   if (EFI_ERROR(Status)) {
@@ -376,6 +382,30 @@ SynaPowerUpController(RMI4_INTERNAL_DATA *Instance)
     goto exit;
   }
 
+  if(Instance->Rmi4Device->ControllerVddPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->Rmi4Device->ControllerVddPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->Rmi4Device->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
+
+  if(Instance->Rmi4Device->ControllerVddIoPin != 0) {
+    Config = EFI_GPIO_CFG(Instance->Rmi4Device->ControllerVddIoPin, 
+      0, 
+      GPIO_OUTPUT, 
+      GPIO_NO_PULL, 
+      GPIO_2MA);
+      
+    Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
+    Instance->Rmi4Device->GpioTlmmProtocol->GpioOut(Config, 
+        Instance->Rmi4Device->ControllerVddCtlActiveLow ? GPIO_LOW_VALUE : GPIO_HIGH_VALUE);
+  }
+
   // Power Seq
   Config = EFI_GPIO_CFG( ResetLine, 0, GPIO_OUTPUT, GPIO_NO_PULL, GPIO_2MA );
   Status = Instance->Rmi4Device->GpioTlmmProtocol->ConfigGpio(Config, TLMM_GPIO_ENABLE);
@@ -480,6 +510,19 @@ VOID EFIAPI SyncPollCallback(IN EFI_EVENT Event, IN VOID *Context)
   //gBS->RestoreTPL(OldTpl);
 }
 
+STATIC
+VOID
+SynapticsTouchDxeExitBootService (
+   EFI_EVENT  Event,
+   VOID *Context
+)
+{
+  if(gRmi4I2cDeviceIo != NULL && gI2CInstance != NULL)
+    gRmi4I2cDeviceIo->I2cQupProtocol->Close(gI2CInstance->I2cController);
+
+  DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Closing i2c instance\n"));
+}
+
 EFI_STATUS
 EFIAPI
 SynaInitialize(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
@@ -490,6 +533,15 @@ SynaInitialize(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
       ImageHandle, SystemTable, &gRmi4DriverBinding, ImageHandle,
       &gRmi4DriverComponentName, &gRmi4DriverComponentName2);
   ASSERT_EFI_ERROR(Status);
+
+  gBS->CreateEventEx(
+      EVT_NOTIFY_SIGNAL,
+      TPL_CALLBACK,
+      SynapticsTouchDxeExitBootService,
+      NULL,
+      &gEfiEventExitBootServicesGuid,
+      &ExitBootServicesEvent
+   );
 
   return EFI_SUCCESS;
 }
