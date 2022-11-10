@@ -33,6 +33,6 @@
   gQcomTokenSpaceGuid.PcdTouchCtlrIntPin|122
   gQcomTokenSpaceGuid.PcdTouchCtlrI2cDevice|18
   gQcomTokenSpaceGuid.PcdTouchMaxX|1080
-  gQcomTokenSpaceGuid.PcdTouchMaxY|2340
+  gQcomTokenSpaceGuid.PcdTouchMaxY|2248
   gQcomTokenSpaceGuid.PcdTouchCtlrVddPin|59
   gQcomTokenSpaceGuid.PcdTouchCtlrVddIoPin|152
