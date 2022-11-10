@@ -490,7 +490,7 @@
   Platform/RenegadePkg/Drivers/SetCPUFreqDxe/SetCPUFreqDxe.inf
   Platform/RenegadePkg/Drivers/KernelErrataPatcher/KernelErrataPatcher.inf
   Platform/EFI_Binaries/Applications/LinuxSimpleMassStorage/LinuxSimpleMassStorage.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDevice.inf
-  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTouchDxe/SynapticsTouchDxe.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDevice.inf
+  Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDxe.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDevice.inf
   Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDxe.inf
