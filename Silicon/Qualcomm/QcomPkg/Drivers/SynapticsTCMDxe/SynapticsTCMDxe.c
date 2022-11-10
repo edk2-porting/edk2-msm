@@ -249,7 +249,7 @@ TCMAbsolutePointerDriverBindingStop(
   TCMI2cDeviceIo->I2cQupProtocol->Close(
     Instance->I2cController);
   
-  DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Closing i2c instance\n"));
+  DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Closing i2c instance\n"));
 
   return EFI_SUCCESS;
 }
@@ -419,12 +419,12 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
 
   Status = SynaI2cRawRead(Instance, (UINT8*)&messageHeader, MESSAGE_HEADER_SIZE);
   if (EFI_ERROR(Status)) {
-    DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Read msg header failed\n"));
+    DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Read msg header failed\n"));
     goto exit;
   }
 
   if (messageHeader.Marker != MESSAGE_MARKER) {
-    DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Invalid msg header marker: 0x%x\n", messageHeader.Marker));
+    DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Invalid msg header marker: 0x%x\n", messageHeader.Marker));
     Status = EFI_INVALID_PARAMETER;
     goto exit;
   }
@@ -434,7 +434,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
 		case TCM_STATUS_OK:
 			break;
 		case TCM_STATUS_CONTINUED_READ:
-				DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Out-of-sync continued read\n"));
+				DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Out-of-sync continued read\n"));
 		case TCM_STATUS_IDLE:
 		case TCM_STATUS_BUSY:
       Status = EFI_INVALID_PARAMETER;
@@ -464,12 +464,12 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
 	else {
     Status = SynaI2cRawRead(Instance, payloadPtr, readLength);
     if(EFI_ERROR(Status)) {
-      DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Could not read message payload\n"));
+      DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Could not read message payload\n"));
       goto free_buffer;
     }
 
     if (payloadPtr[0] != MESSAGE_MARKER || payloadPtr[1] != TCM_STATUS_CONTINUED_READ) {
-      DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Incorrect continued read header marker/code(0x%02x/0x%02x)\n",
+      DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Incorrect continued read header marker/code(0x%02x/0x%02x)\n",
         payloadPtr[0], payloadPtr[1]));
       Status = EFI_INVALID_PARAMETER;
       goto free_buffer;
@@ -482,7 +482,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
   UINT8 temp = payloadPtr[readLength - 1];
 
 	if (temp != MESSAGE_PADDING) {
-		DEBUG((EFI_D_ERROR, "SynapticsTCMDxe: Incorrect message padding byte: 0x%02x\n", temp));
+		DEBUG((EFI_D_VERBOSE, "SynapticsTCMDxe: Incorrect message padding byte: 0x%02x\n", temp));
 		Status = EFI_INVALID_PARAMETER;
 		goto free_buffer;
 	}
@@ -498,7 +498,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
               readLength,
               DataBuffer);
 				} else {
-					DEBUG((EFI_D_ERROR,
+					DEBUG((EFI_D_VERBOSE,
 						"SynapticsTCMDxe: Received report before initialization, report_code:0x%x\n",
 						messageHeader.Code));
 				}
@@ -506,7 +506,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
 				break;
 			case TCM_REPORT_IDENTIFY:
 				if (readLength < sizeof(TCM_ID_INFO)) {
-					DEBUG((EFI_D_ERROR,
+					DEBUG((EFI_D_VERBOSE,
 						"SynapticsTCMDxe: Received ID Info smaller than buffer"));
 					Status = EFI_INVALID_PARAMETER;
 					goto free_buffer;
@@ -537,7 +537,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
 					}
 				}
 				if(Instance->Initialized == TRUE) {
-					DEBUG((EFI_D_ERROR,
+					DEBUG((EFI_D_VERBOSE,
 						"SynapticsTCMDxe: Received identify report with Init done state (IC reset occured, need reinit)\n"));
 					Instance->Initialized = FALSE;
 				}
@@ -560,7 +560,7 @@ SynaGetTouchData(TCM_INTERNAL_DATA *Instance, IN PTOUCH_DATA DataBuffer, IN TCM_
         ResponseData->DataLength = readLength;
       }
     } else {
-      DEBUG((EFI_D_ERROR,
+      DEBUG((EFI_D_VERBOSE,
 						"SynapticsTCMDxe: No response buffer supplied\n"));
     }
 	}
@@ -602,17 +602,14 @@ VOID EFIAPI SyncPollCallback(IN EFI_EVENT Event, IN VOID *Context)
   //OldTpl = gBS->RaiseTPL(TPL_NOTIFY);
 
   if(Instance->Initialized == FALSE) {
-    DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: controller uninitialized unexpectedly\n"));
+    DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: controller uninitialized unexpectedly\n"));
     return;
   }
-
-  // Check interrupt pin here
-  // if()
 
   Status = SynaGetTouchData(Instance, &TouchPointerData, NULL);
 
   if (EFI_ERROR(Status)) {
-    DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Failed to get touch data: %r\n", Status));
+    DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Failed to get touch data: %r\n", Status));
   }
   else {
     if (TouchPointerData.TouchStatus > 0) {
@@ -658,7 +655,7 @@ TcmDispatchReport(
 	BOOLEAN ActiveOnly = FALSE, NeedReport = FALSE;
 
 	if (Instance->ConfigData->DataLength <= 0) {
-		DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Report config data not ready\n"));
+		DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Report config data not ready\n"));
 		return EFI_INVALID_PARAMETER;
 	}
 
@@ -729,7 +726,7 @@ TcmDispatchReport(
 				Index++;
 				Status = TcmParseSingleByte(payloadData, readLength, BitsOffset, BitsToRead, &DataByte);
 				if (Status < 0) {
-					DEBUG((EFI_D_ERROR, "Failed to get object index\n"));
+					DEBUG((EFI_D_VERBOSE, "Failed to get object index\n"));
 					goto exit;
 				}
 				DataInt = (INT32)DataByte;
@@ -754,7 +751,7 @@ TcmDispatchReport(
 				Index++;
 				Status = TcmParseSingleByte(payloadData, readLength, BitsOffset, BitsToRead, &DataByte);
 				if (Status < 0) {
-					DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Failed to get object N classification\n"));
+					DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Failed to get object N classification\n"));
 					goto exit;
 				}
 				touchData->TouchStatus |= (DataByte >= 1) ? 1 : 0;
@@ -767,7 +764,7 @@ TcmDispatchReport(
 				Index++;
 				Status = TcmParseSingleByte(payloadData, readLength, BitsOffset, BitsToRead, &DataByte);
 				if (Status < 0) {
-					DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Failed to get object x position\n"));
+					DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Failed to get object x position\n"));
 					goto exit;
 				}
 				touchData->TouchX = DataByte;
@@ -778,7 +775,7 @@ TcmDispatchReport(
 				Index++;
 				Status = TcmParseSingleByte(payloadData, readLength, BitsOffset, BitsToRead, &DataByte);
 				if (Status < 0) {
-					DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Failed to get object y position\n"));
+					DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Failed to get object y position\n"));
 					goto exit;
 				}
 				touchData->TouchY = DataByte;
@@ -830,7 +827,7 @@ TcmParseSingleByte(
   DEBUG((EFI_D_VERBOSE, "    BitsOffset=%d, BitsToRead=%d, PayloadLength=%d\n", BitsOffset, BitsToRead, PayloadLength));
 
 	if (BitsToRead == 0 || BitsToRead > 32) {
-		DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Invalid number of BitsToRead\n"));
+		DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Invalid number of BitsToRead\n"));
 		return EFI_INVALID_PARAMETER;
 	}
 
@@ -865,7 +862,7 @@ TcmParseSingleByte(
 		byte_offset += 1;
 		remaining_bits -= data_bits;
 		if (remaining_bits < 0) {
-			DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: remaining_bits is negative value:%d\n", remaining_bits));
+			DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: remaining_bits is negative value:%d\n", remaining_bits));
 			break;
 		}
 	}
@@ -905,7 +902,7 @@ TcmGetReportConfig(
     Timeout -= TIMER_INTERVAL_TOUCH_POLL;
   }
   if(Val == 1) {
-    DEBUG((EFI_D_ERROR, "TcmGetReportConfig: timed out waiting for response\n"));
+    DEBUG((EFI_D_VERBOSE, "TcmGetReportConfig: timed out waiting for response\n"));
     return EFI_INVALID_PARAMETER;
   }
   
@@ -927,7 +924,7 @@ SynapticsTcmDxeExitBootService (
   if(gTCMI2cDeviceIo != NULL && gI2CInstance != NULL)
     gTCMI2cDeviceIo->I2cQupProtocol->Close(gI2CInstance->I2cController);
 
-  DEBUG((EFI_D_ERROR, "SynapticsTouchDxe: Closing i2c instance\n"));
+  DEBUG((EFI_D_VERBOSE, "SynapticsTouchDxe: Closing i2c instance\n"));
 }
 
 EFI_STATUS
