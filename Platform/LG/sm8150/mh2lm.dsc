@@ -21,7 +21,7 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9D200000
 
   # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|320
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|355
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"LG"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8X"
