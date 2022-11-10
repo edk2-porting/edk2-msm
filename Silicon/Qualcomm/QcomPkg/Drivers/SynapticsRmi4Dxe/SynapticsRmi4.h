@@ -37,6 +37,9 @@ typedef struct _SYNAPTICS_I2C_DEVICE {
   BOOLEAN                  YInverted;
   UINT32                   ControllerResetPin;
   UINT32                   ControllerInterruptPin;
+  UINT32                   ControllerVddPin;
+  UINT32                   ControllerVddIoPin;
+  BOOLEAN				   ControllerVddCtlActiveLow;
   UINT32                   ControllerI2cDevice;
   EFI_QCOM_TLMM_PROTOCOL   *GpioTlmmProtocol;
   EFI_QCOM_I2C_PROTOCOL    *I2cQupProtocol;
