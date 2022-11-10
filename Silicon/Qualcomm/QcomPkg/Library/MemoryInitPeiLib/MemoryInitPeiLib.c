@@ -117,6 +117,7 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
   SIZE_MB_IN (5120,  6656, 6);
   SIZE_MB_IN (7168,  8704, 8);
   SIZE_MB_IN (9216, 10752, 10);
+  SIZE_MB_IN (11520, 12488, 12);
 
   DEBUG((EFI_D_INFO, "FDT Memory Total: 0x%016lx (%d GiB)\n", MemoryTotal, MemoryTotal / SIZE_GB));
   DEBUG((EFI_D_INFO, "Select Config: %d GiB\n", MemGB));
@@ -130,6 +131,7 @@ MemoryPeim(IN EFI_PHYSICAL_ADDRESS UefiMemoryBase, IN UINT64 UefiMemorySize)
     case Mem6G:
     case Mem8G:
     case Mem10G:
+    case Mem12G:
       if (MemoryDescriptorEx->HobOption != Mem) {
         MemoryDescriptorEx++;
         continue;

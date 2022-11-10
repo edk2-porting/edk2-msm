@@ -19,7 +19,7 @@
       EFI_RESOURCE_ATTRIBUTE_EXECUTION_PROTECTABLE
 
 typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, 
-               Mem4G, Mem6G, Mem8G, Mem10G, MaxMem } DeviceMemoryAddHob;
+               Mem4G, Mem6G, Mem8G, Mem10G, Mem12G, MaxMem } DeviceMemoryAddHob;
 
 #define MEMORY_REGION_NAME_MAX_LENGTH 32
 
