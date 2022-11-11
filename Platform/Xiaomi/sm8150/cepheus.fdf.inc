@@ -7,7 +7,7 @@ FILE DRIVER = 04de8591-d2b3-4077-bbbe-b12070094eb6 {
 
 FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.efi
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/cepheus/DALSys/DALSys.efi
 	# !!ATTENTION!! Please replace this with xbl extracted DALSys ASAP #
     SECTION UI = "DALSys"
 }
