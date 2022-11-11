@@ -5,12 +5,6 @@
     SECTION UI = "SmemDxe"
   }
 
-  FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.efi
-    SECTION UI = "DALSys"
-  }
-
   FILE DRIVER = af9763a2-033b-4109-8e17-56a98d380c92 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/HWIODxeDriver/HWIODxeDriver.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/HWIODxeDriver/HWIODxeDriver.efi
@@ -130,12 +124,6 @@
     SECTION UI = "FontDxe"
   }
 
-  FILE DRIVER = 04de8591-d2b3-4077-bbbe-b12070094eb6 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/I2C/I2C.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/I2C/I2C.efi
-    SECTION UI = "I2C"
-  }
-
   FILE DRIVER = 5a5cb8ca-9382-4e0c-b383-77fb517cd9eb {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/AdcDxe/AdcDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/AdcDxe/AdcDxe.efi
@@ -170,12 +158,6 @@
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/TsensDxe/TsensDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/TsensDxe/TsensDxe.efi
     SECTION UI = "TsensDxe"
-  }
-
-  FILE DRIVER = 569ea0de-b557-4043-84cf-01103fe516e5 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/GpiDxe/GpiDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/GpiDxe/GpiDxe.efi
-    SECTION UI = "GpiDxe"
   }
 
   FILE DRIVER = ce044919-3000-4998-82af-ddb4e17c6b66 {
@@ -263,3 +245,9 @@
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
+
+  # FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.depex
+  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.efi
+  #  SECTION UI = "SdccDxe"
+  # }

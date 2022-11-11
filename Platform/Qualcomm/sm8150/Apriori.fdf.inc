@@ -114,13 +114,6 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
   INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
 
-  # FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
-  #   SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/file-f10f76db-42c1-533f-34a8-69be24653110/section0.dxe.depex
-  #   SECTION RAW = Platform/EFI_Binaries/Drivers/sm8150/file-f10f76db-42c1-533f-34a8-69be24653110/section1.raw
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/file-f10f76db-42c1-533f-34a8-69be24653110/section2.pe
-  #   SECTION UI = "SdccDxe"
-  # }
-
   FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/UFSDxe/UFSDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/UFSDxe.efi
@@ -321,4 +314,10 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
   INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
+
+  # FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.depex
+  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.efi
+  #  SECTION UI = "SdccDxe"
+  # }
 }
