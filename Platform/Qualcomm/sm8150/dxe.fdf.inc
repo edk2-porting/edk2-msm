@@ -230,7 +230,7 @@
 
   FILE DRIVER = 9a00771f-36d4-4dd5-8916-c48ed9b16b86 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/HALIOMMU/HALIOMMU.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/HALIOMMU/HALIOMMU.efi
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/HALIOMMU.efi
     SECTION UI = "HALIOMMU"
   }
 
@@ -245,9 +245,3 @@
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/Patched_Binaries/UFSDxe.efi
     SECTION UI = "UFSDxe"
   }
-
-  # FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
-  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.depex
-  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.efi
-  #  SECTION UI = "SdccDxe"
-  # }
