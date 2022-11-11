@@ -24,6 +24,12 @@ FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
     SECTION UI = "ButtonsDxe"
 }
 
+FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.efi
+    SECTION UI = "SdccDxe"
+  }
+
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 
