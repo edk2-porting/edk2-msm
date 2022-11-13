@@ -2,6 +2,7 @@
 # Provides services to update ASL tables.
 # Note that the current version of the library updates AML.
 #
+# Copyright (c) DuoWoA authors. All rights reserved.
 # Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
 #
 # SPDX-License-Identifier: BSD-2-Clause-Patent
