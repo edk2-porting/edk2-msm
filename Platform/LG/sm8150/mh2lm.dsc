@@ -9,11 +9,12 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sm8150/sm8150.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/LG/sm8150/mh2lm.fdf.inc
+  DEFINE AB_SLOTS_SUPPORT        = TRUE
 
 !include Platform/Qualcomm/sm8150/sm8150.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DMEMMAP_LG_HACKS -DRAM_SIZE=6
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DAB_SLOTS_SUPPORT=1 -DMEMMAP_LG_HACKS -DRAM_SIZE=6
 
 [PcdsFixedAtBuild.common]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
