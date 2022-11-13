@@ -59,7 +59,7 @@
 !endif
 
 !ifdef $(AB_SLOTS_SUPPORT)
-  BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
+  BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
 !endif #$(AB_SLOTS_SUPPORT)
 
   # Ported from SurfaceDuoPkg
@@ -76,8 +76,8 @@
   # OnePlus 6T A/B Slot Support
   # Op6tSlotDxe and BootSlotDxe have the same goal, do not use them both at the same time in device fdf.
   #
-  Platform/Oneplus/sdm845/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
+  GPLDrivers/Drivers/Op6tSlotDxe/Op6tSlotDxe.inf
 !ifdef $(AB_SLOTS_SUPPORT)
-  Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-  Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
+  GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif #$(AB_SLOTS_SUPPORT)

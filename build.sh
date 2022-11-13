@@ -190,7 +190,7 @@ then
 		git submodule set-url Common/edk2                                           https://hub.nuaa.cf/tianocore/edk2.git
 		git submodule set-url Common/edk2-platforms                                 https://hub.nuaa.cf/tianocore/edk2-platforms.git
 		git submodule set-url Platform/EFI_Binaries                                 https://hub.nuaa.cf/edk2-porting/edk2-sdm845-binary.git
-		git submodule set-url Platform/RenegadePkg/Library/SimpleInit               https://hub.nuaa.cf/BigfootACA/simple-init.git
+		git submodule set-url GPLDrivers/Library/SimpleInit               			https://hub.nuaa.cf/BigfootACA/simple-init.git
 		git submodule init;git submodule update --depth 1
 		pushd Common/edk2
 
@@ -205,7 +205,7 @@ then
 		git submodule init;git submodule update
 		git checkout .gitmodules
 		popd
-		pushd Platform/RenegadePkg/Library/SimpleInit
+		pushd GPLDrivers/Library/SimpleInit
 		git submodule set-url libs/lvgl     https://hub.nuaa.cf/lvgl/lvgl.git
 		git submodule set-url libs/freetype https://hub.nuaa.cf/freetype/freetype.git
 		git submodule init;git submodule update
@@ -216,7 +216,7 @@ then
 		pushd Common/edk2
 		git submodule init;git submodule update
 		popd
-		pushd Platform/RenegadePkg/Library/SimpleInit
+		pushd GPLDrivers/Library/SimpleInit
 		git submodule init;git submodule update
 		popd
 	fi
@@ -238,7 +238,7 @@ do
 		break
 	fi
 done
-for i in "${SIMPLE_INIT}" Platform/RenegadePkg/Library/SimpleInit ./simple-init ../simple-init
+for i in "${SIMPLE_INIT}" GPLDrivers/Library/SimpleInit ./simple-init ../simple-init
 do
 	if [ -n "${i}" ]&&[ -f "${i}/SimpleInit.inc" ]
 	then
@@ -255,7 +255,7 @@ echo "EDK2_PLATFORMS Path: ${_EDK2_PLATFORMS}"
 export CROSS_COMPILE="${CROSS_COMPILE:-aarch64-linux-gnu-}"
 export GCC5_AARCH64_PREFIX="${CROSS_COMPILE}"
 export CLANG38_AARCH64_PREFIX="${CROSS_COMPILE}"
-export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_SIMPLE_INIT:$PWD"
+export PACKAGES_PATH="$_EDK2:$_EDK2_PLATFORMS:$_SIMPLE_INIT:$PWD:$PWD/GPLDrivers"
 export WORKSPACE="${OUTDIR}/workspace"
 GITCOMMIT="$(git describe --tags --always)"||GITCOMMIT="unknown"
 export GITCOMMIT

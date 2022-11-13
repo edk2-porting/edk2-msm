@@ -208,8 +208,8 @@ READ_LOCK_STATUS   = TRUE
   INF src/main/SimpleInitMain.inf
 
   INF src/kernelfdt/KernelFdtDxe.inf
-  INF Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-  INF Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  INF GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
+  INF GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)

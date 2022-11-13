@@ -61,7 +61,7 @@
 !endif
 
 # !ifdef $(AB_SLOTS_SUPPORT)
-#   BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
+#   BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
 # !endif
 
   # Ported from SurfaceDuoPkg

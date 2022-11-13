@@ -61,7 +61,7 @@
 !endif
 
 !ifdef $(AB_SLOTS_SUPPORT)
-  BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
+  BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
 !endif
 
   # Ported from SurfaceDuoPkg
@@ -75,5 +75,5 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-  Silicon/Qualcomm/QcomPkg/Drivers/BootSlotDxe/BootSlotDxe.inf
-  Platform/RenegadePkg/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
+  GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
