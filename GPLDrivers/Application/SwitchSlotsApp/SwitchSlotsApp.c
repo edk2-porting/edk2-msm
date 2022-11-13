@@ -79,6 +79,8 @@ SwitchSlotsAppEntryPoint(
     WaitAnyKey(SystemTable);
     return Status;
   }
+  UpdatePartitionAttributes(PARTITION_GUID);
+  UpdatePartitionAttributes(PARTITION_ATTRIBUTES);
 
   // Print (L"Current active slot has been updated successfully! Press any key
   // to reboot.\n"); WaitAnyKey(SystemTable);

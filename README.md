@@ -14,3 +14,6 @@ It can be used as a boot manager for multi-booting mainline Linux, Android and o
 ## User guide and documentations
 
 Please visit [Renegade Project Wiki](https://wiki.renegade-project.cn/)
+
+## License
+All code except drivers in GPLDriver directory are licensed under BSD 2-Clause. GPL Drivers are licensed under GPLv2 license.
