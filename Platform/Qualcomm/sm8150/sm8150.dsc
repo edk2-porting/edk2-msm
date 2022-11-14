@@ -60,9 +60,9 @@
   SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 !endif
 
-!ifdef $(AB_SLOTS_SUPPORT)
-  BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
-!endif
+# !ifdef $(AB_SLOTS_SUPPORT)
+#   BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
+# !endif
 
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
@@ -75,5 +75,5 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-  GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
-  GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+  # GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
+  # GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
