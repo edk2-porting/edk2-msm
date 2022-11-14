@@ -59,5 +59,5 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
   #
   # Touchscreen
   #
-  INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDevice.inf
-  INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDxe.inf
+  # INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDevice.inf
+  # INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsTCMDxe/SynapticsTCMDxe.inf

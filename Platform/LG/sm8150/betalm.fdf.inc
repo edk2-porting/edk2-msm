@@ -44,5 +44,5 @@ FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
   #
   # Touchscreen
   #
-  INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDevice.inf
-  INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDxe.inf
+  # INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDevice.inf
+  # INF Silicon/Qualcomm/QcomPkg/Drivers/SynapticsRmi4Dxe/SynapticsTouchDxe.inf
