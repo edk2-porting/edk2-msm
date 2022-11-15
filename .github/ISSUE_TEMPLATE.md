@@ -1,8 +1,8 @@
 ### Prerequisites
 
-* [ ] Have you read the readme?
-* [ ] Do you (want to) have your device in the supported list?
-* [ ] Does the device have a Snapdragon 845 SOC?
+* [ ] Have you read the wiki?
+* [ ] Is your device in the supported list?
+* [ ] Does the device have a Snapdragon SOC which is supported in this repo?
 
 ### Description
 
