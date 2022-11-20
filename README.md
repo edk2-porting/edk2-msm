@@ -21,7 +21,7 @@ Please visit [Renegade Project Wiki](https://wiki.renegade-project.cn/)
 - [EFIDroid](https://github.com/efidroid)
 - [Ben (Bingxing) Wang](https://github.com/imbushuo/)
 - [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg)
-- BigfootACA and his [SimpleInit](https://github.com/BigfootACA/simple-init) and [LinuxSimpleMassStorage][(https://github.com/BigfootACA/linux-simple-mass-storage)
+- BigfootACA and his [SimpleInit](https://github.com/BigfootACA/simple-init) and [LinuxSimpleMassStorage](https://github.com/BigfootACA/linux-simple-mass-storage)
 - fxsheep and his original edk2-sagit
 - All the developers and members of [Renegade Project](https://github.com/edk2-porting/) for offering efforts, equipments, valuable documents and more
 ## License
