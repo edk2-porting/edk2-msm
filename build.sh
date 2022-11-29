@@ -19,6 +19,7 @@ function _help(){
 	echo "	--distclean, -D:         clean up all files that are not in repo."
 	echo "	--outputdir, -O:         output folder."
 	echo "	--boot, -b:              fastboot boot image."
+	echo "	--fixclang, -f:          fix build using Clang by suppressing -Os flag."
 	echo "	--help, -h:              show this help."
 	echo
 	echo "MainPage: https://github.com/edk2-porting/edk2-msm"
@@ -125,6 +126,7 @@ function _build(){
 		-b "${_MODE}" \
 		-D FIRMWARE_VER="${GITCOMMIT}" \
 		-D USE_UART="${USE_UART}" \
+		-D FIX_CLANG="${FIX_CLANG}" \
 		-D NO_EXCEPTION_DISPLAY="${NO_EXCEPTION_DISPLAY}" \
 		-D FD_BASE="${FD_BASE}" -D FD_SIZE="${FD_SIZE}" \
 		||return "$?"
@@ -149,6 +151,7 @@ CHINESE=false
 CLEAN=false
 DISTCLEAN=false
 TOOLCHAIN=CLANG38
+export FIX_CLANG=0
 SOC_VENDOR=Qualcomm
 USE_UART=0
 NO_EXCEPTION_DISPLAY=0
@@ -156,7 +159,7 @@ export ROOTDIR OUTDIR SOC_VENDOR
 export GEN_ACPI=false
 export GEN_ROOTFS=true
 export FASTBOOT=false
-OPTS="$(getopt -o t:d:habcACDO:r:u -l toolchain:,device:,help,all,boot,chinese,acpi,skip-rootfs-gen,no-exception-disp,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
+OPTS="$(getopt -o t:d:hfabcACDO:r:u -l toolchain:,device:,help,fixclang,all,boot,chinese,acpi,skip-rootfs-gen,no-exception-disp,uart,clean,distclean,outputdir:,release: -n 'build.sh' -- "$@")"||exit 1
 eval set -- "${OPTS}"
 while true
 do	case "${1}" in
@@ -173,6 +176,7 @@ do	case "${1}" in
 		-r|--release) MODE="${2}";shift 2;;
 		-t|--toolchain) TOOLCHAIN="${2}";shift 2;;
 		-u|--uart) USE_UART=1;shift;;
+		-f|--fixclang) FIX_CLANG=1;shift;;
 		-h|--help) _help 0;shift;;
 		--) shift;break;;
 		*) _help 1;;
