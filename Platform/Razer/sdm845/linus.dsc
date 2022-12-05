@@ -8,7 +8,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/Razer/sdm845/surya.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/Razer/sdm845/linus.fdf.inc
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
