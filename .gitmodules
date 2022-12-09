@@ -8,7 +8,7 @@
 	branch = d8232e8816fafb875a3656dda788b6681bc25149
 [submodule "Platform/EFI_Binaries"]
 	path = Platform/EFI_Binaries
-	url = https://github.com/edk2-porting/edk2-sdm845-binary.git
+	url = https://github.com/edk2-porting/edk2-msm-binary.git
 [submodule "Platform/RenegadePkg/Library/SimpleInit"]
 	path = GPLDrivers/Library/SimpleInit
 	url = https://github.com/BigfootACA/simple-init.git
