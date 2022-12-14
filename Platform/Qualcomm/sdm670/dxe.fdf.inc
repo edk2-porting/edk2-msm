@@ -77,6 +77,12 @@
     SECTION UI = "RpmhDxe"
   }
 
+  FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm670/SdccDxe/SdccDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm670/SdccDxe/SdccDxe.efi
+    SECTION UI = "SdccDxe"
+  }
+
   FILE DRIVER = f541d663-4a48-40aa-aabf-ff158ccae34c {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm670/SmemDxe/SmemDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm670/SmemDxe/SmemDxe.efi
