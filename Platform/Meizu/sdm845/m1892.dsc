@@ -8,7 +8,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/Meizu/sdm845/m1892.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/Meizu/sdm845/m18x2.fdf.inc
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
