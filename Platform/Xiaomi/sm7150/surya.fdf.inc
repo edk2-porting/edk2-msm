@@ -6,12 +6,6 @@ FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
     SECTION UI = "DALSys"
 }
 
-FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/ButtonsDxe/ButtonsDxe.depex
-   SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/surya/ButtonsDxe/ButtonsDxe.efi
-    SECTION UI = "ButtonsDxe"
-}
-
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
