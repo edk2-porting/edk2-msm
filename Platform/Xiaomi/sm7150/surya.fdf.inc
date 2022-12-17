@@ -1,11 +1,3 @@
-// per-device BSP DXEs
-
-FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/DALSys/DALSys.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/surya/DALSys/DALSys.efi
-    SECTION UI = "DALSys"
-}
-
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
