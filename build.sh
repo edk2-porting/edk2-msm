@@ -136,7 +136,7 @@ function _build(){
 	set +x
 }
 
-function _clean(){ rm --one-file-system --recursive --force "${WORKSPACE}" "${OUTDIR}"/boot-*.img "${OUTDIR}"/uefi-*.img*; }
+function _clean(){ rm --one-file-system --recursive --force "${WORKSPACE}"./workspace "${OUTDIR}"/boot-*.img "${OUTDIR}"/uefi-*.img*; }
 
 function _distclean(){ if [ -d .git ];then git clean -xdf;else _clean;fi; }
 
