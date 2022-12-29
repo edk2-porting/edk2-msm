@@ -28,6 +28,8 @@ jobs:
           - nabu
           - vayu
           - cepheus
+          - hotdog
+          - guacamole
           # sdm845
           - polaris
           - perseus
