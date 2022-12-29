@@ -12,6 +12,12 @@ FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
     SECTION UI = "ButtonsDxe"
 }
 
+FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+	SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
+}
+
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
