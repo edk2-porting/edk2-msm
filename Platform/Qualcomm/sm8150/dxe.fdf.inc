@@ -136,11 +136,11 @@
     SECTION UI = "PmicGlinkDxe"
   }
 
-  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
-    SECTION UI = "UsbPwrCtrlDxe"
-  }
+#  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+#    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+#    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+#    SECTION UI = "UsbPwrCtrlDxe"
+#  }
 
   FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
