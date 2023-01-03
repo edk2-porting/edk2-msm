@@ -70,11 +70,11 @@
     SECTION UI = "SPMI"
   }
 
-  FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/PmicDxe/PmicDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/PmicDxe/PmicDxe.efi
-    SECTION UI = "PmicDxe"
-  }
+  #FILE DRIVER = 5776232e-082d-4b75-9a0e-fe1d13f7a5d9 {
+  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/PmicDxe/PmicDxe.depex
+  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/PmicDxe/PmicDxe.efi
+  #  SECTION UI = "PmicDxe"
+  #}
 
   FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
