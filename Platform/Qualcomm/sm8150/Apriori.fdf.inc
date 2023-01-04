@@ -278,11 +278,11 @@ APRIORI DXE {
     SECTION UI = "UsbDeviceDxe"
   }
 
-  FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.efi
-    SECTION UI = "ButtonsDxe"
-  }
+  #FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
+  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.depex
+  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.efi
+  #  SECTION UI = "ButtonsDxe"
+  #}
 
   FILE DRIVER = f09ad92e-485c-9cdb-3e05-3385c38f94cc {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/TsensDxe/TsensDxe.depex
