@@ -40,11 +40,11 @@
     SECTION UI = "ULogDxe"
   }
 
-  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219711 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/NpaDxe/NpaDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/NpaDxe/NpaDxe.efi
-    SECTION UI = "NpaDxe"
-  }
+  #FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219711 {
+  #  SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/NpaDxe/NpaDxe.depex
+  #  SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/NpaDxe/NpaDxe.efi
+  #  SECTION UI = "NpaDxe"
+  #}
 
   FILE DRIVER = 4DB5DEA6-5302-4D1A-8A82-677A683B0D29 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/ClockDxe/ClockDxe.depex
