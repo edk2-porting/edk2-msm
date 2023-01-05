@@ -8,7 +8,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/legacy/sdm845/OPPO/pafm00.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/OPPO/sdm845/pafm00.fdf.inc
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
