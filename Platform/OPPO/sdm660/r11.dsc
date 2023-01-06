@@ -8,7 +8,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sdm660/sdm660.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/OPPO/sdm660/r11.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/OPPO/sdm660/r11x.fdf.inc
 
 !include Platform/Qualcomm/sdm660/sdm660.dsc
 
