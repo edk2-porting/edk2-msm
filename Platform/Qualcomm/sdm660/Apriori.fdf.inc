@@ -74,6 +74,12 @@ APRIORI DXE {
   INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
   INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
 
+  FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/SdccDxe/SdccDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/SdccDxe/SdccDxe.efi
+    SECTION UI = "SdccDxe"
+  }
+
   FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/UFSDxe/UFSDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/UFSDxe/UFSDxe.efi

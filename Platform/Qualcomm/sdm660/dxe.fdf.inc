@@ -52,6 +52,12 @@
     SECTION UI = "ClockDxe"
   }
 
+  FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/SdccDxe/SdccDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/SdccDxe/SdccDxe.efi
+    SECTION UI = "SdccDxe"
+  }
+
   FILE DRIVER = AF9763A2-033B-4109-8E17-56A98D380C92 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sdm660/DALTLMM/DALTLMM.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sdm660/DALTLMM/DALTLMM.efi
