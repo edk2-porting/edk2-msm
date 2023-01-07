@@ -25,3 +25,5 @@
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"OnePlus"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"7T Pro"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"hotdog"
+
+  gsm8150PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 855 Plus @ 2.96 GHz"

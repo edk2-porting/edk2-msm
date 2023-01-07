@@ -26,3 +26,5 @@
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Poco X3 Pro"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"vayu"
+
+  gsm8150PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 860 @ 2.96 GHz"

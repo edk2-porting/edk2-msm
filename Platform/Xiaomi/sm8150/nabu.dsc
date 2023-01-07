@@ -26,3 +26,5 @@
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Pad 5"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"nabu"
+
+  gsm8150PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 860 @ 2.96 GHz"
