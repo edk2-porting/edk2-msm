@@ -13,13 +13,11 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {"Hypervisor",        0x85800000, 0x00600000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
     {"MPSS_EFS",          0x85E00000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"SMEM",              0x86000000, 0x00200000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED},
-    {"TZ",                0x86200000, 0x00B00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
+    //{"TZ",                0x86200000, 0x00B00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
     // secapp-region
-    {"TZApps",            0x86D00000, 0x03C00000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
-    {"HLOS 3",            0x8A900000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
+    //{"TZApps",            0x86D00000, 0x03C00000, NoHob,  SYS_MEM, SYS_MEM_CAP, Reserv, NS_DEVICE},
+    //{"HLOS 3",            0x8A900000, 0x00200000, AddMem, SYS_MEM, SYS_MEM_CAP, BsData, WRITE_BACK_XN},
 
-    // qseecom_mem
-    {"TGCM",              0x8AB00000, 0x01400000, AddMem, MEM_RES, WRITE_COMBINEABLE, Reserv, UNCACHED_UNBUFFERED_XN},
     {"PIL_REGION",        0x8BF00000, 0x0BD00000, AddMem, SYS_MEM, SYS_MEM_CAP, Reserv, UNCACHED_UNBUFFERED_XN},
     {"HLOS 4",            0x94000000, 0x09330000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"DBI Dump",          0x9D330000, 0x000D0000, NoHob,  MMAP_IO, INITIALIZED, Reserv, UNCACHED_UNBUFFERED_XN},
