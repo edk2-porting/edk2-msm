@@ -3,10 +3,10 @@
 //
 Device (SDC1)
 {
-    Name (_DEP, Package (One)  // _DEP: Dependencies
-    {
-        \_SB.PEP0
-    })
+    //Name (_DEP, Package (One)  // _DEP: Dependencies
+    //{
+    //    \_SB.PEP0
+    //})
     Name (_HID, "QCOM24BF")  // _HID: Hardware ID
     Name (_CID, "ACPIQCOM24BF")  // _CID: Compatible ID
     Name (_UID, Zero)  // _UID: Unique ID

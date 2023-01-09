@@ -21,12 +21,17 @@ Name (WLEN, One)                // Holds the enable/disable flag for WLAN
 // Storage - EMMC 
 //
 // TODO: We need to repair some PEPs to repair some equipment
-//Include("emmc.asl") 
+Include("emmc.asl") 
 
 //
 // SPMI driver 
 //
 Include("spmi.asl")
+
+//
+// PMIC driver 
+//
+Include("pmic_core.asl")
 
 // copied from msm8998, need to check   
 Include("pep_lpi.asl")
