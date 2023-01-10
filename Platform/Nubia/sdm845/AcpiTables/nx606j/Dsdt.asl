@@ -18,7 +18,7 @@
  *     Compiler ID      "MSFT"
  *     Compiler Version 0x05000000 (83886080)
  */
-DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
+DefinitionBlock ("DSDT.aml", "DSDT", 2, "QCOMM ", "SDM850 ", 0x00000003)
 {
     /*
      * iASL Warning: There were 2 external control methods found during
