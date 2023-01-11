@@ -52,14 +52,6 @@
   gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
 [LibraryClasses.common]
-# UART not supported yet
-# !if $(USE_UART) == 1
-#   SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
-# !else
-#   SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
-# !endif
-
-  SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 
   # Ported from SurfaceDuoPkg
   PlatformMemoryMapLib|Silicon/Qualcomm/msm8998/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
