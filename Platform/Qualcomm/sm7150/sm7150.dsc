@@ -54,11 +54,6 @@
   gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
 [LibraryClasses.common]
-!if $(USE_UART) == 1
-  SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
-!else
-  SerialPortLib|Silicon/Qualcomm/QcomPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
-!endif
 
 # !ifdef $(AB_SLOTS_SUPPORT)
 #   BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
