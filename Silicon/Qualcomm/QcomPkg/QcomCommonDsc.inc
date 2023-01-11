@@ -25,8 +25,6 @@
 
 !if $(AB_SLOTS_SUPPORT) == TRUE
   GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1
-!else
-  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=0
 !endif
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]
