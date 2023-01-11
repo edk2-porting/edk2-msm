@@ -10,10 +10,13 @@
   FLASH_DEFINITION               = Platform/Qualcomm/sdm845/sdm845.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/AYN/sdm845/ayn-odin.fdf.inc
 
+  # Enable A/B Slot Environment
+  AB_SLOTS_SUPPORT               = TRUE
+
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DAB_SLOTS_SUPPORT=1 -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
 
 [PcdsFixedAtBuild.common]
 

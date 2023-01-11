@@ -11,7 +11,7 @@
   DEVICE_DXE_FV_COMPONENTS       = Platform/Oneplus/sdm845/enchilada.fdf.inc
 
   # Enable A/B Slot Environment
-  DEFINE AB_SLOTS_SUPPORT        = TRUE
+  AB_SLOTS_SUPPORT               = TRUE
 
 !include Platform/Qualcomm/sdm845/sdm845.dsc
 

@@ -9,7 +9,9 @@
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sm8150/sm8150.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/sm8150/vayu.fdf.inc
-  DEFINE AB_SLOTS_SUPPORT        = FALSE
+  
+  # Enable A/B Slot Environment
+  AB_SLOTS_SUPPORT               = FALSE
 
 !include Platform/Qualcomm/sm8150/sm8150.dsc
 
