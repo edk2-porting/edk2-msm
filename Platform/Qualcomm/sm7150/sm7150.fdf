@@ -203,6 +203,11 @@ READ_LOCK_STATUS   = TRUE
 
   INF src/kernelfdt/KernelFdtDxe.inf
 
+!if $(AB_SLOTS_SUPPORT) == TRUE
+  INF GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
+  INF GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+!endif
+
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)
 

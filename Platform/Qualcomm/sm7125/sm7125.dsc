@@ -55,10 +55,6 @@
 
 [LibraryClasses.common]
 
-# !ifdef $(AB_SLOTS_SUPPORT)
-#   BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
-# !endif
-
   # Ported from SurfaceDuoPkg
   # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 

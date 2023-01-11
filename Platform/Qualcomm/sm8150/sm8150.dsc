@@ -55,10 +55,6 @@
 
 [LibraryClasses.common]
 
-# !ifdef $(AB_SLOTS_SUPPORT)
-#   BootSlotLib|Silicon/Qualcomm/QcomPkg/Library/BootSlotLib/BootSlotLib.inf
-# !endif
-
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
@@ -68,7 +64,3 @@
   RFSProtectionLib|Silicon/Qualcomm/sm8150/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm8150/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8150/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
-
-[Components.common]
-  # GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
-  # GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf

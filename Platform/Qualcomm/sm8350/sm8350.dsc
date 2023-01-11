@@ -53,10 +53,6 @@
 
 [LibraryClasses.common]
 
-!ifdef $(AB_SLOTS_SUPPORT)
-  BootSlotLib|GPLDrivers/Library/BootSlotLib/BootSlotLib.inf
-!endif #$(AB_SLOTS_SUPPORT)
-
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
@@ -67,7 +63,4 @@
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm8350/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
 [Components.common]
-!ifdef $(AB_SLOTS_SUPPORT)
-  GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
-  GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
-!endif #$(AB_SLOTS_SUPPORT)
+
