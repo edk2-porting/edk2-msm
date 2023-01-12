@@ -48,6 +48,7 @@
   PlatformPrePiLib
   PrePiHobListPointerLib
   PrePiLib
+  UfdtLib
 
 [Guids]
   gEfiSystemNvDataFvGuid

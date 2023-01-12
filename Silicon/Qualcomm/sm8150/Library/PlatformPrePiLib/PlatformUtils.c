@@ -15,7 +15,7 @@
 
 BOOLEAN IsLinuxBootRequested(VOID)
 {
-  return FALSE;
+  return TRUE;
 }
 
 VOID InitializeSharedUartBuffers(VOID)

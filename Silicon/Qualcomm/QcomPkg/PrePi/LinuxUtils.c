@@ -12,6 +12,7 @@
 #include "Pi.h"
 #include "LinuxUtils.h"
 #include <Library/PlatformPrePiLib.h>
+#include <comp_libfdt.h>
 
 #if DEBUG_PEI
 #include <Library/SerialPortLib.h>
@@ -29,9 +30,10 @@ VOID BootLinux(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLoadAddress)
   VOID *LinuxKernelAddr = KernelLoadAddress + 0x200000 + FixedPcdGet32(PcdFdSize);
   LINUX_KERNEL LinuxKernel = (LINUX_KERNEL) LinuxKernelAddr;
 
+  DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64)\n"));
   DEBUG(
       (EFI_D_ERROR,
-       "Kernel Load Address = 0x%llx, Device Tree Load Address = 0x%llx\n\n",
+       "Kernel Load Address = 0x%llx, Device Tree Load Address = 0x%llx\n\nLoading Android...\n",
        LinuxKernelAddr, DeviceTreeLoadAddress));
 
   // Jump to linux
@@ -40,7 +42,9 @@ VOID BootLinux(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLoadAddress)
   CpuDeadLoop();
 }
 
-STATIC BOOLEAN RanOnceFlag = FALSE;
+STATIC BOOLEAN RanOnceFlag = FALSE, UefiBootRequested = TRUE;
+STATIC CONST CHAR8 *ForceNormalBoot = "androidboot.force_normal_boot=1";
+STATIC CONST CHAR8 *SkipRamFs = "skip_initramfs";
 
 VOID ContinueToLinuxIfAcquired(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLoadAddress)
 {
@@ -52,10 +56,27 @@ VOID ContinueToLinuxIfAcquired(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLo
   SerialPortInitialize();
 #endif
 
-  RanOnceFlag = TRUE;
-  if (IsLinuxAvailable(DeviceTreeLoadAddress, KernelLoadAddress)) {
-    if (IsLinuxBootRequested()) {
-      BootLinux(DeviceTreeLoadAddress, KernelLoadAddress);
-    }
+  void *Fdt = DeviceTreeLoadAddress;
+  char Cmdline[4096], *Ptr = NULL;
+  if(!Fdt) return;
+  int Length = 0, CmdlineNode = fdt_path_offset(Fdt, "/chosen");
+  if(CmdlineNode < 0) DEBUG((EFI_D_INFO, "Warning: Failed to get cmdline.\n"));
+  else
+    Ptr = (char*)fdt_getprop(Fdt, CmdlineNode, "bootargs", &Length);
+
+  if(Ptr) {
+    ZeroMem(Cmdline, sizeof(Cmdline));
+    AsciiStrnCatS(Cmdline, sizeof(Cmdline), Ptr, Length);
+    if(AsciiStrStr(Cmdline, ForceNormalBoot) || AsciiStrStr(Cmdline, SkipRamFs))
+      UefiBootRequested = FALSE;
   }
+
+  UefiBootRequested |= !IsLinuxBootRequested();
+
+  RanOnceFlag = TRUE;
+  if (!UefiBootRequested && IsLinuxAvailable(DeviceTreeLoadAddress, KernelLoadAddress)) {
+      BootLinux(DeviceTreeLoadAddress, KernelLoadAddress);
+  }
+
+  return;
 }
