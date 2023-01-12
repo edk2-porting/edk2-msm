@@ -62,3 +62,5 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
   gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
+  gQcomTokenSpaceGuid.PcdHallSensorPin
+  gQcomTokenSpaceGuid.PcdHallSensorActiveLow

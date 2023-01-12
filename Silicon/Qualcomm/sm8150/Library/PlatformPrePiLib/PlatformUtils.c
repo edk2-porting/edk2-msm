@@ -15,7 +15,12 @@
 
 BOOLEAN IsLinuxBootRequested(VOID)
 {
-  return TRUE;
+  INT32 HallSensorPin = FixedPcdGet32(PcdHallSensorPin);
+  BOOLEAN IsActiveLow = FixedPcdGetBool(PcdHallSensorActiveLow);
+  if(!HallSensorPin) return FALSE; // Fail-safe detection GPIO not defined
+  return (MmioRead32(TlmmTilesAddr[sm8150_pin_tiles[HallSensorPin]] 
+    + TLMM_ADDR_OFFSET_FOR_PIN(HallSensorPin) 
+    + TLMM_PIN_IO_REGISTER) & 1) == (!IsActiveLow);
 }
 
 VOID InitializeSharedUartBuffers(VOID)

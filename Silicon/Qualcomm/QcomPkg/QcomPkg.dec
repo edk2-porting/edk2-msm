@@ -68,5 +68,8 @@
   gQcomTokenSpaceGuid.PcdTouchCtlrVddPinActiveLow|FALSE|BOOLEAN|0x0000a50e
   # RTC information
   gQcomTokenSpaceGuid.PcdBootShimInfo1|0xb0000000|UINT64|0x00000a601
+  # Hall sensor gpio settings
+  gQcomTokenSpaceGuid.PcdHallSensorPin|0|UINT32|0x00000a602
+  gQcomTokenSpaceGuid.PcdHallSensorActiveLow|TRUE|BOOLEAN|0x00000a603
   # Debug UART settings
   gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa84000|UINT64|0x00000a701
