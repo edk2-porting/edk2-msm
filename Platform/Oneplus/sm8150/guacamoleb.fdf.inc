@@ -1,4 +1,4 @@
-// per-device BSP DXEs
+// per-device BSP DXEs (use from op7 pro)
 FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
 	SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.depex
 	SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/guacamole/DALSys/DALSys.efi
@@ -17,7 +17,7 @@ FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
     SECTION UI = "UsbPwrCtrlDxe"
 }
 
-// ACPI Tables
+// ACPI Tables (use from op7 pro)
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
   	SECTION RAW = Platform/Oneplus/sm8150/AcpiTables/guacamole/DSDT.aml
@@ -39,7 +39,7 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 	SECTION UI = "AcpiTables"
 }
 
-// Mainline device tree blob
+// Mainline device tree blob (use from sm-8150 mainlane - https://gitlab.com/sm8150-mainline/linux/-/blob/sm8150/5.17/arch/arm64/boot/dts/qcom/sm8150-oneplus-hotdogb.dts)
 FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
   SECTION RAW = Platform/Oneplus/sm8150/FdtBlob/sm8150-oneplus-guacamoleb.dtb
 }
