@@ -9,6 +9,7 @@
 
 GCC_ASM_IMPORT (CEntryPoint)
 GCC_ASM_IMPORT (SecondaryCEntryPoint)
+GCC_ASM_IMPORT (ContinueToLinuxIfAcquired)
 
 GCC_ASM_IMPORT (ArmEnableInstructionCache)
 GCC_ASM_IMPORT (ArmEnableDataCache)
@@ -29,6 +30,9 @@ _StackSize:
 _ModuleEntryPoint:
   mov x10, FixedPcdGet64 (PcdDeviceTreeStore)
   str x0, [x10] // oh my fdt
+
+  /* Continue to linux if acquired */
+  bl ASM_PFX(ContinueToLinuxIfAcquired)
 
   mov x0, #0
   mov x1, #0

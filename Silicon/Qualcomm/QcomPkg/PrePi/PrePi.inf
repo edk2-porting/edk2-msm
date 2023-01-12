@@ -17,6 +17,7 @@
 
 [Sources.common]
   Pi.c
+  LinuxUtils.c
 
 [Sources.AARCH64]
   ModuleEntryPoint.S | GCC
