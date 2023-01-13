@@ -33,6 +33,8 @@ _StackSize:
 	/* Reserved */
 	.long 0
 
+	.ascii "EDK2-MSM"
+
 _Start:
 	adr		x4, _Payload
 	ldr		x5, _StackBase
