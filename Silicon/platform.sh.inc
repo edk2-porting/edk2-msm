@@ -4,6 +4,11 @@ function platform_build_kernel(){
 		"${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd" \
 		> "${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
 		||return "$?"
+	cat \
+		"${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
+		"${ROOTDIR}/tools/BootShim/Padding.bin" \
+		> "${OUTDIR}/${DEVICE}_UEFI-Padding.fd" \
+		||return "$?"
 	gzip -c \
 		< "${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd-bootshim" \
 		> "${WORKSPACE}/uefi-${DEVICE}.img.gz" \
