@@ -12,3 +12,4 @@ ramdisk
 *.swp
 *.rej
 *.orig
+*.fd
