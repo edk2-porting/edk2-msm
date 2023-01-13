@@ -34,6 +34,9 @@ DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
         // ADC driver
         Include("adc.asl")
 
+        // Thermal Zone devices depend on PEP (included in dsdt_common). Please be CAREFUL on location
+		Include("cust_thermal_zones.asl")
+
     }
 
 
