@@ -115,7 +115,7 @@ function _build(){
 	make UEFI_BASE=${FD_BASE} UEFI_SIZE=${FD_SIZE}
 	bootshimsize=$(stat -c %s "BootShim.bin")
 	# padding for 2M alignment for Linux kernel appended
-	dd if=/dev/zero of=Padding.bin bs=1 count=`expr 2097152 - $bootshimsize`
+	dd if=/dev/zero of=Padding.bin bs=512 iflag=count_bytes count=`expr 2097152 - $bootshimsize`
 	popd
 
 	_call_hook platform_pre_build||return "$?"
