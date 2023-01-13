@@ -1,12 +1,3 @@
-/**
- * @file LinuxUtils.c
- * 
- * Copyright (c) DuoWoA authors. All rights reserved.
- * Copyright (c) Renegade Project. All rights reserved.
- *
- * SPDX-License-Identifier: BSD-2-Clause-Patent
-**/
-
 #define DEBUG_PEI 0
 
 #include "Pi.h"
