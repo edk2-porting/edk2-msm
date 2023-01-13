@@ -58,24 +58,30 @@ VOID ContinueToLinuxIfAcquired(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLo
   SerialPortInitialize();
 #endif
 
-  // Use Hall sensor or other GPIO based detection to 
-  // disable UEFI booting as a fail-safe routine to boot recovery
-  if(!IsLinuxBootRequested()) {
-    void *Fdt = DeviceTreeLoadAddress;
-    char Cmdline[4096], *Ptr = NULL;
-    if(!Fdt) return;
-    int Length = 0, CmdlineNode = fdt_path_offset(Fdt, "/chosen");
-    if(CmdlineNode < 0) DEBUG((EFI_D_INFO, "Warning: Failed to get cmdline.\n"));
-    else
-      Ptr = (char*)fdt_getprop(Fdt, CmdlineNode, "bootargs", &Length);
+  BOOLEAN CheckHallOnly = FixedPcdGetBool(PcdLinuxUtilsCheckHallOnly);
 
-    if(Ptr) {
-      ZeroMem(Cmdline, sizeof(Cmdline));
-      AsciiStrnCatS(Cmdline, sizeof(Cmdline), Ptr, Length);
-      if(AsciiStrStr(Cmdline, ForceNormalBoot) || AsciiStrStr(Cmdline, SkipRamFs))
-        UefiBootRequested = FALSE;
-    }
-  } else UefiBootRequested = FALSE;
+  // Don't check cmdline if PcdLinuxUtilsCheckHallOnly is TRUE
+  if(CheckHallOnly) UefiBootRequested = !IsLinuxBootRequested();
+  else {
+    // Use Hall sensor or other GPIO based detection to 
+    // disable UEFI booting as a fail-safe routine to boot recovery
+    if(!IsLinuxBootRequested()) {
+      void *Fdt = DeviceTreeLoadAddress;
+      char Cmdline[4096], *Ptr = NULL;
+      if(!Fdt) return;
+      int Length = 0, CmdlineNode = fdt_path_offset(Fdt, "/chosen");
+      if(CmdlineNode < 0) DEBUG((EFI_D_INFO, "Warning: Failed to get cmdline.\n"));
+      else
+        Ptr = (char*)fdt_getprop(Fdt, CmdlineNode, "bootargs", &Length);
+
+      if(Ptr) {
+        ZeroMem(Cmdline, sizeof(Cmdline));
+        AsciiStrnCatS(Cmdline, sizeof(Cmdline), Ptr, Length);
+        if(AsciiStrStr(Cmdline, ForceNormalBoot) || AsciiStrStr(Cmdline, SkipRamFs))
+          UefiBootRequested = FALSE;
+      }
+    } else UefiBootRequested = FALSE;
+  }
 
   if (!UefiBootRequested && IsLinuxAvailable(DeviceTreeLoadAddress, KernelLoadAddress)) {
       BootLinux(DeviceTreeLoadAddress, KernelLoadAddress);

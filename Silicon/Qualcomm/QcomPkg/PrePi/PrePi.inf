@@ -73,3 +73,4 @@
   gQcomTokenSpaceGuid.PcdUefiMemPoolBase
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize
   gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
+  gQcomTokenSpaceGuid.PcdLinuxUtilsCheckHallOnly
