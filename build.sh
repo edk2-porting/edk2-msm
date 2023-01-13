@@ -132,6 +132,7 @@ function _build(){
 		-D FIX_CLANG="${FIX_CLANG}" \
 		-D NO_EXCEPTION_DISPLAY="${NO_EXCEPTION_DISPLAY}" \
 		-D FD_BASE="${FD_BASE}" -D FD_SIZE="${FD_SIZE}" \
+		-D ENABLE_LINUX_UTILS="${ENABLE_LINUX_UTILS}" \
 		||return "$?"
 	_call_hook platform_build_kernel||return "$?"
 	_call_hook platform_build_bootimg||return "$?"
@@ -155,6 +156,7 @@ CLEAN=false
 DISTCLEAN=false
 TOOLCHAIN=CLANG38
 export FIX_CLANG=0
+export ENABLE_LINUX_UTILS=0
 SOC_VENDOR=Qualcomm
 USE_UART=0
 NO_EXCEPTION_DISPLAY=0

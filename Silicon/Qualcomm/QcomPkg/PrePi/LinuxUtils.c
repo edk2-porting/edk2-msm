@@ -49,6 +49,8 @@ VOID ContinueToLinuxIfAcquired(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLo
   SerialPortInitialize();
 #endif
 
+  // This feature is not enabled by default
+#if ENABLE_LINUX_UTILS
   BOOLEAN CheckHallOnly = FixedPcdGetBool(PcdLinuxUtilsCheckHallOnly);
 
   // Don't check cmdline if PcdLinuxUtilsCheckHallOnly is TRUE
@@ -77,6 +79,6 @@ VOID ContinueToLinuxIfAcquired(IN VOID *DeviceTreeLoadAddress, IN VOID *KernelLo
   if (!UefiBootRequested && IsLinuxAvailable(DeviceTreeLoadAddress, KernelLoadAddress)) {
       BootLinux(DeviceTreeLoadAddress, KernelLoadAddress);
   }
-
+#endif
   return;
 }
