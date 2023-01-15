@@ -61681,41 +61681,4 @@ Include("pmic_batt.asl")
             Alias (PSUB, _SUB)
         }
 
-        Device (BTH0)
-        {
-            Name (_HID, "NOPE02B5")  // _HID: Hardware ID
-            Alias (PSUB, _SUB)
-            Name (_DEP, Package (0x03)  // _DEP: Dependencies
-            {
-                PEP0, 
-                PMIC, 
-                UAR7
-            })
-            Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-            {
-                Zero, 
-                Zero
-            })
-            Name (_S4W, 0x02)  // _S4W: S4 Device Wake State
-            Name (_S0W, 0x02)  // _S0W: S0 Device Wake State
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
-            {
-                Name (PBUF, ResourceTemplate ()
-                {
-                    UartSerialBusV2 (0x0001C200, DataBitsEight, StopBitsOne,
-                        0xC0, LittleEndian, ParityTypeNone, FlowControlHardware,
-                        0x0020, 0x0020, "\\_SB.UAR7",
-                        0x00, ResourceConsumer, , Exclusive,
-                        )
-                })
-                Return (PBUF) /* \_SB_.BTH0._CRS.PBUF */
-            }
-
-            Method (_STA, 0, NotSerialized)  // _STA: Status
-            {
-                Return (0x0F)
-            }
-        }
-
-
 

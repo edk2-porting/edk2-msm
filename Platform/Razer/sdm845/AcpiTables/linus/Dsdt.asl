@@ -37,6 +37,10 @@ DefinitionBlock("DSDT.aml", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
         // Thermal Zone devices depend on PEP (included in dsdt_common). Please be CAREFUL on location
 		Include("cust_thermal_zones.asl")
 
+        //
+        // Bluetooth
+        //
+        Include("wcnss_bt.asl")
     }
 
     // other
