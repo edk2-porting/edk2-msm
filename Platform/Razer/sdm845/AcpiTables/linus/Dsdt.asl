@@ -1,7 +1,7 @@
 //
 // NOTE: The 3rd parameter (i.e. ComplianceRevision) must be >=2 for 64-bit integer support.
 //
-DefinitionBlock("DSDT.AML", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
+DefinitionBlock("DSDT.aml", "DSDT", 0x02, "QCOMM ", "SDM850 ", 3)
 {
     External (_SB_.TZ98, UnknownObj)
     External (_SB_.TZ98._PSV, IntObj)
