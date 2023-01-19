@@ -1,0 +1,35 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RFSProtectionLib
+  FILE_GUID                      = 2FDF4E63-5AD5-4385-A729-868019B45A92
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RFSProtectionLib|DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  RFSProtectionLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ArmPkg/ArmPkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  Silicon/Qualcomm/sm7125/sm7125.dec
+
+[LibraryClasses]
+  ArmLib
+  DebugLib
+  MemoryAllocationLib
+  DevicePathLib
+  UefiBootServicesTableLib
+  MemoryMapHelperLib
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gQcomScmProtocolGuid
