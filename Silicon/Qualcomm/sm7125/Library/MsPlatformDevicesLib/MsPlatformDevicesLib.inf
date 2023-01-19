@@ -37,8 +37,8 @@
   IoLib
   UefiBootServicesTableLib
   UefiLib
-  # AslUpdateLib
-  # RFSProtectionLib
+  AslUpdateLib
+  RFSProtectionLib
   MemoryMapHelperLib
 
 [Protocols]
