@@ -56,12 +56,12 @@
 [LibraryClasses.common]
 
   # Ported from SurfaceDuoPkg
-  # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
+  AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
   PlatformMemoryMapLib|Silicon/Qualcomm/sm7125/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm7125/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm7125/Library/PlatformPrePiLib/PlatformPrePiLib.inf
-  # RFSProtectionLib|Silicon/Qualcomm/sm7125/Library/RFSProtectionLib/RFSProtectionLib.inf
+  RFSProtectionLib|Silicon/Qualcomm/sm7125/Library/RFSProtectionLib/RFSProtectionLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm7125/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm7125/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
 
