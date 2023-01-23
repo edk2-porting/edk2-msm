@@ -11,3 +11,4 @@
   gsdm845PkgTokenSpaceGuid        = { 0x99a14446, 0xaad7, 0xe460, {0xb4, 0xe5, 0x1f, 0x79, 0xaa, 0xa4, 0x93, 0xfd } }
 
 [PcdsFixedAtBuild.common]
+  gsdm845PkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 845 @ 2.80 GHz"|VOID*|0x0000a304
