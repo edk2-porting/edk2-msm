@@ -16,3 +16,6 @@
   EmbeddedPkg/EmbeddedPkg.dec
   Silicon/Qualcomm/QcomPkg/QcomPkg.dec
   Silicon/Qualcomm/sdm845/sdm845.dec
+
+[Pcd]
+  gsdm845PkgTokenSpaceGuid.PcdSmbiosProcessorModel
