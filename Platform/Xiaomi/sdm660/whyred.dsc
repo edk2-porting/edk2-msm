@@ -19,6 +19,9 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2160
 
+  # Simple Init
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|350
+
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Redmi"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"5"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Note5"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"whyred"
