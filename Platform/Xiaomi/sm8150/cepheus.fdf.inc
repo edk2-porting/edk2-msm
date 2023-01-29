@@ -41,4 +41,8 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 }
 
 // Mainline device tree blob
+// from https://github.com/qaz6750/Linux-mainline-cepheus/blob/xiaomi-6.0-rc1/arch/arm64/boot/dts/qcom/sm8150-xiaomi-cepheus.dts
+FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+  SECTION RAW = Platform/Xiaomi/sm8150/FdtBlob/cepheus/sm8150-xiaomi-cepheus.dtb
+}
 
