@@ -24,7 +24,7 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|355
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"LG"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8X"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8X ThinQ"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"mh2lm"
 
   # Synaptics Touchscren
