@@ -22,22 +22,9 @@ jobs:
       max-parallel: 8
       matrix:
         device:
-          # sm8150
-          - mh2lm
-          - betalm
-          - nabu
-          - vayu
-          - cepheus
-          - hotdog
-          - guacamole
-          # sdm845
-          - polaris
-          - perseus
-          # sm7325
-          - mona
-          - lisa
-          # msm8998
-          - cheeseburger
+          - nx606j
+          - nx616j
+          - nx619j
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
