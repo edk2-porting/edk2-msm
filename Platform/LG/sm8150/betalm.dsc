@@ -24,7 +24,7 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|355
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"LG"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8S"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"G8S ThinQ"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"betalm"
 
   # Synaptics Touchscren
