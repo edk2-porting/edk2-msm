@@ -46890,8 +46890,8 @@ Include("cust_touch_resources.asl")
                         {
                             Name (CH, Package (0x02)
                             {
-                                "AUDD\\SAMM0803", 
-                                "AUDD\\SAMM0801"
+                                "AUDD\\QCOM0803", 
+                                "AUDD\\QCOM0801"
                             })
                             Return (CH) /* \_SB_.ADSP.SLM1.ADCM.AUDD.CHLD.CH__ */
                         }
@@ -46936,10 +46936,10 @@ Include("cust_touch_resources.asl")
         Device (AMSS)
         {
             Name (_CCA, Zero)  // _CCA: Cache Coherency Attribute
-            Name (_DEP, Package (0x09)  // _DEP: Dependencies
+            Name (_DEP, Package (0x08)  // _DEP: Dependencies
             {
                 \_SB.PEP0, 
-                \_SB.IPA, 
+                //\_SB.IPA, 
                 \_SB.GLNK, 
                 \_SB.IPC0, 
                 \_SB.PILC, 
@@ -47108,21 +47108,6 @@ Include("cust_touch_resources.asl")
                 {
                     Name (_HID, "QCOM0295")  // _HID: Hardware ID
                     Alias (\_SB.PSUB, _SUB)
-                }
-
-                Device (WSAR)
-                {
-                    Name (_HID, "SAM0609")  // _HID: Hardware ID
-                    Name (_UID, Zero)  // _UID: Unique ID
-                    Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
-                    Name (_DEP, Package (One)  // _DEP: Dependencies
-                    {
-                        \_SB.AMSS.QWLN
-                    })
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                    {
-                        Return (0x0F)
-                    }
                 }
             }
         }
@@ -58985,51 +58970,6 @@ Include("cust_touch_resources.asl")
 
         Scope (\_SB)
         {
-            Device (WBDI)
-            {
-                Name (_HID, "SAM0909")  // _HID: Hardware ID
-                Name (_UID, Zero)  // _UID: Unique ID
-                Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
-                Name (_DEP, Package (0x02)  // _DEP: Dependencies
-                {
-                    \_SB.GIO0, 
-                    \_SB.SCM0
-                })
-                Method (_STA, 0, NotSerialized)  // _STA: Status
-                {
-                    Return (0x0F)
-                }
-
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
-                {
-                    Name (RBUF, ResourceTemplate ()
-                    {
-                        GpioIo (Exclusive, PullNone, 0x0000, 0x0000, IoRestrictionNone,
-                            "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                            )
-                            {   // Pin list
-                                0x003E
-                            }
-                        GpioIo (Exclusive, PullNone, 0x0000, 0x0000, IoRestrictionNone,
-                            "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                            )
-                            {   // Pin list
-                                0x003B
-                            }
-                        GpioInt (Level, ActiveLow, ExclusiveAndWake, PullDefault, 0x0000,
-                            "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                            )
-                            {   // Pin list
-                                0x003C
-                            }
-                    })
-                    Return (RBUF) /* \_SB_.WBDI._CRS.RBUF */
-                }
-            }
-        }
-
-        Scope (\_SB)
-        {
             Name (GRST, Zero)
         }
 
@@ -59085,33 +59025,6 @@ Include("cust_touch_resources.asl")
             Name (NMID, Zero)
             NMID = PIN1 /* \_SB_.PIN1 */
             Return (NMID) /* \_SB_._MID.NMID */
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Scope (\_SB)
-        {
-            Device (AGNT)
-            {
-                Name (_ADR, Zero)  // _ADR: Address
-                Name (_HID, "SAM0603")  // _HID: Hardware ID
-                Name (_CID, "SAM0603")  // _CID: Compatible ID
-                Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
-                Name (_UID, One)  // _UID: Unique ID
-                Name (_STA, 0x0F)  // _STA: Status
-            }
         }
 
         Method (ADBG, 1, Serialized)
@@ -60162,195 +60075,9 @@ Include("cust_thermal_zones.asl")
             Name (_CID, "PNP0C40" /* Standard Button Controller */)  // _CID: Compatible ID
         }
 
-        Device (SVBI)
-        {
-            Name (_HID, "SAMM0901")  // _HID: Hardware ID
-            Name (_SUB, "RENEGA0E")  // _SUB: Subsystem ID
-        }
         Include("cust_touch.asl")
-        // Device (TSC1)
-        // {
-        //     Name (_HID, "MSHW1003")  // _HID: Hardware ID
-        //     Name (_UID, One)  // _UID: Unique ID
-        //     Name (_DEP, Package (0x03)  // _DEP: Dependencies
-        //     {
-        //         \_SB.PEP0,
-        //         \_SB.GIO0, 
-        //         \_SB.IC13
-        //     })
-        //     Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
-        //     {
-        //         Name (RBUF, ResourceTemplate ()
-        //         {
-        //             I2cSerialBusV2 (0x0020, ControllerInitiated, 0x00061A80,
-        //                 AddressingMode7Bit, "\\_SB.IC13",
-        //                 0x00, ResourceConsumer, , Exclusive,
-        //                 )
-        //             GpioInt (Edge, ActiveLow, ExclusiveAndWake, PullUp, 0x0000,
-        //                 "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-        //                 )
-        //                 {   // Pin list
-        //                     0x007D
-        //                 }
-        //             GpioIo (Exclusive, PullNone, 0x0000, 0x0000, IoRestrictionNone,
-        //                 "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-        //                 )
-        //                 {   // Pin list
-        //                     0x0063
-        //                 }
-        //         })
-        //         Return (RBUF) /* \_SB_.TSC1._CRS.RBUF */
-        //     }
-
-        //     /*Method (INFO, 0, NotSerialized)
-        //     {
-        //         Name (RBUF, Buffer (0x04)
-        //         {
-        //              0x0F, 0x01, 0x00, 0x00                           // ....
-        //         })
-        //         Return (RBUF)
-        //     }*/
-
-        //     Name (PGID, Buffer (0x0A)
-        //     {
-        //         "\\_SB.TSC1"
-        //     })
-        //     Name (DBUF, Buffer (DBFL){})
-        //     CreateByteField (DBUF, Zero, STAT)
-        //     CreateByteField (DBUF, 0x02, DVAL)
-        //     CreateField (DBUF, 0x18, 0xA0, DEID)
-        //     Method (_S1D, 0, NotSerialized)  // _S1D: S1 Device State
-        //     {
-        //         Return (0x03)
-        //     }
-
-        //     Method (_S2D, 0, NotSerialized)  // _S2D: S2 Device State
-        //     {
-        //         Return (0x03)
-        //     }
-
-        //     Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
-        //     {
-        //         Return (0x03)
-        //     }
-
-        //     Method (_PS0, 0, NotSerialized)  // _PS0: Power State 0
-        //     {
-        //         DEID = Buffer (ESNL){}
-        //         DVAL = Zero
-        //         DEID = PGID /* \_SB_.TSC1.PGID */
-        //         If (\_SB.ABD.AVBL)
-        //         {
-        //             \_SB.PEP0.FLD0 = DBUF /* \_SB_.TSC1.DBUF */
-        //         }
-        //     }
-
-        //     Method (_PS3, 0, NotSerialized)  // _PS3: Power State 3
-        //     {
-        //         DEID = Buffer (ESNL){}
-        //         DVAL = 0x03
-        //         DEID = PGID /* \_SB_.TSC1.PGID */
-        //         If (\_SB.ABD.AVBL)
-        //         {
-        //             \_SB.PEP0.FLD0 = DBUF /* \_SB_.TSC1.DBUF */
-        //         }
-        //     }
-        // }
 
         Include("cust_arraybutton.asl")
-
-        // Device (BTNS)
-        // {
-        //     Name (_HID, "ACPI0011" /* Generic Buttons Device */)  // _HID: Hardware ID
-        //     Alias (\_SB.PSUB, _SUB)
-        //     Name (_UID, Zero)  // _UID: Unique ID
-        //     Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
-        //     {
-        //         Name (RBUF, ResourceTemplate ()
-        //         {
-        //             GpioInt (Edge, ActiveBoth, Exclusive, PullDown, 0x0010,
-        //                 "\\_SB.PM01", 0x00, ResourceConsumer, ,
-        //                 )
-        //                 {   // Pin list
-        //                     0x0000
-        //                 }
-        //             GpioInt (Edge, ActiveBoth, ExclusiveAndWake, PullUp, 0x0000,
-        //                 "\\_SB.PM01", 0x00, ResourceConsumer, ,
-        //                 )
-        //                 {   // Pin list
-        //                     0x0085
-        //                 }
-        //             GpioInt (Edge, ActiveBoth, ExclusiveAndWake, PullDown, 0x0000,
-        //                 "\\_SB.PM01", 0x00, ResourceConsumer, ,
-        //                 )
-        //                 {   // Pin list
-        //                     0x0084
-        //                 }
-        //         })
-        //         Return (RBUF) /* \_SB_.BTNS._CRS.RBUF */
-        //     }
-
-        //     Name (_DSD, Package (0x02)  // _DSD: Device-Specific Data
-        //     {
-        //         ToUUID ("fa6bd625-9ce8-470d-a2c7-b3ca36c4282e"), 
-        //         Package (0x06)
-        //         {
-        //             Package (0x05)
-        //             {
-        //                 Zero, 
-        //                 One, 
-        //                 Zero, 
-        //                 One, 
-        //                 0x0D
-        //             }, 
-
-        //             Package (0x05)
-        //             {
-        //                 One, 
-        //                 Zero, 
-        //                 One, 
-        //                 One, 
-        //                 0x81
-        //             }, 
-
-        //             Package (0x05)
-        //             {
-        //                 One, 
-        //                 One, 
-        //                 One, 
-        //                 0x0C, 
-        //                 0xE9
-        //             }, 
-
-        //             Package (0x05)
-        //             {
-        //                 One, 
-        //                 0x02, 
-        //                 One, 
-        //                 0x0C, 
-        //                 0xEA
-        //             }, 
-
-        //             Package (0x05)
-        //             {
-        //                 One, 
-        //                 0x03, 
-        //                 One, 
-        //                 0x90, 
-        //                 0x20
-        //             }, 
-
-        //             Package (0x05)
-        //             {
-        //                 One, 
-        //                 0x04, 
-        //                 One, 
-        //                 0x90, 
-        //                 0x21
-        //             }
-        //         }
-        //     })
-        // }
 
         Device (QDCI)
         {
@@ -60405,7 +60132,5 @@ Include("cust_thermal_zones.asl")
         Zero, 
         Zero
     })
-
-
 
 }
