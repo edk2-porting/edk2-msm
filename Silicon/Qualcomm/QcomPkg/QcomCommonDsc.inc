@@ -524,3 +524,5 @@
   GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
   GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif
+
+  Platform/RenegadePkg/Application/Reboot2PayloadApp/Reboot2PayloadApp.inf

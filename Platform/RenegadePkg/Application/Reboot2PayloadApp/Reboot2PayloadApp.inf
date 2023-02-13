@@ -1,0 +1,21 @@
+[Defines]
+  INF_VERSION                    = 0x00010019
+  BASE_NAME                      = Reboot2PayloadApp
+  FILE_GUID                      = 801a189c-e4a4-4195-85c2-64c5450a15ee
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = Reboot2PayloadAppEntryPoint
+
+[Sources.common]
+  Reboot2PayloadApp.c
+
+[LibraryClasses]
+  UefiLib
+  UefiApplicationEntryPoint
+  CacheMaintenanceLib
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec

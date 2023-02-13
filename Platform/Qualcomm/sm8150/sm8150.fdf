@@ -214,6 +214,18 @@ READ_LOCK_STATUS   = TRUE
   INF GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
 !endif
 
+!if $(ENABLE_LINUX_UTILS) == 1
+  FILE FREEFORM = 4b0364cf-1c5b-47aa-9073-d7b5039ce49b {
+    SECTION RAW = tools/simpleinit.static.uefi.cfg
+    SECTION UI = "simpleinit.static.uefi.cfg"
+  }
+
+  INF Platform/RenegadePkg/Application/Reboot2PayloadApp/Reboot2PayloadApp.inf
+  # FILE FREEFORM = 9603c059-3ca4-480b-b520-0335a4d464fc {
+  #  SECTION RAW = tools/reboot2payload.lua
+  #  SECTION UI = "reboot2payload.lua"
+  # }
+!endif
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)
 
