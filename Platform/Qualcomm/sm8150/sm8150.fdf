@@ -31,7 +31,7 @@ ErasePolarity = 1
 
 # This one is tricky, it must be: BlockSize * NumBlocks = Size
 BlockSize     = 0x00001000
-NumBlocks     = 0x1000
+NumBlocks     = 0x700
 
 ################################################################################
 #
@@ -49,7 +49,7 @@ NumBlocks     = 0x1000
 #
 ################################################################################
 
-0x00000000|0x01000000
+0x00000000|0x00700000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
