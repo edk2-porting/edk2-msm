@@ -143,7 +143,7 @@ function _build(){
 
 	if "${GEN_INSTALLER_ZIP}"
 	then
-		cp "${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/SM8150_UEFI.fd" "${ROOTDIR}/tools/Installer/${DEVICE}_UEFI.fd"
+		cp "${WORKSPACE}/Build/${DEVICE}/${_MODE}_${TOOLCHAIN}/FV/${SOC_PLATFORM}_UEFI.fd" "${ROOTDIR}/tools/Installer/${DEVICE}_UEFI.fd"
 		cp "${ROOTDIR}/tools/BootShim/BootShim.Dualboot.bin" "${ROOTDIR}/tools/Installer/BootShim.Dualboot.bin"
 		pushd "${ROOTDIR}/tools/Installer/"
 		./pack.sh
