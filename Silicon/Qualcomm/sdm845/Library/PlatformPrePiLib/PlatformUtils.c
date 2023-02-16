@@ -13,10 +13,6 @@
 
 #include "PlatformUtils.h"
 
-BOOLEAN IsLinuxBootRequested(VOID)
-{
-  return FALSE;
-}
 
 VOID InitializeSharedUartBuffers(VOID)
 {

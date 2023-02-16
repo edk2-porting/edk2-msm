@@ -12,3 +12,6 @@
 [submodule "Platform/RenegadePkg/Library/SimpleInit"]
 	path = GPLDrivers/Library/SimpleInit
 	url = https://github.com/BigfootACA/simple-init.git
+[submodule "tools/Installer"]
+	path = tools/Installer
+	url = https://github.com/MollySophia/Flashable_UEFI_Installer

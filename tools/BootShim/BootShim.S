@@ -1,6 +1,6 @@
 _Head:
 	/* Set _Entry address */
-	adr		x1, _Head
+	adr		x1, _Payload
 
 	/* Jump to the real code */
 	b		_Start
@@ -36,7 +36,7 @@ _StackSize:
 	.ascii "EDK2-MSM"
 
 _Start:
-	adr		x4, _Payload
+	mov		x4, x1
 	ldr		x5, _StackBase
 	cmp		x4, x5
 	beq		_Entry

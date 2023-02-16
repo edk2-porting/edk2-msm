@@ -13,11 +13,6 @@
 
 #include "PlatformUtils.h"
 
-BOOLEAN IsLinuxBootRequested(VOID)
-{
-  return FALSE;
-}
-
 VOID InitializeSharedUartBuffers(VOID)
 {
   INTN* pFbConPosition = (INTN*)(FixedPcdGet32(PcdMipiFrameBufferAddress) + (FixedPcdGet32(PcdMipiFrameBufferWidth) * 
