@@ -54,7 +54,8 @@
 [LibraryClasses.common]
 
   # Ported from SurfaceDuoPkg
-  PlatformMemoryMapLib|Silicon/Qualcomm/msm8998/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
+  PlatformMemoryMapLib|Platform/$(VENDOR_NAME)/msm8998/Library/$(PLATFORM_NAME)/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
+  
   PlatformPeiLib|Silicon/Qualcomm/msm8998/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/msm8998/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
