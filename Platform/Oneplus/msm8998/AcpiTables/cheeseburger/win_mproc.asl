@@ -282,14 +282,93 @@ Device (AMSS)
         Return (One)
     }
 
-    //[WIP] On oneplus5, the SOID value is 292, which may be a problem
+    //
+    // RPEC - RPE Clients Information
+    //
+    Method (RPEC, 0, NotSerialized)
+    {
+        If ((\_SB.SOID == 0x013F))
+        {
+            Return (Package (0x02)
+            {
+                ToUUID ("2eaf5c83-4fa9-49b3-a247-bfdd66e5655b") /* SMD AMSS client GUID */, 
+                ToUUID ("0c25c0b1-f2b9-4688-b403-51cd34e8bb23") /* G-Link AMSS client GUID */
+            })
+        }
+        Else
+        {
+            Return (Package (0x03)
+            {
+                ToUUID ("2eaf5c83-4fa9-49b3-a247-bfdd66e5655b") /* SMD AMSS client GUID */, 
+                ToUUID ("0c25c0b1-f2b9-4688-b403-51cd34e8bb23") /* G-Link AMSS client GUID */, 
+                Buffer (0x10)
+                {
+                    /* 0000 */  0x9C, 0x00, 0x4C, 0x18, 0xCC, 0x42, 0xFF, 0x83,  // ..L..B..
+                    /* 0008 */  0x87, 0x25, 0x13, 0xA5, 0x7C, 0x32, 0x01, 0xEF   // .%..|2..
+                }
+            })
+        }
+    }
+    Method (CHLD)
+    {
+        Return (Package (0x02)
+        {
+            Package (0x05)
+            {
+                "QCMS\\QCOM00EA", 
+                0x12, 
+                Zero, 
+                One, 
+                One
+            }, 
+
+            Package (0x05)
+            {
+                "QCMS\\QCOM00F7", 
+                0x2B, 
+                Zero, 
+                One, 
+                0x02
+            }
+        })
+
+    }
+
+    // Flag to enable modem shutdown (1 is enabled, 0 is disabled)
+    Method (SHUT, 0, NotSerialized)
+    {
+        // First argument SMD client GUID and Second argument points that dump collection does not need unlock from TZ
+        Return (Package (0x01)
+        {
+            One
+        })
+    }
+
     Method (RPEM, 0, NotSerialized)
     {
+        // Modem shutdown is handled by SUBSYS on this platform
         Return (Package (0x01)
         {
             0x03
         })
     }
+
+    //
+    // Mappings from performance percentage to thermal mitigation level
+    //
+    Method (VLMT, 0x0, NotSerialized) {
+        Name (RBUF, Package ()
+        {
+            //           Percent(<=), TM level,
+            //           -----        ----------
+            Package () { 33,          3 },
+            Package () { 66,          2 },
+            Package () { 99,          1 },
+            Package () { 100,         0 }
+        })
+        Return (RBUF)  
+    }
+
 
     Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
     {
@@ -334,17 +413,53 @@ Device (QSM)
         \_SB.PILC, 
         \_SB.RPEN
     })
-    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+
+    //
+    // DHMS client memory config
+    //
+    Method (_CRS, 0, NotSerialized)  
     {
         Name (RBUF, ResourceTemplate ()
         {
-            Memory32Fixed (ReadWrite,
-                0x95815000,         // Address Base
-                0x00600000,         // Address Length
-                )
+            // UEFI memory bank for DHMS clients
+            // Note: must match order of flagged for carveout packages below
+            Memory32Fixed(ReadWrite, 0x95100000, 0x00600000) 
         })
-        Return (RBUF) /* \_SB_.QSM_._CRS.RBUF */
+        Return (RBUF) 
     }
+
+    //
+    // DHMS client config
+    //
+    Name (DHMS, Package (0x01)
+    {
+        Package (0x03)
+        {
+            // Subsystem Name
+            "Diag", 
+
+            Buffer (0x10)
+            {
+                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+            }, 
+
+            // Max CMA size, 0 = Use carveout
+            Zero
+        }
+    })
+
+    //
+    // QSMG - QSM General Platform-specific Configuration
+    //
+    Method (QSMG, 0, NotSerialized)
+    {
+        Return (Package (0x01)
+        {
+            1
+        })
+    }
+
 }
 
 //
