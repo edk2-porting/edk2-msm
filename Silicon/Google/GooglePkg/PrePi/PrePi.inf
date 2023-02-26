@@ -1,0 +1,75 @@
+#/** @file
+#  
+#  
+#  Copyright (c) DuoWoA authors. All rights reserved.
+#  Copyright (c) Renegade Project. All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Sec
+  FILE_GUID                      = 8AF09F13-44C5-96EC-1437-DD899CB5EE5D
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+
+[Sources.common]
+  Pi.c
+
+[Sources.AARCH64]
+  ModuleEntryPoint.S | GCC
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -Wno-error=unused-function
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  SimpleInit.dec
+
+[LibraryClasses]
+  ArmLib
+  BaseLib
+  CacheMaintenanceLib
+  DebugLib
+  ExtractGuidedSectionLib
+  HobLib
+  IoLib
+  LzmaDecompressLib
+  MemoryAllocationLib
+  MemoryInitPeiLib
+  PlatformPeiLib
+  PlatformPrePiLib
+  PrePiHobListPointerLib
+  PrePiLib
+  UfdtLib
+
+[Guids]
+  gEfiSystemNvDataFvGuid
+  gEfiVariableGuid
+  gEfiFirmwarePerformanceGuid
+
+[FeaturePcd]
+  gEmbeddedTokenSpaceGuid.PcdPrePiProduceMemoryTypeInformationHob
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdSystemMemoryBase
+  gArmTokenSpaceGuid.PcdSystemMemorySize
+  gArmTokenSpaceGuid.PcdCpuVectorBaseAddress
+  gArmTokenSpaceGuid.PcdFdBaseAddress
+  gArmTokenSpaceGuid.PcdFdSize
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackSize
+  gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize
+  gQcomTokenSpaceGuid.PcdUefiMemPoolBase
+  gQcomTokenSpaceGuid.PcdUefiMemPoolSize
+  gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore
+  gQcomTokenSpaceGuid.PcdLinuxUtilsCheckHallOnly
