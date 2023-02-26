@@ -1,0 +1,55 @@
+#include "Platform.h"
+#include <ACPI.h>
+
+#pragma pack(push, 1)
+
+typedef struct 
+{
+	UINT64 BASE_ADDRESS ;
+	UINT16 PCI_SEGMENT_GROUP_NUMBER;
+	UINT8 START_BUS_NUMBER;
+	UINT8 END_BUS_NUMBER;
+	UINT32 RESERVED;
+} MEMORY_MAPPED_CONFIG_BASE_ADDRESS;
+
+typedef struct
+{
+	ACPI_HEADER Header ;
+	UINT64 Reserved ;
+	MEMORY_MAPPED_CONFIG_BASE_ADDRESS Buses[2];
+}ENHANCED_CONFIGURATION_SPACE_ACCESS;
+
+
+ENHANCED_CONFIGURATION_SPACE_ACCESS MCFG ={
+	{
+      ACPI_MCFG_SIGNATURE,
+      sizeof (ENHANCED_CONFIGURATION_SPACE_ACCESS),
+      1,
+      0, // to make sum of entire table == 0,
+      ACPI_OEM_ID,
+      ACPI_OEM_TABLE_ID,
+      ACPI_OEM_REVISION,
+      ACPI_CREATOR_ID,
+      ACPI_CREATOR_REVISION
+    },
+	0x0, // reserved 
+	{
+		{
+			0x0000000060000000, //PCIE_0_PCIE20_DBI 
+			0, //PCI Segment Group Number
+			0, //Start Bus Number
+			1, // End Bus Number
+			0x0, //Reserved
+		},
+		{
+			0x0000000040000000, //PCIE_1_GEN3_DBI 
+			1, //PCI Segment Group Number
+			0, //Start Bus Number
+			1, // End Bus Number
+			0x0, //Reserved
+		}
+	}
+};
+#pragma pack(pop)
+
+

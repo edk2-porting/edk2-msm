@@ -1,0 +1,1917 @@
+#include "Platform.h"
+#define offsetof(s,m)   (UINT64)&(((s *)0)->m)
+
+#pragma pack(1)
+typedef struct _INTERRUPT {
+		UINT32 GSIV;
+		UINT32 InterruptFlags;
+}INTERRUPT;
+
+
+
+typedef struct _SMMUV2NODE_SMMU_APPSTCU{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT64 BaseAddress;
+	UINT64 Span;
+	UINT32 Model;
+	UINT32 Flags;
+	UINT32 GlobalIntOffset;
+	UINT32 NumContextInterrupts;
+	UINT32 ContextIntOffset;
+	UINT32 NumPMUInterrupts;
+	UINT32 PMUIntOffset;
+	UINT32 NSGIRPT_GSIV;
+	UINT32 NSGIRPT_FLAGS;
+	UINT32 NSGCFGIRPT_GSIV;
+	UINT32 NSGCFGIRPT_FLAGS;
+	INTERRUPT ContextInterrupts[64];
+	INTERRUPT PMUInterrupts[8];
+}SMMUV2NODE_SMMU_APPSTCU;
+
+#define SMMUV2NODE_SMMU_APPSTCU_VAR  {		\
+	.Type	=	3,		\
+	.Length	=	sizeof(SMMUV2NODE_SMMU_APPSTCU),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	0,		\
+	.MappingsOffset	=	0,		\
+	.BaseAddress	=	0x15000000,		\
+	.Span	=	0x110000,		\
+	.Model	=	3,		\
+	.Flags	=	0,		\
+	.GlobalIntOffset	=	offsetof(SMMUV2NODE_SMMU_APPSTCU,NSGIRPT_GSIV),		\
+	.NumContextInterrupts	=	64,		\
+	.ContextIntOffset	=	offsetof(SMMUV2NODE_SMMU_APPSTCU,ContextInterrupts),		\
+	.NumPMUInterrupts	=	8,		\
+	.PMUIntOffset	=	offsetof(SMMUV2NODE_SMMU_APPSTCU,PMUInterrupts),		\
+	.NSGIRPT_GSIV	=	97,		\
+	.NSGIRPT_FLAGS	=	0,		\
+	.NSGCFGIRPT_GSIV	=	261,		\
+	.NSGCFGIRPT_FLAGS	=	0,		\
+	.ContextInterrupts	={		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	128,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	129,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	130,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	131,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	132,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	133,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	134,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	135,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	136,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	137,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	138,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	139,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	140,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	141,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	142,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	143,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	144,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	145,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	146,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	147,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	148,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	149,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	150,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	213,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	214,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	215,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	216,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	217,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	218,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	219,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	220,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	221,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	222,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	223,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	224,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	347,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	348,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	349,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	350,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	351,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	352,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	353,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	354,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	355,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	356,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	357,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	358,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	359,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	360,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	361,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	362,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	363,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	364,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	365,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	366,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	367,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	368,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	369,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	370,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	371,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	372,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	373,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	374,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	375,		\
+		},		\
+	},		\
+	.PMUInterrupts	={		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	100,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	101,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	102,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	103,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	104,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	105,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	126,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	127,		\
+		},		\
+	},		\
+}
+
+typedef struct _SMMUV2NODE_QSMMU_GPU{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT64 BaseAddress;
+	UINT64 Span;
+	UINT32 Model;
+	UINT32 Flags;
+	UINT32 GlobalIntOffset;
+	UINT32 NumContextInterrupts;
+	UINT32 ContextIntOffset;
+	UINT32 NumPMUInterrupts;
+	UINT32 PMUIntOffset;
+	UINT32 NSGIRPT_GSIV;
+	UINT32 NSGIRPT_FLAGS;
+	UINT32 NSGCFGIRPT_GSIV;
+	UINT32 NSGCFGIRPT_FLAGS;
+	INTERRUPT ContextInterrupts[8];
+	INTERRUPT PMUInterrupts[1];
+}SMMUV2NODE_QSMMU_GPU;
+
+#define SMMUV2NODE_QSMMU_GPU_VAR  {		\
+	.Type	=	3,		\
+	.Length	=	sizeof(SMMUV2NODE_QSMMU_GPU),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	0,		\
+	.MappingsOffset	=	0,		\
+	.BaseAddress	=	0x5040000,		\
+	.Span	=	0x10000,		\
+	.Model	=	1,		\
+	.Flags	=	0,		\
+	.GlobalIntOffset	=	offsetof(SMMUV2NODE_QSMMU_GPU,NSGIRPT_GSIV),		\
+	.NumContextInterrupts	=	8,		\
+	.ContextIntOffset	=	offsetof(SMMUV2NODE_QSMMU_GPU,ContextInterrupts),		\
+	.NumPMUInterrupts	=	1,		\
+	.PMUIntOffset	=	offsetof(SMMUV2NODE_QSMMU_GPU,PMUInterrupts),		\
+	.NSGIRPT_GSIV	=	263,		\
+	.NSGIRPT_FLAGS	=	0,		\
+	.NSGCFGIRPT_GSIV	=	261,		\
+	.NSGCFGIRPT_FLAGS	=	0,		\
+	.ContextInterrupts	={		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	396,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	397,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	398,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	399,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	400,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	401,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	402,		\
+		},		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	403,		\
+		},		\
+	},		\
+	.PMUInterrupts	={		\
+		{		\
+		.InterruptFlags	=	1,		\
+		.GSIV	=	225,		\
+		},		\
+	},		\
+}
+
+typedef struct _SIDMAPPING {
+		UINT32 InputBase;
+		UINT32 NumIDs;
+		UINT32 OutputBase;
+		UINT32 OutputReference;
+		UINT32 Flags;
+}SIDMAPPING;
+
+
+
+typedef struct _PCIROOTCOMPLEX_PCI{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT64 MemAccessProps;
+	UINT32 ATSAttribute;
+	UINT32 PCISegmentNumber;
+	SIDMAPPING SIDMappings[2];
+}PCIROOTCOMPLEX_PCI;
+
+#define PCIROOTCOMPLEX_PCI_VAR  {		\
+	.Type	=	2,		\
+	.Length	=	sizeof(PCIROOTCOMPLEX_PCI),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	2,		\
+	.MappingsOffset	=	offsetof(PCIROOTCOMPLEX_PCI,SIDMappings),		\
+	.MemAccessProps	=	0x0100000000000001,		\
+	.ATSAttribute	=	1,		\
+	.PCISegmentNumber	=	0,		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x87030000,		\
+		.NumIDs	=	0xF,		\
+		.OutputBase	=	0x1C00,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x87030010,		\
+		.NumIDs	=	0xF,		\
+		.OutputBase	=	0x1C10,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_GPU0{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[37];
+}NAMEDNODE_GPU0;
+
+#define NAMEDNODE_GPU0_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_GPU0),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	37,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_GPU0,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	40,		\
+	.DevObjectName	=	"\\_SB.GPU0",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x03030000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x030A0000,		\
+		.NumIDs	=	0x1,		\
+		.OutputBase	=	0x1,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x031C0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x3,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x03030001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x4,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x03030002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x5,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x03030003,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x7,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_qsmmu_gpu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x00030000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x880,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x00030001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x888,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x00030002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0xC80,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x00030003,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0xC88,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x06030004,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1090,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04030000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04030001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A8,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04030002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10B0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x000A0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x881,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x000A0001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x889,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x000A0002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0xC81,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x000A0003,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0xC89,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x060A0004,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1091,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040A0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A3,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040A0001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10AB,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040A0002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A4,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040A0003,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10AC,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040A0004,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10B4,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04090000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A1,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04090001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A5,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04090002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10A9,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x04090003,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10AD,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x040C0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x10B2,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C030000,		\
+		.NumIDs	=	3,		\
+		.OutputBase	=	0x704,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0c030004,		\
+		.NumIDs	=	1,		\
+		.OutputBase	=	0x708,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C030006,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x712,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C030007,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x71F,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C030008,		\
+		.NumIDs	=	5,		\
+		.OutputBase	=	0x714,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C03000E,		\
+		.NumIDs	=	1,		\
+		.OutputBase	=	0x71C,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C090000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x71E,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0C090001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x713,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_VFE0{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[33];
+}NAMEDNODE_VFE0;
+
+#define NAMEDNODE_VFE0_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_VFE0),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	33,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_VFE0,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.GPU0.AVS0",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x01030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1078,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030001,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x107A,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030002,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1070,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030003,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1020,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030004,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1028,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030005,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1040,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030006,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1048,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030007,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1030,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030008,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1050,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030009,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1038,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000A,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1058,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000B,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xC08,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000C,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xC10,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000D,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x808,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000E,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x810,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0103000F,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0xC18,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030010,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x818,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x01030011,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1000,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x809,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x811,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0002,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x819,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0003,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xC09,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0004,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xC11,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0005,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xC19,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0006,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1001,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0007,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1021,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0008,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1029,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D0009,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1031,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D000A,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1039,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D000B,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1041,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D000C,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1049,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D000D,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1051,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x010D000E,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1059,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_JPGE{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[2];
+}NAMEDNODE_JPGE;
+
+#define NAMEDNODE_JPGE_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_JPGE),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	2,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_JPGE,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.JPGE",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x02030000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1060,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x02030001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1068,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_ADCM{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[10];
+}NAMEDNODE_ADCM;
+
+#define NAMEDNODE_ADCM_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_ADCM),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	10,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_ADCM,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.ADSP.SLM1.ADCM",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x07030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1821,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x07030004,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1806,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x07030005,		\
+		.NumIDs	=	4,		\
+		.OutputBase	=	0x180D,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0703000A,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1813,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x07160000,		\
+		.NumIDs	=	0x5,		\
+		.OutputBase	=	0x1807,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x07160006,		\
+		.NumIDs	=	0x5,		\
+		.OutputBase	=	0x1800,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0716000C,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1812,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0716000D,		\
+		.NumIDs	=	0x6,		\
+		.OutputBase	=	0x1814,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x07060000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1820,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x071F0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1822,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_URS0{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_URS0;
+
+#define NAMEDNODE_URS0_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_URS0),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_URS0,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.URS0",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x80030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x740,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_USB0{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_USB0;
+
+#define NAMEDNODE_USB0_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_USB0),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_USB0,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.USB0",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x80030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x740,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_URS1{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_URS1;
+
+#define NAMEDNODE_URS1_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_URS1),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_URS1,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.URS1",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x80030001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x760,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_USB1{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_USB1;
+
+#define NAMEDNODE_USB1_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_USB1),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_USB1,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.USB1",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x80030001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x760,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_CDSP{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[5];
+}NAMEDNODE_CDSP;
+
+#define NAMEDNODE_CDSP_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_CDSP),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	5,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_CDSP,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.CDSP",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x830A0000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1409,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x84030000,		\
+		.NumIDs	=	0x5,		\
+		.OutputBase	=	0x1411,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x840A0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1419,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0F1E0000,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x1420,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x0F2A0000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x142A,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_IPA{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_IPA;
+
+#define NAMEDNODE_IPA_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_IPA),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_IPA,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.IPA",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x0B030000,		\
+		.NumIDs	=	2,		\
+		.OutputBase	=	0x720,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_QUP{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[4];
+}NAMEDNODE_QUP;
+
+#define NAMEDNODE_QUP_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_QUP),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	4,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_QUP,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.QUP",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x10030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x3,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x10030001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x16,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x12030002,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x6C3,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x12030003,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x6D6,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_SEN1{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[4];
+}NAMEDNODE_SEN1;
+
+#define NAMEDNODE_SEN1_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_SEN1),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	4,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_SEN1,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.SEN1",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x85030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x6E3,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x85030001,		\
+		.NumIDs	=	2,		\
+		.OutputBase	=	0x7A1,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x85050000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x6EB,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x85050001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x7A0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_WLAN{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[3];
+}NAMEDNODE_WLAN;
+
+#define NAMEDNODE_WLAN_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_WLAN),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	3,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_WLAN,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.AMSS.QWLN",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x11030000,		\
+		.NumIDs	=	1,		\
+		.OutputBase	=	0x40,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x11190000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x42,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x11180000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x43,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_UFS0{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[2];
+}NAMEDNODE_UFS0;
+
+#define NAMEDNODE_UFS0_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_UFS0),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	2,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_UFS0,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.UFS0",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x81030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0xE0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x81030001,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x100,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_SDC2{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[2];
+}NAMEDNODE_SDC2;
+
+#define NAMEDNODE_SDC2_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_SDC2),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	2,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_SDC2,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.SDC2",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x86030000,		\
+		.NumIDs	=	0xF,		\
+		.OutputBase	=	0xA0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x86030010,		\
+		.NumIDs	=	0xF,		\
+		.OutputBase	=	0xC0,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_TSC5{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_TSC5;
+
+#define NAMEDNODE_TSC5_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_TSC5),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_TSC5,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.TSC5",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x88030000,		\
+		.NumIDs	=	0xF,		\
+		.OutputBase	=	0x20,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_QDSS{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_QDSS;
+
+#define NAMEDNODE_QDSS_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_QDSS),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_QDSS,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.QDSS",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x89030000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x460,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_ARPC{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[5];
+}NAMEDNODE_ARPC;
+
+#define NAMEDNODE_ARPC_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_ARPC),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	5,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_ARPC,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.ARPC",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x1703000C,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1823,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x1703000D,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1824,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x17030000,		\
+		.NumIDs	=	5,		\
+		.OutputBase	=	0x1401,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x17030006,		\
+		.NumIDs	=	5,		\
+		.OutputBase	=	0x1421,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+		{		\
+		.InputBase	=	0x170A0000,		\
+		.NumIDs	=	0,		\
+		.OutputBase	=	0x1429,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _NAMEDNODE_USBA{
+	UINT8 Type;
+	UINT16 Length;
+	UINT8 Revision;
+	UINT32 Reserved;
+	UINT32 NumberofMappings;
+	UINT32 MappingsOffset;
+	UINT32 NodeFlags;
+	UINT64 MemAccessProps;
+	UINT8 DeviceMemAddressSize;
+	UINT8 DevObjectName[32];
+	SIDMAPPING SIDMappings[1];
+}NAMEDNODE_USBA;
+
+#define NAMEDNODE_USBA_VAR  {		\
+	.Type	=	1,		\
+	.Length	=	sizeof(NAMEDNODE_USBA),		\
+	.Revision	=	0,		\
+	.Reserved	=	0,		\
+	.NumberofMappings	=	1,		\
+	.MappingsOffset	=	offsetof(NAMEDNODE_USBA,SIDMappings),		\
+	.NodeFlags	=	0,		\
+	.MemAccessProps	=	0,		\
+	.DeviceMemAddressSize	=	36,		\
+	.DevObjectName	=	"\\_SB.USBA",		\
+	.SIDMappings	={		\
+		{		\
+		.InputBase	=	0x0703000B,		\
+		.NumIDs	=	0x0,		\
+		.OutputBase	=	0x182C,		\
+		.OutputReference	=	offsetof(IORT,SMMUV2Nodes_smmu_appstcu),		\
+		.Flags	=	0,		\
+		},		\
+	},		\
+}
+
+typedef struct _IORT{
+	UINT32 Signature;
+	UINT32 Length;
+	UINT8 Revision;
+	UINT8 Checksum;
+	UINT8 OEMID[6];
+	UINT64 OEMTableID;
+	UINT32 OEMRevision;
+	UINT32 CreatorID;
+	UINT32 CreatorRevision;
+	UINT32 NumberofIORTNodes;
+	UINT32 IORTNodesOffset;
+	UINT32 Reserved;
+	SMMUV2NODE_SMMU_APPSTCU SMMUV2Nodes_smmu_appstcu;
+	SMMUV2NODE_QSMMU_GPU SMMUV2Nodes_qsmmu_gpu;
+	PCIROOTCOMPLEX_PCI PCIRootComplexes_pci;
+	NAMEDNODE_GPU0 NamedNodes_gpu0;
+	NAMEDNODE_JPGE NamedNodes_jpge;
+	NAMEDNODE_VFE0 NamedNodes_vfe0;
+	NAMEDNODE_ADCM NamedNodes_adcm;
+	NAMEDNODE_URS0 NamedNodes_urs0;
+	NAMEDNODE_USB0 NamedNodes_usb0;
+	NAMEDNODE_URS1 NamedNodes_urs1;
+	NAMEDNODE_USB1 NamedNodes_usb1;
+	NAMEDNODE_CDSP NamedNodes_cdsp;
+	NAMEDNODE_IPA NamedNodes_ipa;
+	NAMEDNODE_QUP NamedNodes_qup;
+	NAMEDNODE_SEN1 NamedNodes_sen1;
+	NAMEDNODE_WLAN NamedNodes_wlan;
+	NAMEDNODE_UFS0 NamedNodes_ufs0;
+	NAMEDNODE_SDC2 NamedNodes_sdc2;
+	NAMEDNODE_TSC5 NamedNodes_tsc5;
+	NAMEDNODE_QDSS NamedNodes_qdss;
+	NAMEDNODE_ARPC NamedNodes_arpc;
+	NAMEDNODE_USBA NamedNodes_usba;
+}IORT;
+
+IORT IORT_TABLE = {		
+	.Signature	=	'TROI',		
+	.Length	=	sizeof(IORT),		
+	.Revision	=	0,		
+	.Checksum	=	0,		
+	.OEMID	=	ACPI_OEM_ID,		
+	.OEMTableID	=	ACPI_OEM_TABLE_ID,		
+	.OEMRevision	=	ACPI_OEM_REVISION,		
+	.CreatorID	=	ACPI_CREATOR_ID,		
+	.CreatorRevision	=	ACPI_CREATOR_REVISION,		
+	.NumberofIORTNodes	=	22,		
+	.IORTNodesOffset	=	offsetof(IORT,Reserved)+4,		
+	.Reserved	=	0,		
+	.SMMUV2Nodes_smmu_appstcu	=	SMMUV2NODE_SMMU_APPSTCU_VAR		,
+	.SMMUV2Nodes_qsmmu_gpu	=	SMMUV2NODE_QSMMU_GPU_VAR		,
+	.PCIRootComplexes_pci	=	PCIROOTCOMPLEX_PCI_VAR		,
+	.NamedNodes_gpu0	=	NAMEDNODE_GPU0_VAR		,
+	.NamedNodes_jpge	=	NAMEDNODE_JPGE_VAR		,
+	.NamedNodes_vfe0	=	NAMEDNODE_VFE0_VAR		,
+	.NamedNodes_adcm	=	NAMEDNODE_ADCM_VAR		,
+	.NamedNodes_urs0	=	NAMEDNODE_URS0_VAR		,
+	.NamedNodes_usb0	=	NAMEDNODE_USB0_VAR		,
+	.NamedNodes_urs1	=	NAMEDNODE_URS1_VAR		,
+	.NamedNodes_usb1	=	NAMEDNODE_USB1_VAR		,
+	.NamedNodes_cdsp	=	NAMEDNODE_CDSP_VAR		,
+	.NamedNodes_ipa	=	NAMEDNODE_IPA_VAR		,
+	.NamedNodes_qup	=	NAMEDNODE_QUP_VAR		,
+	.NamedNodes_sen1	=	NAMEDNODE_SEN1_VAR		,
+	.NamedNodes_wlan	=	NAMEDNODE_WLAN_VAR		,
+	.NamedNodes_ufs0	=	NAMEDNODE_UFS0_VAR		,
+	.NamedNodes_sdc2	=	NAMEDNODE_SDC2_VAR		,
+	.NamedNodes_tsc5	=	NAMEDNODE_TSC5_VAR		,
+	.NamedNodes_qdss	=	NAMEDNODE_QDSS_VAR		,
+	.NamedNodes_arpc	=	NAMEDNODE_ARPC_VAR		,
+	.NamedNodes_usba	=	NAMEDNODE_USBA_VAR		,
+};
+
+#pragma pack()
