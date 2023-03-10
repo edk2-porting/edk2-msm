@@ -15,9 +15,9 @@
   # FIXME: use less -Wno- flags
   # Clang -Os error bypass
   !if $(FIX_CLANG) == 1
-  *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG -Wno-self-assign -Wno-uninitialized -Wno-initializer-overrides -Wno-non-literal-null-conversion -Wno-unused-but-set-variable -Wno-string-plus-int -fdiagnostics-format=vi -fcolor-diagnostics
+  *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG -Wno-self-assign -Wno-uninitialized -Wno-initializer-overrides -Wno-non-literal-null-conversion -Wno-unused-but-set-variable -Wno-string-plus-int -fdiagnostics-format=vi -fcolor-diagnostics -Wno-deprecated-non-prototype
   !else
-  *_CLANG38_AARCH64_CC_FLAGS = -Os -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG -Wno-self-assign -Wno-uninitialized -Wno-initializer-overrides -Wno-non-literal-null-conversion -Wno-unused-but-set-variable -Wno-string-plus-int -fdiagnostics-format=vi -fcolor-diagnostics
+  *_CLANG38_AARCH64_CC_FLAGS = -Os -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG -Wno-self-assign -Wno-uninitialized -Wno-initializer-overrides -Wno-non-literal-null-conversion -Wno-unused-but-set-variable -Wno-string-plus-int -fdiagnostics-format=vi -fcolor-diagnostics -Wno-deprecated-non-prototype
   !endif
   # WARNING: GCC compilation doesn't work sometimes
   *_GCC5_AARCH64_CC_FLAGS = -O1
