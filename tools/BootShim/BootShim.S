@@ -1,19 +1,19 @@
 _Head:
 	/* Set _Entry address */
-	adr		x1, _Payload
+	adr	x1, _Payload
 
 	/* Jump to the real code */
-	b		_Start
+	b	_Start
 
 	/* Fake Linux kernel header */
 
-_StackBase:
+_StackBase0: //has to be 0 on some devices
 	/* Text Offset */
-	.quad UEFI_BASE
+	.quad 0
 
-_StackSize:
+_StackSize0:
 	/* Image Size */
-	.quad UEFI_SIZE
+	.quad 0
 
 	/* Flags */
 	.quad 0
@@ -35,26 +35,34 @@ _StackSize:
 
 	.ascii "EDK2-MSM"
 
+_StackBase:
+	/* Text Offset */
+	.quad UEFI_BASE
+
+_StackSize:
+	/* Image Size */
+	.quad UEFI_SIZE
+
 _Start:
-	mov		x4, x1
-	ldr		x5, _StackBase
-	cmp		x4, x5
-	beq		_Entry
-	ldr		x6,  _StackSize
+	mov	x4, x1
+	ldr	x5, _StackBase
+	cmp	x4, x5
+	beq	_Entry
+	ldr	x6,	_StackSize
 
 _CopyLoop:
-	ldp		x2, x3, [x4], #16
-	stp		x2, x3, [x5], #16
+	ldp	x2, x3, [x4], #16
+	stp	x2, x3, [x5], #16
 	subs	x6, x6, #16
 	b.ne	_CopyLoop
-	ldr		x5, _StackBase
+	ldr	x5, _StackBase
 
 _Entry:
-	br		x5
+	br	x5
 
 _Dead:
 	/* We should never get here */
-	b		_Dead
+	b	_Dead
 
 .text
 .align 4
