@@ -27,22 +27,22 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "QCOMM ", "MSM8998 ", 3)
 		//
         // Hardware Notifications
 		//
-        Include("cust_hwn.asl")
+        //Include("cust_hwn.asl")
 
 		//
         // Buttons
 		//
-        Include("cust_arraybutton.asl")
+        //Include("cust_arraybutton.asl")
 
         //
         // Touch
         //
-        Include("cust_touch.asl")
+        //Include("cust_touch.asl")
 
         //
         // Data components
         //
-        Include("data.asl")
+        //Include("data.asl")
 
         //
         // Qualcomm Diagnostic Consumer Interface
