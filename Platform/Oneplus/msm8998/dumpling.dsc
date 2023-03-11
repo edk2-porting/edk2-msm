@@ -1,4 +1,5 @@
 [Defines]
+  VENDOR_NAME                    = Oneplus
   PLATFORM_NAME                  = dumpling
   VENDOR_NAME                    = Oneplus
   PLATFORM_GUID                  = 28f1a3bf-193a-47e3-a7b9-5a435eaab2ee

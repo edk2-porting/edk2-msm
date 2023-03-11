@@ -1,7 +1,6 @@
 // per-device BSP DXEs
 
 // ACPI Tables
-// ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
   SECTION RAW = Platform/Oneplus/msm8998/AcpiTables/dumpling/DSDT.aml
   SECTION RAW = Silicon/Qualcomm/msm8998/AcpiTables/Csrt.acp
