@@ -33,8 +33,11 @@ Device (HAL0)
 //
 // Storage - UFS/SD 
 //
-Include("ufs.asl")
-Include("sdc.asl")
+//Include("ufs.asl")
+//Include("sdc.asl")
+
+#Disable UFS cause Pixel phones are known to brick when UFS is enabled
+#Pixel Phones dont have a Sdcard Slot
 
 //
 // ASL Bridge Device
