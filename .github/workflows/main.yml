@@ -26,7 +26,8 @@ jobs:
           - mh2lm
           - betalm
           - nabu
-          - vayu
+          - vayu-huaxing
+          - vayu-tianma
           - cepheus
           - hotdog
           - guacamole
