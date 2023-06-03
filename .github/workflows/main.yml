@@ -41,6 +41,8 @@ jobs:
           - lisa
           # msm8998
           - cheeseburger
+          #8gen2
+          - fuxi
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
