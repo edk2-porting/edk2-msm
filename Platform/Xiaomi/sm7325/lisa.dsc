@@ -24,5 +24,5 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Lite NE 5G"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Mi 11 Lite NE"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"lisa"
