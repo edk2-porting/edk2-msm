@@ -30,6 +30,8 @@ jobs:
           - vayu-tianma
           # sm8550
           - fuxi
+          # sm7325
+          - lisa
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
