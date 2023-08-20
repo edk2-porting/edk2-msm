@@ -9,7 +9,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sm8475/sm8475.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/Nubia/sm8475/yudi.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/sm8475/yudi.fdf.inc
 
 !include Platform/Qualcomm/sm8475/sm8475.dsc
 
