@@ -1,0 +1,190 @@
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = MtkPkg
+  PACKAGE_GUID                   = 5fd522a5-b671-429f-957f-75113dd02430
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  Include                        # Root include for the package
+
+[Guids.common]
+  gMtkPkgTokenSpaceGuid = { 0x59f58449, 0x99e1, 0x4a19, { 0x86, 0x65, 0x12, 0xd6, 0x37, 0xed, 0xbe, 0x5e } }
+  gMtkTokenSpaceGuid = { 0x59f58449, 0x99e1, 0x4a19, { 0x86, 0x65, 0x12, 0xd6, 0x37, 0xed, 0xbe, 0x5e } }
+  gMtkUartDmBaseGuid = { 0xa1e1732a, 0xb28a, 0x41a1, { 0x87, 0x6d, 0xac, 0xa9, 0xfd, 0x76, 0x36, 0x40 } }
+
+  # BootSplash 93be6759-7d1a-4d69-986d-d78e54c9f930
+  gLumiaBootSplashAppGuid = { 0x93be6759, 0x7d1a, 0x4d69, { 0x98, 0x6d, 0xd7, 0x8e, 0x54, 0xc9, 0xf9, 0x30 } }
+
+[Protocols]
+  gMtkBamProtocolGuid = { 0xacdd545a, 0xf1f6, 0x4272, { 0x81, 0xc5, 0x04, 0x93, 0xe3, 0x58, 0x05, 0x32 } }
+  gMtkClockProtocolGuid = { 0x4fcc91c2, 0x9c4f, 0x4e3c, { 0xa6, 0x73, 0xc6, 0xdf, 0x62, 0xe0, 0x41, 0xd5 } }
+  gMtkGpioTlmmProtocolGuid = { 0x8054947b, 0x3223, 0x407a, { 0xa1, 0xcc, 0x31, 0x22, 0x2f, 0x80, 0x66, 0x40 } }
+  gMtkGpioTlmmInterruptProtocolGuid = { 0x1634c987, 0x50a7, 0x4f98, { 0x88, 0xf0, 0x7e, 0xbc, 0x60, 0x11, 0xa5, 0x32 } }
+  gMtkSpmiProtocolGuid = { 0xa95ee608, 0x52be, 0x46c9, { 0x9f, 0x78, 0x03, 0x86, 0x42, 0xdb, 0xd0, 0x7c } }
+  gMtkPm8x41ProtocolGuid = { 0xb6e811d5, 0x1dce, 0x4ccb, { 0xaf, 0x21, 0xe9, 0xf7, 0xef, 0x68, 0x60, 0x7b } }
+  gMtkScmProtocolGuid = { 0x231fddbd, 0xe8ff, 0x4df3, { 0x91, 0xb8, 0xe2, 0x12, 0xd7, 0x01, 0x70, 0xd6 } }
+  gMtkI2cQupProtocolGuid = { 0x2c898318, 0x41c1, 0x4309, { 0x89, 0x8a, 0x2f, 0x55, 0xc8, 0xcf, 0x0b, 0x86 } }
+  gMtkSmemProtocolGuid = { 0xe738ff9d, 0x020f, 0x4ecd, { 0x87, 0xfc, 0xd5, 0x82, 0x50, 0x75, 0xaa, 0xcd } }
+  gMtkSmemPtableProtocolGuid = { 0x66075564, 0x7aac, 0x4c93, { 0xb4, 0x62, 0x40, 0xbf, 0xee, 0x1d, 0x59, 0x38 } }
+  gMtkRpmProtocolGuid = { 0x10c51490, 0xd3b6, 0x45de, { 0xb6, 0xfc, 0x8f, 0x46, 0xa2, 0xeb, 0x8e, 0x01 } }
+  gMtkSsbiProtocolGuid = { 0x659CFADB, 0xF14F, 0x4088, { 0x9F, 0x64, 0xB0, 0xE8, 0xA6, 0xAB, 0x66, 0x81 } }
+  gMtkBoardProtocolGuid = { 0x470d9ff7, 0x23d0, 0x4f25, { 0x91, 0xaf, 0xe4, 0x5f, 0x3f, 0x6f, 0xe6, 0xb4 } }
+  gEFIDroidUsbDeviceProtocolGuid = { 0x040e318f, 0x5388, 0x474c, { 0x9a, 0xc0, 0x1f, 0xa5, 0x03, 0xa4, 0x16, 0x89 } }
+  gBlockRamProtocolGuid = { 0x150e318f, 0x6788, 0xa74c, { 0x1a, 0xc0, 0x1f, 0xa5, 0x03, 0xa4, 0x16, 0x90 } }
+  gMtkMsmPCIExpressInitProtocolGuid = { 0x879baa44, 0xc7ed, 0x1023, { 0x48, 0x7d, 0xa0, 0x45, 0x5e, 0xbc, 0x20, 0x7e } }
+  gPreLoaderProtocolGuid = { 0x10117639, 0x42b0, 0x4f64, { 0x9d, 0x0b, 0xe0, 0x45, 0x24, 0x81, 0xf9, 0x35 } }
+  gMtkSpiQupProtocolGuid = { 0x5fd394e8, 0x3f10, 0x4be5, { 0xba, 0x3e, 0x12, 0x78, 0xab, 0x5e, 0x01, 0x9a } }
+  gSynapticsTouchDeviceProtocolGuid = { 0xf6ba192f, 0x9ee4, 0x4e3b, { 0xb1, 0x7a, 0xda, 0x75, 0x40, 0x3f, 0xa5, 0xa7} }
+
+[PcdsFixedAtBuild.common]
+  # Memory allocation
+  gMtkPkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x20000000|UINT64|0x00000a106
+  gMtkPkgTokenSpaceGuid.PcdUefiMemPoolSize|0x78000000|UINT32|0x00000a107
+
+  # RTC information
+  gMtkPkgTokenSpaceGuid.PcdBootShimInfo1|0xb0000000|UINT64|0x00000a601
+
+  # MpPark
+  gMtkPkgTokenSpaceGuid.SecondaryCpuStackSize|0x4000|UINT32|0x0000f001
+  gMtkPkgTokenSpaceGuid.SecondaryCpuMpParkRegionBase|0x00300000|UINT64|0x0000f002
+  gMtkPkgTokenSpaceGuid.SecondaryCpuIgnoreCpuIdCheck|FALSE|BOOLEAN|0x0000f003
+  gMtkPkgTokenSpaceGuid.PsciCpuSuspendAddress|0x06c03aa8|UINT64|0x0000f004
+
+  # QTimer
+  gMtkTokenSpaceGuid.PcdQTimerBase|0xF9021000|UINT64|0x00000050
+  gMtkTokenSpaceGuid.PcdIntDebugTimerExp|41|UINT64|0x00000010
+
+  # GpioTlmmDxe and GpioTlmmInterruptDxe
+  gMtkTokenSpaceGuid.PcdGpioTlmmBaseAddress|0|UINT64|0x00000100
+  gMtkTokenSpaceGuid.PcdGpioTlmmSummaryIrq|0|UINT64|0x00000101
+  gMtkTokenSpaceGuid.PcdGpioTlmmIoOffset|0|UINT64|0x00000102
+  gMtkTokenSpaceGuid.PcdGpioTlmmIoElementSize|0|UINT64|0x00000103
+  gMtkTokenSpaceGuid.PcdGpioTlmmCtlOffset|0|UINT64|0x00000104
+  gMtkTokenSpaceGuid.PcdGpioTlmmCtlElementSize|0|UINT64|0x00000105
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrCfgOffset|0|UINT64|0x00000106
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrCfgElementSize|0|UINT64|0x00000107
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrStatusOffset|0|UINT64|0x00000108
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrStatusElementSize|0|UINT64|0x00000109
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrTargetOffset|0|UINT64|0x0000010a
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrTargetElementSize|0|UINT64|0x0000010b
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrEnableBit|0|UINT64|0x0000010c
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrStatusBit|0|UINT64|0x0000010d
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrAckHigh|FALSE|BOOLEAN|0x0000010e
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrTargetBit|0|UINT64|0x0000010f
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrTargetKpssValue|0|UINT64|0x00000110
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrRawStatusBit|0|UINT64|0x00000111
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrPolarityBit|0|UINT64|0x00000112
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrDetectionBit|0|UINT64|0x00000113
+  gMtkTokenSpaceGuid.PcdGpioTlmmIntrDetectionWidth|0|UINT64|0x00000114
+  gMtkTokenSpaceGuid.PcdGpioTlmmInBit|0|UINT64|0x00000115
+  gMtkTokenSpaceGuid.PcdGpioTlmmOutBit|0|UINT64|0x00000116
+  gMtkTokenSpaceGuid.PcdGpioTlmmOeBit|0|UINT64|0x00000117
+  gMtkTokenSpaceGuid.PcdGpioTlmmMuxBit|0|UINT64|0x00000118
+  gMtkTokenSpaceGuid.PcdGpioTlmmDrvBit|0|UINT64|0x00000119
+  gMtkTokenSpaceGuid.PcdGpioTlmmPullBit|0|UINT64|0x0000011a
+  gMtkTokenSpaceGuid.PcdGpioTlmmNumFunctions|0|UINT64|0x0000011b
+
+  # SpmiDxe
+  gMtkTokenSpaceGuid.PcdSpmiMaxPeripherals|128|UINT64|0x00000090
+  gMtkTokenSpaceGuid.PcdSpmiBaseAddress|0x0|UINT64|0x00000091
+  gMtkTokenSpaceGuid.PcdSpmiVersion|1|UINT64|0x00000092
+  gMtkTokenSpaceGuid.PcdPmicArbCoreAddress|0x0|UINT64|0x00000093
+  gMtkTokenSpaceGuid.PcdPmicArbChannelNum|0|UINT64|0x00000094
+  gMtkTokenSpaceGuid.PcdPmicArbOwnerId|0|UINT64|0x00000095
+
+  # MMCHSDxe
+  gMtkTokenSpaceGuid.PcdMmcSdc1BamBase|0|UINT64|0x000000c0
+  gMtkTokenSpaceGuid.PcdMmcSdc2BamBase|0|UINT64|0x000000c1
+  gMtkTokenSpaceGuid.PcdMmcSdc3BamBase|0|UINT64|0x000000c2
+  gMtkTokenSpaceGuid.PcdMmcSdc4BamBase|0|UINT64|0x000000c3
+  gMtkTokenSpaceGuid.PcdMmcSdc1DmlBase|0|UINT64|0x000000c4
+  gMtkTokenSpaceGuid.PcdMmcSdc2DmlBase|0|UINT64|0x000000c5
+  gMtkTokenSpaceGuid.PcdMmcSdc3DmlBase|0|UINT64|0x000000c6
+  gMtkTokenSpaceGuid.PcdMmcSdc4DmlBase|0|UINT64|0x000000c7
+  gMtkTokenSpaceGuid.PcdMmcAdmChn|0|UINT64|0x000000c8
+  gMtkTokenSpaceGuid.PcdMmcAdmSd|0|UINT64|0x000000c9
+  gMtkTokenSpaceGuid.PcdMmcAdmBase|0|UINT64|0x000000ca
+  gMtkTokenSpaceGuid.PcdMmcAdmSdOffset|0|UINT64|0x000000cb
+  gMtkTokenSpaceGuid.PcdMmcAdmMap0|0|UINT8|0x000000cc
+  gMtkTokenSpaceGuid.PcdMmcAdmMap1|0|UINT8|0x000000cd
+  gMtkTokenSpaceGuid.PcdMmcAdmMap2|0|UINT8|0x000000ce
+  gMtkTokenSpaceGuid.PcdMmcAdmMap3|0|UINT8|0x000000cf
+  gMtkTokenSpaceGuid.PcdMmcAdmMap4|0|UINT8|0x000000d0
+
+  # SdhciMMCHSDxe
+  gMtkTokenSpaceGuid.PcdSdccMciHcMode|0|UINT64|0x000000e0
+  gMtkTokenSpaceGuid.PcdSdccHcPwrctlStatusReg|0|UINT64|0x000000e1
+  gMtkTokenSpaceGuid.PcdSdccHcPwrctlMaskReg|0|UINT64|0x000000e2
+  gMtkTokenSpaceGuid.PcdSdccHcPwrctlClearReg|0|UINT64|0x000000e3
+  gMtkTokenSpaceGuid.PcdSdccHcPwrctlCtlReg|0|UINT64|0x000000e4
+  gMtkTokenSpaceGuid.PcdMmcSdhciDdrCfgVal|0x80040853|UINT64|0x000000e5 # DDR_CONFIG_VAL
+  gMtkTokenSpaceGuid.PcdMmcSdc1HdrvPullCtlOffset|0|UINT64|0x000000e6
+  gMtkTokenSpaceGuid.PcdMmcSdc2HdrvPullCtlOffset|0|UINT64|0x000000e7
+  gMtkTokenSpaceGuid.PcdMmcSdc3HdrvPullCtlOffset|0|UINT64|0x000000e8
+  gMtkTokenSpaceGuid.PcdMmcSdc4HdrvPullCtlOffset|0|UINT64|0x000000e9
+
+  # Misc
+  gMtkTokenSpaceGuid.PcdGicSpiStart|32|UINT64|0x00000200
+
+  # UartDmSerialPortLib
+  gMtkTokenSpaceGuid.PcdUartDmClkRxTxBitRate|0x0|UINT64|0x00000020
+  gMtkTokenSpaceGuid.PcdUartDmCsrOffset|0|UINT64|0x00000021
+  gMtkTokenSpaceGuid.PcdUartDmTfOffset|0|UINT64|0x00000022
+  gMtkTokenSpaceGuid.PcdUartDmCrOffset|0|UINT64|0x00000023
+  gMtkTokenSpaceGuid.PcdUartDmImrOffset|0|UINT64|0x00000024
+  gMtkTokenSpaceGuid.PcdUartDmIrdaOffset|0|UINT64|0x00000025
+  gMtkTokenSpaceGuid.PcdUartDmSrOffset|0|UINT64|0x00000026
+  gMtkTokenSpaceGuid.PcdUartDmRfOffset|0|UINT64|0x00000027
+  gMtkTokenSpaceGuid.PcdUartDmMisrOffset|0|UINT64|0x00000028
+  gMtkTokenSpaceGuid.PcdUartDmIsrOffset|0|UINT64|0x00000029
+  gMtkTokenSpaceGuid.PcdUartDmRxTotalSnapOffset|0|UINT64|0x0000002a
+
+  # Synaptics 3202
+  gMtkPkgTokenSpaceGuid.SynapticsCtlrAddress|0|UINT16|0x0002a501
+  gMtkPkgTokenSpaceGuid.SynapticsCtlrResetPin|0|UINT32|0x0002a502
+  gMtkPkgTokenSpaceGuid.SynapticsCtlrIntPin|0|UINT32|0x0002a503
+  gMtkPkgTokenSpaceGuid.SynapticsCtlrI2cDevice|0|UINT32|0x0002a504
+  gMtkPkgTokenSpaceGuid.SynapticsXMax|0|UINT64|0x0002a505
+  gMtkPkgTokenSpaceGuid.SynapticsYMax|0|UINT64|0x0002a506
+
+  # RPM
+  gMtkTokenSpaceGuid.PcdApcsAlias0IpcInterrupt|0|UINT64|0x000000b0
+  gMtkTokenSpaceGuid.PcdSmdIrq|0|UINT64|0x000000b1
+
+  # SMEM
+  gMtkTokenSpaceGuid.PcdMsmSharedBase|0x0|UINT64|0x00000001
+  gMtkTokenSpaceGuid.PcdMsmSharedSize|0x0|UINT64|0x00000002
+  gMtkTokenSpaceGuid.PcdSmemTargetInfoAddress|0|UINT64|0x0000003
+
+  # UsbDxe
+  gMtkTokenSpaceGuid.PcdUsb30Ee1Irq|0|UINT64|0x00000300
+  gMtkTokenSpaceGuid.PcdUsb30Base|0|UINT64|0x00000301
+  gMtkTokenSpaceGuid.PcdUsb30ScratchBase|0|UINT64|0x00000302
+  gMtkTokenSpaceGuid.PcdUsb30QmpPhyBase|0|UINT64|0x00000303
+  gMtkTokenSpaceGuid.PcdUsb2PhyBase|0|UINT64|0x00000305
+  gMtkTokenSpaceGuid.PcdUsb2GccPhyBcr|0|UINT64|0x00000306
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortPowerDownOffset|0|UINT64|0x00000307
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortUtmiCtrl2Offset|0|UINT64|0x00000308
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortTune1Offset|0|UINT64|0x00000309
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortTune2Offset|0|UINT64|0x0000030a
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortTune3Offset|0|UINT64|0x0000030b
+  gMtkTokenSpaceGuid.PcdUsb2PhyPortTune4Offset|0|UINT64|0x0000030c
+  gMtkTokenSpaceGuid.PcdUsbHsBase|0|UINT64|0x0000030d
+  gMtkTokenSpaceGuid.PcdUsbHsIrq|0|UINT64|0x0000030e
+
+[PcdsFeatureFlag.common]
+  # MMCHSDxe
+  gMtkTokenSpaceGuid.PcdMmcAdmSupport|FALSE|BOOLEAN|0x00010001
+  gMtkTokenSpaceGuid.PcdMmcBamSupport|FALSE|BOOLEAN|0x00010002
+
+  # SdhciMMCHSDxe
+  gMtkTokenSpaceGuid.PcdMmcHs200Caps|TRUE|BOOLEAN|0x00010010
+
+  # ScmDxe
+  gMtkTokenSpaceGuid.PcdTcsrBootMiscDetect|0|UINT64|0x000000a0
+
+  # LK Build
+  gMtkPkgTokenSpaceGuid.PcdIsLkBuild|TRUE|BOOLEAN|0x0000b101
+
+  # RPM
+  gMtkTokenSpaceGuid.PcdInstallRpmProtocol|FALSE|BOOLEAN|0x00000c100
