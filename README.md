@@ -1,4 +1,4 @@
-# EDK2 UEFI firmware for Qualcomm Snapdragon platforms
+# EDK2 UEFI firmware for MediaTek platforms
 
 ![banner_wide_dark](https://user-images.githubusercontent.com/17036722/199902341-b086ec31-8d5c-4766-953a-8b9e1492de8b.png)
 
@@ -7,7 +7,7 @@
 
 ## Description
 
-This repository aims to provide an usable EDK2 UEFI environment for modern Qualcomm SoCs.
+This repository aims to provide an usable EDK2 UEFI environment for modern MediaTek SoCs.
 
 It can be used as a boot manager for multi-booting mainline Linux, Android and optionally Windows on certain SoCs.
 
