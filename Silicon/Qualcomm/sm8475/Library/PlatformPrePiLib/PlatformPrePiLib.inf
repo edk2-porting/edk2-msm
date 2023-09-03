@@ -1,0 +1,66 @@
+#/** @file
+#  
+#  Copyright (c) DuoWoA authors. All rights reserved.
+#  Copyright (c) 2011-2015, ARM Limited. All rights reserved.
+#  Copyright (c) 2014, Linaro Limited. All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformPrePiLib
+  FILE_GUID                      = 59C11815-F8DA-4F49-B4FB-EC1E41ED1F07
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PlatformPrePiLib
+
+[Sources]
+  PlatformUtils.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  Silicon/Qualcomm/sm8475/sm8475.dec
+
+[LibraryClasses]
+  ArmLib
+  ArmMmuLib
+  BaseLib
+  DebugLib
+  IoLib
+  ExtractGuidedSectionLib
+  LzmaDecompressLib
+  PeCoffGetEntryPointLib
+  PrePiHobListPointerLib
+  CacheMaintenanceLib
+  DebugAgentLib
+  SerialPortLib
+  MemoryAllocationLib
+  PrePiMemoryAllocationLib
+  PerformanceLib
+  HobLib
+  CompilerIntrinsicsLib
+  # Platform-specific libraries
+  MemoryInitPeiLib
+  PlatformPeiLib
+  PlatformPrePiLib
+  TimerLib
+  PrintLib
+  MemoryMapHelperLib
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdGicRedistributorsBase
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
+  gQcomTokenSpaceGuid.PcdHallSensorPin
+  gQcomTokenSpaceGuid.PcdHallSensorActiveLow
