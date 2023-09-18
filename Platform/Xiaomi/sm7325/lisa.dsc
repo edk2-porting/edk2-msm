@@ -1,4 +1,5 @@
 [Defines]
+  VENDOR_NAME                    = Xiaomi
   PLATFORM_NAME                  = lisa
   PLATFORM_GUID                  = 28f1a3bf-193a-47e3-a7b9-5a435eaab2ee
   PLATFORM_VERSION               = 0.1
@@ -23,5 +24,5 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|440
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Lite NE 5G"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Mi 11 Lite NE"
   gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"lisa"

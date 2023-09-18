@@ -26,11 +26,14 @@ jobs:
           - mh2lm
           - betalm
           - nabu
-          - vayu
+          - vayu-huaxing
+          - vayu-tianma
           - cepheus
           - hotdog
           - guacamole
           # sdm845
+          - beryllium-ebbg
+          - beryllium-tianma
           - polaris
           - perseus
           # sm7325
@@ -45,12 +48,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install requires packages
+      - name: Install required packages
         run: |
+          sudo dpkg --add-architecture i386
+          wget -qO - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
+          sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport
+          sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu $(lsb_release -cs) main"
           sudo apt-get update
-          sudo apt-get -y install build-essential uuid-dev clang llvm iasl nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext
+          sudo apt-get -y install build-essential uuid-dev clang llvm iasl nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext libgcc-s1:i386 libstdc++6:i386
+          sudo apt-get install --install-recommends winehq-stable
 
-      - name: Build device ${{ matrix.device }}
+      - name: Build an image for ${{ matrix.device }}
         run: |
           ./build.sh --device ${{ matrix.device }}
 

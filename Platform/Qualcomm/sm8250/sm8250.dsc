@@ -56,7 +56,8 @@
   # Ported from SurfaceDuoPkg
   # AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
-  PlatformMemoryMapLib|Silicon/Qualcomm/sm8250/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
+  PlatformMemoryMapLib|Platform/$(VENDOR_NAME)/sm8250/Library/$(PLATFORM_NAME)/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
+
   PlatformPeiLib|Silicon/Qualcomm/sm8250/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm8250/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm8250/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
