@@ -1,4 +1,15 @@
 // per-device BSP DXEs
+FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/winner/DALSys/DALSys.efi
+    SECTION UI = "DALSys"
+}
+
+FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.depex
+   SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/winner/ButtonsDxe/ButtonsDxe.efi
+    SECTION UI = "ButtonsDxe"
+}
 FILE DRIVER = f10f76db-42c1-533f-34a8-69be24653110 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8150/SdccDxe/SdccDxe.efi
