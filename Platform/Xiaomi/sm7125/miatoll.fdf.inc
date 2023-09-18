@@ -1,11 +1,3 @@
-// per-device BSP DXEs
-
-  FILE DRIVER = 0d35cd8e-97ea-4f9a-96af-0f0d89f76567 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7125/UFSDxe/UFSDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7125/UFSDxe/UFSDxe.efi
-    SECTION UI = "UFSDxe"
-  }
-
 // ACPI Tables
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 # 	Customized DSDT
