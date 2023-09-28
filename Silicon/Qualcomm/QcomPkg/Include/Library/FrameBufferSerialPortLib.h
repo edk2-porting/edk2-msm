@@ -1,6 +1,8 @@
 #ifndef _FRAMEBUFFER_SERIALPORT_LIB_H_
 #define _FRAMEBUFFER_SERIALPORT_LIB_H_
 
+
+
 typedef struct _FBCON_POSITION {
   INTN x;
   INTN y;

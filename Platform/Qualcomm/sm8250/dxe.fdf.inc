@@ -71,11 +71,11 @@
     SECTION UI = "PmicDxe"
   }
 
-  FILE DRIVER = 0401b830-bff9-44a2-a5f6-95734a33c017 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/PwrUtilsDxe/PwrUtilsDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8250/PwrUtilsDxe/PwrUtilsDxe.efi
-    SECTION UI = "PwrUtilsDxe"
-  }
+  #FILE DRIVER = 0401b830-bff9-44a2-a5f6-95734a33c017 {
+    #SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/PwrUtilsDxe/PwrUtilsDxe.depex#
+    #SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8250/PwrUtilsDxe/PwrUtilsDxe.efi
+    #SECTION UI = "PwrUtilsDxe"#
+  #}
 
   FILE DRIVER = 3ae17db7-3cc5-4b89-9304-9549211057ef {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/ResetRuntimeDxe/ResetRuntimeDxe.depex
@@ -83,11 +83,7 @@
     SECTION UI = "ResetRuntimeDxe"
   }
 
-  FILE DRIVER = CB29F4D1-7F37-4692-A416-93E82E219766 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/RpmhDxe/RpmhDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm8250/RpmhDxe/RpmhDxe.efi
-    SECTION UI = "RpmhDxe"
-  }
+  
 
   FILE DRIVER = 2d7a83e3-e343-4ffb-9109-631f2ee11694 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8250/ScmDxe/ScmDxe.depex

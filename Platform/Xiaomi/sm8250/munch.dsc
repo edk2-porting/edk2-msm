@@ -1,6 +1,6 @@
 [Defines]
   VENDOR_NAME                    = Xiaomi
-  PLATFORM_NAME                  = alioth
+  PLATFORM_NAME                  = munch
   PLATFORM_GUID                  = 28f1a3bf-193a-47e3-a7b9-5a435eaab2ee
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010019
@@ -9,7 +9,7 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sm8250/sm8250.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/sm8250/alioth.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/sm8250/munch.fdf.inc
 
 !include Platform/Qualcomm/sm8250/sm8250.dsc
 
@@ -24,5 +24,5 @@
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|420
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Xiaomi"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Poco F3"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"alioth"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"Poco F4"
+  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"munch"

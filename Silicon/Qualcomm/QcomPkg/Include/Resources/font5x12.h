@@ -32,7 +32,7 @@
 #define FONT_WIDTH 5
 #define FONT_HEIGHT 12
 
-#define SCALE_FACTOR 2
+#define SCALE_FACTOR 1
 
 unsigned font5x12[] = {
     0x00000000, 0x00000000, 0x08421080, 0x00020084, 0x00052940, 0x00000000,

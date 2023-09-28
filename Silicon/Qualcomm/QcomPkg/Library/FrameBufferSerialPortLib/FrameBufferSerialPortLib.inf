@@ -28,6 +28,7 @@
   HobLib
   CompilerIntrinsicsLib
   CacheMaintenanceLib
+ TimerLib
 
 [Pcd]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
