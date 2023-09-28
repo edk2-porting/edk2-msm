@@ -107,6 +107,8 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
 #else
     {"RAM Partition",     0xC0000000, 0x80000000,  Mem12G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 #endif
+    {"RAM Partition",     0x0C0000000, 0x00300000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
+    {"DXE Heap",          0x0C0300000, 0x7FD00000, AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
 
     {"RAM Partition",    0x140000000, 0xC0000000,  Mem12G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
     {"RAM Partition",    0x200000000, 0x80000000,  Mem12G,  SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK_XN},
