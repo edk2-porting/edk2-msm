@@ -31,7 +31,7 @@ ErasePolarity = 1
 
 # This one is tricky, it must be: BlockSize * NumBlocks = Size
 BlockSize     = 0x00001000
-NumBlocks     = 0x2000
+NumBlocks     = 0x700
 
 ################################################################################
 #
@@ -49,7 +49,7 @@ NumBlocks     = 0x2000
 #
 ################################################################################
 
-0x00000000|0x02000000
+0x00000000|0x00700000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
@@ -212,6 +212,15 @@ READ_LOCK_STATUS   = TRUE
 !if $(AB_SLOTS_SUPPORT) == TRUE
   INF GPLDrivers/Drivers/BootSlotDxe/BootSlotDxe.inf
   INF GPLDrivers/Application/SwitchSlotsApp/SwitchSlotsApp.inf
+!endif
+
+!if $(ENABLE_LINUX_UTILS) == 1
+  FILE FREEFORM = 4b0364cf-1c5b-47aa-9073-d7b5039ce49b {
+    SECTION RAW = tools/simpleinit.static.uefi.cfg
+    SECTION UI = "simpleinit.static.uefi.cfg"
+  }
+
+  INF Platform/RenegadePkg/Application/Reboot2PayloadApp/Reboot2PayloadApp.inf
 !endif
 
 # Device specific fdf
