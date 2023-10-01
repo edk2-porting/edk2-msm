@@ -41,5 +41,5 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 
 // Mainline device tree blob (use from sm-8150 mainlane - https://gitlab.com/sm8150-mainline/linux/-/blob/sm8150/5.17/arch/arm64/boot/dts/qcom/sm8150-oneplus-hotdogb.dts)
 FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
-  SECTION RAW = Platform/Oneplus/sm8150/FdtBlob/sm8150-oneplus-guacamoleb.dtb
+  SECTION RAW = Platform/Oneplus/sm8150/FdtBlob/sm8150-oneplus-hotdogb.dtb
 }
