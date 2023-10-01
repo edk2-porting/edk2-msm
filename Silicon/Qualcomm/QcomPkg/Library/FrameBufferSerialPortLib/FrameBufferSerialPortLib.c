@@ -12,7 +12,7 @@
 
 #include "Library/FrameBufferSerialPortLib.h"
 
-UINTN delay = 500000;
+UINTN delay = 30000;
 
 FBCON_POSITION m_Position;
 FBCON_POSITION m_MaxPosition;
