@@ -3,7 +3,7 @@
   INF  Platform/EFI_Binaries/Drivers/sm6225/HWIODxe/HWIODxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/ChipInfoDxe/ChipInfoDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/PlatformInfoDxe/PlatformInfoDxe.inf
-  INF  Platform/EFI_Binaries/Drivers/sm6225/HALIOMMUDxe/HALIOMMUDxe.inf
+  INF  Platform/EFI_Binaries/Drivers/Devices/fog/HALIOMMUDxe/HALIOMMUDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/GLinkDxe/GLinkDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/ULogDxe/ULogDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/NpaDxe/NpaDxe.inf
@@ -17,7 +17,7 @@
             SECTION UI = "ScmDxe"
     }
 
-    INF  Platform/EFI_Binaries/Drivers/sm6225/SdccDxe/SdccDxe.inf
+    INF  Platform/EFI_Binaries/Drivers/Devices/fog/SdccDxe/SdccDxe.inf
     INF  Platform/EFI_Binaries/Drivers/Devices/fog/UFSDxe/UFSDxe.inf
 
     # INF  Platform/EFI_Binaries/Drivers/sm6225/TzDxe/TzDxeLA.inf
