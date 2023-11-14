@@ -92,6 +92,9 @@ APRIORI DXE {
   INF  Platform/EFI_Binaries/Drivers/sm6225/QcomChargerDxe/QcomChargerDxeLA.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/ChargerExDxe/ChargerExDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/UsbfnDwc3Dxe/UsbfnDwc3Dxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/UsbConfigDxe/UsbConfigDxe.inf
   INF  Platform/EFI_Binaries/Drivers/Devices/fog/ButtonsDxe/ButtonsDxe.inf
   INF  Platform/EFI_Binaries/Drivers/sm6225/TsensDxe/TsensDxe.inf
