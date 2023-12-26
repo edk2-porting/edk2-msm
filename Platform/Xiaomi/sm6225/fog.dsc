@@ -8,16 +8,16 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
-  FLASH_DEFINITION               = Platform/Qualcomm/sm6225/sm6225.fog.fdf
+  FLASH_DEFINITION               = Platform/Qualcomm/sm6225/sm6225.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/Xiaomi/sm6225/fog.fdf.inc
 
   # Enable A/B Slot Environment
   AB_SLOTS_SUPPORT               = TRUE
   
-!include Platform/Qualcomm/sm6225/sm6225.fog.dsc
+!include Platform/Qualcomm/sm6225/sm6225.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT
+  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT 
 
 [PcdsFixedAtBuild.common]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|720
