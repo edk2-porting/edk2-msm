@@ -28,10 +28,13 @@
 
   gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0x5FF8C000     # CPU Vectors
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000
-  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|17
-  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|18
-  gArmTokenSpaceGuid.PcdGicDistributorBase|0x0F200000
-  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x0F300000
+  gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|18
+  gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|20
+  gArmTokenSpaceGuid.PcdArmArchTimerVirtIntrNum|30
+  gArmTokenSpaceGuid.PcdArmArchTimerHypIntrNum|26
+  gArmTokenSpaceGuid.PcdGicDistributorBase|0xf200000
+  gArmTokenSpaceGuid.PcdGicRedistributorsBase|0xf300000
+  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0xf200000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00006225
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x5FF90000      # UEFI Stack
@@ -42,8 +45,6 @@
   gQcomTokenSpaceGuid.PcdUefiMemPoolSize|0x0E000000         # UefiMemorySize, DXE heap size
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x5C000000
 
-  gQcomTokenSpaceGuid.PcdDebugUartPortBase|0xa90000
-
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8
   gArmPlatformTokenSpaceGuid.PcdClusterCount|2
 
@@ -53,9 +54,7 @@
   gSimpleInitTokenSpaceGuid.PcdDeviceTreeStore|0x53F00000
   gSimpleInitTokenSpaceGuid.PcdLoggerdUseConsole|FALSE
 
-
 [LibraryClasses.common]
-
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
@@ -64,3 +63,5 @@
   PlatformPrePiLib|Silicon/Qualcomm/sm6225/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   MsPlatformDevicesLib|Silicon/Qualcomm/sm6225/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   SOCSmbiosInfoLib|Silicon/Qualcomm/sm6225/Library/SOCSmbiosInfoLib/SOCSmbiosInfoLib.inf
+
+[Components.common]

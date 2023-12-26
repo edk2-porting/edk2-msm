@@ -131,6 +131,9 @@ READ_LOCK_STATUS   = TRUE
 # BSP drivers
 !include Platform/Qualcomm/sm6225/dxe.fdf.inc
 
+  # INF Silicon/Qualcomm/sdm845/Drivers/sdm845Dxe/sdm845Dxe.inf // not sdm845
+  INF Silicon/Qualcomm/QcomPkg/Drivers/SimpleFbDxe/SimpleFbDxe.inf
+
   #
   # Helper drivers
   #
@@ -139,14 +142,14 @@ READ_LOCK_STATUS   = TRUE
   #
   # USB Host Support
   #
-  # INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
-  # INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+  INF MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
   #
   # FAT filesystem + GPT/MBR partitioning
   #
-  # INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
+  INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
   INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
   INF FatPkg/EnhancedFatDxe/Fat.inf
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
@@ -219,8 +222,8 @@ READ_LOCK_STATUS   = TRUE
   }
 
   INF Platform/RenegadePkg/Application/Reboot2PayloadApp/Reboot2PayloadApp.inf
-
 !endif
+
 # Device specific fdf
 !include $(DEVICE_DXE_FV_COMPONENTS)
 
@@ -248,6 +251,11 @@ READ_LOCK_STATUS   = TRUE
     SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
       SECTION FV_IMAGE = FVMAIN
     }
+  }
+
+  FILE FREEFORM = DDE58710-41CD-4306-DBFB-3FA90BB1D2DD {
+    SECTION UI = "uefiplat.cfg"
+    SECTION RAW = Platform/Xiaomi/sm6225/RawFiles/fog/uefiplat.cfg
   }
 
 !include Silicon/Qualcomm/QcomPkg/QcomCommonFdf.inc
