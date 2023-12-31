@@ -45,6 +45,7 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 }
 
 // Mainline device tree blob 
+// from https://github.com/Ost268/linux/blob/master/arch/arm64/boot/dts/qcom/sm8150-samsung-winner.dts 
 //FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
   //SECTION RAW = Platform/Samsung/sm8150/FdtBlob/winner/sm8150-Samsung-winner.dtb
 //}
