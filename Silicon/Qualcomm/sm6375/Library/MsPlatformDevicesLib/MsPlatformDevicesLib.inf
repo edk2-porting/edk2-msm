@@ -1,0 +1,47 @@
+## @file
+# Ms Platform Devices Library
+# Ported from SurfaceDuoPkg
+# 
+# Copyright (c) DuoWoA authors. All rights reserved.
+# Copyright (C) Microsoft Corporation. All rights reserved.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MsPlatformDevicesLib
+  FILE_GUID                      = 2FDF4E63-5AD5-4385-A729-868019B45A91
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MsPlatformDevicesLib|DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  MsPlatformDevicesLib.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Platform/RenegadePkg/RenegadePkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+  Silicon/Qualcomm/sm6375/sm6375.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  IoLib
+  UefiBootServicesTableLib
+  UefiLib
+  # AslUpdateLib
+  # RFSProtectionLib
+  MemoryMapHelperLib
+
+[Protocols]
+  gEfiChipInfoProtocolGuid                      ## CONSUMES
+  gQcomSMEMProtocolGuid                         ## CONSUMES
+  gEfiPlatformInfoProtocolGuid                  ## CONSUMES
