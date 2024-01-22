@@ -12,9 +12,9 @@ FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
 }
 
 FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
-	SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/guacamoleb/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
-    SECTION UI = "UsbPwrCtrlDxe"
+  	SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/WP_Binaries/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+  	SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/guacamoleb/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+  	SECTION UI = "UsbPwrCtrlDxe"
 }
 
 // ACPI Tables
@@ -39,7 +39,7 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 	SECTION UI = "AcpiTables"
 }
 
-// Mainline device tree blob (use from sm-8150 mainlane - https://gitlab.com/sm8150-mainline/linux/-/blob/sm8150/5.17/arch/arm64/boot/dts/qcom/sm8150-oneplus-hotdogb.dts)
+// Mainline device tree blob (use from sm-8150 mainline - https://gitlab.com/sm8150-mainline/linux/-/blob/sm8150/5.17/arch/arm64/boot/dts/qcom/sm8150-oneplus-hotdogb.dts)
 FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
   SECTION RAW = Platform/Oneplus/sm8150/FdtBlob/sm8150-oneplus-hotdogb.dtb
 }
