@@ -33,6 +33,7 @@ jobs:
           - guacamole
           - guacamoleb
           # sdm845
+          - fajita
           - beryllium-ebbg
           - beryllium-tianma
           - polaris
