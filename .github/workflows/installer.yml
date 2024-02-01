@@ -49,8 +49,7 @@ jobs:
 
       - name: Build device ${{ matrix.device }}
         run: |
-          ./build.sh --device lmi --installer-zip
-          #./build.sh --device ${{ matrix.device }} --installer-zip
+          ./build.sh --device ${{ matrix.device }} --installer-zip
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
