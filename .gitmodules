@@ -1,11 +1,9 @@
 [submodule "Common/edk2"]
 	path = Common/edk2
 	url = https://github.com/tianocore/edk2.git
-	branch = 5801910013757bd626f67ed77eea6c16a176eebf
 [submodule "Common/edk2-platforms"]
 	path = Common/edk2-platforms
 	url = https://github.com/tianocore/edk2-platforms.git
-	branch = d8232e8816fafb875a3656dda788b6681bc25149
 [submodule "Platform/EFI_Binaries"]
 	path = Platform/EFI_Binaries
 	url = https://github.com/edk2-porting/edk2-msm-binary.git
