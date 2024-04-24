@@ -31,7 +31,9 @@ jobs:
           - cepheus
           - hotdog
           - guacamole
+          - guacamoleb
           # sdm845
+          - fajita
           - beryllium-ebbg
           - beryllium-tianma
           - polaris

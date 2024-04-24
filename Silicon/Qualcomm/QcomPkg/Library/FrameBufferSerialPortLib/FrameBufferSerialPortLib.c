@@ -10,6 +10,8 @@
 #include <Resources/font5x12.h>
 
 #include "Library/FrameBufferSerialPortLib.h"
+#include <Library/TimerLib.h>
+
 
 FBCON_POSITION m_Position;
 FBCON_POSITION m_MaxPosition;
@@ -20,6 +22,7 @@ UINTN gWidth = FixedPcdGet32(PcdMipiFrameBufferWidth);
 // Reserve half screen for output
 UINTN gHeight = FixedPcdGet32(PcdMipiFrameBufferHeight);
 UINTN gBpp    = FixedPcdGet32(PcdMipiFrameBufferPixelBpp);
+UINTN delay = FixedPcdGet32(PcdMipiFrameBufferDelay);
 
 // Module-used internal routine
 void FbConPutCharWithFactor(char c, int type, unsigned scale_factor);
@@ -142,6 +145,7 @@ paint:
   return;
 
 newline:
+  MicroSecondDelay( delay ); 
   m_Position.y += scale_factor;
   m_Position.x = 0;
   if (m_Position.y >= m_MaxPosition.y - scale_factor) {

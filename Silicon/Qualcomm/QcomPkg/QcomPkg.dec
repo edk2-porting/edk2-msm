@@ -51,6 +51,8 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
   gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080|UINT32|0x0000a404
   gQcomTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|2160|UINT32|0x0000a405
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferDelay|1|UINT32|0x0000a406
+																 
   # Touch Screen
   gQcomTokenSpaceGuid.PcdTouchCtlrAddress|0|UINT16|0x0000a501
   gQcomTokenSpaceGuid.PcdTouchCtlrResetPin|0|UINT32|0x0000a502
