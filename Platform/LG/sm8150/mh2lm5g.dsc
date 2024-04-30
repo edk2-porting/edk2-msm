@@ -9,17 +9,17 @@
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = Platform/Qualcomm/sm8150/sm8150.fdf
-  DEVICE_DXE_FV_COMPONENTS       = Platform/LG/sm8150/mh2lm.fdf.inc
+  DEVICE_DXE_FV_COMPONENTS       = Platform/LG/sm8150/mh2lm5g.fdf.inc
 
 !include Platform/Qualcomm/sm8150/sm8150.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT -DMEMMAP_LG_HACKS
+  GCC:*_*_AARCH64_CC_FLAGS = -DPLST_FIX -DMEMMAP_LG_HACKS -DHAS_MLVM
 
 [PcdsFixedAtBuild.common]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
-  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9D200000
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
 
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|355
