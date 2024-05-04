@@ -2,13 +2,13 @@
 
 FILE DRIVER = 8e9bd160-b184-11df-94e2-0800200c9a66 {
 	SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/DALSys/DALSys.depex
-	SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/mh2lm/DALSys/DALSys.efi
+	SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/mh2lm5g/DALSys/DALSys.efi
 	SECTION UI = "DALSys"
 }
 
 FILE DRIVER = 5bd181db-0487-4f1a-ae73-820e165611b3 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm8150/ButtonsDxe/ButtonsDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/mh2lm/ButtonsDxe/ButtonsDxe.efi
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/Devices/mh2lm5g/ButtonsDxe/ButtonsDxe.efi
     SECTION UI = "ButtonsDxe"
 }
 
@@ -28,7 +28,7 @@ FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
 FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 
 # 	Customized DSDT
-    SECTION RAW = Platform/LG/sm8150/AcpiTables/mh2lm/DSDT.aml
+    SECTION RAW = Platform/LG/sm8150/AcpiTables/mh2lm5g/DSDT.aml
 # 	Common Tables
 	SECTION RAW = Silicon/Qualcomm/sm8150/AcpiTables/BuiltIn/APIC.aml
 # 	SECTION RAW = Silicon/Qualcomm/sm8150/AcpiTables/BuiltIn/BERT.aml

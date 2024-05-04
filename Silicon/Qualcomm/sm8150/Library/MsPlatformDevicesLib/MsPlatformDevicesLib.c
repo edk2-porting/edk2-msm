@@ -165,7 +165,10 @@ PlatformUpdateAcpiTables(VOID)
   UpdateNameAslCode(SIGNATURE_32('S', 'U', 'S', '3'), &SUS3, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'I', 'D', 'T'), &SIDT, 4);
   UpdateNameAslCode(SIGNATURE_32('S', 'O', 'S', 'N'), &SOSN, 8);
+#ifdef PLST_FIX
+  #else
   UpdateNameAslCode(SIGNATURE_32('P', 'L', 'S', 'T'), &PLST, 4);
+#endif  
   UpdateNameAslCode(SIGNATURE_32('R', 'M', 'T', 'B'), &RMTB, 4);
   UpdateNameAslCode(SIGNATURE_32('R', 'M', 'T', 'X'), &RMTX, 4);
   UpdateNameAslCode(SIGNATURE_32('R', 'F', 'M', 'B'), &RFMB, 4);
