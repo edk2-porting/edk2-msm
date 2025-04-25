@@ -1,17 +1,17 @@
 [submodule "Common/edk2"]
 	path = Common/edk2
-	url = https://hub.nuaa.cf/tianocore/edk2.git
+	url = https://github.com/tianocore/edk2.git
 	branch = 5801910013757bd626f67ed77eea6c16a176eebf
 [submodule "Common/edk2-platforms"]
 	path = Common/edk2-platforms
-	url = https://hub.nuaa.cf/tianocore/edk2-platforms.git
+	url = https://github.com/tianocore/edk2-platforms.git
 	branch = d8232e8816fafb875a3656dda788b6681bc25149
 [submodule "Platform/EFI_Binaries"]
 	path = Platform/EFI_Binaries
-	url = https://hub.nuaa.cf/edk2-porting/edk2-msm-binary.git
+	url = https://github.com/edk2-porting/edk2-msm-binary.git
 [submodule "Platform/RenegadePkg/Library/SimpleInit"]
 	path = GPLDrivers/Library/SimpleInit
-	url = https://hub.nuaa.cf/BigfootACA/simple-init.git
+	url = https://github.com/BigfootACA/simple-init.git
 [submodule "tools/Installer"]
 	path = tools/Installer
-	url = https://hub.nuaa.cf/MollySophia/Flashable_UEFI_Installer
+	url = https://github.com/MollySophia/Flashable_UEFI_Installer
