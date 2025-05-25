@@ -1,0 +1,20 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = KeypadDeviceImplLib
+  FILE_GUID                      = A66E6466-0BF1-4211-8CD9-9FBCD1F460A6
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = KeypadDeviceImplLib
+  CONSTRUCTOR                    = KeypadDeviceImplConstructor
+
+[Sources.common]
+  KeypadDeviceImplLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  Silicon/Google/Tensor/Tensor.dec
+
+[LibraryClasses]
+  TimerLib
+  

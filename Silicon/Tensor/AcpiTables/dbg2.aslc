@@ -1,0 +1,443 @@
+#include "Platform.h"
+
+
+#define MAX_OEM_WRITE_ENTRIES                                    8
+
+#define DEBUG_DEVICE_PORT_TYPE_SERIAL                            0x8000
+#define DEBUG_DEVICE_PORT_TYPE_USB                               0x8002
+#define DEBUG_DEVICE_PORT_TYPE_NET                               0x8003
+
+#define DEBUG_DEVICE_PORT_SUBTYPE_SERIAL_QCOM                    0x0004
+#define DEBUG_DEVICE_PORT_SUBTYPE_SERIAL_QCOM_S850               0x0011
+
+#define DEBUG_DEVICE_PORT_SUBTYPE_NET_QCOM                       0x5143
+
+#define DEBUG_DEVICE_PORT_SUBTYPE_USB_QCOM                       0x0004
+#define DEBUG_DEVICE_PORT_SUBTYPE_USB30                          0x0000
+
+#define DEBUG_DEVICE_OEM_PORT_USBFN                              0x0001
+#define DEBUG_DEVICE_OEM_PORT_USBFN_SYNOPSYS                     0x0005
+
+// Subtype 3 need to be used only if unaligned access to strongly ordered memory isn't supported by hardware.
+// But it works on all hardware so use this value
+#define DEBUG_DEVICE_OEM_PORT_USBFN_BUFFERED                     0x0003
+
+#define NUMBER_OF_DBG_DEVICES                                    3
+#define MAX_NAME_SPACE_STRING_LENGTH                             32
+
+#define ACPI_DDI_V2_2_REGISTER_CNT                               2
+#define ACPI_DDI_V3_REGISTER_CNT                                 1
+
+// ACPI structure declarations.
+
+#pragma pack(1)
+
+typedef struct {
+  UINT8                             Revision;
+  UINT16                            Length;
+  UINT8                             BaseAddressRegisterCount;
+  UINT16                            NameSpaceStringLength;
+  UINT16                            NameSpaceStringOffset;
+  UINT16                            OemDataLength;
+  UINT16                            OemDataOffset;
+  UINT16                            PortType;
+  UINT16                            PortSubtype;
+  UINT16                            Reserved;
+  UINT16                            BaseAddressRegisterOffset;
+  UINT16                            AddressSizeOffset;
+} ACPI_DEBUG_DEVICE_INFORMATION_V2;
+
+//
+// v3 Debug Device Information Structure
+//
+typedef struct {
+
+  UINT8                     Revision;
+  UINT16                    Length;
+  UINT8                     BaseAddressRegisterCount;
+  UINT16                    NameSpaceStringLength;
+  UINT16                    NameSpaceStringOffset;
+  UINT16                    OemDataLength;
+  UINT16                    OemDataOffset;
+  UINT16                    PortType;
+  UINT16                    PortSubtype;
+  UINT16                    Reserved;
+  UINT16                    BaseAddressRegisterOffset;
+  UINT16                    AddressSizeOffset;
+  ACPI_GAS                  DEVICE_ADDRESS;
+  UINT32                    ADDRESS_SIZE;
+  UINT8                     NameSpacestring[MAX_NAME_SPACE_STRING_LENGTH];
+} ACPI_DEBUG_DEVICE_INFORMATION_V3;
+
+typedef struct {
+  ACPI_HEADER               Header;
+  UINT32                    OffsetDbgDeviceInfo;
+  UINT32                    NumberDbgDeviceInfo;
+} ACPI_DEBUG_PORT_TABLE_V2;
+
+//OEM struct supported by KDNET
+typedef struct {
+  UINT16                    PortType;
+  UINT16                    Reserved;
+  UINT32                    Signature;
+  UINT32                    WriteCount;
+  struct {
+     UINT8                  BaseAddressRegister;
+     UINT8                  Width;
+     UINT16                 Offset;
+     UINT32                 AndValue;
+     UINT32                 OrValue;
+  } Data[MAX_OEM_WRITE_ENTRIES];
+} ACPI_DEBUG_DEVICE_OEM_DATA;
+
+
+//OEM struct for SNPS controller supported by KDNET
+//OEM Phase: 1 = after reset
+//           2 = when configuration is done
+//           3 = on connection done
+typedef struct {
+    UINT16 PortType;
+    UINT16 Reserved;
+    UINT32 Signature;
+    UINT32 WriteCount;
+    struct {
+        UINT8 BaseAddressRegister;
+        UINT8 Phase;
+        UINT16 Reserved;
+        UINT32 Offset;
+        UINT32 AndValue;
+        UINT32 OrValue;
+    } Data[MAX_OEM_WRITE_ENTRIES];
+} ACPI_DEBUG_DEVICE_OEM_DATA_V2;
+
+// OEM Data Strucutre V3 based upon addition of secondary debugger
+//OEM struct for SNPS controller supported by KDNET
+//OEM Phase: 1 = after reset
+//           2 = when configuration is done
+//           3 = on connection done
+typedef struct {
+    UINT16 PortType;
+    UINT16 Reserved;
+    UINT32 Signature;
+    UINT32 WriteCount;
+    struct {
+        UINT8 BaseAddressRegister;
+        UINT8 Phase;
+        UINT16 Reserved;
+        UINT32 Offset;
+        UINT32 AndValue;
+        UINT32 OrValue;
+    } Data[MAX_OEM_WRITE_ENTRIES];
+    struct {
+        UINT8 UsbCore;
+        UINT8 Reserved1;
+        UINT16 Reserved2;
+        UINT32 Signature; // = 'USBC'
+    } ACPI_USB_INIT_CORE_OEM_DATA;
+} ACPI_DEBUG_DEVICE_OEM_DATA_V3;
+
+
+//OEM struct supported by KDUSB, KDNET
+typedef struct {
+
+  UINT32                    StructureSize;
+  UINT64                    GpioPhysicalAddress;
+  UINT32                    GpioBlockSize;
+  UINT32                    WriteCount;
+  UINT32                    Offset[12];
+  UINT32                    Value[12];
+
+} OEM_DATA;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V2 DebugDeviceInformation;
+
+  // not part of the actual structure
+  ACPI_GAS                                   BaseAddressRegister;
+  UINT32                                     AddressSize;
+  UINT8                                      NameSpaceString[MAX_NAME_SPACE_STRING_LENGTH];
+} ACPI_DEBUG_DEVICE_INFORMATION_V2_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V2 DebugDeviceInformation;
+
+  // not part of the actual structure
+  ACPI_GAS                                   BaseAddressRegister;
+  UINT32                                     AddressSize;
+  UINT8                                      NameSpaceString[MAX_NAME_SPACE_STRING_LENGTH];
+  OEM_DATA                                   OemData;
+} ACPI_DEBUG_DEVICE_INFORMATION_V2_1_OEM_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V2 DebugDeviceInformation;
+
+  // not part of the actual structure
+  ACPI_GAS                            BaseAddressRegister[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT32                              AddressSize[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT8                               NameSpaceString[MAX_NAME_SPACE_STRING_LENGTH];
+  ACPI_DEBUG_DEVICE_OEM_DATA          OemData;
+} ACPI_DEBUG_DEVICE_INFORMATION_V2_2_OEM_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V2 DebugDeviceInformation;
+  // not part of the actual structure
+  ACPI_GAS                            BaseAddressRegister[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT32                              AddressSize[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT8                               NameSpaceString[MAX_NAME_SPACE_STRING_LENGTH];
+  ACPI_DEBUG_DEVICE_OEM_DATA_V2       OemData;
+} ACPI_DEBUG_DEVICE_INFORMATION_V2_3_OEM_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V2 DebugDeviceInformation;
+  // not part of the actual structure
+  ACPI_GAS                            BaseAddressRegister[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT32                              AddressSize[ACPI_DDI_V2_2_REGISTER_CNT];
+  UINT8                               NameSpaceString[MAX_NAME_SPACE_STRING_LENGTH];
+  ACPI_DEBUG_DEVICE_OEM_DATA_V3       OemData;
+} ACPI_DEBUG_DEVICE_INFORMATION_V2_4_OEM_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_DEVICE_INFORMATION_V3    DebugDeviceInformation;
+  OEM_DATA                            OemData;
+} ACPI_DEBUG_DEVICE_INFORMATION_V3_OEM_IMPL;
+
+typedef struct {
+  ACPI_DEBUG_PORT_TABLE_V2 DebugPortTable;
+
+  // not part of the actual structure
+  ACPI_DEBUG_DEVICE_INFORMATION_V2_IMPL         DebugDevice1;   // UART KDCOM
+  ACPI_DEBUG_DEVICE_INFORMATION_V2_4_OEM_IMPL   DebugDevice2;   // KDNET on primary port on SNPS controller
+  ACPI_DEBUG_DEVICE_INFORMATION_V2_4_OEM_IMPL   DebugDevice3;   // KDNET on secondary port on SNPS controller
+
+} ACPI_DEBUG_PORT_TABLE_V2_IMPL;
+
+#pragma pack()
+
+
+// Fixed field values.
+#define ACPI_DDI_V2_REVISION                          1
+#define ACPI_DDI_V2_LENGTH                            sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2_IMPL)
+#define ACPI_DDI_V2_1_OEM_LENGTH                      sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2_1_OEM_IMPL)
+#define ACPI_DDI_V2_2_OEM_LENGTH                      sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2_2_OEM_IMPL)
+#define ACPI_DDI_V2_3_OEM_LENGTH                      sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2_3_OEM_IMPL)
+#define ACPI_DDI_V2_4_OEM_LENGTH                      sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2_4_OEM_IMPL)
+#define ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET      sizeof(ACPI_DEBUG_DEVICE_INFORMATION_V2)
+
+// Structure has only one ACPI_GAS for register (1 base address register)
+#define ACPI_DDI_V2_1_ADDRESS_SIZE_OFFSET             ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET + 1 * sizeof(ACPI_GAS)
+#define ACPI_DDI_V2_1_NAMESPACE_STRING_OFFSET         ACPI_DDI_V2_1_ADDRESS_SIZE_OFFSET + 1 * sizeof(UINT32)
+#define ACPI_DDI_V2_1_OEM_DATA_OFFSET                 ACPI_DDI_V2_1_NAMESPACE_STRING_OFFSET + MAX_NAME_SPACE_STRING_LENGTH
+
+// Structure has ACPI_DDI_V2_2_REGISTER_CNT ACPI_GAS base registers
+// Change this macro ACPI_DDI_V2_2_REGISTER_CNT based upon number of base address register to be used
+#define ACPI_DDI_V2_2_ADDRESS_SIZE_OFFSET             ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET + ACPI_DDI_V2_2_REGISTER_CNT * sizeof(ACPI_GAS)
+#define ACPI_DDI_V2_2_NAMESPACE_STRING_OFFSET         ACPI_DDI_V2_2_ADDRESS_SIZE_OFFSET + ACPI_DDI_V2_2_REGISTER_CNT * sizeof(UINT32)
+#define ACPI_DDI_V2_2_OEM_DATA_OFFSET                 ACPI_DDI_V2_2_NAMESPACE_STRING_OFFSET + MAX_NAME_SPACE_STRING_LENGTH
+
+#define ACPI_DPT_V2_LENGTH                            sizeof(ACPI_DEBUG_PORT_TABLE_V2_IMPL)
+#define ACPI_DPT_V2_REVISION                          1
+
+
+// Device namespace strings. (May not be longer than MAX_NAME_SPACE_STRING_LENGTH characters & may not point to same device.)
+#define UART_DEVICE_NAME_SPACE_STRING                 "\\_SB.UARD"
+#define USB_SS_DEVICE_NAME_SPACE_STRING               "\\_SB.URS0"    //point to USB3.0 controller
+#define USB_SS1_DEVICE_NAME_SPACE_STRING               "\\_SB.USB1"   //point to secondary USB3.0 controller
+//URS1 specific
+//#define USB_SS1_DEVICE_NAME_SPACE_STRING               "\\_SB.URS1"   //point to secondary USB3.0 controller
+
+// ACPI table definition.
+
+ACPI_DEBUG_PORT_TABLE_V2_IMPL DBG2 =
+  {
+  {
+    {
+        ACPI_DBG2_SIGNATURE,                          // Signature
+        ACPI_DPT_V2_LENGTH,                           // Length
+        ACPI_DPT_V2_REVISION,                         // Revision
+        0,                                            // Checksum
+        ACPI_OEM_ID,                                  // OEMID[ACPI_MAX_OEM_ID]
+        ACPI_OEM_TABLE_ID,                            // OEMTableID[ACPI_MAX_TABLE_ID]
+        ACPI_OEM_REVISION,                            // OEMRevision
+        ACPI_CREATOR_ID,                              // CreatorID[ACPI_MAX_CREATOR_ID]
+        ACPI_CREATOR_REVISION                         // CreatorRev
+    },
+
+      sizeof(ACPI_DEBUG_PORT_TABLE_V2),
+    NUMBER_OF_DBG_DEVICES
+    },
+
+
+  //
+  // Debug device table.
+  //
+
+
+  // Device UART
+   {
+     {
+       ACPI_DDI_V2_REVISION,                               // Revision
+       ACPI_DDI_V2_LENGTH,                                 // Length
+       1,                                                  // BaseAddressRegisterCount
+       sizeof(UART_DEVICE_NAME_SPACE_STRING),              // NameSpaceStringLength
+       ACPI_DDI_V2_1_NAMESPACE_STRING_OFFSET,              // NameSpaceStringOffset
+       0,                                                  // OemDataLength
+       0,                                                  // OemDataOffset
+       DEBUG_DEVICE_PORT_TYPE_SERIAL,                      // PortType
+       DEBUG_DEVICE_PORT_SUBTYPE_SERIAL_QCOM_S850,         // PortSubtype
+       0,                                                  // Reserved
+       ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET,           // BaseAddressRegisterOffset
+      ACPI_DDI_V2_1_ADDRESS_SIZE_OFFSET                   // AddressSizeOffset
+     },
+
+     {
+       ACPI_GAS_ID_SYSTEM_MEMORY,
+       32,
+       0,
+       32,
+       0xA84000                                          // BaseAddressRegister
+     },
+     0x00001000,                                           // AddressSize
+     UART_DEVICE_NAME_SPACE_STRING                         // NameSpaceString
+   },
+
+    // Device USB SS as KDNET on primary port (SNPS Controller+ QMP/QUSB2 Phy)
+    {
+      {
+        ACPI_DDI_V2_REVISION,                               // Revision
+        ACPI_DDI_V2_4_OEM_LENGTH,                           // Length
+        ACPI_DDI_V2_2_REGISTER_CNT,                         // BaseAddressRegisterCount
+        sizeof(USB_SS_DEVICE_NAME_SPACE_STRING),            // NameSpaceStringLength
+        ACPI_DDI_V2_2_NAMESPACE_STRING_OFFSET,              // NameSpaceStringOffset
+        sizeof(ACPI_DEBUG_DEVICE_OEM_DATA_V3),              // OemDataLength
+        ACPI_DDI_V2_2_OEM_DATA_OFFSET,                      // OemDataOffset
+        DEBUG_DEVICE_PORT_TYPE_NET,                         // PortType
+        DEBUG_DEVICE_PORT_SUBTYPE_NET_QCOM,                 // PortSubtype
+        0,                                                  // Reserved
+        ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET,           // BaseAddressRegisterOffset
+        ACPI_DDI_V2_2_ADDRESS_SIZE_OFFSET                   // AddressSizeOffset
+      },
+      {
+        {                                                   // BaseAddressRegister
+          ACPI_GAS_ID_SYSTEM_MEMORY,
+          32,
+          0,
+          32,
+          0xA600000                                         // USB3.0 SNPS base
+        },
+        {                                                   // BaseAddressRegister
+          ACPI_GAS_ID_SYSTEM_MEMORY,
+          32,
+          0,
+          32,
+          0xA600000                                         // USB3.0 SNPS base
+        }
+      },
+      {
+        0xFFFFF,                                            // AddressSize
+        0x1000,                                            // AddressSize
+      },
+      USB_SS_DEVICE_NAME_SPACE_STRING,                      // NameSpaceString
+      {                                                     // OEM Data
+        DEBUG_DEVICE_OEM_PORT_USBFN_SYNOPSYS,               // Controller type
+        0,
+        'FIX2',
+        2,                                                  // Number of writes
+        {
+          //set HS dev speed
+          {
+            0,                                              // BaseAddressRegister
+            2,                                              // Phase
+            0,                                              // Reserved
+            0xC700,                                         // Offset
+            0xfffffff8,                                     // AndValue
+            0x0                                             // OrValue
+          },
+          //set ULPI_VBUS_VALID
+          {
+            0,                                              // BaseAddressRegister
+            2,                                              // Phase
+            0,                                              // Reserved
+            0xf8810,                                        // Offset
+            0,                                              // AndValue
+            0x10100000                                      // OrValue
+          }
+        },
+        {
+          0,                                                  // USB Core Number - Primary (Core 0)
+          0,                                                  //Reserved
+          0,                                                  //Reserved
+          'USBC'                                              //Signature
+        }
+      }   //end OEM data
+    },
+    // Device USB SS as KDNET on seconday port (SNPS Controller+ QMP/QUSB2 Phy)
+    {
+      {
+        ACPI_DDI_V2_REVISION,                               // Revision
+        ACPI_DDI_V2_4_OEM_LENGTH,                           // Length
+        ACPI_DDI_V2_2_REGISTER_CNT,                         // BaseAddressRegisterCount
+        sizeof(USB_SS1_DEVICE_NAME_SPACE_STRING),           // NameSpaceStringLength
+        ACPI_DDI_V2_2_NAMESPACE_STRING_OFFSET,              // NameSpaceStringOffset
+        sizeof(ACPI_DEBUG_DEVICE_OEM_DATA_V3),              // OemDataLength
+        ACPI_DDI_V2_2_OEM_DATA_OFFSET,                      // OemDataOffset
+        DEBUG_DEVICE_PORT_TYPE_NET,                         // PortType
+        DEBUG_DEVICE_PORT_SUBTYPE_NET_QCOM,                 // PortSubtype
+        0,                                                  // Reserved
+        ACPI_DDI_V2_BASE_ADDRESS_REGISTER_OFFSET,           // BaseAddressRegisterOffset
+        ACPI_DDI_V2_2_ADDRESS_SIZE_OFFSET                   // AddressSizeOffset
+      },
+      {
+        {                                                   // BaseAddressRegister
+          ACPI_GAS_ID_SYSTEM_MEMORY,
+          32,
+          0,
+          32,
+          0x0A800000                                         // USB3.0 SNPS base
+        },
+    {                                                   // BaseAddressRegister
+          ACPI_GAS_ID_SYSTEM_MEMORY,
+          32,
+          0,
+          32,
+          0x0A800000                                         // USB3.0 SNPS base
+        }
+      },
+      {
+        0xFFFFF,                                            // AddressSize
+        0x1000,                                            // AddressSize
+      },
+      USB_SS1_DEVICE_NAME_SPACE_STRING,                      // NameSpaceString
+      {                                                     // OEM Data
+        DEBUG_DEVICE_OEM_PORT_USBFN_SYNOPSYS,               // Controller type
+        0,
+        'FIX2',
+        2,                                                  // Number of writes
+        {
+          //set HS dev speed
+          {
+            0,                                              // BaseAddressRegister
+            2,                                              // Phase
+            0,                                              // Reserved
+            0xC700,                                         // Offset
+            0xfffffff8,                                     // AndValue
+            0x0                                             // OrValue
+          },
+          //set ULPI_VBUS_VALID
+          {
+            0,                                              // BaseAddressRegister
+            2,                                              // Phase
+            0,                                              // Reserved
+            0xf8810,                                        // Offset
+            0,                                              // AndValue
+            0x10100000                                      // OrValue
+          }
+        },
+        {
+          1,                                                  // USB Core Number - Primary (Core 1)
+          0,                                                  //Reserved
+          0,                                                  //Reserved
+          'USBC'                                              //Signature
+        }
+      }   //end OEM data
+    }
+};
