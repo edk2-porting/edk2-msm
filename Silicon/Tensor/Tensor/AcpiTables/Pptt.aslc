@@ -1,0 +1,312 @@
+#include "Platform.h"
+#include "Acpi.h"
+
+#define ACPI_PROCESSOR_PROPERTIES_DESCRIPTION_TABLE_REVISION 0x00000001
+
+
+//
+// Types defined for Node/Cache/Id Type from Document
+//
+
+#define offsetof(s,m)   (UINT32)&(((s *)0)->m)
+
+#define ACPI_PROCESSOR_NODE       0
+#define ACPI_CACHE_TYPE	          1
+#define ACPI_ID_TYPE	          2
+
+#pragma pack (1)
+
+typedef struct _ACPI_CACHE_TYPE_STRUCTURE {	// 5-152
+  UINT8	Type;
+	UINT8	Length;
+	UINT16	Reserved;
+	UINT32	Flags;
+	UINT32	NextLevelCache;
+	UINT32	Size;
+	UINT32 	NumOfSets;
+	UINT8	Associativity;
+	UINT8	Attributes;
+	UINT16	LineSize;	
+} ACPI_CACHE_TYPE_STRUCTURE;
+
+typedef struct _ACPI_PROCESSOR_NODE_STRUCTURE { // 5-150
+    UINT8	Type;
+    UINT8	Length;
+    UINT16	Reserved;
+	UINT32  Flags;
+	UINT32	Parent;				// may not be required (container concept)
+	UINT32	AcpiProcessorId;
+	UINT32	numPrivateResources;
+    UINT32  localCacheL1D;
+    UINT32  LocalCacheL1I;
+} ACPI_PROCESSOR_NODE_STRUCTURE;
+
+typedef struct _ACPI_ID_TYPE_STRUCTURE { // Table 5-154
+    UINT8	Type;
+    UINT8	Length;
+    UINT16	Reserved;
+	UINT32  vendorId;
+	UINT64	level1Id;
+	UINT64	level2Id;
+	UINT16	majorRev;
+	UINT16	minorRev;
+	UINT16	spinRev;
+} ACPI_ID_TYPE_STRUCTURE;
+
+typedef struct _ACPI_PROCESSOR_NODE_STRUCTURE_L3 { // dummy node which has L3 as next cache
+    UINT8	Type;
+    UINT8	Length;
+    UINT16	Reserved;
+	UINT32 Flags;
+	UINT32	Parent;				// may not be required (container concept)
+	UINT32	AcpiProcessorId;
+	UINT32	numPrivateResources;
+	UINT32  CommonCacheL3;
+	UINT32  SocId;
+} ACPI_PROCESSOR_NODE_STRUCTURE_L3;
+
+//
+// ACPI 5.0 PPTT structure
+//
+typedef struct {
+  ACPI_HEADER                 		  	   Header;
+  ACPI_CACHE_TYPE_STRUCTURE         localCacheL3U;
+  ACPI_ID_TYPE_STRUCTURE                    SocId;
+  ACPI_PROCESSOR_NODE_STRUCTURE_L3 	    NodeForL3;
+  ACPI_CACHE_TYPE_STRUCTURE      	localCacheL2U;
+  ACPI_CACHE_TYPE_STRUCTURE      	localCacheL1D;
+  ACPI_CACHE_TYPE_STRUCTURE      	localCacheL1I;
+  ACPI_PROCESSOR_NODE_STRUCTURE         LocalPpt0;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt1;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt2;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt3;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt4;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt5;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt6;
+  ACPI_PROCESSOR_NODE_STRUCTURE    		LocalPpt7;
+} ACPI_PROC_TOPOLOGY_TABLE;
+
+//
+//
+// PPTT Description Table
+//
+ACPI_PROC_TOPOLOGY_TABLE Pptt = 
+{  
+  // Header
+  {
+    ACPI_PPTT_SIGNATURE,                                   //Signature
+    sizeof (ACPI_PROC_TOPOLOGY_TABLE),     //Length
+    ACPI_PROCESSOR_PROPERTIES_DESCRIPTION_TABLE_REVISION,  //Revision
+    0,                                                     //Checksum
+    ACPI_OEM_ID,                                           //OEMID
+    ACPI_OEM_TABLE_ID,                                     //OEMTableID
+    ACPI_OEM_REVISION,                                     //OEMRevision
+    ACPI_CREATOR_ID,                                       //CreatorID
+    ACPI_CREATOR_REVISION                                  //CreatorRevision
+  },
+
+  // L3 Cache Details
+  {
+    ACPI_CACHE_TYPE,						// Type;
+    sizeof (ACPI_CACHE_TYPE_STRUCTURE),	// Length;
+    0,									// Reserved;
+    0,									// flags
+    0,									// NextLevelCache
+    0,									// Size;
+    0,									// NumOfSets;
+    0,									// Associativity
+    0,									// Attributes
+    0,									// LineSize;
+  },
+  
+  // id type structure
+  {
+    ACPI_ID_TYPE,						// Type
+    sizeof (ACPI_ID_TYPE_STRUCTURE),	// Length;
+    0,								// Reserved;
+    0,								// vendorId;
+    0,								// level1Id;
+    0,								// level2Id;
+    0,								// majorRev;
+    0,								// minorRev;
+    0,								// spinRev;
+  }, 
+
+  // L3 Node
+  {
+    ACPI_PROCESSOR_NODE,							// type
+    sizeof (ACPI_PROCESSOR_NODE_STRUCTURE_L3),	// length
+    0x00,										// Reserved
+    0x01,										// Flags
+    0,											// Parent
+    0x00,										// AcpiProcessorId
+    2,											// numPrivateResources
+    offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL3U),
+    offsetof(ACPI_PROC_TOPOLOGY_TABLE, SocId),
+  },
+
+  // L2 unified Cache
+  {
+    ACPI_CACHE_TYPE,						// Type
+    sizeof (ACPI_CACHE_TYPE_STRUCTURE),		// Length
+    0x00,									// Reserved
+    0,		// flags
+    0,		// NextLevelCache
+    0,		// Size
+    0,		// NumOfSets
+    0,		// Associativity
+    0,		// Attributes
+    0,		// LineSize
+  },
+  
+  // L1 Data Cache
+  {
+    ACPI_CACHE_TYPE,						// Type
+    sizeof (ACPI_CACHE_TYPE_STRUCTURE),		// Length
+    0x00,									// Reserved
+    0,		// flags
+    offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL2U), // NextLevelCache
+    0,		// Size
+    0,		// NumOfSets
+    0,		// Associativity
+    0,		// Attributes
+    0,		// LineSize
+  },
+
+  // L1 Instruction Cache
+  {
+    ACPI_CACHE_TYPE,						// Type
+    sizeof (ACPI_CACHE_TYPE_STRUCTURE),		// Length
+    0x00,									// Reserved
+    0,		// flags
+    offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL2U), // NextLevelCache
+    0,		// Size
+    0,		// NumOfSets
+    0,		// Associativity
+    0,		// Attributes
+    0,		// LineSize
+  },
+
+  // LocalPpt0
+  {
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x00,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt1
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x01,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt2
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x02,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt3
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x03,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+  
+  // LocalPpt4
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x04,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt5
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x05,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt6
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x06,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+
+  // LocalPpt7
+  {
+    // node structure
+	ACPI_PROCESSOR_NODE,					// Type
+	sizeof (ACPI_PROCESSOR_NODE_STRUCTURE),	// Length
+	0x00,									// Reserved
+	0x02,									// Flags
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, NodeForL3),				// Parent
+	0x07,									// AcpiProcessorId
+	2,										// numPrivateResources
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1D),
+	offsetof(ACPI_PROC_TOPOLOGY_TABLE, localCacheL1I),
+  },
+};
+
+#pragma pack()
+
+VOID*
+ReferenceAcpiTable (VOID)
+{
+  //
+  // Reference the table being generated to prevent the optimizer from removing the 
+  // data structure from the exeutable
+  //
+  return (VOID*)&Pptt;
+}

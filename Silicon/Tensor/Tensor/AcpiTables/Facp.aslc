@@ -1,0 +1,144 @@
+#include "Platform.h"
+
+ACPI_FACP FACP = {
+  {
+    ACPI_FACP_SIGNATURE,
+    sizeof (ACPI_FACP),
+    ACPI_FACP_REVISION,
+    0,
+    ACPI_OEM_ID,
+    ACPI_OEM_TABLE_ID,
+    ACPI_OEM_REVISION,
+    ACPI_CREATOR_ID,
+    ACPI_CREATOR_REVISION
+  },
+
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_PM_PROFILE_SLATE,              // Preferred_PM_Profile
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+  ACPI_RESERVED,
+
+  ACPI_HARDWARE_REDUCED|LOW_POWER_S0_CAPABLE,
+
+  {
+    ACPI_GAS_ID_EMBEDDED_CONTROLLER,
+    0,
+    0,
+    ACPI_GAS_ACCESS_DWORD,
+    HWIO_SCSS_RESET_ADDR
+  },
+
+  SCSS_SYS_POR,                                  // RESET_VALUE;
+  // Bit 0 is for PSCI support
+  // Bit 1 is to tell the OS to use HVC instead of SMC.
+  // 0x0 to disable PSCI
+  0x1,                                           // ARM_BOOT_ARCH;
+  ACPI_RESERVED,                                 // FADT Minor Version;
+  ACPI_RESERVED,                                 // X_FIRMWARE_CTRL;
+  ACPI_RESERVED,                                 // X_DSDT;
+  {                                              // X_PM1a_EVT_BLK; 
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_PM1b_EVT_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_PM1a_CNT_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_PM1b_CNT_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_PM2_CNT_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_PM_TMR_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_GPE0_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // X_GPE1_BLK;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // SLEEP_CONTROL_REG;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  {                                              // SLEEP_STATUS_REG;
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED,
+    ACPI_RESERVED
+  },
+  HYP_VENDOR_ID,                                 // Hypervisor Vendor Identity
+};
+

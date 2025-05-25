@@ -1,0 +1,20 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GoogleResetSystemLib
+  FILE_GUID                      = d49ee93d-1a9e-46cb-a617-d5bec4cd53b0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ResetSystemLib
+
+[Sources.common]
+  ResetSystemLib.c
+
+[Packages]
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  Platform/ARM/VExpressPkg/ArmVExpressPkg.dec
+  Silicon/Google/Tensor/Tensor.dec
+
+[LibraryClasses]
+  DebugLib
