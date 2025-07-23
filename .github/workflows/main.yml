@@ -41,6 +41,8 @@ jobs:
           # sm7325
           - mona
           - lisa
+          # sm7475
+          - marble
           # msm8998
           - cheeseburger
 

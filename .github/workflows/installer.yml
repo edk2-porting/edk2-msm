@@ -34,7 +34,8 @@ jobs:
           - fuxi
           # sm7325
           - lisa
-
+          # sm7475
+          - marble
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
