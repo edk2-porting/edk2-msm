@@ -24,7 +24,7 @@
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0xFDFA0000         # Limit to 4GB Size here
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x300000000        # Limit to 12GB Size here
 
   gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0xA7600000     # CPU Vectors
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000

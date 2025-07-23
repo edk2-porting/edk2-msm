@@ -1,7 +1,7 @@
 [Defines]
   VENDOR_NAME                    = Xiaomi
   PLATFORM_NAME                  = marble
-  PLATFORM_GUID                  = 6eaa81ea-98c3-6d92-de4a-4b1c3dd714c2
+  PLATFORM_GUID                  = 9851fa4b-27cf-43b4-b0bd-0af439d7987b
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010019
   OUTPUT_DIRECTORY               = Build/$(PLATFORM_NAME)
@@ -17,6 +17,9 @@
   GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT
 
 [PcdsFixedAtBuild.common]
+  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000       
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x300000000       
+
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2400
 
