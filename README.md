@@ -1,28 +1,56 @@
-# EDK2 UEFI firmware for Qualcomm Snapdragon platforms
+# EDK2-MSM port for Xiaomi Poco F5 (SM7475 / Marble)
 
-![banner_wide_dark](https://user-images.githubusercontent.com/17036722/199902341-b086ec31-8d5c-4766-953a-8b9e1492de8b.png)
+This project aims to port EDK2-based UEFI firmware to the **Xiaomi Poco F5**, which is based on the **Snapdragon 7+ Gen 2 (SM7475)** SoC.  
+The port is based on prior support for SM8475 SoCs from the [EDK2-MSM](https://github.com/edk2-porting/edk2-msm) project.
 
-![Github](https://img.shields.io/github/downloads/edk2-porting/edk2-sdm845/total)
-![Github](https://img.shields.io/github/v/release/edk2-porting/edk2-sdm845?include_prereleases)
+---
 
-## Description
+## Status
 
-This repository aims to provide an usable EDK2 UEFI environment for modern Qualcomm SoCs.
+| Component         | Status        |
+|------------------|----------------|
+| Firmware Build    | Successful   |
+| CoreDXE Boot      | Stable(?)    |
+| UART Output       | Not working  |
+| Display Output    | Black screen |
+| USB Debug (Gadget)| Not tested   |
+| Vibration Output  | Not tested   |
 
-It can be used as a boot manager for multi-booting mainline Linux, Android and optionally Windows on certain SoCs.
+---
 
-## User guide and documentations
+## What Has Been Done
 
-Please visit [Renegade Project Wiki](https://wiki.renegade-project.cn/)
+### 1. Platform Bring-up
+- Cloned and renamed SM8475 support to `Platform/Xiaomi/sm7475/`.
+- Renamed and configured `.dsc`, `.fdf`, `.dec`, and other files for `sm7475` & `marble`.
 
-## Acknowledgements
-- Gustave Monce and his [SurfaceDuoPkg](https://github.com/WOA-Project/SurfaceDuoPkg)
-- [DuoWoa Project](https://github.com/WOA-Project)
-- [EFIDroid](https://github.com/efidroid)
-- [Ben (Bingxing) Wang](https://github.com/imbushuo/)
-- [Lumia950XLPkg](https://github.com/WOA-Project/Lumia950XLPkg)
-- BigfootACA and his [SimpleInit](https://github.com/BigfootACA/simple-init) and [LinuxSimpleMassStorage](https://github.com/BigfootACA/linux-simple-mass-storage)
-- fxsheep and his original edk2-sagit
-- All the developers and members of [Renegade Project](https://github.com/edk2-porting/) for offering efforts, equipments, valuable documents and more
-## License
-All code except drivers in GPLDriver directory are licensed under BSD 2-Clause. GPL Drivers are licensed under GPLv2 license.
+### 2. `.dsc` Configuration
+- Updated:
+  - `PcdSystemMemorySize` to match actual RAM.
+  - `PcdCoreCount`, `PcdClusterCount` using `cpuinfo`.
+  - Memory base addresses using `iomem`.
+- Added:
+  - `SerialPortLib` → `QcomGeniSerialPortLib`
+  - UART base address: `0x894000` 
+
+### 3. Apriori Drivers
+Manually extracted and included crucial DXE drivers:
+- `SmemDxe`, `DalSysDxe`, `HwIODxe`
+- `ChipInfoDxe`, `ClockDxe`, `PMICDxe`, `PlatformInfoDxe`, etc.
+
+### 4. Platform Library Modifications (`Silicon/Qualcomm/sm7475/Library/`)
+- **PlatformMemoryMapLib**:
+  - Adjusted MMIO/heap regions to avoid memory violations.
+- **PlatformPrePiLib**:
+  - Confirmed UART initialization is in place.
+- **marble.dec**:
+  - Added:
+    ```ini
+    gEfiMdePkgTokenSpaceGuid.PcdUartBaseAddress|UINT32|0x894000|0
+    ```
+### Planned Next Steps
+Test USB Gadget Console:
+
+    Enable ConfigFS or g_serial from firmware (if possible).
+
+    Attempt to log using dmesg | grep usb or detect /dev/ttyGS0.
