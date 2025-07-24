@@ -1,0 +1,47 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SynapticsTCMDxe
+  FILE_GUID                      = 580ed63f-530d-4d49-8156-2b1a78a61aba
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SynaInitialize
+
+[Sources.common]
+  SynapticsTCMDxe.c
+  I2cOps.c
+  ComponentName.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -Wno-error=unused-variable
+
+[LibraryClasses]
+  ArmLib
+  UefiDriverEntryPoint
+  IoLib
+  TimerLib
+  BaseLib
+  DebugLib
+  PrintLib
+  CompilerIntrinsicsLib
+  CacheMaintenanceLib
+  UefiLib
+
+[Protocols]
+  gQcomI2cProtocolGuid
+  gQcomTlmmProtocolGuid
+  gHardwareInterruptProtocolGuid
+  gEfiAbsolutePointerProtocolGuid
+  gSynapticsTouchDeviceProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+
+[Depex]
+  gSynapticsTouchDeviceProtocolGuid

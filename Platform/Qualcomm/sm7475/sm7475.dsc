@@ -32,6 +32,8 @@
   gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
   gArmTokenSpaceGuid.PcdGicDistributorBase|0x17100000
   gArmTokenSpaceGuid.PcdGicRedistributorsBase|0x17180000
+  
+  gEfiMdePkgTokenSpaceGuid.PcdUartBaseAddress|0x894000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00007475
   gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0x9F590000      # UEFI Stack
@@ -60,7 +62,8 @@
 
   # Ported from SurfaceDuoPkg
   AslUpdateLib|Silicon/Qualcomm/QcomPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
-
+ 
+  SerialPortLib|QcomPkg/Library/QcomGeniSerialPortLib/QcomGeniSerialPortLib.inf
   PlatformMemoryMapLib|Silicon/Qualcomm/sm7475/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
   PlatformPeiLib|Silicon/Qualcomm/sm7475/Library/PlatformPeiLib/PlatformPeiLib.inf
   PlatformPrePiLib|Silicon/Qualcomm/sm7475/Library/PlatformPrePiLib/PlatformPrePiLib.inf

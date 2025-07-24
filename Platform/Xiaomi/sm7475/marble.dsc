@@ -15,10 +15,12 @@
 
 [BuildOptions.common]
   GCC:*_*_AARCH64_CC_FLAGS = -DENABLE_SIMPLE_INIT
+[Packages]
+  Platform/Xiaomi/sm7475/marble.dec
 
 [PcdsFixedAtBuild.common]
-  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000       
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x300000000       
+  #gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000       
+  #gArmTokenSpaceGuid.PcdSystemMemorySize|0x300000000       
 
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2400

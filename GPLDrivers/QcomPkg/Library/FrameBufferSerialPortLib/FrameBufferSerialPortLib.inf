@@ -1,0 +1,38 @@
+## @file
+#
+# Copyright (c) DuoWoA authors. All rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+[Defines]
+  INF_VERSION    = 0x00010005
+  FILE_GUID      = 33220897-2430-1CD5-EA89-CB01B138CF39
+  BASE_NAME      = FrameBufferSerialPortLib
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.1
+  LIBRARY_CLASS  = SerialPortLib
+
+[Sources.common]
+  FrameBufferSerialPortLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  PcdLib
+  IoLib
+  HobLib
+  CompilerIntrinsicsLib
+  CacheMaintenanceLib
+  TimerLib
+
+[Pcd]
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferPixelBpp
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferDelay

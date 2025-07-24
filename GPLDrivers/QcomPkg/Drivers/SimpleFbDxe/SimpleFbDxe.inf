@@ -1,0 +1,51 @@
+# SimpleFbDxe.inf: Implements Simple FrameBuffer in UEFI.
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SimpleFbDxe
+  FILE_GUID                      = dcfd1e6d-788d-4ffc-8e1b-ca2f75651a92
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SimpleFbDxeInitialize
+
+[Sources.common]
+  SimpleFbDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  Silicon/Qualcomm/QcomPkg/QcomPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  ReportStatusCodeLib
+  UefiLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  PcdLib
+  FrameBufferBltLib
+  CacheMaintenanceLib
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid ## PRODUCES
+  gEfiCpuArchProtocolGuid
+
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight
+
+[Guids]
+  gEfiMdeModulePkgTokenSpaceGuid
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution
+
+[Depex]
+  gEfiCpuArchProtocolGuid
+

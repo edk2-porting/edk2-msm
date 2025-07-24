@@ -29,7 +29,7 @@ VOID UartInit(VOID)
   SerialPortInitialize();
   InitializeSharedUartBuffers();
 
-  DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64)\n"));
+  DEBUG((EFI_D_INFO, "\nRenegade Project edk2-msm (AArch64) for Poco F5 by YuzuruRiverflow\n"));
   DEBUG(
       (EFI_D_INFO, "Firmware version %s built %a %a\n\n",
        (CHAR16 *)PcdGetPtr(PcdFirmwareVersionString), __TIME__, __DATE__));

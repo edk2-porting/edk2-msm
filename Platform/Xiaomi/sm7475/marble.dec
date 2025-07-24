@@ -1,0 +1,12 @@
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = sm7475Pkg
+  PACKAGE_UNI_FILE               = sm7475Pkg.uni
+  PACKAGE_GUID                   = 6f1a2e87-4cda-4c3b-b2a7-879d0eae9f23
+  PACKAGE_VERSION                = 0.1
+
+[Guids]
+gEfiMdePkgTokenSpaceGuid={0x8BE4DF61,0x93CA,0x11D2,{0xAA,0x0D,0x00,0xE0,0x98,0x03,0x2B,0x8C}}
+
+[PcdsFixedAtBuild]
+gEfiMdePkgTokenSpaceGuid.PcdUartBaseAddress|0x894000|UINT32|0
