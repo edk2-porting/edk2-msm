@@ -60,10 +60,10 @@ FILE DRIVER = 4DB5DEA6-5302-4D1A-8A82-677A683B0D29 {
   # }
 
   # ADD: GPIO/TLMM driver (critical for display initialization)
-  # FILE DRIVER = <GPIO_GUID> {
-  #   SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7475/GPIODxe/GPIODxe.efi
-  #   SECTION UI = "GPIODxe"
-  # }
+FILE DRIVER = 569ea0de-b557-4043-84cf-01103fe516e5 {
+  SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7475/GpiDxe/GpiDxe.efi
+  SECTION UI = "GpiDxe"
+}
 
   # Memory/Storage drivers
   INF MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
