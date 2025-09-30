@@ -1,20 +1,20 @@
 // per-device BSP DXEs
-  FILE DRIVER = CD823A4D-7DEC-4531-AE5D-4134FA4127B8 {
+  FILE DRIVER = cd823a4d-7dec-4531-ae5d-4134fa4127b8 {
     SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbConfigDxe/UsbConfigDxe.depex
     SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbConfigDxe/UsbConfigDxe.efi
     SECTION UI = "UsbConfigDxe"
   }
-  
-  FILE DRIVER = 3299A266-15F0-4346-8318-716336736D3E {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbDeviceDxe/UsbDeviceDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbDeviceDxe/UsbDeviceDxe.efi
-    SECTION UI = "UsbDeviceDxe"
+
+  FILE DRIVER = 11faed4c-b21f-4d88-8e48-c4c28a1e50df {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
+    SECTION UI = "UsbPwrCtrlDxe"
   }
-  
-  FILE DRIVER = 11FAED4C-B21F-4D88-8E48-C4C28A1E50DF {
-	SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbPwrCtrlDxe/UsbPwrCtrlDxe.depex
-	SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbPwrCtrlDxe/UsbPwrCtrlDxe.efi
-	SECTION UI = "UsbPwrCtrlDxe"
+
+  FILE DRIVER = 94f8a6a7-dc34-4101-88c1-99179cceae83 {
+    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
+    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
+    SECTION UI = "UsbfnDwc3Dxe"
   }
   
 //FILE FREEFORM = 26462CDA-221F-47DF-AC1D-259CFAA4E326 {
