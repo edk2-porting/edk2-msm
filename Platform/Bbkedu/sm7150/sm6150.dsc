@@ -14,16 +14,9 @@
 !include Platform/Qualcomm/sm7150/sm7150.dsc
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -DISABLE_SIMPLE_INIT -DENABLE_LINUX_SIMPLE_MASS_STORAGE
+  GCC:*_*_AARCH64_CC_FLAGS = -DISABLE_SIMPLE_INIT
 
 [PcdsFixedAtBuild.common]
   gQcomTokenSpaceGuid.PcdMipiFrameBufferWidth|1600
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2176
   # gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9c400000
-
-  # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|320
-
-  gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Bbkedu"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"S6"
-  gRenegadePkgTokenSpaceGuid.PcdDeviceCodeName|"sm6150"
