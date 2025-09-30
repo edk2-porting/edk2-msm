@@ -52,7 +52,7 @@ jobs:
           ./build.sh --device ${{ matrix.device }} --installer-zip
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: # Artifact name
           name: ${{ matrix.device }}
           # A file, directory or wildcard pattern that describes what to upload
