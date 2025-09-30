@@ -17,19 +17,6 @@
 	SECTION UI = "UsbPwrCtrlDxe"
   }
   
-  FILE DRIVER = 5AF77F10-90DF-4E7E-8325-A17EC09D5443 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbMsdDxe/UsbMsdDxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbMsdDxe/UsbMsdDxe.efi
-    SECTION UI = "UsbMsdDxe"
-  }
-  
-  FILE DRIVER = 94F8A6A7-DC34-4101-88C1-99179CCEAE83 {
-    SECTION DXE_DEPEX = Platform/EFI_Binaries/Drivers/sm7150/UsbfnDwc3Dxe/UsbfnDwc3Dxe.depex
-    SECTION PE32 = Platform/EFI_Binaries/Drivers/sm7150/UsbfnDwc3Dxe/UsbfnDwc3Dxe.efi
-    SECTION UI = "UsbfnDwc3Dxe"
-  }
-  
-  
 //FILE FREEFORM = 26462CDA-221F-47DF-AC1D-259CFAA4E326 {
   //SECTION RAW = Platform/Bbkedu/sm7150/FdtBlob_compat/sm6150.dtb
 //}
