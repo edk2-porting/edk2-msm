@@ -21,7 +21,7 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2176
 
   # Simple Init
-  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|300
+  gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|320
 
   gRenegadePkgTokenSpaceGuid.PcdDeviceVendor|"Bbkedu"
   gRenegadePkgTokenSpaceGuid.PcdDeviceProduct|"S5"
