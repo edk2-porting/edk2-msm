@@ -45,7 +45,7 @@ jobs:
       - name: Install requires packages
         run: |
           sudo apt-get update
-          sudo apt-get -y install build-essential uuid-dev clang llvm iasl nasm gcc-aarch64-linux-gnu abootimg python3-distutils python3-pil python3-git gettext
+          sudo apt install build-essential uuid-dev iasl git nasm python-is-python3 gettext gcc-aarch64-linux-gnu clang llvm device-tree-compiler
 
       - name: Build device ${{ matrix.device }}
         run: |
