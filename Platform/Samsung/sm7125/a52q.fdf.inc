@@ -6,7 +6,7 @@ FILE FREEFORM = 67a12712-1928-4ad1-8597-a60586820501 {
 	  SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/FACP.aml
   	SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/GTDT.aml
 # 	SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/IORT.aml
-	  SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/MADT.aml
+	  SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/APIC.aml
 	  SECTION RAW = Silicon/Qualcomm/sm7125/AcpiTables/BuiltIn/PPTT.aml
 	  SECTION UI = "AcpiTables"
 }
